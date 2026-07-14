@@ -1,0 +1,483 @@
+/* =======================================================
+   BRITISH MIDLAND VIRTUAL
+   BASE STYLES
+   Version 3.1
+======================================================= */
+
+/* -------------------------------
+   RESET
+-------------------------------- */
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+html{
+    scroll-behavior:smooth;
+}
+
+body{
+
+    font-family:'Inter',sans-serif;
+    background:#f8f3ee;
+    color:#001a3a;
+    line-height:1.6;
+
+}
+
+img{
+
+    display:block;
+    max-width:100%;
+
+}
+
+a{
+
+    text-decoration:none;
+    color:inherit;
+
+}
+
+ul{
+
+    list-style:none;
+
+}
+
+/* -------------------------------
+   COLOURS
+-------------------------------- */
+
+:root{
+
+    --bm-blue:#001a3a;
+    --bm-red:#d02823;
+    --bm-white:#f8f3ee;
+
+    --container:1280px;
+
+    --radius:18px;
+
+    --shadow:
+        0 20px 45px rgba(0,0,0,.08);
+
+}
+
+/* -------------------------------
+   CONTAINER
+-------------------------------- */
+
+.container{
+
+    width:min(92%,var(--container));
+    margin:auto;
+
+}
+
+/* -------------------------------
+   HEADER
+-------------------------------- */
+
+.site-header{
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    z-index:100;
+
+}
+
+.navbar{
+
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+
+    padding:28px 0;
+
+}
+
+.logo img{
+
+    height:58px;
+
+}
+
+.nav-links{
+
+    display:flex;
+    gap:42px;
+
+}
+
+.nav-links a{
+
+    color:white;
+
+    font-weight:700;
+
+    font-size:.9rem;
+
+    letter-spacing:.08em;
+
+    transition:.25s;
+
+}
+
+.nav-links a:hover{
+
+    color:var(--bm-red);
+
+}
+
+.active{
+
+    color:var(--bm-red)!important;
+
+}
+
+/* -------------------------------
+   HERO
+-------------------------------- */
+
+.hero{
+
+    position:relative;
+    min-height:100vh;
+
+    display:flex;
+    align-items:center;
+
+    overflow:hidden;
+
+}
+
+.hero-image{
+
+    position:absolute;
+
+    inset:0;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+}
+
+.hero-overlay{
+
+    position:absolute;
+
+    inset:0;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,26,58,.88),
+            rgba(0,26,58,.52)
+        );
+
+}
+
+.hero-content{
+
+    position:relative;
+
+    z-index:2;
+
+    color:white;
+
+    max-width:700px;
+
+}
+
+.hero-kicker{
+
+    text-transform:uppercase;
+
+    letter-spacing:.25em;
+
+    font-size:.8rem;
+
+    margin-bottom:20px;
+
+}
+
+.hero h1{
+
+    font-size:4.8rem;
+
+    line-height:1;
+
+    font-weight:800;
+
+    margin-bottom:24px;
+
+}
+
+.hero-divider{
+
+    width:90px;
+    height:4px;
+
+    background:var(--bm-red);
+
+    margin:35px 0;
+
+}
+
+.hero-copy{
+
+    font-size:1.2rem;
+
+    max-width:620px;
+
+    opacity:.95;
+
+}
+
+/* -------------------------------
+   BUTTONS
+-------------------------------- */
+
+.hero-buttons,
+.cta-buttons{
+
+    display:flex;
+    gap:18px;
+
+    margin-top:45px;
+
+    flex-wrap:wrap;
+
+}
+
+.primary-button{
+
+    background:var(--bm-red);
+
+    color:white;
+
+    padding:18px 36px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.primary-button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+.secondary-button{
+
+    border:2px solid white;
+
+    color:white;
+
+    padding:18px 36px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.secondary-button:hover{
+
+    background:white;
+    color:var(--bm-blue);
+
+}
+
+/* -------------------------------
+   SECTIONS
+-------------------------------- */
+
+section{
+
+    padding:120px 0;
+
+}
+
+.section-label{
+
+    color:var(--bm-red);
+
+    text-transform:uppercase;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    margin-bottom:15px;
+
+}
+
+section h2{
+
+    font-size:3rem;
+
+    margin-bottom:25px;
+
+}
+
+section p{
+
+    max-width:760px;
+
+}
+
+/* -------------------------------
+   CARDS
+-------------------------------- */
+
+.cards{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap:35px;
+
+}
+
+.card{
+
+    background:white;
+
+    padding:40px;
+
+    border-radius:var(--radius);
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.card h3{
+
+    margin-bottom:16px;
+
+    color:var(--bm-blue);
+
+}
+
+/* -------------------------------
+   FOOTER
+-------------------------------- */
+
+footer{
+
+    background:var(--bm-blue);
+
+    color:white;
+
+    text-align:center;
+
+    padding:70px 20px;
+
+}
+
+footer p{
+
+    margin:12px 0;
+
+}
+
+/* -------------------------------
+   RESPONSIVE
+-------------------------------- */
+
+@media(max-width:1000px){
+
+.hero h1{
+
+    font-size:3.4rem;
+
+}
+
+.cards{
+
+    grid-template-columns:1fr;
+
+}
+
+.nav-links{
+
+    gap:24px;
+
+}
+
+}
+
+@media(max-width:768px){
+
+.navbar{
+
+    flex-direction:column;
+    gap:25px;
+
+}
+
+.nav-links{
+
+    flex-wrap:wrap;
+    justify-content:center;
+
+}
+
+.hero{
+
+    min-height:85vh;
+
+}
+
+.hero h1{
+
+    font-size:2.7rem;
+
+}
+
+.hero-buttons{
+
+    flex-direction:column;
+
+}
+
+.primary-button,
+.secondary-button{
+
+    text-align:center;
+
+}
+
+section{
+
+    padding:80px 0;
+
+}
+
+}
