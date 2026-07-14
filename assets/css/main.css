@@ -1,0 +1,21 @@
+
+:root{
+ --blue:#001A3A;
+ --red:#D02823;
+ --white:#F8F3EE;
+ --container:1280px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:Arial,sans-serif;background:var(--white);color:var(--blue)}
+.container{width:min(92%,var(--container));margin:auto}
+header{background:var(--blue);position:sticky;top:0}
+nav{height:90px;display:flex;justify-content:space-between;align-items:center}
+.logo{color:white;font-size:1.5rem;font-weight:bold}
+.logo span{color:var(--red)}
+.menu{display:flex;gap:42px}
+.menu a{color:white;text-decoration:none;text-transform:uppercase;font-size:.9rem}
+.menu a:hover{color:var(--red)}
+.hero{background:var(--blue);color:white;padding:140px 0}
+.hero h1{font-size:4rem;margin-bottom:20px}
+.hero p{max-width:650px;opacity:.85;font-size:1.1rem}
+.btn{display:inline-block;margin-top:32px;background:var(--red);color:white;padding:16px 28px;border-radius:999px;text-decoration:none}
