@@ -42,9 +42,13 @@ body{
 
 .hero-poster{
 
-    padding-top:150px;
+    padding:150px 0 90px;
 
-    padding-bottom:90px;
+    background:linear-gradient(
+        180deg,
+        #001a3a 0%,
+        #032b63 100%
+    );
 
 }
 
@@ -52,11 +56,18 @@ body{
 
     background:white;
 
-    border-radius:24px;
+    border:10px solid white;
 
-    padding:20px;
+    border-radius:26px;
 
-    box-shadow:var(--shadow);
+    padding:14px;
+
+    box-shadow:
+        0 35px 90px rgba(0,0,0,.30);
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
 
 }
 
@@ -145,7 +156,13 @@ body{
 
 .aircraft-section{
 
-    padding:110px 0;
+    padding:120px 0;
+
+}
+
+.aircraft-section:nth-of-type(odd){
+
+    background:var(--bm-cream);
 
 }
 
@@ -436,7 +453,15 @@ body{
 
     max-width:900px;
 
-    margin:auto;
+    margin:0 auto;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    text-align:center;
 
 }
 
@@ -524,6 +549,16 @@ body{
 
 }
 
+.fleet-statistics .container{
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+}
+
 .fleet-statistics h2{
 
     font-size:clamp(2.8rem,5vw,4.5rem);
@@ -536,7 +571,11 @@ body{
 
 .stats-grid{
 
-    margin-top:60px;
+    width:100%;
+
+    max-width:1200px;
+
+    margin:60px auto 0;
 
     display:grid;
 
