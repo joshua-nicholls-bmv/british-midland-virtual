@@ -1,0 +1,152 @@
+{
+  "hub": {
+    "icao": "EGBB",
+    "iata": "BHX",
+    "name": "Birmingham",
+    "country": "United Kingdom",
+    "lat": 52.4539,
+    "lon": -1.7480
+  },
+  "destinations": [
+    {
+      "iata": "AMS",
+      "icao": "EHAM",
+      "city": "Amsterdam",
+      "country": "Netherlands",
+      "lat": 52.3086,
+      "lon": 4.7639,
+      "aircraft": ["A319", "A320"],
+      "status": "active"
+    },
+    {
+      "iata": "DUS",
+      "icao": "EDDL",
+      "city": "Düsseldorf",
+      "country": "Germany",
+      "lat": 51.2895,
+      "lon": 6.7668,
+      "aircraft": ["A319", "A320"],
+      "status": "active"
+    },
+    {
+      "iata": "FRA",
+      "icao": "EDDF",
+      "city": "Frankfurt",
+      "country": "Germany",
+      "lat": 50.0379,
+      "lon": 8.5622,
+      "aircraft": ["A319", "A320", "A321"],
+      "status": "active"
+    },
+    {
+      "iata": "CDG",
+      "icao": "LFPG",
+      "city": "Paris",
+      "country": "France",
+      "lat": 49.0097,
+      "lon": 2.5479,
+      "aircraft": ["A319", "A320"],
+      "status": "active"
+    },
+    {
+      "iata": "DUB",
+      "icao": "EIDW",
+      "city": "Dublin",
+      "country": "Ireland",
+      "lat": 53.4213,
+      "lon": -6.2701,
+      "aircraft": ["A319", "A320"],
+      "status": "active"
+    },
+    {
+      "iata": "BRU",
+      "icao": "EBBR",
+      "city": "Brussels",
+      "country": "Belgium",
+      "lat": 50.9014,
+      "lon": 4.4844,
+      "aircraft": ["A319", "A320"],
+      "status": "active"
+    },
+    {
+      "iata": "CPH",
+      "icao": "EKCH",
+      "city": "Copenhagen",
+      "country": "Denmark",
+      "lat": 55.6181,
+      "lon": 12.6560,
+      "aircraft": ["A320", "A321"],
+      "status": "active"
+    },
+    {
+      "iata": "ZRH",
+      "icao": "LSZH",
+      "city": "Zurich",
+      "country": "Switzerland",
+      "lat": 47.4581,
+      "lon": 8.5555,
+      "aircraft": ["A319", "A320"],
+      "status": "active"
+    },
+    {
+      "iata": "MAD",
+      "icao": "LEMD",
+      "city": "Madrid",
+      "country": "Spain",
+      "lat": 40.4983,
+      "lon": -3.5676,
+      "aircraft": ["A321"],
+      "status": "active"
+    },
+    {
+      "iata": "MXP",
+      "icao": "LIMC",
+      "city": "Milan",
+      "country": "Italy",
+      "lat": 45.6306,
+      "lon": 8.7281,
+      "aircraft": ["A321"],
+      "status": "active"
+    },
+    {
+      "iata": "JFK",
+      "icao": "KJFK",
+      "city": "New York",
+      "country": "USA",
+      "lat": 40.6413,
+      "lon": -73.7781,
+      "aircraft": ["A350-1000"],
+      "status": "coming-soon"
+    },
+    {
+      "iata": "MCO",
+      "icao": "KMCO",
+      "city": "Orlando",
+      "country": "USA",
+      "lat": 28.4312,
+      "lon": -81.3081,
+      "aircraft": ["A350-1000"],
+      "status": "coming-soon"
+    },
+    {
+      "iata": "CUN",
+      "icao": "MMUN",
+      "city": "Cancún",
+      "country": "Mexico",
+      "lat": 21.0365,
+      "lon": -86.8771,
+      "aircraft": ["A350-1000"],
+      "status": "coming-soon"
+    },
+    {
+      "iata": "PUJ",
+      "icao": "MDPC",
+      "city": "Punta Cana",
+      "country": "Dominican Republic",
+      "lat": 18.5674,
+      "lon": -68.3634,
+      "aircraft": ["A350-1000"],
+      "status": "coming-soon"
+    }
+  ]
+}
