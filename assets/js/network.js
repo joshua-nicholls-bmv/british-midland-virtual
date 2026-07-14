@@ -87,35 +87,57 @@ function initialiseMap() {
 // Birmingham Hub
 // ======================================================
 
+// ======================================================
+// Birmingham Hub
+// ======================================================
+
 function createHub() {
 
-    const hub = L.circleMarker(
+    const hub = L.circleMarker(BHX, {
 
-        BHX,
+        radius:12,
+
+        color:"#ffffff",
+
+        weight:4,
+
+        fillColor:"#d02823",
+
+        fillOpacity:1
+
+    }).addTo(map);
+
+    hub.bindTooltip(
+
+        "<strong>BHX</strong><br>British Midland Hub",
 
         {
 
-            radius:10,
+            permanent:true,
 
-            color:"#ffffff",
+            direction:"top",
 
-            weight:3,
+            offset:[0,-15],
 
-            fillColor:colours.active,
-
-            fillOpacity:1
+            className:"hub-label"
 
         }
 
     );
 
-    hub.addTo(map);
+    L.circle(BHX,{
 
-    hub.bindPopup(
+        radius:25000,
 
-        "<strong>Birmingham</strong><br>British Midland Hub"
+        color:"#d02823",
 
-    );
+        fillColor:"#d02823",
+
+        fillOpacity:.08,
+
+        weight:2
+
+    }).addTo(map);
 
 }
 // ======================================================
