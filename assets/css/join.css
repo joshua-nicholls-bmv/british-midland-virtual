@@ -462,3 +462,46 @@
     }
 
 }
+/* ------------------------------
+   DISCORD BUTTON
+------------------------------ */
+
+.discord-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:12px;
+
+    background:#5865F2;
+
+    color:white;
+
+    padding:18px 36px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    transition:.3s;
+
+    box-shadow:0 10px 25px rgba(88,101,242,.35);
+
+}
+
+.discord-button:hover{
+
+    background:#4752C4;
+
+    transform:translateY(-3px);
+
+    box-shadow:0 15px 35px rgba(88,101,242,.45);
+
+}
+
+.discord-button i{
+
+    font-size:1.2rem;
+
+}
