@@ -3,18 +3,21 @@
 
 <head>
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Network | British Midland Virtual</title>
+    <title>Network | British Midland Virtual</title>
 
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link rel="stylesheet" href="assets/css/base.css">
-<link rel="stylesheet" href="assets/css/network.css">
+    <link rel="stylesheet"
+          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/network.css">
 
 </head>
 
@@ -22,53 +25,160 @@
 
 <header class="site-header">
 
-<div class="container navbar">
+    <div class="container navbar">
 
-<a class="logo" href="index.html">
-<img src="assets/images/logo.png" alt="British Midland Virtual">
-</a>
+        <a class="logo" href="index.html">
+            <img src="assets/images/logo.png" alt="British Midland Virtual">
+        </a>
 
-<ul class="nav-links">
+        <nav>
 
-<li><a href="index.html">HOME</a></li>
-<li><a href="fleet.html">FLEET</a></li>
-<li><a class="active" href="network.html">NETWORK</a></li>
-<li><a href="operations.html">OPERATIONS</a></li>
-<li><a href="news.html">NEWS</a></li>
-<li><a href="join.html">JOIN</a></li>
+            <ul class="nav-links">
 
-</ul>
+                <li><a href="index.html">HOME</a></li>
 
-</div>
+                <li><a href="fleet.html">FLEET</a></li>
+
+                <li><a class="active" href="network.html">NETWORK</a></li>
+
+                <li><a href="operations.html">OPERATIONS</a></li>
+
+                <li><a href="news.html">NEWS</a></li>
+
+                <li><a href="join.html">JOIN</a></li>
+
+            </ul>
+
+        </nav>
+
+    </div>
 
 </header>
 
 <main>
 
-<section class="network-hero">
+    <section class="network-hero">
 
-<div class="container">
+        <div class="container">
 
-<h1>Our Network</h1>
+            <p class="hero-kicker">
 
-<p>
+                BRITISH MIDLAND • ROUTE NETWORK
 
-The Heart of Britain.
-Connected to the World.
+            </p>
 
-</p>
+            <h1>
 
-<div id="network-map">
+                Explore Our Network
 
-<!-- Route map loads here -->
+            </h1>
 
-</div>
+            <div class="hero-divider"></div>
 
-</div>
+            <p class="hero-copy">
 
-</section>
+                Discover British Midland Virtual's growing network from Birmingham
+                to key destinations across Europe, with exciting long-haul services
+                planned for the future.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <section class="network-map-section">
+
+        <div class="container">
+
+            <div id="network-map"></div>
+
+        </div>
+
+    </section>
+
+    <section class="network-destinations">
+
+        <div class="container">
+
+            <div id="destination-grid">
+
+                <!-- Destination cards generated automatically -->
+
+            </div>
+
+        </div>
+
+    </section>
 
 </main>
+
+<footer class="fleet-footer">
+
+    <div class="container footer-grid">
+
+        <div class="footer-brand">
+
+            <img src="assets/images/logo.png"
+                 alt="British Midland Virtual">
+
+            <p>
+
+                The Heart of Britain.<br>
+                Connected to the World.
+
+            </p>
+
+        </div>
+
+        <div>
+
+            <h4>Fleet</h4>
+
+            <a href="fleet.html">Fleet Overview</a>
+
+            <a href="#">A320 Family</a>
+
+            <a href="#">A350-1000</a>
+
+        </div>
+
+        <div>
+
+            <h4>Network</h4>
+
+            <a href="network.html">Europe</a>
+
+            <a href="network.html">Long Haul</a>
+
+            <a href="network.html">Interactive Map</a>
+
+        </div>
+
+        <div>
+
+            <h4>Community</h4>
+
+            <a href="join.html">Join Us</a>
+
+            <a href="#">Discord</a>
+
+            <a href="news.html">News</a>
+
+        </div>
+
+    </div>
+
+    <div class="copyright">
+
+        © 2026 British Midland Virtual.
+        All Rights Reserved.
+
+    </div>
+
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 
 <script src="assets/js/network.js"></script>
 
