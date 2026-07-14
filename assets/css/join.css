@@ -1,1 +1,464 @@
+/* =======================================================
+   BRITISH MIDLAND VIRTUAL
+   JOIN PAGE
+   Version 3.3
+======================================================= */
 
+/* ------------------------------
+   HERO
+------------------------------ */
+
+.join-hero{
+
+    padding:0;
+
+}
+
+.join-hero .hero-content{
+
+    padding-top:150px;
+
+    padding-bottom:130px;
+
+    max-width:720px;
+
+}
+
+.join-hero .hero-overlay{
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(0,26,58,.88),
+            rgba(0,26,58,.58),
+            rgba(0,26,58,.18)
+        );
+
+}
+
+/* ------------------------------
+   INTRO
+------------------------------ */
+
+.section-intro{
+
+    max-width:760px;
+
+    margin:25px 0 55px;
+
+    font-size:1.08rem;
+
+    line-height:1.9;
+
+    color:#44556b;
+
+}
+
+/* ------------------------------
+   STANDARD
+------------------------------ */
+
+.join-standard{
+
+    background:var(--bm-white);
+
+}
+
+.join-standard .cards{
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:35px;
+
+}
+
+.join-standard .card{
+
+    min-height:250px;
+
+}
+/* ------------------------------
+   JOURNEY
+------------------------------ */
+
+.join-journey{
+
+    background:#ffffff;
+
+}
+
+.journey-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:30px;
+
+    margin-top:50px;
+
+}
+
+.journey-step{
+
+    position:relative;
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:40px 30px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.journey-step:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.step-number{
+
+    width:70px;
+
+    height:70px;
+
+    margin:0 auto 25px;
+
+    border-radius:50%;
+
+    background:var(--bm-red);
+
+    color:white;
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    font-size:1.7rem;
+
+    font-weight:800;
+
+}
+
+.journey-step h3{
+
+    color:var(--bm-blue);
+
+    margin-bottom:18px;
+
+    font-size:1.3rem;
+
+}
+
+.journey-step p{
+
+    color:#55657d;
+
+    line-height:1.8;
+
+}
+
+/* ------------------------------
+   PILOT TYPES
+------------------------------ */
+
+.pilot-types{
+
+    background:var(--bm-white);
+
+}
+
+.pilot-types .cards{
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:35px;
+
+}
+
+.pilot-types .card{
+
+    min-height:300px;
+
+}
+
+.pilot-types h3{
+
+    margin-bottom:20px;
+
+}
+/* ------------------------------
+   COMMUNITY EXPECTATIONS
+------------------------------ */
+
+.community-values{
+
+    background:#ffffff;
+
+}
+
+.community-values .cards{
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:30px;
+
+}
+
+.community-values .card{
+
+    min-height:220px;
+
+}
+
+.community-values .card:hover{
+
+    transform:translateY(-8px);
+
+}
+
+/* ------------------------------
+   MEMBERSHIP
+------------------------------ */
+
+.membership{
+
+    background:var(--bm-white);
+
+}
+
+.requirements-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(5,1fr);
+
+    gap:25px;
+
+    margin-top:50px;
+
+}
+
+.requirement{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:35px 25px;
+
+    text-align:center;
+
+    box-shadow:var(--shadow);
+
+    transition:.3s;
+
+}
+
+.requirement:hover{
+
+    transform:translateY(-8px);
+
+}
+
+.requirement h3{
+
+    color:var(--bm-blue);
+
+    margin-bottom:18px;
+
+    font-size:1.2rem;
+
+}
+
+.requirement p{
+
+    color:#55657d;
+
+    font-weight:600;
+
+    line-height:1.6;
+
+}
+
+/* ------------------------------
+   CTA
+------------------------------ */
+
+.join-cta{
+
+    background:
+        linear-gradient(
+            135deg,
+            var(--bm-blue),
+            #032b63
+        );
+
+    color:white;
+
+    text-align:center;
+
+}
+
+.join-cta h2{
+
+    color:white;
+
+    margin-bottom:25px;
+
+}
+
+.join-cta p{
+
+    max-width:720px;
+
+    margin:0 auto 40px;
+
+    color:rgba(255,255,255,.88);
+
+    line-height:1.9;
+
+}
+
+.join-cta .section-label{
+
+    color:var(--bm-red);
+
+}
+/* ------------------------------
+   CARD ENHANCEMENTS
+------------------------------ */
+
+.join-standard .card,
+.pilot-types .card,
+.community-values .card,
+.requirement{
+
+    position:relative;
+
+    overflow:hidden;
+
+}
+
+.join-standard .card::before,
+.pilot-types .card::before,
+.community-values .card::before,
+.requirement::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:0;
+
+    width:100%;
+    height:5px;
+
+    background:var(--bm-red);
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:.35s;
+
+}
+
+.join-standard .card:hover::before,
+.pilot-types .card:hover::before,
+.community-values .card:hover::before,
+.requirement:hover::before{
+
+    transform:scaleX(1);
+
+}
+
+/* ------------------------------
+   RESPONSIVE
+------------------------------ */
+
+@media(max-width:1200px){
+
+    .journey-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .requirements-grid{
+
+        grid-template-columns:repeat(3,1fr);
+
+    }
+
+}
+
+@media(max-width:900px){
+
+    .join-standard .cards,
+    .pilot-types .cards,
+    .community-values .cards{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .requirements-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .join-hero .hero-content{
+
+        padding-top:180px;
+
+        text-align:center;
+
+        margin:auto;
+
+    }
+
+    .journey-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .requirements-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .join-hero h1{
+
+        font-size:2.5rem;
+
+    }
+
+    .section-intro{
+
+        font-size:1rem;
+
+    }
+
+}
