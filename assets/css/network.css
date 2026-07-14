@@ -563,3 +563,32 @@ footer{
     }
 
 }
+/* ===========================================================
+   HUB LABEL
+=========================================================== */
+
+.hub-label{
+
+    background:#001a3a;
+
+    color:white;
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:10px 14px;
+
+    font-weight:700;
+
+    letter-spacing:.04em;
+
+    box-shadow:0 10px 25px rgba(0,0,0,.18);
+
+}
+
+.hub-label::before{
+
+    display:none;
+
+}
