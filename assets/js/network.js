@@ -65,7 +65,15 @@ function initialiseMap() {
 
     });
 
-    map.setView(BHX, 5);
+  map.fitBounds(
+    [
+        [26, -88],
+        [61, 26]
+    ],
+    {
+        padding: [40, 40]
+    }
+);
 
     L.tileLayer(
 
@@ -178,11 +186,11 @@ function createAirport(destination) {
 
         {
 
-            radius:7,
+            radius:6,
 
             color:"#ffffff",
 
-            weight:2,
+            weight:1.8,
 
             fillColor:active
                 ? colours.active
@@ -222,45 +230,68 @@ card.classList.add("selected");
 // Route Line
 // ======================================================
 
+// ======================================================
+// Curved Route Line
+// ======================================================
+
 function createRoute(destination) {
 
     const active = destination.status === "active";
 
-    const route = L.polyline(
+    const start = L.latLng(BHX[0], BHX[1]);
+    const end = L.latLng(destination.lat, destination.lon);
 
-        [
+    const latMid = (start.lat + end.lat) / 2;
+    const lngMid = (start.lng + end.lng) / 2;
 
-            BHX,
 
-            [
+    const control = L.latLng(
 
-                destination.lat,
+        latMid + (end.lng - start.lng) * 0.18,
 
-                destination.lon
-
-            ]
-
-        ],
-
-        {
-
-            color:active
-                ? colours.active
-                : colours.future,
-
-            weight:3,
-
-            opacity:.9,
-
-            dashArray:active
-                ? null
-                : "10 10"
-
-        }
+        lngMid - (end.lat - start.lat) * 0.18
 
     );
 
-    route.addTo(map);
+    const points = [];
+
+    for(let t=0;t<=1;t+=0.025){
+
+        const lat =
+            Math.pow(1-t,2)*start.lat +
+            2*(1-t)*t*control.lat +
+            Math.pow(t,2)*end.lat;
+
+        const lng =
+            Math.pow(1-t,2)*start.lng +
+            2*(1-t)*t*control.lng +
+            Math.pow(t,2)*end.lng;
+
+        points.push([lat,lng]);
+
+    }
+
+    L.polyline(points,{
+
+        color:active
+            ? "#d02823"
+            : "#406fb5",
+
+        weight:active
+            ? 3
+            : 2,
+
+        opacity:.9,
+
+        dashArray:active
+            ? null
+            : "8 8",
+
+        lineCap:"round",
+
+        lineJoin:"round"
+
+    }).addTo(map);
 
 }
 
