@@ -190,11 +190,11 @@ function createAirport(destination) {
         .querySelectorAll(".destination-card")
         .forEach(c => c.classList.remove("selected"));
 
-    card.classList.add("selected");
+card.classList.add("selected");
 
 });
 
-  } 
+}
 
 // ======================================================
 // Route Line
@@ -241,81 +241,8 @@ function createRoute(destination) {
     route.addTo(map);
 
 }
-// ======================================================
-// Destination Cards
-// ======================================================
 
-function buildDestinationCards() {
 
-    const grid = document.getElementById("destination-grid");
-
-    if (!grid) return;
-
-    grid.innerHTML = "";
-
-    networkData.destinations.forEach(destination => {
-
-        const card = document.createElement("div");
-
-        card.className = "destination-card";
-
-        card.id = `card-${destination.iata}`;
-
-        card.innerHTML = `
-
-            <div class="destination-status ${destination.status}">
-
-                ${destination.status === "active"
-                    ? "ACTIVE"
-                    : "COMING SOON"}
-
-            </div>
-
-            <h3>
-
-                ${destination.city}
-
-            </h3>
-
-            <p class="airport">
-
-                ${destination.iata} • ${destination.icao}
-
-            </p>
-
-            <div class="destination-info">
-
-                <div>
-
-                    <span>Aircraft</span>
-
-                    <strong>${destination.aircraft.join(" / ")}</strong>
-
-                </div>
-
-                <div>
-
-                    <span>Status</span>
-
-                    <strong>
-
-                        ${destination.status === "active"
-                            ? "Operating"
-                            : "Future"}
-
-                    </strong>
-
-                </div>
-
-            </div>
-
-        `;
-
-        grid.appendChild(card);
-
-    });
-
-}
     // ======================================================
 // Destination Information
 // ======================================================
