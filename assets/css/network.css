@@ -1,1 +1,565 @@
+/* ===========================================================
+   BRITISH MIDLAND VIRTUAL
+   Network v3.2
+=========================================================== */
 
+:root{
+
+    --bm-blue:#001a3a;
+    --bm-red:#d02823;
+    --bm-cream:#f8f3ee;
+    --text:#44556b;
+
+    --radius:22px;
+
+    --shadow:
+        0 25px 60px rgba(0,0,0,.12);
+
+}
+
+/* =========================================================== */
+
+body{
+
+    background:var(--bm-cream);
+
+}
+
+/* =========================================================== */
+
+.network-hero{
+
+    padding-top:170px;
+
+    padding-bottom:80px;
+
+    text-align:center;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--bm-blue),
+            #032b63
+        );
+
+    color:white;
+
+}
+
+.network-hero h1{
+
+    font-size:clamp(3.2rem,6vw,5.5rem);
+
+    margin-bottom:20px;
+
+}
+
+.network-hero .hero-divider{
+
+    margin:35px auto;
+
+}
+
+.network-hero .hero-copy{
+
+    max-width:760px;
+
+    margin:auto;
+
+    font-size:1.15rem;
+
+    line-height:1.9;
+
+}
+
+/* =========================================================== */
+
+.network-map-section{
+
+    padding:90px 0;
+
+}
+
+/* =========================================================== */
+
+#network-map{
+
+    width:100%;
+
+    height:700px;
+
+    border-radius:26px;
+
+    overflow:hidden;
+
+    box-shadow:var(--shadow);
+
+    border:8px solid white;
+
+}
+
+/* =========================================================== */
+
+.leaflet-container{
+
+    background:#dfe9f4;
+
+    font-family:'Inter',sans-serif;
+
+}
+/* ===========================================================
+   DESTINATION GRID
+=========================================================== */
+
+.network-destinations{
+
+    padding:0 0 120px;
+
+}
+
+#destination-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+
+    gap:30px;
+
+}
+
+/* ===========================================================
+   DESTINATION CARD
+=========================================================== */
+
+.destination-card{
+
+    background:white;
+
+    border-radius:22px;
+
+    padding:34px;
+
+    box-shadow:var(--shadow);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease,
+        border-color .3s ease;
+
+    border:2px solid transparent;
+
+}
+
+.destination-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:
+        0 30px 80px rgba(0,0,0,.15);
+
+}
+
+/* =========================================================== */
+
+.destination-card.selected{
+
+    border-color:var(--bm-red);
+
+    transform:translateY(-6px);
+
+}
+
+/* =========================================================== */
+
+.destination-status{
+
+    display:inline-block;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    letter-spacing:.12em;
+
+    text-transform:uppercase;
+
+    margin-bottom:22px;
+
+}
+
+.destination-status.active{
+
+    background:#e7f6eb;
+
+    color:#1d7c3d;
+
+}
+
+.destination-status.coming-soon{
+
+    background:#eef0f3;
+
+    color:#6d7683;
+
+}
+
+/* =========================================================== */
+
+.destination-card h3{
+
+    font-size:2rem;
+
+    color:var(--bm-blue);
+
+    margin-bottom:8px;
+
+}
+
+.airport{
+
+    color:#8a93a3;
+
+    font-weight:600;
+
+    margin-bottom:22px;
+
+    letter-spacing:.05em;
+
+}
+
+.destination-description{
+
+    color:var(--text);
+
+    line-height:1.8;
+
+    margin-bottom:30px;
+
+}
+
+/* ===========================================================
+   INFO GRID
+=========================================================== */
+
+.destination-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+.destination-info div{
+
+    background:var(--bm-cream);
+
+    border-radius:16px;
+
+    padding:18px;
+
+}
+
+.destination-info span{
+
+    display:block;
+
+    font-size:.78rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+    color:#8d97a8;
+
+    margin-bottom:8px;
+
+}
+
+.destination-info strong{
+
+    color:var(--bm-blue);
+
+    font-size:1rem;
+
+}
+/* ===========================================================
+   MAP POLISH
+=========================================================== */
+
+.network-map-section{
+
+    position:relative;
+
+    margin-top:-40px;
+
+    z-index:5;
+
+}
+
+/* =========================================================== */
+
+#network-map{
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
+
+}
+
+#network-map:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 40px 100px rgba(0,0,0,.18);
+
+}
+
+/* ===========================================================
+   LEAFLET CONTROLS
+=========================================================== */
+
+.leaflet-control-zoom{
+
+    border:none !important;
+
+    box-shadow:none !important;
+
+}
+
+.leaflet-control-zoom a{
+
+    width:42px !important;
+
+    height:42px !important;
+
+    line-height:42px !important;
+
+    background:white !important;
+
+    color:var(--bm-blue) !important;
+
+    border-radius:12px !important;
+
+    margin-bottom:8px;
+
+    font-weight:700;
+
+    box-shadow:0 8px 20px rgba(0,0,0,.12);
+
+}
+
+.leaflet-control-zoom a:hover{
+
+    background:var(--bm-red) !important;
+
+    color:white !important;
+
+}
+
+/* ===========================================================
+   POPUPS
+=========================================================== */
+
+.leaflet-popup-content-wrapper{
+
+    border-radius:16px;
+
+    font-family:'Inter',sans-serif;
+
+}
+
+.leaflet-popup-content{
+
+    margin:16px 18px;
+
+    line-height:1.6;
+
+}
+
+.leaflet-popup-tip{
+
+    background:white;
+
+}
+
+/* ===========================================================
+   MARKERS
+=========================================================== */
+
+.leaflet-interactive{
+
+    transition:
+        stroke .25s ease,
+        fill .25s ease;
+
+}
+
+/* ===========================================================
+   SECTION TRANSITION
+=========================================================== */
+
+.network-destinations{
+
+    position:relative;
+
+}
+
+.network-destinations::before{
+
+    content:"";
+
+    display:block;
+
+    width:90px;
+
+    height:4px;
+
+    background:var(--bm-red);
+
+    margin:0 auto 70px;
+
+}
+/* ===========================================================
+   FOOTER SPACING
+=========================================================== */
+
+footer{
+
+    margin-top:0;
+
+}
+
+/* ===========================================================
+   RESPONSIVE
+=========================================================== */
+
+@media (max-width:1200px){
+
+    #network-map{
+
+        height:620px;
+
+    }
+
+}
+
+@media (max-width:992px){
+
+    .network-hero{
+
+        padding-top:150px;
+
+    }
+
+    .network-hero h1{
+
+        font-size:3.5rem;
+
+    }
+
+    #network-map{
+
+        height:560px;
+
+    }
+
+    #destination-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .network-hero{
+
+        padding-top:130px;
+
+        padding-bottom:60px;
+
+    }
+
+    .network-hero h1{
+
+        font-size:2.8rem;
+
+    }
+
+    .network-hero .hero-copy{
+
+        font-size:1rem;
+
+    }
+
+    .network-map-section{
+
+        padding:60px 0;
+
+        margin-top:-20px;
+
+    }
+
+    #network-map{
+
+        height:500px;
+
+        border-width:5px;
+
+    }
+
+    .destination-card{
+
+        padding:28px;
+
+    }
+
+    .destination-card h3{
+
+        font-size:1.6rem;
+
+    }
+
+    .destination-info{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+
+@media (max-width:480px){
+
+    .network-hero h1{
+
+        font-size:2.2rem;
+
+    }
+
+    #network-map{
+
+        height:420px;
+
+    }
+
+    .destination-status{
+
+        font-size:.68rem;
+
+    }
+
+    .destination-card{
+
+        padding:22px;
+
+    }
+
+}
