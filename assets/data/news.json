@@ -71,20 +71,26 @@
     "featured": false,
     "published": "2026-07-25",
     "category": "Community",
-    "title": "Pilot Applications Opening Soon",
-    "summary": "Applications to join British Midland Virtual will open shortly.",
+    "title": "Now Welcoming New & Type-Rated Airbus Pilots",
+    "summary": "Whether you're taking your first steps into virtual aviation or already experienced on the Airbus family, British Midland Virtual welcomes you to join our growing community.",
     "content": [
-      "Preparations are underway to welcome our first generation of British Midland Virtual pilots.",
-      "The upcoming Join section of the website will guide new members through the application process and introduce the airline's philosophy, standards and operating procedures.",
-      "Whether you are a seasoned virtual airline pilot or just beginning your journey in Microsoft Flight Simulator, British Midland Virtual aims to provide a welcoming and enjoyable environment focused on realism without unnecessary complexity.",
-      "More information regarding pilot recruitment, ranks and future events will be announced in the coming weeks."
+      "British Midland Virtual is proud to welcome both new and experienced Airbus pilots to our growing community.",
+      "Whether you're flying your very first virtual airline route or already have experience operating the Airbus A320 family, you'll find a friendly and supportive environment built around realistic operations and an appreciation for British Midland's heritage.",
+      "Our current fleet includes the Airbus A320, Airbus A321 and Airbus A350-1000, operating an expanding network of short-haul European and long-haul international services from our Birmingham hub.",
+      "We believe realistic flying should be enjoyable and accessible, with no unnecessary barriers to getting started. New pilots can learn as they fly, while experienced Airbus crews can immediately enjoy our routes and procedures.",
+      "As our network and community continue to grow, we invite anyone with a passion for virtual aviation to become part of British Midland Virtual and help write the next chapter of our story.",
+      "If you're looking for a welcoming Airbus-focused virtual airline inspired by one of Britain's most recognisable carriers, we'd be delighted to have you on board."
     ],
-    "image": "assets/images/news/join.jpg",
-    "author": "Community Team",
+    "image": "assets/images/news/airbus-pilot-community.jpg",
+    "author": "British Midland Crew Services",
     "tags": [
       "Community",
-      "Recruitment",
-      "Pilots"
+      "Pilots",
+      "Airbus",
+      "A320",
+      "A321",
+      "A350",
+      "Join"
     ]
   }
 ]
