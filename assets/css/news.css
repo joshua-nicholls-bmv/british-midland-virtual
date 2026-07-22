@@ -3,125 +3,73 @@
    NEWS PAGE
 ========================================================== */
 
-.news-page{
-    padding:60px 0 100px;
-    background:#f8f3ee;
+:root{
+    --bm-blue:#001a3a;
+    --bm-red:#d02823;
+    --bm-cream:#f8f3ee;
+    --text:#3d4754;
 }
 
-/* ==========================================================
-   FEATURED ARTICLE
-========================================================== */
-
-.featured-card{
-
-    max-width:1200px;
-    margin:0 auto 80px;
-
-    display:grid;
-    grid-template-columns:1.3fr 1fr;
-    gap:50px;
-
-    align-items:center;
-
-    background:#ffffff;
-
-    border-radius:22px;
-
-    overflow:hidden;
-
-    box-shadow:0 20px 45px rgba(0,0,0,.08);
-
+body{
+    margin:0;
+    background:var(--bm-cream);
+    font-family:"Inter",sans-serif;
+    color:var(--text);
 }
 
-.featured-card img{
+/* ================= HERO ================= */
 
-    width:100%;
-    height:100%;
-    min-height:500px;
+.news-hero{
 
-    object-fit:cover;
-
-    display:block;
-
-}
-
-.featured-content{
-
-    padding:50px;
-
-}
-
-.featured-content h2{
-
-    font-size:2.9rem;
-
-    line-height:1.1;
-
-    color:#001a3a;
-
-    margin:20px 0;
-
-}
-
-.featured-content p{
-
-    color:#555;
-
-    font-size:1.05rem;
-
-    line-height:1.8;
-
-    margin-bottom:30px;
-
-}
-
-/* ==========================================================
-   SECTION HEADING
-========================================================== */
-
-.news-section{
-
-    max-width:1200px;
-    margin:auto;
-
-    padding:0 30px;
-
-}
-
-.section-heading{
+    padding:90px 20px 70px;
 
     text-align:center;
 
-    margin-bottom:60px;
+}
+
+.news-hero .container{
+
+    max-width:900px;
+
+    margin:auto;
 
 }
 
 .eyebrow{
 
-    color:#d02823;
+    display:inline-block;
+
+    color:var(--bm-red);
 
     text-transform:uppercase;
 
     letter-spacing:3px;
 
-    font-size:.85rem;
+    font-size:.8rem;
 
     font-weight:700;
 
-}
-
-.section-heading h1,
-.section-heading h2{
-
-    font-size:3rem;
-
-    color:#001a3a;
-
-    margin:15px 0;
+    margin-bottom:20px;
 
 }
 
-.section-heading p{
+.news-hero h1{
+
+    font-size:4rem;
+
+    color:var(--bm-blue);
+
+    margin:0 0 20px;
+
+    font-weight:800;
+
+}
+
+.news-hero p{
+
+    font-size:1.1rem;
+
+    line-height:1.8;
 
     color:#666;
 
@@ -129,13 +77,173 @@
 
     margin:auto;
 
-    line-height:1.8;
+}
+
+/* ================= FEATURED ================= */
+
+.featured-section{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    padding:0 30px 90px;
 
 }
 
-/* ==========================================================
-   NEWS GRID
-========================================================== */
+.featured-card{
+
+    display:grid;
+
+    grid-template-columns:55% 45%;
+
+    background:white;
+
+    border-radius:24px;
+
+    overflow:hidden;
+
+    box-shadow:0 20px 60px rgba(0,0,0,.08);
+
+}
+
+.featured-card img{
+
+    width:100%;
+
+    height:100%;
+
+    min-height:500px;
+
+    object-fit:cover;
+
+}
+
+.featured-content{
+
+    padding:60px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+.featured-content h2{
+
+    font-size:3rem;
+
+    color:var(--bm-blue);
+
+    line-height:1.15;
+
+    margin:20px 0;
+
+}
+
+.featured-content p{
+
+    line-height:1.8;
+
+    color:#666;
+
+    margin-bottom:35px;
+
+}
+
+/* ================= CATEGORY ================= */
+
+.category{
+
+    display:inline-block;
+
+    align-self:flex-start;
+
+    padding:8px 16px;
+
+    border-radius:30px;
+
+    background:var(--bm-red);
+
+    color:white;
+
+    text-transform:uppercase;
+
+    font-size:.75rem;
+
+    font-weight:700;
+
+}
+
+/* ================= BUTTON ================= */
+
+.btn{
+
+    display:inline-block;
+
+    align-self:flex-start;
+
+    background:var(--bm-red);
+
+    color:white;
+
+    text-decoration:none;
+
+    padding:14px 28px;
+
+    border-radius:999px;
+
+    font-weight:700;
+
+    transition:.25s;
+
+}
+
+.btn:hover{
+
+    background:var(--bm-blue);
+
+    transform:translateY(-2px);
+
+}
+
+/* ================= NEWS GRID ================= */
+
+.news-section{
+
+    max-width:1300px;
+
+    margin:auto;
+
+    padding:0 30px 100px;
+
+}
+
+.section-title{
+
+    text-align:center;
+
+    margin-bottom:60px;
+
+}
+
+.section-title h2{
+
+    color:var(--bm-blue);
+
+    font-size:2.5rem;
+
+    margin-bottom:10px;
+
+}
+
+.section-title p{
+
+    color:#666;
+
+}
 
 .news-grid{
 
@@ -147,21 +255,17 @@
 
 }
 
-/* ==========================================================
-   NEWS CARD
-========================================================== */
-
 .news-card{
 
-    background:#ffffff;
+    background:white;
 
-    border-radius:18px;
+    border-radius:20px;
 
     overflow:hidden;
 
-    box-shadow:0 15px 40px rgba(0,0,0,.08);
+    box-shadow:0 12px 35px rgba(0,0,0,.08);
 
-    transition:.3s ease;
+    transition:.3s;
 
     display:flex;
 
@@ -173,25 +277,21 @@
 
     transform:translateY(-8px);
 
-    box-shadow:0 22px 50px rgba(0,0,0,.12);
-
 }
 
 .news-card img{
 
     width:100%;
 
-    height:220px;
+    height:230px;
 
     object-fit:cover;
-
-    display:block;
 
 }
 
 .news-content{
 
-    padding:28px;
+    padding:30px;
 
     display:flex;
 
@@ -203,11 +303,11 @@
 
 .news-content h3{
 
-    color:#001a3a;
+    font-size:1.6rem;
 
-    font-size:1.45rem;
+    color:var(--bm-blue);
 
-    margin:18px 0 12px;
+    margin:18px 0;
 
 }
 
@@ -215,165 +315,19 @@
 
     color:#666;
 
-    line-height:1.7;
+    line-height:1.8;
 
     flex:1;
 
 }
 
-/* ==========================================================
-   CATEGORY BADGE
-========================================================== */
-
-.category{
-
-    display:inline-block;
-
-    background:#d02823;
-
-    color:#fff;
-
-    padding:7px 14px;
-
-    border-radius:30px;
-
-    text-transform:uppercase;
-
-    font-size:.75rem;
-
-    font-weight:700;
-
-    letter-spacing:1px;
-
-}
-
-/* ==========================================================
-   BUTTONS
-========================================================== */
-
-.btn{
-
-    display:inline-block;
-
-    align-self:flex-start;
-
-    margin-top:25px;
-
-    padding:13px 26px;
-
-    border-radius:40px;
-
-    background:#d02823;
-
-    color:#fff;
-
-    text-decoration:none;
-
-    font-weight:700;
-
-    transition:.25s;
-
-}
-
-.btn:hover{
-
-    background:#001a3a;
-
-    transform:translateY(-2px);
-
-}
-
-/* ==========================================================
-   ARTICLE PAGE
-========================================================== */
-
-.article-page{
-
-    max-width:950px;
-
-    margin:70px auto;
-
-    padding:0 30px;
-
-}
-
-.article-image{
-
-    width:100%;
-
-    border-radius:22px;
-
-    margin-bottom:35px;
-
-}
-
-.article-page h1{
-
-    color:#001a3a;
-
-    font-size:3rem;
-
-    line-height:1.15;
-
-    margin:20px 0;
-
-}
-
-.article-page p{
-
-    color:#555;
-
-    line-height:1.9;
-
-    margin-bottom:22px;
-
-}
-
-.article-date{
-
-    color:#999;
-
-    font-size:.95rem;
-
-    margin-bottom:35px;
-
-}
-
-.back-link{
-
-    display:inline-block;
-
-    margin-bottom:40px;
-
-    color:#001a3a;
-
-    text-decoration:none;
-
-    font-weight:700;
-
-}
-
-.back-link:hover{
-
-    color:#d02823;
-
-}
-
-/* ==========================================================
-   RESPONSIVE
-========================================================== */
+/* ================= MOBILE ================= */
 
 @media(max-width:900px){
 
     .featured-card{
 
         grid-template-columns:1fr;
-
-    }
-
-    .featured-card img{
-
-        min-height:280px;
 
     }
 
@@ -389,16 +343,9 @@
 
     }
 
-    .section-heading h1,
-    .section-heading h2{
+    .news-hero h1{
 
-        font-size:2.3rem;
-
-    }
-
-    .article-page h1{
-
-        font-size:2.3rem;
+        font-size:2.7rem;
 
     }
 
@@ -406,21 +353,11 @@
 
 @media(max-width:600px){
 
-    .news-grid{
+    .news-section,
+    .featured-section{
 
-        grid-template-columns:1fr;
-
-    }
-
-    .news-section{
-
-        padding:0 20px;
-
-    }
-
-    .featured-content{
-
-        padding:25px;
+        padding-left:20px;
+        padding-right:20px;
 
     }
 
