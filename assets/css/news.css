@@ -1,93 +1,110 @@
 /* ==========================================================
-   BRITISH MIDLAND VIRTUAL
-   NEWS PAGE
+   British Midland Virtual
+   News Page v2
 ========================================================== */
 
 :root{
-    --bm-blue:#001a3a;
-    --bm-red:#d02823;
-    --bm-cream:#f8f3ee;
-    --text:#3d4754;
+
+    --bm-blue:#001A3A;
+    --bm-red:#D02823;
+    --bm-cream:#F8F3EE;
+    --bm-white:#ffffff;
+    --bm-text:#4d5666;
+
 }
 
 body{
+
     margin:0;
-    background:var(--bm-cream);
-    font-family:"Inter",sans-serif;
-    color:var(--text);
+    font-family:Inter,sans-serif;
+    background:#ffffff;
+    color:var(--bm-text);
+
 }
 
-/* ================= HERO ================= */
+/* ==========================================================
+   HERO
+========================================================== */
 
 .news-hero{
 
-    padding:90px 20px 70px;
+    background:linear-gradient(180deg,#001A3A 0%,#032553 100%);
+    color:#fff;
 
+    padding:170px 0 120px;
     text-align:center;
 
 }
 
-.news-hero .container{
+.news-hero .eyebrow{
 
-    max-width:900px;
-
-    margin:auto;
-
-}
-
-.eyebrow{
-
-    display:inline-block;
+    display:block;
 
     color:var(--bm-red);
 
     text-transform:uppercase;
 
-    letter-spacing:3px;
+    letter-spacing:6px;
 
-    font-size:.8rem;
+    font-size:.85rem;
 
     font-weight:700;
 
-    margin-bottom:20px;
+    margin-bottom:28px;
 
 }
 
 .news-hero h1{
 
-    font-size:4rem;
-
-    color:var(--bm-blue);
-
-    margin:0 0 20px;
+    font-size:4.4rem;
 
     font-weight:800;
+
+    line-height:1.05;
+
+    margin:0;
+
+}
+
+.news-hero h1::after{
+
+    content:"";
+
+    display:block;
+
+    width:90px;
+
+    height:4px;
+
+    margin:40px auto;
+
+    background:var(--bm-red);
 
 }
 
 .news-hero p{
 
-    font-size:1.1rem;
-
-    line-height:1.8;
-
-    color:#666;
-
-    max-width:700px;
+    max-width:760px;
 
     margin:auto;
+
+    font-size:1.2rem;
+
+    line-height:1.9;
+
+    color:rgba(255,255,255,.82);
 
 }
 
-/* ================= FEATURED ================= */
+/* ==========================================================
+   FEATURED ARTICLE
+========================================================== */
 
 .featured-section{
 
-    max-width:1300px;
+    background:var(--bm-cream);
 
-    margin:auto;
-
-    padding:0 30px 90px;
+    padding:90px 0;
 
 }
 
@@ -95,9 +112,9 @@ body{
 
     display:grid;
 
-    grid-template-columns:55% 45%;
+    grid-template-columns:1.2fr 1fr;
 
-    background:white;
+    background:#fff;
 
     border-radius:24px;
 
@@ -113,15 +130,13 @@ body{
 
     height:100%;
 
-    min-height:500px;
-
     object-fit:cover;
 
 }
 
 .featured-content{
 
-    padding:60px;
+    padding:55px;
 
     display:flex;
 
@@ -131,69 +146,67 @@ body{
 
 }
 
-.featured-content h2{
-
-    font-size:3rem;
-
-    color:var(--bm-blue);
-
-    line-height:1.15;
-
-    margin:20px 0;
-
-}
-
-.featured-content p{
-
-    line-height:1.8;
-
-    color:#666;
-
-    margin-bottom:35px;
-
-}
-
-/* ================= CATEGORY ================= */
-
-.category{
+.badge{
 
     display:inline-block;
 
     align-self:flex-start;
 
-    padding:8px 16px;
-
-    border-radius:30px;
-
     background:var(--bm-red);
 
-    color:white;
+    color:#fff;
 
-    text-transform:uppercase;
+    padding:10px 18px;
+
+    border-radius:999px;
 
     font-size:.75rem;
 
     font-weight:700;
 
+    letter-spacing:1px;
+
+    text-transform:uppercase;
+
 }
 
-/* ================= BUTTON ================= */
+.featured-content h2{
 
-.btn{
+    color:var(--bm-blue);
 
-    display:inline-block;
+    font-size:3rem;
+
+    margin:28px 0 18px;
+
+    line-height:1.1;
+
+}
+
+.featured-content p{
+
+    font-size:1.1rem;
+
+    line-height:1.8;
+
+}
+
+.read-button{
+
+    margin-top:30px;
+
+    display:inline-flex;
 
     align-self:flex-start;
 
     background:var(--bm-red);
 
-    color:white;
+    color:#fff;
 
-    text-decoration:none;
-
-    padding:14px 28px;
+    padding:16px 34px;
 
     border-radius:999px;
+
+    text-decoration:none;
 
     font-weight:700;
 
@@ -201,23 +214,23 @@ body{
 
 }
 
-.btn:hover{
+.read-button:hover{
 
-    background:var(--bm-blue);
+    transform:translateY(-3px);
 
-    transform:translateY(-2px);
+    background:#b91f1b;
 
 }
 
-/* ================= NEWS GRID ================= */
+/* ==========================================================
+   LATEST NEWS
+========================================================== */
 
 .news-section{
 
-    max-width:1300px;
+    padding:100px 0;
 
-    margin:auto;
-
-    padding:0 30px 100px;
+    background:#fff;
 
 }
 
@@ -233,15 +246,17 @@ body{
 
     color:var(--bm-blue);
 
-    font-size:2.5rem;
+    font-size:2.8rem;
 
-    margin-bottom:10px;
+    margin-bottom:14px;
 
 }
 
 .section-title p{
 
-    color:#666;
+    color:#667085;
+
+    font-size:1.05rem;
 
 }
 
@@ -249,27 +264,23 @@ body{
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    grid-template-columns:repeat(auto-fit,minmax(330px,1fr));
 
-    gap:40px;
+    gap:35px;
 
 }
 
 .news-card{
 
-    background:white;
+    background:#fff;
 
     border-radius:20px;
 
     overflow:hidden;
 
-    box-shadow:0 12px 35px rgba(0,0,0,.08);
+    box-shadow:0 15px 40px rgba(0,0,0,.08);
 
     transition:.3s;
-
-    display:flex;
-
-    flex-direction:column;
 
 }
 
@@ -277,88 +288,84 @@ body{
 
     transform:translateY(-8px);
 
+    box-shadow:0 25px 55px rgba(0,0,0,.12);
+
 }
 
 .news-card img{
 
     width:100%;
 
-    height:230px;
+    height:220px;
 
     object-fit:cover;
 
 }
 
-.news-content{
+.news-card-content{
 
     padding:30px;
 
-    display:flex;
-
-    flex-direction:column;
-
-    flex:1;
-
 }
 
-.news-content h3{
-
-    font-size:1.6rem;
+.news-card h3{
 
     color:var(--bm-blue);
+
+    font-size:1.6rem;
 
     margin:18px 0;
 
 }
 
-.news-content p{
-
-    color:#666;
+.news-card p{
 
     line-height:1.8;
 
-    flex:1;
+}
+
+.news-card a{
+
+    display:inline-block;
+
+    margin-top:20px;
+
+    color:var(--bm-red);
+
+    text-decoration:none;
+
+    font-weight:700;
 
 }
 
-/* ================= MOBILE ================= */
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
 
 @media(max-width:900px){
 
-    .featured-card{
+.featured-card{
 
-        grid-template-columns:1fr;
-
-    }
-
-    .featured-content{
-
-        padding:35px;
-
-    }
-
-    .featured-content h2{
-
-        font-size:2.2rem;
-
-    }
-
-    .news-hero h1{
-
-        font-size:2.7rem;
-
-    }
+    grid-template-columns:1fr;
 
 }
 
-@media(max-width:600px){
+.news-hero{
 
-    .news-section,
-    .featured-section{
+    padding:130px 0 90px;
 
-        padding-left:20px;
-        padding-right:20px;
+}
 
-    }
+.news-hero h1{
+
+    font-size:3rem;
+
+}
+
+.featured-content{
+
+    padding:35px;
+
+}
 
 }
