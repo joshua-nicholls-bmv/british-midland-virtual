@@ -20,3 +20,17 @@
     ]
   }
 ]
+{
+  "id": 2,
+  "featured": false,
+  "published": "2026-07-23",
+  "category": "Network",
+  "title": "Paris Charles de Gaulle Joins the Network",
+  "summary": "British Midland Virtual continues its expansion with the addition of Paris CDG.",
+  "content": [
+    "We're delighted to announce the addition of Paris Charles de Gaulle..."
+  ],
+  "image": "assets/images/news/paris.jpg",
+  "author": "Network Planning",
+  "tags": ["Network", "Paris"]
+}
