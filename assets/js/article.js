@@ -15,15 +15,21 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (!article) {
 
             container.innerHTML = `
-                <section style="padding:120px 20px;text-align:center;">
-                    <h1>Article not found</h1>
-                    <a href="news.html">Back to News</a>
+                <section class="article-not-found">
+                    <div class="container">
+                        <h1>Article not found</h1>
+                        <a href="news.html" class="back-link">
+                            ← Back to News
+                        </a>
+                    </div>
                 </section>
             `;
 
             return;
 
         }
+
+        document.title = `${article.title} | British Midland Virtual`;
 
         const formattedDate = new Date(article.published).toLocaleDateString(
             "en-GB",
@@ -35,32 +41,49 @@ document.addEventListener("DOMContentLoaded", async () => {
         );
 
         container.innerHTML = `
-            <section style="max-width:900px;margin:160px auto;padding:40px;">
 
-                <img src="${article.image}"
-                     style="width:100%;border-radius:16px;">
+        <section class="article-hero">
 
-                <p style="color:#D02823;font-weight:700;margin-top:30px;">
-                    ${article.category}
-                </p>
+            <img class="hero-image"
+                 src="${article.image}"
+                 alt="${article.title}">
 
-                <h1 style="font-size:3rem;color:#001A3A;">
-                    ${article.title}
-                </h1>
+            <div class="hero-overlay"></div>
 
-                <p>
-                    ${formattedDate} • ${article.author}
-                </p>
+        </section>
 
-                ${article.content.map(p => `<p>${p}</p>`).join("")}
+        <section class="article-body">
 
-                <br><br>
+            <div class="container narrow">
 
-                <a href="news.html">
+                <a href="news.html" class="back-link">
                     ← Back to News
                 </a>
 
-            </section>
+                <span class="article-category">
+                    ${article.category}
+                </span>
+
+                <h1>
+                    ${article.title}
+                </h1>
+
+                <p class="article-meta">
+                    ${formattedDate} • ${article.author}
+                </p>
+
+                <p class="article-summary">
+                    ${article.summary}
+                </p>
+
+                ${article.content
+                    .map(paragraph => `<p>${paragraph}</p>`)
+                    .join("")}
+
+            </div>
+
+        </section>
+
         `;
 
     }
@@ -69,9 +92,11 @@ document.addEventListener("DOMContentLoaded", async () => {
         console.error(err);
 
         container.innerHTML = `
-            <section style="padding:150px;text-align:center;">
-                <h1>JavaScript Error</h1>
-                <pre>${err}</pre>
+            <section class="article-not-found">
+                <div class="container">
+                    <h1>Something went wrong.</h1>
+                    <p>${err}</p>
+                </div>
             </section>
         `;
 
