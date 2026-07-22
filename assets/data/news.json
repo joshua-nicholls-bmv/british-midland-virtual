@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "featured": true,
+    "published": "2026-07-22",
+    "category": "Development",
+    "title": "British Midland Virtual Website Now Live",
+    "summary": "The official British Midland Virtual website is now live.",
+    "content": [
+      "After months of planning and development, we are delighted to launch the official British Midland Virtual website.",
+      "The website showcases our growing route network, fleet and future plans for the airline.",
+      "This is only the beginning, with many exciting features including a Pilot Portal, downloads and operations centre planned for future updates."
+    ],
+    "image": "assets/images/news/website-launch.jpg",
+    "author": "British Midland Crew Services",
+    "tags": [
+      "Website",
+      "Launch",
+      "Development"
+    ]
+  }
+]
