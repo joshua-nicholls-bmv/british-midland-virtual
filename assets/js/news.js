@@ -1,5 +1,6 @@
 document.addEventListener("DOMContentLoaded", async () => {
     try {
+
         const response = await fetch("assets/data/news.json");
 
         if (!response.ok) {
@@ -8,25 +9,41 @@ document.addEventListener("DOMContentLoaded", async () => {
 
         const articles = await response.json();
 
-        // Sort newest first
-        articles.sort((a, b) => new Date(b.published) - new Date(a.published));
-
+        // Uses the order of the JSON file
         renderFeatured(articles);
         renderNewsCards(articles);
 
     } catch (error) {
+
         console.error("News loading error:", error);
 
         document.getElementById("featured-news").innerHTML = `
+
             <div class="featured-card">
+
                 <div class="featured-content">
-                    <h2>Unable to load news</h2>
-                    <p>Please try again later.</p>
+
+                    <span class="badge">
+                        Error
+                    </span>
+
+                    <h2>
+                        Unable to load news
+                    </h2>
+
+                    <p>
+                        Please try again later.
+                    </p>
+
                 </div>
+
             </div>
+
         `;
+
     }
 });
+
 
 function renderFeatured(articles) {
 
@@ -36,16 +53,17 @@ function renderFeatured(articles) {
 
     document.getElementById("featured-news").innerHTML = `
 
-        <div class="featured-card">
+        <article class="featured-card">
 
             <img
-                src="${featured.image}?v=${Date.now()}"
+                src="${featured.image}"
                 alt="${featured.title}"
+                loading="eager"
             >
 
             <div class="featured-content">
 
-                <span class="category">
+                <span class="badge">
                     ${featured.category}
                 </span>
 
@@ -58,7 +76,7 @@ function renderFeatured(articles) {
                 </p>
 
                 <a
-                    class="btn"
+                    class="read-button"
                     href="article.html?id=${featured.id}"
                 >
                     Read Article →
@@ -66,10 +84,12 @@ function renderFeatured(articles) {
 
             </div>
 
-        </div>
+        </article>
 
     `;
+
 }
+
 
 function renderNewsCards(articles) {
 
@@ -86,13 +106,14 @@ function renderNewsCards(articles) {
                 <article class="news-card">
 
                     <img
-                        src="${article.image}?v=${Date.now()}"
+                        src="${article.image}"
                         alt="${article.title}"
+                        loading="lazy"
                     >
 
-                    <div class="news-content">
+                    <div class="news-card-content">
 
-                        <span class="category">
+                        <span class="badge">
                             ${article.category}
                         </span>
 
@@ -105,7 +126,6 @@ function renderNewsCards(articles) {
                         </p>
 
                         <a
-                            class="btn"
                             href="article.html?id=${article.id}"
                         >
                             Read More →
