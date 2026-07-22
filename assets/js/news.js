@@ -30,7 +30,9 @@ function renderFeatured(articles) {
 
                 <p>${featured.summary}</p>
 
-                <button>Read Article</button>
+                <a class="btn" href="article.html?id=${featured.id}">
+                    Read Article
+                </a>
 
             </div>
 
@@ -62,7 +64,9 @@ function renderNewsCards(articles) {
 
                     <p>${article.summary}</p>
 
-                    <button>Read More</button>
+                    <a class="btn" href="article.html?id=${article.id}">
+                        Read More
+                    </a>
 
                 </div>
 
