@@ -25,27 +25,6 @@
   {
     "id": 2,
     "featured": false,
-    "published": "2026-07-23",
-    "category": "Fleet",
-    "title": "Airbus A320 Fleet Ready for Operations",
-    "summary": "Our flagship Airbus A320 fleet is now fully configured for launch operations.",
-    "content": [
-      "Following extensive work behind the scenes, the British Midland Virtual Airbus A320 fleet is now fully prepared for day one operations.",
-      "Each aircraft has been configured to provide a consistent experience for our pilots, featuring custom liveries inspired by the final British Midland colour scheme while embracing a modern interpretation suitable for today's virtual skies.",
-      "The Airbus A320 will form the backbone of our European operation, serving destinations across Western and Central Europe from Birmingham Airport.",
-      "As the airline grows, additional aircraft including the Airbus A321 and Airbus A350-1000 will expand our capability into longer routes and higher-capacity operations."
-    ],
-    "image": "assets/images/news/fleet.jpg",
-    "author": "Fleet Management",
-    "tags": [
-      "Fleet",
-      "A320",
-      "Operations"
-    ]
-  },
-  {
-    "id": 3,
-    "featured": false,
     "published": "2026-07-24",
     "category": "Community",
     "title": "Now Welcoming New & Type-Rated Airbus Pilots",
@@ -68,6 +47,27 @@
       "A321",
       "A350",
       "Join"
+    ]
+  },
+  {
+    "id": 3,
+    "featured": false,
+    "published": "2026-07-23",
+    "category": "Fleet",
+    "title": "Airbus A320 Fleet Ready for Operations",
+    "summary": "Our flagship Airbus A320 fleet is now fully configured for launch operations.",
+    "content": [
+      "Following extensive work behind the scenes, the British Midland Virtual Airbus A320 fleet is now fully prepared for day one operations.",
+      "Each aircraft has been configured to provide a consistent experience for our pilots, featuring custom liveries inspired by the final British Midland colour scheme while embracing a modern interpretation suitable for today's virtual skies.",
+      "The Airbus A320 will form the backbone of our European operation, serving destinations across Western and Central Europe from Birmingham Airport.",
+      "As the airline grows, additional aircraft including the Airbus A321 and Airbus A350-1000 will expand our capability into longer routes and higher-capacity operations."
+    ],
+    "image": "assets/images/news/fleet.jpg",
+    "author": "Fleet Management",
+    "tags": [
+      "Fleet",
+      "A320",
+      "Operations"
     ]
   },
   {
