@@ -2,33 +2,68 @@
 <html lang="en">
 
 <head>
+
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
+
+    <meta name="theme-color" content="#001A3A">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>News | British Midland Virtual</title>
-
-    <link rel="icon" href="favicon.ico">
+    <title>British Midland News | British Midland Virtual</title>
 
     <!-- Google Font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="assets/css/base.css">
     <link rel="stylesheet" href="assets/css/news.css">
+
 </head>
 
 <body>
 
-   <body>
+    <!-- =========================
+         Navigation
+    ========================== -->
 
-    <!-- Navigation -->
-    <!-- Paste your existing navbar here -->
+    <header class="site-header">
+
+        <nav class="navbar container">
+
+            <a class="logo" href="index.html">
+                <img src="assets/images/logo.png"
+                     alt="British Midland Virtual">
+            </a>
+
+            <ul class="nav-links">
+                <li><a href="index.html">HOME</a></li>
+                <li><a href="fleet.html">FLEET</a></li>
+                <li><a href="network.html">NETWORK</a></li>
+                <li><a class="active" href="news.html">NEWS</a></li>
+                <li><a href="operations.html">OPERATIONS</a></li>
+                <li><a href="join.html">JOIN</a></li>
+            </ul>
+
+        </nav>
+
+    </header>
 
     <main class="news-page">
 
-        <!-- Hero -->
+        <!-- =========================
+             Hero
+        ========================== -->
+
         <section class="news-hero">
 
             <div class="container">
@@ -50,15 +85,23 @@
 
         </section>
 
-        <!-- Featured Story -->
+        <!-- =========================
+             Featured Story
+        ========================== -->
 
         <section class="featured-section">
 
-            <div id="featured-news"></div>
+            <div class="container">
+
+                <div id="featured-news"></div>
+
+            </div>
 
         </section>
 
-        <!-- Latest News -->
+        <!-- =========================
+             Latest News
+        ========================== -->
 
         <section class="news-section">
 
@@ -71,9 +114,7 @@
                     </h2>
 
                     <p>
-
                         The latest updates from across the airline.
-
                     </p>
 
                 </div>
@@ -87,12 +128,32 @@
 
     </main>
 
-    <!-- Footer -->
-    <!-- Paste your existing footer here -->
+    <!-- =========================
+         Footer
+    ========================== -->
+
+    <footer>
+
+        <div class="container">
+
+            <p><strong>British Midland Virtual</strong></p>
+
+            <p>
+                The Heart of Britain. Connected to the World.
+            </p>
+
+            <p>
+                &copy; 2026 British Midland Virtual
+            </p>
+
+        </div>
+
+    </footer>
+
+    <!-- Scripts -->
 
     <script src="assets/js/news.js"></script>
 
-</body>
 </body>
 
 </html>
