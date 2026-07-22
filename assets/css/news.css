@@ -1,0 +1,41 @@
+.news-page{
+    padding-top:60px;
+    padding-bottom:80px;
+}
+
+.news-section{
+    max-width:1200px;
+    margin:auto;
+    padding:0 30px;
+}
+
+.section-heading{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.eyebrow{
+    color:#d02823;
+    text-transform:uppercase;
+    letter-spacing:3px;
+    font-size:.85rem;
+    font-weight:700;
+}
+
+.section-heading h2{
+    font-size:3rem;
+    margin:10px 0;
+    color:#001a3a;
+}
+
+.section-heading p{
+    color:#666;
+    max-width:700px;
+    margin:auto;
+}
+
+.news-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    gap:40px;
+}
