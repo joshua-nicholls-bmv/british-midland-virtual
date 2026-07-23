@@ -1,7 +1,7 @@
 // ======================================================
 // British Midland Virtual
-// Network Engine v3.2
-// Part 1 - Initialisation
+// Network Engine v3.3
+// Part 1 - Initialisation & Configuration
 // ======================================================
 
 let map;
@@ -9,15 +9,119 @@ let networkData = null;
 
 const BHX = [52.4539, -1.7480];
 
+// ------------------------------------------------------
+// Fleet Colours
+// ------------------------------------------------------
+
 const colours = {
 
-    active: "#d02823",
-
-    future: "#8a8f98",
-
-    hub: "#001a3a"
+    A319: "#2E6FA3",      // Regional
+    A320: "#D02823",      // Core network
+    A321: "#C9A227",      // Leisure / High Capacity
+    A350: "#8A8F98",      // Future Long Haul
+    hub: "#001A3A"
 
 };
+
+// ======================================================
+// Helper Functions
+// ======================================================
+
+function isActive(destination) {
+
+    return destination.status === "active";
+
+}
+
+function getAircraft(destination) {
+
+    if (!destination.aircraft || destination.aircraft.length === 0) {
+
+        return "A320";
+
+    }
+
+    return destination.aircraft[0];
+
+}
+
+function getAircraftColour(destination) {
+
+    if (!isActive(destination)) {
+
+        return colours.A350;
+
+    }
+
+    switch (getAircraft(destination)) {
+
+        case "A319":
+            return colours.A319;
+
+        case "A320":
+            return colours.A320;
+
+        case "A321":
+            return colours.A321;
+
+        case "A350-1000":
+            return colours.A350;
+
+        default:
+            return colours.A320;
+
+    }
+
+}
+
+function getRouteWeight(destination) {
+
+    switch (getAircraft(destination)) {
+
+        case "A319":
+            return 2.5;
+
+        case "A320":
+            return 3;
+
+        case "A321":
+            return 3.5;
+
+        case "A350-1000":
+            return 4;
+
+        default:
+            return 3;
+
+    }
+
+}
+
+function getCurveStrength(destination) {
+
+    if (!isActive(destination)) {
+
+        return 0.18;
+
+    }
+
+    switch (getAircraft(destination)) {
+
+        case "A319":
+            return 0.06;
+
+        case "A320":
+            return 0.07;
+
+        case "A321":
+            return 0.08;
+
+        default:
+            return 0.08;
+
+    }
+
+}
 
 // ======================================================
 // Load JSON
@@ -57,23 +161,30 @@ function initialiseMap() {
 
     map = L.map("network-map", {
 
-    zoomControl: true,
+        zoomControl: true,
 
-    scrollWheelZoom: true,
+        scrollWheelZoom: true,
 
-    attributionControl: false
+        attributionControl: false
 
-});
+    });
 
-  map.fitBounds(
-    [
-        [26, -88],
-        [61, 26]
-    ],
-    {
-        padding: [40, 40]
-    }
-);
+    map.fitBounds(
+
+        [
+
+            [26, -88],
+            [61, 26]
+
+        ],
+
+        {
+
+            padding: [40, 40]
+
+        }
+
+    );
 
     L.tileLayer(
 
@@ -95,23 +206,19 @@ function initialiseMap() {
 // Birmingham Hub
 // ======================================================
 
-// ======================================================
-// Birmingham Hub
-// ======================================================
-
 function createHub() {
 
     const hub = L.circleMarker(BHX, {
 
-        radius:12,
+        radius: 12,
 
-        color:"#ffffff",
+        color: "#ffffff",
 
-        weight:4,
+        weight: 4,
 
-        fillColor:"#d02823",
+        fillColor: colours.A320,
 
-        fillOpacity:1
+        fillOpacity: 1
 
     }).addTo(map);
 
@@ -121,35 +228,36 @@ function createHub() {
 
         {
 
-            permanent:true,
+            permanent: true,
 
-            direction:"top",
+            direction: "top",
 
-            offset:[0,-15],
+            offset: [0, -15],
 
-            className:"hub-label"
+            className: "hub-label"
 
         }
 
     );
 
-    L.circle(BHX,{
+    L.circle(BHX, {
 
-        radius:25000,
+        radius: 25000,
 
-        color:"#d02823",
+        color: colours.A320,
 
-        fillColor:"#d02823",
+        fillColor: colours.A320,
 
-        fillOpacity:.08,
+        fillOpacity: 0.08,
 
-        weight:2
+        weight: 2
 
     }).addTo(map);
 
 }
+
 // ======================================================
-// Airport Markers
+// Draw Network
 // ======================================================
 
 function drawRoutes() {
@@ -163,7 +271,6 @@ function drawRoutes() {
     });
 
 }
-
 // ======================================================
 // Airport Marker
 // ======================================================
@@ -178,51 +285,49 @@ function createAirport(destination) {
 
     ];
 
-    const active = destination.status === "active";
-
     const marker = L.circleMarker(
 
         position,
 
         {
 
-            radius:6,
+            radius: 6,
 
-            color:"#ffffff",
+            color: "#ffffff",
 
-            weight:1.8,
+            weight: 1.8,
 
-            fillColor:active
-                ? colours.active
-                : colours.future,
+            fillColor: getAircraftColour(destination),
 
-            fillOpacity:1
+            fillOpacity: 1
 
         }
 
     ).addTo(map);
 
- marker.on("click", () => {
+    marker.on("click", () => {
 
-    const card = document.getElementById(`card-${destination.iata}`);
+        const card = document.getElementById(`card-${destination.iata}`);
 
-    if (!card) return;
+        if (!card) return;
 
-    card.scrollIntoView({
+        card.scrollIntoView({
 
-        behavior: "smooth",
+            behavior: "smooth",
 
-        block: "center"
+            block: "center"
+
+        });
+
+        document
+
+            .querySelectorAll(".destination-card")
+
+            .forEach(c => c.classList.remove("selected"));
+
+        card.classList.add("selected");
 
     });
-
-    document
-        .querySelectorAll(".destination-card")
-        .forEach(c => c.classList.remove("selected"));
-
-card.classList.add("selected");
-
-});
 
 }
 
@@ -230,79 +335,134 @@ card.classList.add("selected");
 // Route Line
 // ======================================================
 
-// ======================================================
-// Curved Route Line
-// ======================================================
-
 function createRoute(destination) {
 
-    const active = destination.status === "active";
+    const start = L.latLng(
 
-    const start = L.latLng(BHX[0], BHX[1]);
-    const end = L.latLng(destination.lat, destination.lon);
+        BHX[0],
+
+        BHX[1]
+
+    );
+
+    const end = L.latLng(
+
+        destination.lat,
+
+        destination.lon
+
+    );
 
     const latMid = (start.lat + end.lat) / 2;
+
     const lngMid = (start.lng + end.lng) / 2;
 
+    const curve = getCurveStrength(destination);
+
+    // -----------------------------------------------
+    // Fan routes out from Birmingham slightly
+    // to prevent nearby destinations overlapping
+    // -----------------------------------------------
+
+    let offset = 0;
+
+    switch (destination.iata) {
+
+        case "AMS":
+            offset = -0.020;
+            break;
+
+        case "BRU":
+            offset = -0.012;
+            break;
+
+        case "CDG":
+            offset = -0.004;
+            break;
+
+        case "DUS":
+            offset = 0.004;
+            break;
+
+        case "FRA":
+            offset = 0.012;
+            break;
+
+        case "MUC":
+            offset = 0.018;
+            break;
+
+        default:
+            offset = 0;
+
+    }
 
     const control = L.latLng(
 
-        latMid + (end.lng - start.lng) * 0.18,
+        latMid +
 
-        lngMid - (end.lat - start.lat) * 0.18
+            (end.lng - start.lng) * curve +
+
+            offset,
+
+        lngMid -
+
+            (end.lat - start.lat) * curve
 
     );
 
     const points = [];
 
-    for(let t=0;t<=1;t+=0.025){
+    for (let t = 0; t <= 1; t += 0.025) {
 
         const lat =
-            Math.pow(1-t,2)*start.lat +
-            2*(1-t)*t*control.lat +
-            Math.pow(t,2)*end.lat;
+
+            Math.pow(1 - t, 2) * start.lat +
+
+            2 * (1 - t) * t * control.lat +
+
+            Math.pow(t, 2) * end.lat;
 
         const lng =
-            Math.pow(1-t,2)*start.lng +
-            2*(1-t)*t*control.lng +
-            Math.pow(t,2)*end.lng;
 
-        points.push([lat,lng]);
+            Math.pow(1 - t, 2) * start.lng +
+
+            2 * (1 - t) * t * control.lng +
+
+            Math.pow(t, 2) * end.lng;
+
+        points.push([lat, lng]);
 
     }
 
-    L.polyline(points,{
+    L.polyline(points, {
 
-        color:active
-            ? "#d02823"
-            : "#406fb5",
+        color: getAircraftColour(destination),
 
-        weight:active
-            ? 3
-            : 2,
+        weight: getRouteWeight(destination),
 
-        opacity:.9,
+        opacity: 0.9,
 
-        dashArray:active
+        dashArray: isActive(destination)
+
             ? null
+
             : "8 8",
 
-        lineCap:"round",
+        lineCap: "round",
 
-        lineJoin:"round"
+        lineJoin: "round"
 
     }).addTo(map);
 
 }
 
-
-    // ======================================================
+// ======================================================
 // Destination Information
 // ======================================================
 
 const destinationInfo = {
-
-    AMS: {
+        AMS: {
         flightTime: "1h 20m",
         description: "A vibrant European capital renowned for its canals, museums and rich history."
     },
@@ -351,80 +511,81 @@ const destinationInfo = {
         flightTime: "2h 05m",
         description: "Northern Italy's gateway to fashion, business and the beautiful Italian Lakes."
     },
+
     MUC: {
-    flightTime: "1h 45m",
-    description: "Bavaria's capital, combining world-class engineering, culture and Alpine charm."
-},
+        flightTime: "1h 45m",
+        description: "Bavaria's capital, combining world-class engineering, culture and Alpine charm."
+    },
 
-ARN: {
-    flightTime: "2h 20m",
-    description: "Sweden's elegant capital, built across islands and known for Scandinavian design."
-},
+    ARN: {
+        flightTime: "2h 20m",
+        description: "Sweden's elegant capital, built across islands and known for Scandinavian design."
+    },
 
-OSL: {
-    flightTime: "2h 00m",
-    description: "Norway's modern capital and gateway to spectacular fjords."
-},
+    OSL: {
+        flightTime: "2h 00m",
+        description: "Norway's modern capital and gateway to spectacular fjords."
+    },
 
-VIE: {
-    flightTime: "2h 15m",
-    description: "Austria's imperial capital, famous for classical music, cafés and history."
-},
+    VIE: {
+        flightTime: "2h 15m",
+        description: "Austria's imperial capital, famous for classical music, cafés and history."
+    },
 
-WAW: {
-    flightTime: "2h 25m",
-    description: "Poland's dynamic capital blending historic architecture with a modern skyline."
-},
+    WAW: {
+        flightTime: "2h 25m",
+        description: "Poland's dynamic capital blending historic architecture with a modern skyline."
+    },
 
-FCO: {
-    flightTime: "2h 40m",
-    description: "The Eternal City, offering thousands of years of history and Italian culture."
-},
+    FCO: {
+        flightTime: "2h 40m",
+        description: "The Eternal City, offering thousands of years of history and Italian culture."
+    },
 
-LIS: {
-    flightTime: "2h 40m",
-    description: "Portugal's colourful coastal capital overlooking the Atlantic Ocean."
-},
+    LIS: {
+        flightTime: "2h 40m",
+        description: "Portugal's colourful coastal capital overlooking the Atlantic Ocean."
+    },
 
-ALC: {
-    flightTime: "2h 35m",
-    description: "A popular Mediterranean destination on Spain's Costa Blanca."
-},
+    ALC: {
+        flightTime: "2h 35m",
+        description: "A popular Mediterranean destination on Spain's Costa Blanca."
+    },
 
-AGP: {
-    flightTime: "2h 50m",
-    description: "Gateway to Spain's Costa del Sol, renowned for sunshine and beaches."
-},
+    AGP: {
+        flightTime: "2h 50m",
+        description: "Gateway to Spain's Costa del Sol, renowned for sunshine and beaches."
+    },
 
-TFS: {
-    flightTime: "4h 30m",
-    description: "The southern gateway to Tenerife and the Canary Islands."
-},
+    TFS: {
+        flightTime: "4h 30m",
+        description: "The southern gateway to Tenerife and the Canary Islands."
+    },
 
-LPA: {
-    flightTime: "4h 25m",
-    description: "Gran Canaria's principal airport serving one of Europe's favourite winter destinations."
-},
+    LPA: {
+        flightTime: "4h 25m",
+        description: "Gran Canaria's principal airport serving one of Europe's favourite winter destinations."
+    },
 
-ACE: {
-    flightTime: "4h 10m",
-    description: "Lanzarote's volcanic landscapes make it one of Spain's most unique holiday islands."
-},
+    ACE: {
+        flightTime: "4h 10m",
+        description: "Lanzarote's volcanic landscapes make it one of Spain's most unique holiday islands."
+    },
 
-PRG: {
-    flightTime: "2h 00m",
-    description: "The Czech capital, celebrated for its medieval Old Town and rich history."
-},
+    PRG: {
+        flightTime: "2h 00m",
+        description: "The Czech capital, celebrated for its medieval Old Town and rich history."
+    },
 
-INN: {
-    flightTime: "2h 10m",
-    description: "An Alpine gateway surrounded by mountains and one of Europe's premier ski destinations."
-},
+    INN: {
+        flightTime: "2h 10m",
+        description: "An Alpine gateway surrounded by mountains and one of Europe's premier ski destinations."
+    },
 
-GVA: {
-    flightTime: "1h 50m",
-    description: "An international city on the shores of Lake Geneva, home to diplomacy and finance."
-},
+    GVA: {
+        flightTime: "1h 50m",
+        description: "An international city on the shores of Lake Geneva, home to diplomacy and finance."
+    },
 
     JFK: {
         flightTime: "7h 30m",
@@ -449,7 +610,7 @@ GVA: {
 };
 
 // ======================================================
-// Update Destination Cards
+// Destination Cards
 // ======================================================
 
 function buildDestinationCards() {
@@ -469,8 +630,7 @@ function buildDestinationCards() {
         card.className = "destination-card";
 
         card.id = `card-${destination.iata}`;
-
-        card.innerHTML = `
+                card.innerHTML = `
 
             <div class="destination-status ${destination.status}">
 
