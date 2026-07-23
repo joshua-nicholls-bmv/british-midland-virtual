@@ -456,7 +456,40 @@ function createRoute(destination) {
     }).addTo(map);
 
 }
+function getAircraftBadge(aircraft) {
 
+    return aircraft.map(type => {
+
+        let className = "";
+
+        switch (type) {
+
+            case "A319":
+                className = "badge-a319";
+                break;
+
+            case "A320":
+                className = "badge-a320";
+                break;
+
+            case "A321":
+                className = "badge-a321";
+                break;
+
+            case "A350-1000":
+                className = "badge-a350";
+                break;
+
+            default:
+                className = "badge-a320";
+
+        }
+
+        return `<span class="${className}">${type}</span>`;
+
+    }).join(" ");
+
+}
 // ======================================================
 // Destination Information
 // ======================================================
@@ -668,7 +701,7 @@ function buildDestinationCards() {
 
                     <span>Aircraft</span>
 
-                    <strong>${destination.aircraft.join(" / ")}</strong>
+                    <strong>${getAircraftBadge(destination.aircraft)}</strong>
 
                 </div>
 
