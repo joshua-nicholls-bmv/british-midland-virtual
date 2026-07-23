@@ -57,13 +57,13 @@ function initialiseMap() {
 
     map = L.map("network-map", {
 
-        zoomControl: true,
+    zoomControl: true,
 
-        scrollWheelZoom: false,
+    scrollWheelZoom: true,
 
-        attributionControl: false
+    attributionControl: false
 
-    });
+});
 
   map.fitBounds(
     [
