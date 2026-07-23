@@ -930,3 +930,240 @@ body{
     }
 
 }
+/*======================================================
+  FLEET V3.2
+======================================================*/
+
+.fleet-overview{
+
+    padding:90px 0;
+
+    text-align:center;
+
+}
+
+.overview-text{
+
+    max-width:760px;
+
+    margin:40px auto 60px;
+
+    font-size:1.08rem;
+
+    line-height:1.9;
+
+    color:var(--bm-grey);
+
+}
+
+
+/*======================================================
+  SECTION HEADINGS
+======================================================*/
+
+.section-heading{
+
+    margin:42px 0 18px;
+
+    font-size:.9rem;
+
+    font-weight:700;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+    color:var(--bm-red);
+
+}
+
+
+/*======================================================
+  FLEET AIRCRAFT LIST
+======================================================*/
+
+.fleet-aircraft-list{
+
+    display:grid;
+
+    gap:14px;
+
+    margin:24px 0 42px;
+
+}
+
+.fleet-aircraft{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:18px 22px;
+
+    background:#ffffff;
+
+    border:1px solid rgba(0,26,58,.08);
+
+    border-radius:14px;
+
+    transition:.25s ease;
+
+}
+
+.fleet-aircraft:hover{
+
+    transform:translateY(-2px);
+
+    box-shadow:0 12px 24px rgba(0,26,58,.08);
+
+}
+
+.fleet-aircraft strong{
+
+    color:var(--bm-blue);
+
+    font-size:.92rem;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+}
+
+.fleet-aircraft span{
+
+    color:#666;
+
+    font-size:.95rem;
+
+}
+
+
+/*======================================================
+  BETTER ROUTE CHIPS
+======================================================*/
+
+.route-chips{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    gap:12px;
+
+    list-style:none;
+
+    padding:0;
+
+    margin:18px 0 40px;
+
+}
+
+.route-chips li{
+
+    background:#f6f7f9;
+
+    border:1px solid rgba(0,26,58,.08);
+
+    border-radius:999px;
+
+    padding:10px 18px;
+
+    font-size:.9rem;
+
+    font-weight:600;
+
+    color:var(--bm-blue);
+
+}
+
+
+/*======================================================
+  SPECIFICATION CARDS
+======================================================*/
+
+.spec-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+    margin-top:20px;
+
+}
+
+.spec{
+
+    background:#ffffff;
+
+    border:1px solid rgba(0,26,58,.08);
+
+    border-radius:14px;
+
+    padding:24px;
+
+}
+
+.spec span{
+
+    display:block;
+
+    color:#888;
+
+    font-size:.82rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.12em;
+
+    margin-bottom:8px;
+
+}
+
+.spec strong{
+
+    color:var(--bm-blue);
+
+    font-size:1.05rem;
+
+    font-weight:700;
+
+}
+
+
+/*======================================================
+  MOBILE
+======================================================*/
+
+@media (max-width:900px){
+
+    .fleet-aircraft{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:6px;
+
+    }
+
+    .spec-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+}
+/*======================================================
+  FUTURE FLEET
+======================================================*/
+
+.future-fleet .fleet-aircraft-list{
+
+    margin-top:24px;
+
+}
