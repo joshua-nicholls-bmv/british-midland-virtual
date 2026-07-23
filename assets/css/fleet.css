@@ -1010,6 +1010,53 @@ body{
 
     transition:.25s ease;
 
+    gap:20px;
+
+}
+.registration-right{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:flex-end;
+
+    gap:16px;
+
+    margin-left:auto;
+
+}
+
+.fleet-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:95px;
+
+    padding:5px 12px;
+
+    border-radius:999px;
+
+    font-size:.70rem;
+
+    font-weight:700;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+}
+
+.fleet-status.on-order{
+
+    background:#fff4dd;
+
+    color:#b67b18;
+
 }
 
 .fleet-aircraft:hover{
