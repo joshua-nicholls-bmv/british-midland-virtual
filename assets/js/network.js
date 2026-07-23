@@ -351,6 +351,80 @@ const destinationInfo = {
         flightTime: "2h 05m",
         description: "Northern Italy's gateway to fashion, business and the beautiful Italian Lakes."
     },
+    MUC: {
+    flightTime: "1h 45m",
+    description: "Bavaria's capital, combining world-class engineering, culture and Alpine charm."
+},
+
+ARN: {
+    flightTime: "2h 20m",
+    description: "Sweden's elegant capital, built across islands and known for Scandinavian design."
+},
+
+OSL: {
+    flightTime: "2h 00m",
+    description: "Norway's modern capital and gateway to spectacular fjords."
+},
+
+VIE: {
+    flightTime: "2h 15m",
+    description: "Austria's imperial capital, famous for classical music, cafés and history."
+},
+
+WAW: {
+    flightTime: "2h 25m",
+    description: "Poland's dynamic capital blending historic architecture with a modern skyline."
+},
+
+FCO: {
+    flightTime: "2h 40m",
+    description: "The Eternal City, offering thousands of years of history and Italian culture."
+},
+
+LIS: {
+    flightTime: "2h 40m",
+    description: "Portugal's colourful coastal capital overlooking the Atlantic Ocean."
+},
+
+ALC: {
+    flightTime: "2h 35m",
+    description: "A popular Mediterranean destination on Spain's Costa Blanca."
+},
+
+AGP: {
+    flightTime: "2h 50m",
+    description: "Gateway to Spain's Costa del Sol, renowned for sunshine and beaches."
+},
+
+TFS: {
+    flightTime: "4h 30m",
+    description: "The southern gateway to Tenerife and the Canary Islands."
+},
+
+LPA: {
+    flightTime: "4h 25m",
+    description: "Gran Canaria's principal airport serving one of Europe's favourite winter destinations."
+},
+
+ACE: {
+    flightTime: "4h 10m",
+    description: "Lanzarote's volcanic landscapes make it one of Spain's most unique holiday islands."
+},
+
+PRG: {
+    flightTime: "2h 00m",
+    description: "The Czech capital, celebrated for its medieval Old Town and rich history."
+},
+
+INN: {
+    flightTime: "2h 10m",
+    description: "An Alpine gateway surrounded by mountains and one of Europe's premier ski destinations."
+},
+
+GVA: {
+    flightTime: "1h 50m",
+    description: "An international city on the shores of Lake Geneva, home to diplomacy and finance."
+},
 
     JFK: {
         flightTime: "7h 30m",
