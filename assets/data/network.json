@@ -108,6 +108,157 @@
       "aircraft": ["A321"],
       "status": "active"
     },
+    ,
+{
+  "iata": "MUC",
+  "icao": "EDDM",
+  "city": "Munich",
+  "country": "Germany",
+  "lat": 48.3538,
+  "lon": 11.7861,
+  "aircraft": ["A320"],
+  "status": "active"
+},
+{
+  "iata": "ARN",
+  "icao": "ESSA",
+  "city": "Stockholm",
+  "country": "Sweden",
+  "lat": 59.6519,
+  "lon": 17.9186,
+  "aircraft": ["A320"],
+  "status": "active"
+},
+{
+  "iata": "OSL",
+  "icao": "ENGM",
+  "city": "Oslo",
+  "country": "Norway",
+  "lat": 60.1939,
+  "lon": 11.1004,
+  "aircraft": ["A320"],
+  "status": "active"
+},
+{
+  "iata": "VIE",
+  "icao": "LOWW",
+  "city": "Vienna",
+  "country": "Austria",
+  "lat": 48.1103,
+  "lon": 16.5697,
+  "aircraft": ["A320"],
+  "status": "active"
+},
+{
+  "iata": "WAW",
+  "icao": "EPWA",
+  "city": "Warsaw",
+  "country": "Poland",
+  "lat": 52.1657,
+  "lon": 20.9671,
+  "aircraft": ["A320"],
+  "status": "active"
+},
+{
+  "iata": "FCO",
+  "icao": "LIRF",
+  "city": "Rome",
+  "country": "Italy",
+  "lat": 41.8003,
+  "lon": 12.2389,
+  "aircraft": ["A321"],
+  "status": "active"
+},
+{
+  "iata": "LIS",
+  "icao": "LPPT",
+  "city": "Lisbon",
+  "country": "Portugal",
+  "lat": 38.7742,
+  "lon": -9.1342,
+  "aircraft": ["A321"],
+  "status": "active"
+},
+{
+  "iata": "ALC",
+  "icao": "LEAL",
+  "city": "Alicante",
+  "country": "Spain",
+  "lat": 38.2822,
+  "lon": -0.5582,
+  "aircraft": ["A321"],
+  "status": "active"
+},
+{
+  "iata": "AGP",
+  "icao": "LEMG",
+  "city": "Málaga",
+  "country": "Spain",
+  "lat": 36.6749,
+  "lon": -4.4991,
+  "aircraft": ["A321"],
+  "status": "active"
+},
+{
+  "iata": "TFS",
+  "icao": "GCTS",
+  "city": "Tenerife South",
+  "country": "Spain",
+  "lat": 28.0445,
+  "lon": -16.5725,
+  "aircraft": ["A321"],
+  "status": "active"
+},
+{
+  "iata": "LPA",
+  "icao": "GCLP",
+  "city": "Gran Canaria",
+  "country": "Spain",
+  "lat": 27.9319,
+  "lon": -15.3866,
+  "aircraft": ["A321"],
+  "status": "active"
+},
+{
+  "iata": "ACE",
+  "icao": "GCRR",
+  "city": "Lanzarote",
+  "country": "Spain",
+  "lat": 28.9455,
+  "lon": -13.6052,
+  "aircraft": ["A321"],
+  "status": "active"
+},
+{
+  "iata": "PRG",
+  "icao": "LKPR",
+  "city": "Prague",
+  "country": "Czech Republic",
+  "lat": 50.1008,
+  "lon": 14.2600,
+  "aircraft": ["A319"],
+  "status": "active"
+},
+{
+  "iata": "INN",
+  "icao": "LOWI",
+  "city": "Innsbruck",
+  "country": "Austria",
+  "lat": 47.2602,
+  "lon": 11.3439,
+  "aircraft": ["A319"],
+  "status": "active"
+},
+{
+  "iata": "GVA",
+  "icao": "LSGG",
+  "city": "Geneva",
+  "country": "Switzerland",
+  "lat": 46.2381,
+  "lon": 6.1089,
+  "aircraft": ["A319"],
+  "status": "active"
+}
     {
       "iata": "JFK",
       "icao": "KJFK",
