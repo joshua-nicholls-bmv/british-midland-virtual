@@ -61,7 +61,7 @@ HERO
 
     position:relative;
 
-    min-height:92vh;
+    min-height:88vh;
 
     display:flex;
 
@@ -71,7 +71,7 @@ HERO
 
     color:var(--text-white);
 
-    padding:150px 0 110px;
+    padding:120px 0 90px;
 
 }
 
@@ -97,13 +97,13 @@ HERO
 
     z-index:2;
 
-    max-width:680px;
+    max-width:640px;
 
 }
 
 .hero-kicker{
 
-    margin-bottom:28px;
+    margin-bottom:18px;
 
     letter-spacing:.18em;
 
@@ -113,11 +113,11 @@ HERO
 
     font-size:clamp(3.25rem,6vw,5.6rem);
 
-    line-height:1.05;
+    line-height:.95;
 
-    letter-spacing:-.03em;
+    letter-spacing:-.035em;
 
-    margin:30px 0;
+    margin:18px 0 30px;
 
 }
 
@@ -127,7 +127,7 @@ HERO
 
     height:4px;
 
-    margin:42px 0;
+    margin:0 0 34px;
 
     background:var(--bm-red);
 
@@ -137,15 +137,15 @@ HERO
 
 .hero-copy{
 
-    max-width:620px;
+    max-width:560px;
 
-    font-size:1.15rem;
+    font-size:1.12rem;
 
-    line-height:1.9;
+    line-height:1.85;
 
     color:rgba(255,255,255,.92);
 
-    margin-bottom:50px;
+    margin-bottom:46px;
 
 }
 
@@ -153,9 +153,7 @@ HERO
 
     display:flex;
 
-    gap:20px;
-
-    margin-top:20px;
+    gap:24px;
 
     flex-wrap:wrap;
 
