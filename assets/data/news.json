@@ -49,27 +49,30 @@
       "Join"
     ]
   },
-  {
-    "id": 3,
-    "featured": false,
-    "published": "2026-07-23",
-    "category": "Fleet",
-    "title": "Airbus A320 Fleet Ready for Operations",
-    "summary": "Our flagship Airbus A320 fleet is now fully configured for launch operations.",
-    "content": [
-      "Following extensive work behind the scenes, the British Midland Virtual Airbus A320 fleet is now fully prepared for day one operations.",
-      "Each aircraft has been configured to provide a consistent experience for our pilots, featuring custom liveries inspired by the final British Midland colour scheme while embracing a modern interpretation suitable for today's virtual skies.",
-      "The Airbus A320 will form the backbone of our European operation, serving destinations across Western and Central Europe from Birmingham Airport.",
-      "As the airline grows, additional aircraft including the Airbus A321 and Airbus A350-1000 will expand our capability into longer routes and higher-capacity operations."
-    ],
-    "image": "assets/images/news/fleet.jpg",
-    "author": "Fleet Management",
-    "tags": [
-      "Fleet",
-      "A320",
-      "Operations"
-    ]
-  },
+ {
+  "id": 3,
+  "featured": false,
+  "published": "2026-07-23",
+  "category": "Fleet",
+  "title": "Airbus A319, A320 & A321 Fleet Ready for Operations",
+  "summary": "British Midland Virtual's launch fleet is now fully configured, with additional Airbus aircraft already planned for future expansion.",
+  "content": [
+    "Following extensive work behind the scenes, the British Midland Virtual Airbus A319, A320 and A321 fleet is now fully prepared for operations, marking another major milestone ahead of our public launch.",
+    "Our initial fleet consists of three Airbus aircraft, each configured to provide a consistent and immersive experience for our pilots. Leading the fleet are Airbus A319 G-BMFI 'City of Lichfield', Airbus A320 G-BMFB 'City of Coventry' and Airbus A321 G-BMFA 'City of Birmingham'. Every aircraft features a custom livery inspired by the final British Midland colour scheme, reimagined for today's virtual skies.",
+    "Together, the Airbus A319, A320 and A321 will form the backbone of our European operation from Birmingham Airport, with each aircraft assigned to routes best suited to its capacity and operational profile.",
+    "Looking ahead, British Midland Virtual has already committed to expanding the fleet with a further nine Airbus aircraft. Planned additions include A319s G-BMFC 'City of Stoke-on-Trent', G-BMFG 'Spirit of Dudley' and G-BMFK 'Heart of the Black Country'; A320s G-BMFD 'City of Wolverhampton', G-BMFH 'Spirit of Solihull' and G-BMFL 'Heart of Staffordshire'; and A321s G-BMFE 'City of Worcester', G-BMFF 'City of Derby' and G-BMFJ 'Heart of Warwickshire'.",
+    "As these aircraft enter service, they will strengthen our network across Europe while continuing our tradition of celebrating the cities, towns and regions that define the Heart of Britain."
+  ],
+  "image": "assets/images/news/fleet.jpg",
+  "author": "Fleet Management",
+  "tags": [
+    "Fleet",
+    "A319",
+    "A320",
+    "A321",
+    "Operations"
+  ]
+},
   {
     "id": 4,
     "featured": false,
