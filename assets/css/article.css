@@ -7,6 +7,7 @@
     --bm-blue:#001A3A;
     --bm-red:#D02823;
     --bm-cream:#F8F3EE;
+    --bm-white:#FFFFFF;
     --bm-text:#505A6B;
 
 }
@@ -207,6 +208,62 @@ body{
     color:var(--bm-text);
 
     margin-bottom:28px;
+
+}
+
+/* ======================================================
+   AIRCRAFT STYLING
+====================================================== */
+
+.aircraft-type{
+
+    font-weight:800;
+
+    color:var(--bm-red);
+
+}
+
+.aircraft-reg{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:3px 10px;
+
+    margin:0 .2rem;
+
+    border-radius:999px;
+
+    background:var(--bm-blue);
+
+    color:var(--bm-white);
+
+    font-family:"JetBrains Mono", monospace;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
+
+    line-height:1;
+
+    vertical-align:middle;
+
+    white-space:nowrap;
+
+}
+
+.aircraft-name{
+
+    font-weight:600;
+
+    color:var(--bm-blue);
+
+    font-style:italic;
 
 }
 
