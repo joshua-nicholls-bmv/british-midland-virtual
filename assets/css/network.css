@@ -592,3 +592,34 @@ footer{
     display:none;
 
 }
+.badge-a319,
+.badge-a320,
+.badge-a321,
+.badge-a350 {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 999px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.badge-a319 {
+    background: #2E6FA3;
+    color: white;
+}
+
+.badge-a320 {
+    background: #D02823;
+    color: white;
+}
+
+.badge-a321 {
+    background: #C9A227;
+    color: #001A3A;
+}
+
+.badge-a350 {
+    background: #8A8F98;
+    color: white;
+}
