@@ -4,18 +4,17 @@
 <head>
 
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>Operations | British Midland Virtual</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/operations.css">
 
 </head>
 
@@ -25,10 +24,8 @@
 
     <div class="container navbar">
 
-        <a href="index.html" class="logo">
-
+        <a class="logo" href="index.html">
             <img src="assets/images/logo.png" alt="British Midland Virtual">
-
         </a>
 
         <nav>
@@ -36,15 +33,10 @@
             <ul class="nav-links">
 
                 <li><a href="index.html">HOME</a></li>
-
                 <li><a href="fleet.html">FLEET</a></li>
-
                 <li><a href="network.html">NETWORK</a></li>
-
-                <li><a href="operations.html" class="active">OPERATIONS</a></li>
-
+                <li><a class="active" href="operations.html">OPERATIONS</a></li>
                 <li><a href="news.html">NEWS</a></li>
-
                 <li><a href="join.html">JOIN</a></li>
 
             </ul>
@@ -55,58 +47,200 @@
 
 </header>
 
-<section class="hero">
+<main>
 
-    <img src="assets/images/home/hero-home.png" class="hero-image" alt="British Midland">
+    <!-- HERO -->
 
-    <div class="hero-overlay"></div>
+    <section class="operations-hero">
 
-    <div class="container hero-content">
+        <div class="hero-overlay"></div>
 
-        <p class="hero-kicker">
+        <div class="container hero-content">
 
-            OPERATIONS
+            <p class="hero-kicker">
+                BRITISH MIDLAND • OPERATIONS
+            </p>
 
-        </p>
+            <h1>
+                Airline Operations.<br>
+                Built for Simulation.
+            </h1>
 
-        <h1>
+            <div class="hero-divider"></div>
 
-            Coming Soon.
+            <p class="hero-copy">
 
-        </h1>
+                Every British Midland flight follows professional airline
+                procedures from dispatch through to arrival, creating an
+                immersive and enjoyable experience for every pilot.
 
-        <div class="hero-divider"></div>
+            </p>
 
-        <p class="hero-copy">
-
-            We're currently building our Operations Centre.
-            This section will soon contain our Operations Manual,
-            procedures, flight standards and everything you need
-            to fly the British Midland way.
-
-        </p>
-
-        <div class="hero-buttons">
-
-            <a href="join.html" class="primary-button">
-
-                Join the Crew
-
+            <a href="#operations-overview" class="primary-button">
+                Explore Operations
             </a>
 
         </div>
 
-    </div>
+    </section>
 
-</section>
+    <!-- INTRO -->
 
-<footer>
+    <section id="operations-overview" class="operations-intro">
 
-    <p>© 2026 British Midland Virtual.</p>
+        <div class="container narrow">
 
-    <p>The Heart of Britain. Connected to the World.</p>
+            <p class="eyebrow">
+                OPERATIONS PHILOSOPHY
+            </p>
+
+            <h2>
+                Every Flight Matters
+            </h2>
+
+            <div class="title-line"></div>
+
+            <p class="intro-text">
+
+                British Midland Virtual combines realistic airline operations
+                with a welcoming community. Every flight is planned, monitored
+                and completed using procedures inspired by real-world airline
+                operations while remaining enjoyable for pilots of every
+                experience level.
+
+            </p>
+
+        </div>
+
+    </section>
+
+    <!-- FEATURE CARDS -->
+
+    <section class="operations-features">
+
+        <div class="container feature-grid">
+
+            <div class="feature-card">
+
+                <h3>Dispatch</h3>
+
+                <p>
+
+                    Realistic flight planning, route preparation and operational
+                    information before every departure.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>Standardisation</h3>
+
+                <p>
+
+                    Modern Airbus procedures designed to provide consistency
+                    throughout every flight.
+
+                </p>
+
+            </div>
+
+            <div class="feature-card">
+
+                <h3>Flexibility</h3>
+
+                <p>
+
+                    Fly when it suits you. No fixed schedules, no minimum
+                    hours, just realistic airline operations.
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+    <!-- OCC DASHBOARD -->
+
+    <section class="operations-dashboard">
+
+        <div class="container">
+
+            <div class="dashboard-header">
+
+                <p class="eyebrow">
+                    OPERATIONS CONTROL CENTRE
+                </p>
+
+                <h2>
+                    Live Airline Operations
+                </h2>
+
+            </div>
+
+            <div class="dashboard-grid">
+
+                <div class="dashboard-card">
+
+                    <h3>Fleet Status</h3>
+
+                    <ul>
+
+                        <li>A319 <span>Available</span></li>
+                        <li>A320 <span>Available</span></li>
+                        <li>A321 <span>Available</span></li>
+                        <li>A350 <span>Future Fleet</span></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <h3>Network</h3>
+
+                    <ul>
+
+                        <li>Hub <span>BHX</span></li>
+                        <li>Destinations <span>25</span></li>
+                        <li>Future Routes <span>4</span></li>
+
+                    </ul>
+
+                </div>
+
+                <div class="dashboard-card">
+
+                    <h3>Operational Status</h3>
+
+                    <ul>
+
+                        <li>Dispatch <span class="status online">ONLINE</span></li>
+                        <li>Network <span class="status online">NORMAL</span></li>
+                        <li>Community <span class="status online">ONLINE</span></li>
+
+                    </ul>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+</main>
+
+<footer class="fleet-footer">
+
+    <!-- Reuse existing footer -->
 
 </footer>
+
+<script src="assets/js/operations.js"></script>
 
 </body>
 
