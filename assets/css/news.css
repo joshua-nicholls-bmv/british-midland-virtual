@@ -509,3 +509,23 @@ body{
 }
 
 }
+/* ==========================
+   Aircraft Styling
+========================== */
+
+.aircraft-type {
+    font-weight: 700;
+    color: var(--bm-red);
+}
+
+.aircraft-reg {
+    font-family: "JetBrains Mono", monospace;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    color: var(--bm-blue);
+}
+
+.aircraft-name {
+    font-style: italic;
+    color: var(--text-secondary);
+}
