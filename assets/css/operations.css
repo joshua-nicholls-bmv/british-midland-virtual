@@ -183,3 +183,132 @@
     color:white;
 
 }
+/*==================================================
+  OPERATIONS CONTROL
+==================================================*/
+
+.card-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    margin-bottom:24px;
+
+}
+
+.card-status{
+
+    font-size:.8rem;
+
+    font-weight:700;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+}
+
+.card-status.active{
+
+    background:#173f2c;
+
+    color:#5ad879;
+
+}
+
+.card-status.future{
+
+    background:#42361b;
+
+    color:#ffc857;
+
+}
+
+.fleet-table{
+
+    width:100%;
+
+    border-collapse:collapse;
+
+}
+
+.fleet-table th{
+
+    text-align:left;
+
+    padding:10px 0;
+
+    color:#8aa2c5;
+
+    font-size:.75rem;
+
+    text-transform:uppercase;
+
+    letter-spacing:.08em;
+
+}
+
+.fleet-table td{
+
+    padding:12px 0;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+    font-size:.92rem;
+
+}
+
+.pill{
+
+    display:inline-block;
+
+    padding:5px 12px;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+}
+
+.green{
+
+    background:#173f2c;
+
+    color:#5ad879;
+
+}
+
+.blue{
+
+    background:#16345e;
+
+    color:#7fc1ff;
+
+}
+
+.amber{
+
+    background:#4b3a17;
+
+    color:#ffc857;
+
+}
+
+.station{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    padding:16px 0;
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+}
