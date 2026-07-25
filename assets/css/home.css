@@ -635,9 +635,15 @@
 
 }
 
-.partner-section .secondary-button{
+.partner-section .primary-button{
 
-    margin-top:50px;
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    margin-top:70px;
 
 }
 
