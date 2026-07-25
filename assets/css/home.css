@@ -1,12 +1,14 @@
 /* =======================================================
    BRITISH MIDLAND VIRTUAL
    HOME PAGE
-   Version 3.1
+   Version 4.0
 =======================================================*/
 
-/* ------------------------------
+
+
+/* =======================================================
    HERO
------------------------------- */
+=======================================================*/
 
 .hero{
 
@@ -17,140 +19,111 @@
 .hero-content{
 
     padding-top:140px;
-
     padding-bottom:120px;
 
 }
 
-/* ------------------------------
-   INTRO
------------------------------- */
 
-.intro{
+
+/* =======================================================
+   HOMEPAGE LAYOUT
+=======================================================*/
+
+.homepage-content{
 
     background:var(--bm-white);
 
-    text-align:center;
+}
+
+
+/* Standard section spacing */
+
+.home-feature,
+.partner-section,
+.join-home{
+
+    padding:110px 0;
 
 }
 
-.intro h2{
 
-    color:var(--bm-blue);
+/* Container width improvements */
 
-}
+.homepage-content .container{
 
-.intro p{
-
-    margin:30px auto 0;
-
-    font-size:1.1rem;
-
-    line-height:1.8;
-
-    color:#33445f;
+    max-width:1280px;
 
 }
 
-/* ------------------------------
-   QUICK LINKS
------------------------------- */
 
-.quick-links{
+/* =======================================================
+   TYPOGRAPHY
+=======================================================*/
+
+.section-kicker{
+
+    display:inline-block;
+
+    margin-bottom:18px;
+
+    color:var(--bm-red);
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    letter-spacing:.22em;
+
+    text-transform:uppercase;
+
+}
+
+
+.home-feature h2,
+.partner-section h2,
+.join-home h2{
+
+    margin:0 0 24px;
+
+    font-size:clamp(2.2rem,4vw,3.2rem);
+
+    line-height:1.15;
+
+    font-weight:800;
+
+}
+
+
+.home-feature p,
+.partner-section p,
+.join-home p{
+
+    font-size:1.08rem;
+
+    line-height:1.9;
+
+}
+
+
+/* =======================================================
+   BACKGROUND COLOURS
+=======================================================*/
+
+.home-feature{
 
     background:#ffffff;
 
 }
 
-.cards{
 
-    margin-top:20px;
+.home-feature.reverse{
 
-}
-
-.card{
-
-    position:relative;
-
-    overflow:hidden;
+    background:var(--bm-white);
 
 }
 
-.card::before{
 
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:5px;
-
-    background:var(--bm-red);
-
-    transform:scaleX(0);
-
-    transform-origin:left;
-
-    transition:.35s;
-
-}
-
-.card:hover::before{
-
-    transform:scaleX(1);
-
-}
-
-.card h3{
-
-    font-size:1.5rem;
-
-    margin-bottom:18px;
-
-}
-
-.card p{
-
-    color:#4d5b72;
-
-    margin-bottom:28px;
-
-    line-height:1.7;
-
-}
-
-.card::after{
-
-    content:"→";
-
-    font-size:1.4rem;
-
-    color:var(--bm-red);
-
-    position:absolute;
-
-    right:35px;
-
-    bottom:30px;
-
-    transition:.25s;
-
-}
-
-.card:hover::after{
-
-    transform:translateX(6px);
-
-}
-
-/* ------------------------------
-   FEATURE STRIP
------------------------------- */
-
-.feature-strip{
+.partner-section{
 
     background:var(--bm-blue);
 
@@ -158,7 +131,130 @@
 
 }
 
-.feature-grid{
+
+.partner-section h2{
+
+    color:white;
+
+}
+
+
+.partner-section p{
+
+    color:rgba(255,255,255,.88);
+
+}
+
+
+.join-home{
+
+    background:var(--bm-white);
+
+}
+
+
+/* =======================================================
+   BUTTONS
+=======================================================*/
+
+.feature-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    margin-top:10px;
+
+    color:var(--bm-red);
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    transition:.25s ease;
+
+}
+
+
+.feature-button:hover{
+
+    gap:16px;
+
+}
+
+
+.partner-section .secondary-button{
+
+    margin-top:20px;
+
+}
+
+
+.join-home .hero-buttons{
+
+    justify-content:center;
+
+    margin-top:45px;
+
+}
+
+
+/* =======================================================
+   SHARED IMAGE STYLING
+=======================================================*/
+
+.feature-image img{
+
+    width:100%;
+
+    display:block;
+
+    border-radius:20px;
+
+    box-shadow:0 18px 45px rgba(0,0,0,.12);
+
+    transition:transform .35s ease,
+               box-shadow .35s ease;
+
+}
+
+
+.feature-image img:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:0 28px 60px rgba(0,0,0,.18);
+
+}
+
+
+/* =======================================================
+   GLOBAL TRANSITIONS
+=======================================================*/
+
+.home-feature,
+.partner-section,
+.join-home{
+
+    transition:.3s ease;
+
+}
+/* =======================================================
+   STATS BAR
+=======================================================*/
+
+.stats{
+
+    background:#ffffff;
+
+    border-top:1px solid rgba(0,0,0,.05);
+    border-bottom:1px solid rgba(0,0,0,.05);
+
+}
+
+.stats-grid{
 
     display:grid;
 
@@ -166,100 +262,865 @@
 
     gap:40px;
 
+    padding:60px 0;
+
+}
+
+.stat{
+
     text-align:center;
 
-}
-
-.feature h3{
-
-    margin-top:20px;
-
-    font-size:1.15rem;
-
-    letter-spacing:.08em;
+    position:relative;
 
 }
 
-.feature p{
+.stat:not(:last-child)::after{
 
-    margin-top:12px;
+    content:"";
 
-    color:rgba(255,255,255,.75);
+    position:absolute;
 
-    font-size:.95rem;
+    right:-20px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    width:1px;
+
+    height:55px;
+
+    background:#e8e8e8;
 
 }
+
+.stat-number{
+
+    display:block;
+
+    color:var(--bm-blue);
+
+    font-size:2rem;
+
+    font-weight:800;
+
+    margin-bottom:12px;
+
+}
+
+.stat-label{
+
+    display:block;
+
+    color:#7b8798;
+
+    font-size:.78rem;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+}
+
+
+
+/* =======================================================
+   FEATURE SECTIONS
+=======================================================*/
+
+.home-feature{
+
+    display:grid;
+
+    grid-template-columns:55% 45%;
+
+    gap:80px;
+
+    align-items:center;
+
+}
+
+.home-feature.reverse{
+
+    grid-template-columns:45% 55%;
+
+}
+
+.home-feature.reverse .feature-image{
+
+    order:2;
+
+}
+
+.home-feature.reverse .feature-content{
+
+    order:1;
+
+}
+
+
+
+/* =======================================================
+   FEATURE IMAGES
+=======================================================*/
+
+.feature-image{
+
+    overflow:hidden;
+
+    border-radius:20px;
+
+}
+
+.feature-image img{
+
+    width:100%;
+
+    height:100%;
+
+    display:block;
+
+    object-fit:cover;
+
+}
+
+.feature-image:hover img{
+
+    transform:scale(1.03);
+
+}
+
+
+
+/* =======================================================
+   FEATURE CONTENT
+=======================================================*/
+
+.feature-content{
+
+    max-width:540px;
+
+}
+
+.feature-content h2{
+
+    color:var(--bm-blue);
+
+}
+
+.feature-content p{
+
+    color:#516279;
+
+    margin-bottom:35px;
+
+}
+
+
+
+/* =======================================================
+   FEATURE BUTTON
+=======================================================*/
+
+.feature-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    gap:10px;
+
+    color:var(--bm-red);
+
+    text-decoration:none;
+
+    font-weight:700;
+
+    font-size:1rem;
+
+    transition:all .25s ease;
+
+}
+
+.feature-button::after{
+
+    content:"→";
+
+    transition:transform .25s ease;
+
+}
+
+.feature-button:hover{
+
+    color:var(--bm-blue);
+
+}
+
+.feature-button:hover::after{
+
+    transform:translateX(6px);
+
+}
+
+
+
+/* =======================================================
+   FEATURE SPACING
+=======================================================*/
+
+.home-feature+.home-feature{
+
+    margin-top:110px;
+
+}
+
+
+
+/* =======================================================
+   FEATURE IMAGE SHADOW
+=======================================================*/
+
+.feature-image img{
+
+    box-shadow:
+
+        0 15px 40px rgba(0,0,0,.08),
+
+        0 30px 60px rgba(0,0,0,.08);
+
+}
+
+
+
+/* =======================================================
+   SUBTLE SECTION DIVIDERS
+=======================================================*/
+
+.partner-section{
+
+    margin-top:120px;
+
+}
+
+.join-home{
+
+    margin-top:0;
+
+}
+/* =======================================================
+   OFFICIAL TECHNOLOGY PARTNER
+=======================================================*/
+
+.partner-section{
+
+    text-align:center;
+
+    background:var(--bm-blue);
+
+    color:white;
+
+    overflow:hidden;
+
+}
+
+.partner-section .container{
+
+    max-width:900px;
+
+}
+
+.partner-logo{
+
+    display:block;
+
+    max-width:320px;
+
+    width:100%;
+
+    margin:45px auto;
+
+}
+
+.partner-section h2{
+
+    margin-bottom:30px;
+
+}
+
+.partner-section p{
+
+    max-width:700px;
+
+    margin:0 auto;
+
+    color:rgba(255,255,255,.88);
+
+}
+
+.partner-section .secondary-button{
+
+    margin-top:45px;
+
+}
+
+
+
+/* Decorative line */
+
+.partner-section::before{
+
+    content:"";
+
+    display:block;
+
+    width:80px;
+
+    height:4px;
+
+    background:var(--bm-red);
+
+    margin:0 auto 50px;
+
+    border-radius:999px;
+
+}
+
+
+
+/* =======================================================
+   JOIN BRITISH MIDLAND
+=======================================================*/
+
+.join-home{
+
+    text-align:center;
+
+    background:var(--bm-white);
+
+}
+
+.join-home .container{
+
+    max-width:900px;
+
+}
+
+.join-home h2{
+
+    color:var(--bm-blue);
+
+}
+
+.join-home p{
+
+    max-width:700px;
+
+    margin:0 auto;
+
+    color:#58677d;
+
+}
+
+.join-home .hero-buttons{
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    gap:20px;
+
+    margin-top:45px;
+
+}
+
+
+
+/* =======================================================
+   BUTTON IMPROVEMENTS
+=======================================================*/
+
+.primary-button,
+.secondary-button{
+
+    transition:
+        background .3s ease,
+        color .3s ease,
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+.primary-button:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:0 12px 30px rgba(208,40,35,.30);
+
+}
+
+.secondary-button:hover{
+
+    transform:translateY(-3px);
+
+}
+
+
+
+/* =======================================================
+   SECTION ENTRANCE SPACING
+=======================================================*/
+
+.partner-section,
+.join-home{
+
+    position:relative;
+
+}
+
+.partner-section{
+
+    padding-top:120px;
+
+    padding-bottom:120px;
+
+}
+
+.join-home{
+
+    padding-top:120px;
+
+    padding-bottom:120px;
+
+}
+
+
+
+/* =======================================================
+   SMALL VISUAL DETAILS
+=======================================================*/
+
+.partner-section a,
+.join-home a{
+
+    text-decoration:none;
+
+}
+
+.partner-section .section-kicker{
+
+    color:#ffffff;
+
+    opacity:.75;
+
+}
+
+.join-home .section-kicker{
+
+    color:var(--bm-red);
+
+}
+/* =======================================================
+   FOOTER
+=======================================================*/
+
+.site-footer{
+
+    background:var(--bm-blue);
+
+    color:white;
+
+    margin-top:0;
+
+}
+
 
 /* ------------------------------
-   CTA
+   Footer Grid
 ------------------------------ */
 
-.home-cta{
+.footer-grid{
 
-    background:linear-gradient(
-        135deg,
-        var(--bm-blue),
-        #032b63
-    );
+    display:grid;
 
-    color:white;
+    grid-template-columns:2fr 1fr 1fr 1fr;
 
-    text-align:center;
+    gap:70px;
+
+    padding:80px 0;
 
 }
 
-.home-cta h2{
 
-    color:white;
+/* ------------------------------
+   Brand
+------------------------------ */
+
+.footer-brand img{
+
+    width:180px;
 
     margin-bottom:25px;
 
 }
 
-.home-cta p{
+.footer-brand p{
 
-    margin:0 auto 40px;
+    color:rgba(255,255,255,.72);
 
-    max-width:700px;
+    line-height:1.8;
 
-    opacity:.9;
+    max-width:320px;
 
 }
+
 
 /* ------------------------------
-   RESPONSIVE
+   Headings
 ------------------------------ */
 
-@media(max-width:1000px){
+.site-footer h4{
 
-.feature-grid{
+    color:white;
 
-    grid-template-columns:repeat(2,1fr);
+    font-size:.95rem;
 
-}
+    font-weight:700;
 
-}
+    text-transform:uppercase;
 
-@media(max-width:768px){
+    letter-spacing:.12em;
 
-.hero-content{
-
-    padding-top:180px;
-
-    text-align:center;
+    margin-bottom:24px;
 
 }
 
-.hero-copy{
 
-    margin:auto;
+/* ------------------------------
+   Lists
+------------------------------ */
+
+.site-footer ul{
+
+    list-style:none;
+
+    padding:0;
+
+    margin:0;
 
 }
 
-.feature-grid{
+.site-footer li{
 
-    grid-template-columns:1fr;
+    margin-bottom:14px;
 
 }
+
+
+/* ------------------------------
+   Links
+------------------------------ */
+
+.site-footer a{
+
+    color:rgba(255,255,255,.72);
+
+    text-decoration:none;
+
+    transition:all .25s ease;
+
+}
+
+.site-footer a:hover{
+
+    color:white;
+
+    padding-left:6px;
+
+}
+
+
+/* ------------------------------
+   Bottom Bar
+------------------------------ */
+
+.footer-bottom{
+
+    border-top:1px solid rgba(255,255,255,.08);
+
+}
+
+.footer-bottom-content{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:30px;
+
+    padding:24px 0;
+
+}
+
+.footer-bottom p{
+
+    margin:0;
+
+    color:rgba(255,255,255,.55);
+
+    font-size:.9rem;
+
+}
+/* =======================================================
+   RESPONSIVE DESIGN
+=======================================================*/
+
+/* ------------------------------
+   Large Tablets
+------------------------------ */
+
+@media (max-width:1200px){
+
+    .home-feature,
+    .home-feature.reverse{
+
+        grid-template-columns:1fr;
+        gap:60px;
+
+    }
+
+    .home-feature.reverse .feature-image,
+    .home-feature.reverse .feature-content{
+
+        order:unset;
+
+    }
+
+    .feature-content{
+
+        max-width:100%;
+
+    }
+
+}
+
+
+/* ------------------------------
+   Tablets
+------------------------------ */
+
+@media (max-width:992px){
+
+    .hero-content{
+
+        padding-top:170px;
+        padding-bottom:120px;
+
+        text-align:center;
+
+    }
+
+    .hero-copy{
+
+        max-width:700px;
+        margin:0 auto;
+
+    }
+
+    .hero-buttons{
+
+        justify-content:center;
+
+    }
+
+    .stats-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:40px;
+
+    }
+
+    .stat:nth-child(2)::after{
+
+        display:none;
+
+    }
+
+    .footer-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+        gap:50px;
+
+    }
+
+}
+
+
+/* ------------------------------
+   Mobile
+------------------------------ */
+
+@media (max-width:768px){
+
+    .hero h1{
+
+        font-size:2.8rem;
+
+    }
+
+    .hero-copy{
+
+        font-size:1rem;
+
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+        align-items:center;
+
+        gap:16px;
+
+    }
+
+    .hero-buttons a{
+
+        width:100%;
+        max-width:320px;
+
+        justify-content:center;
+
+    }
+
+    .stats-grid{
+
+        grid-template-columns:1fr;
+
+        gap:30px;
+
+    }
+
+    .stat::after{
+
+        display:none;
+
+    }
+
+    .home-feature{
+
+        gap:40px;
+
+    }
+
+    .feature-content{
+
+        text-align:center;
+
+    }
+
+    .feature-button{
+
+        justify-content:center;
+
+    }
+
+    .partner-logo{
+
+        max-width:240px;
+
+    }
+
+    .join-home .hero-buttons{
+
+        flex-direction:column;
+
+    }
+
+    .footer-grid{
+
+        grid-template-columns:1fr;
+
+        text-align:center;
+
+    }
+
+    .footer-brand{
+
+        display:flex;
+
+        flex-direction:column;
+
+        align-items:center;
+
+    }
+
+    .footer-brand p{
+
+        max-width:350px;
+
+    }
+
+    .footer-bottom-content{
+
+        flex-direction:column;
+
+        text-align:center;
+
+    }
+
+}
+
+
+/* ------------------------------
+   Small Phones
+------------------------------ */
+
+@media (max-width:480px){
+
+    .hero-content{
+
+        padding-top:150px;
+
+    }
+
+    .hero h1{
+
+        font-size:2.2rem;
+
+        line-height:1.2;
+
+    }
+
+    .section-kicker{
+
+        letter-spacing:.18em;
+
+        font-size:.75rem;
+
+    }
+
+    .home-feature h2,
+    .partner-section h2,
+    .join-home h2{
+
+        font-size:2rem;
+
+    }
+
+    .feature-content p,
+    .partner-section p,
+    .join-home p{
+
+        font-size:1rem;
+
+        line-height:1.8;
+
+    }
 
 }
