@@ -187,21 +187,30 @@
       "Ireland",
       "Expansion"
     ]
-  }
-]
+  },
 {
-  "id": "sayintentions-partnership",
-  "title": "British Midland Virtual Joins the SayIntentions.AI Virtual Airline Programme",
-  "date": "21 July 2026",
+  "id": 9,
+  "featured": true,
+  "published": "2026-07-25",
   "category": "Partnership",
-  "image": "assets/images/news/sayintentions-partnership.jpg",
-  "excerpt": "We're proud to announce that British Midland Virtual is now officially part of the SayIntentions.AI Virtual Airline Programme, bringing even greater immersion to our pilots.",
+  "title": "British Midland Virtual Joins the SayIntentions.AI Virtual Airline Programme",
+  "summary": "British Midland Virtual is now officially part of the SayIntentions.AI Virtual Airline Programme, bringing an even more immersive flying experience to our pilots.",
   "content": [
     "We're delighted to announce that British Midland Virtual has officially joined the SayIntentions.AI Virtual Airline Programme.",
-    "This exciting partnership allows our pilots to seamlessly connect their SayIntentions account with British Midland Virtual, ensuring eligible flights are automatically associated with the airline while enjoying one of the most immersive AI-powered flight simulation experiences available.",
-    "SayIntentions.AI offers realistic AI Air Traffic Control, intelligent cabin crew, dispatch services and much more, helping create an authentic airline environment from pushback to shutdown.",
-    "To connect your account, simply log into your SayIntentions Pilot Portal and navigate to Settings → Virtual Airline. From the drop-down menu, select 'British Midland Virtual' and save your changes.",
-    "Planning to subscribe? Speak to a member of the British Midland staff team before purchasing. We have an exclusive 10% discount code available for our pilots.",
-    "This partnership marks another important milestone as we continue building a professional, immersive and realistic virtual airline experience. We look forward to welcoming many more pilots aboard."
+    "This exciting partnership allows our pilots to enhance every flight with realistic AI Air Traffic Control, intelligent cabin crew, AI dispatch services and seamless virtual airline integration through SayIntentions.AI.",
+    "Getting started couldn't be easier. Simply log into your SayIntentions Pilot Portal, navigate to Settings → Virtual Airline and select 'British Midland Virtual' from the drop-down menu before saving your changes. Once linked, your eligible flights will automatically be associated with the airline.",
+    "Thinking of subscribing to SayIntentions.AI? Before purchasing a subscription, speak to a member of the British Midland staff team. We have an exclusive 10% discount code available for all British Midland Virtual pilots.",
+    "This partnership represents another major milestone as we continue building a professional, immersive and realistic virtual airline experience inspired by one of Britain's most iconic airlines. We look forward to welcoming many more pilots aboard as we continue connecting the Heart of Britain with Europe and beyond."
+  ],
+  "image": "assets/images/news/sayintentions-partnership.jpg",
+  "author": "British Midland Crew Services",
+  "tags": [
+    "Partnership",
+    "SayIntentions",
+    "Virtual Airline",
+    "Integration",
+    "AI ATC"
+  ]
+}
   ]
 }
