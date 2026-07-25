@@ -203,13 +203,27 @@
 
     gap:10px;
 
-    margin-top:10px;
-
     color:var(--bm-red);
 
     text-decoration:none;
 
     font-weight:700;
+
+    font-size:1rem;
+
+    transition:
+
+        color .25s ease,
+
+        transform .25s ease;
+
+}
+
+.feature-button:hover{
+
+    color:var(--bm-blue);
+
+    transform:translateX(4px);
 
 }
 
@@ -221,15 +235,9 @@
 
 }
 
-.feature-button:hover{
-
-    color:var(--bm-blue);
-
-}
-
 .feature-button:hover::after{
 
-    transform:translateX(7px);
+    transform:translateX(6px);
 
 }
 
@@ -707,9 +715,21 @@
 
 .site-footer{
 
+    width:100%;
+
     background:var(--bm-blue);
 
     color:#ffffff;
+
+    margin-top:0;
+
+}
+
+.site-footer .container{
+
+    width:min(94%,1500px);
+
+    margin-inline:auto;
 
 }
 
