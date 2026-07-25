@@ -1,34 +1,15 @@
 /* ==========================================================
    BRITISH MIDLAND VIRTUAL
    HOME PAGE
-   Version 5.1
+   Version 6.0
    ----------------------------------------------------------
    PART 1
    Global Layout
+   Hero
    Typography
    Buttons
    Shared Components
 ========================================================== */
-
-
-
-/* ==========================================================
-   HERO
-========================================================== */
-
-.hero{
-
-    padding:0;
-    overflow:hidden;
-
-}
-
-.hero-content{
-
-    padding:150px 0 130px;
-
-}
-
 
 
 /* ==========================================================
@@ -36,33 +17,54 @@
 ========================================================== */
 
 .homepage-content{
-
     background:#ffffff;
-
 }
-
-
-/* Homepage Container */
 
 .homepage-content .container{
-
     width:min(94%,1500px);
-
     margin-inline:auto;
-
 }
 
 
-/* Shared Section Padding */
+/* ==========================================================
+   SHARED SECTION SPACING
+========================================================== */
 
 .home-feature,
 .partner-section,
 .join-home{
-
     padding:110px 0;
-
 }
 
+
+/* ==========================================================
+   HERO
+========================================================== */
+
+.hero{
+    position:relative;
+    overflow:hidden;
+    padding:0;
+}
+
+.hero-content{
+    position:relative;
+    z-index:2;
+    padding:155px 0 135px;
+}
+
+.hero-copy{
+    max-width:760px;
+}
+
+.hero-copy h1{
+    margin-bottom:28px;
+}
+
+.hero-copy p{
+    max-width:640px;
+    margin-bottom:42px;
+}
 
 
 /* ==========================================================
@@ -70,94 +72,42 @@
 ========================================================== */
 
 .section-kicker{
-
     display:inline-block;
-
     margin-bottom:22px;
 
     color:var(--bm-red);
 
     font-size:.82rem;
-
     font-weight:700;
-
     letter-spacing:.24em;
-
     text-transform:uppercase;
-
 }
-
 
 .home-feature h2,
 .partner-section h2,
 .join-home h2{
 
-    margin:0 0 30px;
+    margin:0 0 28px;
 
     color:var(--bm-blue);
 
-    font-size:clamp(3rem,5vw,4.25rem);
-
+    font-size:clamp(2.8rem,4vw,4.2rem);
     line-height:1.08;
-
     font-weight:800;
-
     text-wrap:balance;
-
 }
-
 
 .home-feature p,
 .partner-section p,
 .join-home p{
 
+    margin:0;
+
+    color:#56667c;
+
     font-size:1.08rem;
-
     line-height:1.9;
-
-    color:#516279;
-
 }
-
-
-
-/* ==========================================================
-   BACKGROUNDS
-========================================================== */
-
-.home-feature{
-
-    display:grid;
-
-    grid-template-columns:1fr 1fr;
-
-    align-items:center;
-
-    gap:60px;
-
-}
-
-.home-feature.reverse{
-
-    grid-template-columns:1fr 1fr;
-
-}
-
-.partner-section{
-
-    background:#f7f6f3;
-
-    text-align:center;
-
-}
-
-
-.join-home{
-
-    background:#ffffff;
-
-}
-
 
 
 /* ==========================================================
@@ -169,67 +119,38 @@
 .feature-button{
 
     transition:
-
         transform .25s ease,
-        box-shadow .25s ease,
         background .25s ease,
-        color .25s ease;
-
+        color .25s ease,
+        box-shadow .25s ease;
 }
-
-
-/* Primary */
 
 .primary-button:hover{
 
     transform:translateY(-3px);
 
-    box-shadow:0 16px 34px rgba(208,40,35,.28);
-
+    box-shadow:
+        0 18px 36px rgba(208,40,35,.24);
 }
-
-
-/* Secondary */
 
 .secondary-button:hover{
-
     transform:translateY(-3px);
-
 }
-
-
-/* Feature Link */
 
 .feature-button{
 
     display:inline-flex;
-
     align-items:center;
-
     gap:10px;
+
+    margin-top:42px;
 
     color:var(--bm-red);
 
     text-decoration:none;
 
-    font-weight:700;
-
     font-size:1rem;
-
-    transition:
-
-        color .25s ease,
-
-        transform .25s ease;
-
-}
-
-.feature-button:hover{
-
-    color:var(--bm-blue);
-
-    transform:translateX(4px);
-
+    font-weight:700;
 }
 
 .feature-button::after{
@@ -237,26 +158,67 @@
     content:"→";
 
     transition:transform .25s ease;
+}
 
+.feature-button:hover{
+
+    color:var(--bm-blue);
+
+    transform:translateX(4px);
 }
 
 .feature-button:hover::after{
 
     transform:translateX(6px);
-
 }
 
 
+/* ==========================================================
+   SHARED FEATURE LAYOUT
+========================================================== */
+
+.home-feature{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,minmax(0,1fr));
+
+    align-items:center;
+
+    gap:70px;
+}
+
+.home-feature.reverse .feature-image{
+    order:2;
+}
+
+.home-feature.reverse .feature-content{
+    order:1;
+}
+
 
 /* ==========================================================
-   IMAGES
+   FEATURE CONTENT
+========================================================== */
+
+.feature-content{
+
+    width:100%;
+    max-width:620px;
+}
+
+.feature-content p{
+    margin-bottom:38px;
+}
+
+
+/* ==========================================================
+   FEATURE IMAGES
 ========================================================== */
 
 .feature-image{
 
     width:100%;
-
-    min-width:0;
 
     overflow:hidden;
 
@@ -264,6 +226,7 @@
 
     aspect-ratio:16 / 10;
 
+    background:#eef2f6;
 }
 
 .feature-image img{
@@ -271,14 +234,10 @@
     display:block;
 
     width:100%;
-
     height:100%;
 
     object-fit:cover;
-
     object-position:center;
-
-    border-radius:22px;
 
     transition:
         transform .45s ease,
@@ -286,73 +245,20 @@
 
     box-shadow:
         0 18px 45px rgba(0,0,0,.08),
-        0 30px 60px rgba(0,0,0,.08);
-
+        0 28px 60px rgba(0,0,0,.08);
 }
 
-.feature-image:hover img{
-
+.home-feature:hover .feature-image img{
     transform:scale(1.03);
-
 }
-
-
-
 /* ==========================================================
-   SHARED DETAILS
+   PART 2
+   Stats
+   Fleet & Network
+   Section Styling
 ========================================================== */
 
-.partner-section,
-.join-home{
 
-    position:relative;
-
-}
-
-.partner-section a,
-.join-home a{
-
-    text-decoration:none;
-
-}
-
-
-
-/* ==========================================================
-   PARTNER SECTION
-========================================================== */
-
-.partner-section .container{
-
-    max-width:900px;
-
-}
-
-.partner-logo{
-
-    display:block;
-
-    width:min(100%,620px);
-
-    margin:45px auto 70px;
-
-}
-
-.partner-section h2{
-
-    color:var(--bm-blue);
-
-}
-
-.partner-section p{
-
-    max-width:620px;
-
-    margin:0 auto;
-
-    color:#5c6b80;
-
-}
 /* ==========================================================
    STATS BAR
 ========================================================== */
@@ -361,8 +267,8 @@
 
     background:#ffffff;
 
-    border-top:1px solid rgba(0,0,0,.05);
-    border-bottom:1px solid rgba(0,0,0,.05);
+    border-top:1px solid rgba(0,26,58,.06);
+    border-bottom:1px solid rgba(0,26,58,.06);
 
 }
 
@@ -400,7 +306,7 @@
     width:1px;
     height:60px;
 
-    background:#e4e8ed;
+    background:#e3e8ee;
 
 }
 
@@ -410,11 +316,10 @@
 
     margin-bottom:14px;
 
-    font-size:2.1rem;
-
-    font-weight:800;
-
     color:var(--bm-blue);
+
+    font-size:2.15rem;
+    font-weight:800;
 
 }
 
@@ -422,18 +327,15 @@
 
     display:block;
 
-    font-size:.78rem;
+    color:#7b8798;
 
-    font-weight:600;
+    font-size:.78rem;
+    font-weight:700;
 
     letter-spacing:.18em;
-
     text-transform:uppercase;
 
-    color:#77879c;
-
 }
-
 
 
 /* ==========================================================
@@ -442,45 +344,37 @@
 
 .home-feature{
 
-    display:grid;
+    position:relative;
 
-    grid-template-columns:62% 38%;
+    background:#ffffff;
 
-    align-items:center;
+}
 
-    gap:110px;
+.home-feature + .home-feature{
+
+    margin-top:90px;
 
 }
 
 .home-feature.reverse{
 
-    grid-template-columns:38% 62%;
+    background:#ffffff;
 
 }
-
-.home-feature.reverse .feature-image{
-
-    order:2;
-
-}
-
-.home-feature.reverse .feature-content{
-
-    order:1;
-
-}
-
-
-
-/* ==========================================================
-   FEATURE CONTENT
-========================================================== */
 
 .feature-content{
 
-    width:100%;
+    display:flex;
 
-    max-width:640px;
+    flex-direction:column;
+
+    justify-content:center;
+
+}
+
+.feature-content .section-kicker{
+
+    margin-bottom:18px;
 
 }
 
@@ -494,70 +388,55 @@
 
     max-width:34rem;
 
-    margin-bottom:42px;
+}
+
+.home-feature.reverse .feature-content{
+
+    justify-self:start;
 
 }
 
+.home-feature:not(.reverse) .feature-content{
+
+    justify-self:start;
+
+}
 
 
 /* ==========================================================
-   FEATURE BUTTONS
+   IMAGE PRESENTATION
 ========================================================== */
 
-.feature-button{
+.feature-image{
 
-    display:inline-flex;
-
-    align-items:center;
-
-    gap:10px;
-
-    font-size:1rem;
-
-    font-weight:700;
+    position:relative;
 
 }
 
-.feature-button:hover{
+.feature-image::before{
 
-    letter-spacing:.02em;
+    content:"";
 
-}
+    position:absolute;
 
+    inset:0;
 
+    border-radius:22px;
 
-/* ==========================================================
-   FEATURE IMAGES
-========================================================== */
+    box-shadow:
+        inset 0 0 0 1px rgba(255,255,255,.15);
 
+    pointer-events:none;
 
-/* ==========================================================
-   SECTION RHYTHM
-========================================================== */
-
-.home-feature + .home-feature{
-
-    margin-top:90px;
+    z-index:2;
 
 }
 
-.home-feature:nth-child(1){
+.feature-image img{
 
-    padding-top:10px;
-
-}
-
-.home-feature:last-child{
-
-    padding-bottom:10px;
+    border-radius:22px;
 
 }
-
-
-
-/* ==========================================================
-   VISUAL POLISH
-========================================================== */
 
 .home-feature:hover .feature-image img{
 
@@ -565,24 +444,63 @@
 
 }
 
-.home-feature:hover .feature-content h2{
 
-    color:var(--bm-red);
+/* ==========================================================
+   VISUAL RHYTHM
+========================================================== */
+
+.home-feature:first-of-type{
+
+    padding-top:10px;
+
+}
+
+.home-feature:last-of-type{
+
+    padding-bottom:10px;
+
+}
+
+.feature-content>*:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+/* ==========================================================
+   SUBTLE INTERACTION
+========================================================== */
+
+.home-feature h2{
 
     transition:color .25s ease;
 
 }
+
+.home-feature:hover h2{
+
+    color:var(--bm-red);
+
+}
+/* ==========================================================
+   PART 3
+   Official Technology Partner
+   Join British Midland
+========================================================== */
+
+
 /* ==========================================================
    OFFICIAL TECHNOLOGY PARTNER
 ========================================================== */
 
 .partner-section{
 
-    background:#f7f6f3;
+    position:relative;
+
+    background:#f8f3ee;
 
     text-align:center;
-
-    padding:90px 0;
 
 }
 
@@ -594,7 +512,7 @@
 
 .partner-section .section-kicker{
 
-    color:var(--bm-red);
+    margin-bottom:20px;
 
 }
 
@@ -604,25 +522,23 @@
 
     width:min(100%,620px);
 
-    margin:45px auto 70px;
+    margin:48px auto 65px;
 
 }
 
 .partner-section h2{
 
-    color:var(--bm-blue);
+    margin-bottom:28px;
 
 }
 
 .partner-section p{
 
-    max-width:620px;
+    max-width:640px;
 
     margin:0 auto;
 
-    color:#5c6b80;
-
-    line-height:1.9;
+    color:#5d6d82;
 
 }
 
@@ -634,10 +550,47 @@
 
     justify-content:center;
 
-    margin-top:70px;
+    margin-top:60px;
 
 }
 
+
+/* ==========================================================
+   PARTNER DETAILS
+========================================================== */
+
+.partner-section a{
+
+    text-decoration:none;
+
+}
+
+.partner-logo img{
+
+    display:block;
+
+    width:100%;
+
+    height:auto;
+
+}
+
+.partner-section::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0;
+
+    pointer-events:none;
+
+    background:
+        radial-gradient(circle at top,
+        rgba(255,255,255,.55),
+        transparent 70%);
+
+}
 
 
 /* ==========================================================
@@ -646,13 +599,13 @@
 
 .join-home{
 
-    text-align:center;
+    position:relative;
 
     background:#ffffff;
 
-    padding:100px 0 110px;
+    text-align:center;
 
-    border-top:1px solid rgba(0,26,58,.05);
+    border-top:1px solid rgba(0,26,58,.06);
 
 }
 
@@ -664,21 +617,15 @@
 
 .join-home h2{
 
-    margin-bottom:30px;
-
-    color:var(--bm-blue);
+    margin-bottom:28px;
 
 }
 
 .join-home p{
 
-    max-width:620px;
+    max-width:640px;
 
     margin:0 auto;
-
-    color:#5c6b80;
-
-    line-height:1.9;
 
 }
 
@@ -690,6 +637,8 @@
 
     align-items:center;
 
+    flex-wrap:wrap;
+
     gap:20px;
 
     margin-top:55px;
@@ -698,21 +647,53 @@
 
 .join-home .primary-button{
 
-    padding:20px 42px;
+    min-width:220px;
 
-    font-size:1.05rem;
+}
+
+.join-home .secondary-button{
+
+    min-width:220px;
 
 }
 
 
+/* ==========================================================
+   JOIN SECTION POLISH
+========================================================== */
+
+.join-home::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+    left:50%;
+
+    transform:translateX(-50%);
+
+    width:120px;
+    height:3px;
+
+    background:var(--bm-red);
+
+    border-radius:999px;
+
+    opacity:.12;
+
+}
+/* ==========================================================
+   PART 4
+   Footer
+========================================================== */
+
 
 /* ==========================================================
-   FOOTER
+   SITE FOOTER
 ========================================================== */
 
 .site-footer{
-
-    width:100%;
 
     background:var(--bm-blue);
 
@@ -730,6 +711,11 @@
 
 }
 
+
+/* ==========================================================
+   FOOTER GRID
+========================================================== */
+
 .footer-grid{
 
     display:grid;
@@ -742,27 +728,40 @@
 
 }
 
+.footer-brand{
+
+    max-width:380px;
+
+}
+
 .footer-brand img{
+
+    display:block;
 
     width:220px;
 
-    margin-bottom:30px;
+    margin-bottom:28px;
 
 }
 
 .footer-brand p{
 
-    max-width:360px;
+    color:rgba(255,255,255,.72);
 
     line-height:1.9;
 
-    color:rgba(255,255,255,.72);
+    margin:0;
 
 }
 
+
+/* ==========================================================
+   FOOTER HEADINGS
+========================================================== */
+
 .site-footer h4{
 
-    margin-bottom:22px;
+    margin:0 0 22px;
 
     color:#ffffff;
 
@@ -775,6 +774,11 @@
     text-transform:uppercase;
 
 }
+
+
+/* ==========================================================
+   FOOTER LISTS
+========================================================== */
 
 .site-footer ul{
 
@@ -791,6 +795,17 @@
     margin-bottom:14px;
 
 }
+
+.site-footer li:last-child{
+
+    margin-bottom:0;
+
+}
+
+
+/* ==========================================================
+   FOOTER LINKS
+========================================================== */
 
 .site-footer a{
 
@@ -811,6 +826,11 @@
     padding-left:8px;
 
 }
+
+
+/* ==========================================================
+   FOOTER DIVIDER
+========================================================== */
 
 .footer-bottom{
 
@@ -841,8 +861,71 @@
     font-size:.9rem;
 
 }
+
+
 /* ==========================================================
-   RESPONSIVE DESIGN
+   FOOTER SOCIALS
+========================================================== */
+
+.footer-social{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:16px;
+
+}
+
+.footer-social a{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:42px;
+
+    height:42px;
+
+    border-radius:50%;
+
+    background:rgba(255,255,255,.06);
+
+    transition:
+        background .25s ease,
+        transform .25s ease;
+
+}
+
+.footer-social a:hover{
+
+    background:rgba(255,255,255,.14);
+
+    transform:translateY(-3px);
+
+}
+
+
+/* ==========================================================
+   FOOTER LOGO POLISH
+========================================================== */
+
+.footer-brand img{
+
+    transition:opacity .25s ease;
+
+}
+
+.footer-brand img:hover{
+
+    opacity:.9;
+
+}
+/* ==========================================================
+   PART 5
+   Responsive Design
 ========================================================== */
 
 
@@ -852,7 +935,8 @@
 
 @media (max-width:1400px){
 
-    .homepage-content .container{
+    .homepage-content .container,
+    .site-footer .container{
 
         width:min(94%,1320px);
 
@@ -892,8 +976,7 @@
 
     .feature-content p{
 
-        max-width:650px;
-
+        max-width:700px;
         margin-inline:auto;
 
     }
@@ -901,6 +984,14 @@
     .feature-button{
 
         justify-content:center;
+
+    }
+
+    .footer-grid{
+
+        grid-template-columns:2fr 1fr 1fr;
+
+        gap:60px;
 
     }
 
@@ -915,15 +1006,18 @@
 
     .hero-content{
 
-        padding:170px 0 120px;
-
+        padding:165px 0 120px;
         text-align:center;
 
     }
 
     .hero-copy{
 
-        max-width:700px;
+        margin-inline:auto;
+
+    }
+
+    .hero-copy p{
 
         margin-inline:auto;
 
@@ -959,8 +1053,6 @@
 
         grid-template-columns:repeat(2,1fr);
 
-        gap:60px;
-
     }
 
 }
@@ -972,21 +1064,23 @@
 
 @media (max-width:768px){
 
+    .home-feature,
+    .partner-section,
+    .join-home{
+
+        padding:85px 0;
+
+    }
+
     .hero-content{
 
         padding:145px 0 95px;
 
     }
 
-    .hero h1{
+    .hero-copy h1{
 
-        font-size:2.8rem;
-
-    }
-
-    .hero-copy{
-
-        font-size:1rem;
+        font-size:2.9rem;
 
     }
 
@@ -1003,7 +1097,6 @@
     .hero-buttons a{
 
         width:100%;
-
         max-width:320px;
 
         justify-content:center;
@@ -1020,11 +1113,13 @@
 
     .home-feature{
 
-        gap:55px;
+        gap:50px;
 
     }
 
-    .home-feature h2{
+    .home-feature h2,
+    .partner-section h2,
+    .join-home h2{
 
         font-size:2.45rem;
 
@@ -1032,7 +1127,7 @@
 
     .partner-logo{
 
-        width:min(100%,340px);
+        width:min(100%,360px);
 
         margin:35px auto 50px;
 
@@ -1044,10 +1139,10 @@
 
     }
 
-    .join-home .primary-button{
+    .join-home .primary-button,
+    .join-home .secondary-button{
 
         width:100%;
-
         max-width:320px;
 
         justify-content:center;
@@ -1066,17 +1161,19 @@
 
     .footer-brand{
 
-        display:flex;
-
-        flex-direction:column;
-
-        align-items:center;
+        margin-inline:auto;
 
     }
 
-    .footer-brand p{
+    .footer-brand img{
 
         margin-inline:auto;
+
+    }
+
+    .footer-social{
+
+        justify-content:center;
 
     }
 
@@ -1086,7 +1183,7 @@
 
         text-align:center;
 
-        gap:10px;
+        gap:12px;
 
     }
 
@@ -1101,13 +1198,13 @@
 
     .hero-content{
 
-        padding:130px 0 85px;
+        padding:130px 0 80px;
 
     }
 
-    .hero h1{
+    .hero-copy h1{
 
-        font-size:2.15rem;
+        font-size:2.2rem;
 
         line-height:1.15;
 
@@ -1149,7 +1246,6 @@
     .secondary-button{
 
         width:100%;
-
         max-width:300px;
 
         justify-content:center;
