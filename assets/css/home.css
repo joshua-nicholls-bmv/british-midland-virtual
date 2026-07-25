@@ -129,7 +129,7 @@
 
     display:grid;
 
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-columns:1fr 1fr;
 
     align-items:center;
 
@@ -139,10 +139,9 @@
 
 .home-feature.reverse{
 
-    grid-template-columns:minmax(0,1fr) minmax(0,1fr);
+    grid-template-columns:1fr 1fr;
 
 }
-
 
 .partner-section{
 
@@ -530,25 +529,6 @@
 /* ==========================================================
    FEATURE IMAGES
 ========================================================== */
-
-.feature-image{
-
-    overflow:hidden;
-
-    border-radius:22px;
-
-}
-
-.feature-image img{
-
-    width:100%;
-
-    height:100%;
-
-    object-fit:cover;
-
-}
-
 
 
 /* ==========================================================
