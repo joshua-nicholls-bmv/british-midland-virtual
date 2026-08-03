@@ -45,7 +45,7 @@ const signOutButton =
     document.getElementById("signOutButton");
 
 
-// Dashboard statistics
+// Statistics
 
 const activePilotsElement =
     document.getElementById("activePilots");
@@ -60,8 +60,17 @@ const reviewCountElement =
     document.getElementById("reviewCount");
 
 
+// Operations
+
+const recentOperationsElement =
+    document.getElementById("recentOperations");
+
+const reviewQueueElement =
+    document.getElementById("reviewQueue");
+
+
 // ------------------------------------------------------------
-// REDIRECT TO LOGIN
+// REDIRECT
 // ------------------------------------------------------------
 
 function redirectToLogin() {
@@ -81,7 +90,6 @@ function setGreeting(name) {
 
     const hour =
         new Date().getHours();
-
 
     let greeting =
         "Good evening";
@@ -108,7 +116,7 @@ function setGreeting(name) {
 
 
 // ------------------------------------------------------------
-// VERIFY MANAGEMENT USER
+// MANAGEMENT VERIFICATION
 // ------------------------------------------------------------
 
 async function getManagementUser(userId) {
@@ -151,7 +159,184 @@ async function getManagementUser(userId) {
 
 
 // ============================================================
-// LOAD ACARS DASHBOARD STATISTICS
+// FORMATTERS
+// ============================================================
+
+function escapeHtml(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    return String(value)
+        .replaceAll("&", "&amp;")
+        .replaceAll("<", "&lt;")
+        .replaceAll(">", "&gt;")
+        .replaceAll('"', "&quot;")
+        .replaceAll("'", "&#039;");
+
+}
+
+
+function formatLandingRate(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "—";
+
+    }
+
+
+    const rate =
+        Number(value);
+
+
+    if (Number.isNaN(rate)) {
+
+        return "—";
+
+    }
+
+
+    return `${rate} fpm`;
+
+}
+
+
+function formatAircraft(
+    aircraft,
+    registration
+) {
+
+    const aircraftText =
+        aircraft || "—";
+
+
+    if (!registration) {
+
+        return aircraftText;
+
+    }
+
+
+    return `${aircraftText} · ${registration}`;
+
+}
+
+
+function formatScore(
+    score,
+    grade
+) {
+
+    if (
+        score === null ||
+        score === undefined
+    ) {
+
+        return grade || "—";
+
+    }
+
+
+    if (grade) {
+
+        return `${score} ${grade}`;
+
+    }
+
+
+    return String(score);
+
+}
+
+
+function formatFlightTime(minutes) {
+
+    const totalMinutes =
+        Number(minutes) || 0;
+
+
+    const hours =
+        Math.floor(
+            totalMinutes / 60
+        );
+
+
+    const remainingMinutes =
+        totalMinutes % 60;
+
+
+    return `${hours}h ${remainingMinutes}m`;
+
+}
+
+
+// ============================================================
+// LOAD PILOT LOOKUP
+// ============================================================
+
+async function loadPilotLookup() {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("pilots")
+            .select(
+                "id, pilot_id, nickname"
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Unable to load pilot lookup:",
+            error
+        );
+
+        throw error;
+
+    }
+
+
+    const lookup =
+        new Map();
+
+
+    for (const pilot of data || []) {
+
+        lookup.set(
+            pilot.id,
+            {
+                pilotId:
+                    pilot.pilot_id || "—",
+
+                nickname:
+                    pilot.nickname || "Unknown Pilot"
+            }
+        );
+
+    }
+
+
+    return lookup;
+
+}
+
+
+// ============================================================
+// LOAD DASHBOARD STATISTICS
 // ============================================================
 
 async function loadDashboardStatistics() {
@@ -188,18 +373,13 @@ async function loadDashboardStatistics() {
 
         if (pilotError) {
 
-            console.error(
-                "Unable to load active pilots:",
-                pilotError
-            );
-
             throw pilotError;
 
         }
 
 
         // ----------------------------------------------------
-        // LOAD PIREP SUMMARY DATA
+        // PIREP SUMMARY
         // ----------------------------------------------------
 
         const {
@@ -215,11 +395,6 @@ async function loadDashboardStatistics() {
 
         if (pirepError) {
 
-            console.error(
-                "Unable to load PIREP statistics:",
-                pirepError
-            );
-
             throw pirepError;
 
         }
@@ -229,51 +404,27 @@ async function loadDashboardStatistics() {
             pireps || [];
 
 
-        // ----------------------------------------------------
-        // TOTAL FLIGHTS
-        // ----------------------------------------------------
-
         const totalFlights =
             pirepData.length;
 
-
-        // ----------------------------------------------------
-        // TOTAL BLOCK TIME
-        // ----------------------------------------------------
 
         const totalMinutes =
             pirepData.reduce(
                 (total, pirep) => {
 
-                    const blockMinutes =
-                        Number(
-                            pirep.block_minutes
-                        ) || 0;
-
-
                     return (
                         total +
-                        blockMinutes
+                        (
+                            Number(
+                                pirep.block_minutes
+                            ) || 0
+                        )
                     );
 
                 },
                 0
             );
 
-
-        const hours =
-            Math.floor(
-                totalMinutes / 60
-            );
-
-
-        const minutes =
-            totalMinutes % 60;
-
-
-        // ----------------------------------------------------
-        // REQUIRES REVIEW
-        // ----------------------------------------------------
 
         const reviewCount =
             pirepData.filter(
@@ -283,47 +434,29 @@ async function loadDashboardStatistics() {
 
 
         // ----------------------------------------------------
-        // UPDATE DASHBOARD
+        // UPDATE CARDS
         // ----------------------------------------------------
 
-        if (activePilotsElement) {
-
-            activePilotsElement.textContent =
-                pilotCount ?? 0;
-
-        }
+        activePilotsElement.textContent =
+            pilotCount ?? 0;
 
 
-        if (totalFlightsElement) {
-
-            totalFlightsElement.textContent =
-                totalFlights;
-
-        }
+        totalFlightsElement.textContent =
+            totalFlights;
 
 
-        if (flightHoursElement) {
-
-            flightHoursElement.textContent =
-                `${hours}h ${minutes}m`;
-
-        }
+        flightHoursElement.textContent =
+            formatFlightTime(
+                totalMinutes
+            );
 
 
-        if (reviewCountElement) {
+        reviewCountElement.textContent =
+            reviewCount;
 
-            reviewCountElement.textContent =
-                reviewCount;
-
-        }
-
-
-        // ----------------------------------------------------
-        // DIAGNOSTIC LOG
-        // ----------------------------------------------------
 
         console.log(
-            "ACARS dashboard statistics loaded successfully:",
+            "ACARS statistics loaded:",
             {
                 activePilots:
                     pilotCount ?? 0,
@@ -334,9 +467,6 @@ async function loadDashboardStatistics() {
                 totalMinutes:
                     totalMinutes,
 
-                formattedFlightTime:
-                    `${hours}h ${minutes}m`,
-
                 requiresReview:
                     reviewCount
             }
@@ -346,49 +476,22 @@ async function loadDashboardStatistics() {
     catch (error) {
 
         console.error(
-            "Unable to load ACARS dashboard statistics:",
+            "Unable to load ACARS statistics:",
             error
         );
 
 
-        /*
-         * Authentication remains valid even if ACARS data
-         * cannot be loaded.
-         *
-         * Show an error state instead of redirecting the
-         * management user back to the login page.
-         */
+        activePilotsElement.textContent =
+            "ERR";
 
-        if (activePilotsElement) {
+        totalFlightsElement.textContent =
+            "ERR";
 
-            activePilotsElement.textContent =
-                "ERR";
+        flightHoursElement.textContent =
+            "ERR";
 
-        }
-
-
-        if (totalFlightsElement) {
-
-            totalFlightsElement.textContent =
-                "ERR";
-
-        }
-
-
-        if (flightHoursElement) {
-
-            flightHoursElement.textContent =
-                "ERR";
-
-        }
-
-
-        if (reviewCountElement) {
-
-            reviewCountElement.textContent =
-                "ERR";
-
-        }
+        reviewCountElement.textContent =
+            "ERR";
 
     }
 
@@ -396,7 +499,484 @@ async function loadDashboardStatistics() {
 
 
 // ============================================================
-// INITIALISE OPERATIONS CONTROL
+// RECENT OPERATIONS
+// ============================================================
+
+async function loadRecentOperations(
+    pilotLookup
+) {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("pireps")
+                .select(`
+                    id,
+                    pilot_id,
+                    flight_number,
+                    departure,
+                    arrival,
+                    aircraft,
+                    registration,
+                    landing_rate_fpm,
+                    flight_score,
+                    flight_grade,
+                    submitted_at
+                `)
+                .order(
+                    "submitted_at",
+                    {
+                        ascending: false
+                    }
+                )
+                .limit(8);
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        const pireps =
+            data || [];
+
+
+        if (pireps.length === 0) {
+
+            recentOperationsElement.innerHTML =
+                `
+                <div class="empty-state">
+                    No submitted PIREPs found.
+                </div>
+                `;
+
+            return;
+
+        }
+
+
+        recentOperationsElement.innerHTML =
+            pireps
+                .map(
+                    pirep => {
+
+                        const pilot =
+                            pilotLookup.get(
+                                pirep.pilot_id
+                            );
+
+
+                        const pilotId =
+                            pilot
+                                ? pilot.pilotId
+                                : "—";
+
+
+                        const nickname =
+                            pilot
+                                ? pilot.nickname
+                                : "Unknown Pilot";
+
+
+                        const pilotDisplay =
+                            `
+                            <strong>
+                                ${escapeHtml(pilotId)}
+                            </strong>
+                            <br>
+                            <span style="color:#697582;font-size:8px;">
+                                ${escapeHtml(nickname)}
+                            </span>
+                            `;
+
+
+                        const route =
+                            `${escapeHtml(pirep.departure)} → ${escapeHtml(pirep.arrival)}`;
+
+
+                        const aircraft =
+                            formatAircraft(
+                                pirep.aircraft,
+                                pirep.registration
+                            );
+
+
+                        const landing =
+                            formatLandingRate(
+                                pirep.landing_rate_fpm
+                            );
+
+
+                        const score =
+                            formatScore(
+                                pirep.flight_score,
+                                pirep.flight_grade
+                            );
+
+
+                        return `
+                            <div class="table-row">
+
+                                <span>
+                                    ${pilotDisplay}
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        ${escapeHtml(pirep.flight_number)}
+                                    </strong>
+                                </span>
+
+                                <span>
+                                    ${route}
+                                </span>
+
+                                <span>
+                                    ${escapeHtml(aircraft)}
+                                </span>
+
+                                <span>
+                                    ${escapeHtml(landing)}
+                                </span>
+
+                                <span>
+                                    <strong>
+                                        ${escapeHtml(score)}
+                                    </strong>
+                                </span>
+
+                            </div>
+                        `;
+
+                    }
+                )
+                .join("");
+
+
+        console.log(
+            "Recent Operations loaded:",
+            pireps.length
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Unable to load Recent Operations:",
+            error
+        );
+
+
+        recentOperationsElement.innerHTML =
+            `
+            <div class="empty-state">
+                Unable to load recent operations.
+            </div>
+            `;
+
+    }
+
+}
+
+
+// ============================================================
+// REVIEW QUEUE
+// ============================================================
+
+async function loadReviewQueue(
+    pilotLookup
+) {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .from("pireps")
+                .select(`
+                    id,
+                    pilot_id,
+                    flight_number,
+                    departure,
+                    arrival,
+                    landing_rate_fpm,
+                    flight_score,
+                    flight_grade,
+                    performance_rating,
+                    landing_assessment,
+                    submitted_at
+                `)
+                .eq(
+                    "requires_review",
+                    true
+                )
+                .order(
+                    "submitted_at",
+                    {
+                        ascending: false
+                    }
+                )
+                .limit(5);
+
+
+        if (error) {
+
+            throw error;
+
+        }
+
+
+        const reviews =
+            data || [];
+
+
+        // ----------------------------------------------------
+        // NO REVIEWS
+        // ----------------------------------------------------
+
+        if (reviews.length === 0) {
+
+            reviewQueueElement.innerHTML =
+                `
+                <div class="review-zero">
+
+                    <strong>0</strong>
+
+                    <span>
+                        No flights require review
+                    </span>
+
+                </div>
+                `;
+
+            return;
+
+        }
+
+
+        // ----------------------------------------------------
+        // REVIEW FLIGHTS
+        // ----------------------------------------------------
+
+        reviewQueueElement.innerHTML =
+            `
+            <div style="width:100%;">
+
+                ${reviews
+                    .map(
+                        pirep => {
+
+                            const pilot =
+                                pilotLookup.get(
+                                    pirep.pilot_id
+                                );
+
+
+                            const pilotId =
+                                pilot
+                                    ? pilot.pilotId
+                                    : "—";
+
+
+                            const nickname =
+                                pilot
+                                    ? pilot.nickname
+                                    : "Unknown Pilot";
+
+
+                            const landing =
+                                formatLandingRate(
+                                    pirep.landing_rate_fpm
+                                );
+
+
+                            const score =
+                                formatScore(
+                                    pirep.flight_score,
+                                    pirep.flight_grade
+                                );
+
+
+                            return `
+                                <div
+                                    style="
+                                        padding:16px 20px;
+                                        border-bottom:1px solid #eeeeeb;
+                                    "
+                                >
+
+                                    <div
+                                        style="
+                                            display:flex;
+                                            justify-content:space-between;
+                                            gap:15px;
+                                            align-items:flex-start;
+                                        "
+                                    >
+
+                                        <div>
+
+                                            <span
+                                                style="
+                                                    color:#d02823;
+                                                    font-size:7px;
+                                                    font-weight:700;
+                                                    letter-spacing:1px;
+                                                "
+                                            >
+                                                REVIEW REQUIRED
+                                            </span>
+
+                                            <strong
+                                                style="
+                                                    display:block;
+                                                    margin-top:5px;
+                                                    font-size:12px;
+                                                    color:#001a3a;
+                                                "
+                                            >
+                                                ${escapeHtml(pirep.flight_number)}
+                                            </strong>
+
+                                        </div>
+
+
+                                        <strong
+                                            style="
+                                                font-size:12px;
+                                                color:#d02823;
+                                            "
+                                        >
+                                            ${escapeHtml(score)}
+                                        </strong>
+
+                                    </div>
+
+
+                                    <div
+                                        style="
+                                            margin-top:10px;
+                                            color:#697582;
+                                            font-size:8px;
+                                            line-height:1.6;
+                                        "
+                                    >
+
+                                        ${escapeHtml(pilotId)}
+                                        ·
+                                        ${escapeHtml(nickname)}
+
+                                        <br>
+
+                                        ${escapeHtml(pirep.departure)}
+                                        →
+                                        ${escapeHtml(pirep.arrival)}
+
+                                        <br>
+
+                                        Landing:
+                                        ${escapeHtml(landing)}
+
+                                    </div>
+
+                                </div>
+                            `;
+
+                        }
+                    )
+                    .join("")}
+
+            </div>
+            `;
+
+
+        console.log(
+            "Review Queue loaded:",
+            reviews.length
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Unable to load Review Queue:",
+            error
+        );
+
+
+        reviewQueueElement.innerHTML =
+            `
+            <div class="review-zero">
+
+                <strong>!</strong>
+
+                <span>
+                    Unable to load review queue
+                </span>
+
+            </div>
+            `;
+
+    }
+
+}
+
+
+// ============================================================
+// LOAD OPERATIONS DATA
+// ============================================================
+
+async function loadOperationsData() {
+
+    try {
+
+        /*
+         * Load pilots once and use the resulting lookup
+         * for both Recent Operations and Review Queue.
+         */
+
+        const pilotLookup =
+            await loadPilotLookup();
+
+
+        await Promise.all([
+            loadDashboardStatistics(),
+            loadRecentOperations(
+                pilotLookup
+            ),
+            loadReviewQueue(
+                pilotLookup
+            )
+        ]);
+
+
+        console.log(
+            "Operations Control data loaded successfully."
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Unable to initialise Operations data:",
+            error
+        );
+
+    }
+
+}
+
+
+// ============================================================
+// INITIALISE DASHBOARD
 // ============================================================
 
 async function initialiseDashboard() {
@@ -404,7 +984,7 @@ async function initialiseDashboard() {
     try {
 
         // ----------------------------------------------------
-        // CHECK AUTHENTICATED SESSION
+        // AUTHENTICATED SESSION
         // ----------------------------------------------------
 
         const {
@@ -421,11 +1001,6 @@ async function initialiseDashboard() {
             !sessionData.session
         ) {
 
-            console.log(
-                "No authenticated management session."
-            );
-
-
             redirectToLogin();
 
             return;
@@ -438,7 +1013,7 @@ async function initialiseDashboard() {
 
 
         // ----------------------------------------------------
-        // VERIFY MANAGEMENT AUTHORISATION
+        // MANAGEMENT AUTHORISATION
         // ----------------------------------------------------
 
         const manager =
@@ -448,11 +1023,6 @@ async function initialiseDashboard() {
 
 
         if (!manager) {
-
-            console.warn(
-                "Authenticated user does not have management access."
-            );
-
 
             await supabaseClient
                 .auth
@@ -496,14 +1066,14 @@ async function initialiseDashboard() {
 
 
         // ----------------------------------------------------
-        // LOAD LIVE ACARS DATA
+        // LOAD ACARS OPERATIONS
         // ----------------------------------------------------
 
-        await loadDashboardStatistics();
+        await loadOperationsData();
 
 
         // ----------------------------------------------------
-        // REVEAL OPERATIONS CONTROL
+        // REVEAL DASHBOARD
         // ----------------------------------------------------
 
         authGate.classList.add(
@@ -584,7 +1154,7 @@ if (signOutButton) {
 
 
 // ------------------------------------------------------------
-// WATCH AUTHENTICATION STATE
+// AUTH STATE
 // ------------------------------------------------------------
 
 supabaseClient.auth.onAuthStateChange(
