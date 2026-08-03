@@ -1,0 +1,1 @@
+<!doctype html><html><head><meta charset="utf-8"><meta name="robots" content="noindex"><script>location.replace('/management/reviews/'+location.search+location.hash);</script></head><body></body></html>

@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Operations Control | British Midland Virtual</title>
+    <title>Review Centre | British Midland Virtual</title>
 
     <meta name="robots" content="noindex, nofollow">
 
@@ -17,9 +18,11 @@
     >
 
     <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="reviews.css?v=1">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
+
 
 <body>
 
@@ -49,7 +52,7 @@
 
 
     <!-- =====================================================
-         MANAGEMENT APPLICATION
+         APPLICATION
          ===================================================== -->
 
     <div id="dashboardApp" class="app hidden">
@@ -70,7 +73,6 @@
                     </div>
 
                     <div>
-
                         <strong>
                             BRITISH MIDLAND
                         </strong>
@@ -78,21 +80,16 @@
                         <span>
                             OPERATIONS CONTROL
                         </span>
-
                     </div>
 
                 </div>
 
 
-                <!-- =========================================
-                     MANAGEMENT NAVIGATION
-                     ========================================= -->
-
                 <nav class="navigation">
 
                     <a
                         href="/management/dashboard/"
-                        class="nav-item active"
+                        class="nav-item"
                     >
                         <span class="nav-symbol">▦</span>
                         Dashboard
@@ -105,7 +102,10 @@
                     >
                         <span class="nav-symbol">◉</span>
                         Live Operations
-                        <small>SOON</small>
+
+                        <small>
+                            SOON
+                        </small>
                     </a>
 
 
@@ -129,7 +129,7 @@
 
                     <a
                         href="/management/reviews/"
-                        class="nav-item"
+                        class="nav-item active"
                     >
                         <span class="nav-symbol">!</span>
                         Reviews
@@ -175,7 +175,7 @@
                     </span>
 
                     <h1>
-                        Operations Control
+                        Review Centre
                     </h1>
 
                 </div>
@@ -206,41 +206,41 @@
 
 
             <!-- =============================================
-                 WELCOME
+                 INTRODUCTION
                  ============================================= -->
 
-            <section class="welcome">
+            <section class="reviews-intro">
 
                 <div>
 
                     <span class="eyebrow">
-                        BRITISH MIDLAND VIRTUAL
+                        FLIGHT OPERATIONS
                     </span>
 
-                    <h2 id="welcomeHeading">
-                        Good evening.
+                    <h2>
+                        Review Centre
                     </h2>
 
                     <p>
-                        Here's the current state of British Midland Virtual
-                        flight operations.
+                        Flights automatically identified by ACARS
+                        for management attention.
                     </p>
 
                 </div>
 
 
-                <div class="system-status">
+                <div class="review-system-status">
 
                     <span class="status-dot"></span>
 
                     <div>
 
                         <strong>
-                            ACARS SYSTEM
+                            ACARS REVIEW
                         </strong>
 
                         <small>
-                            OPERATIONAL
+                            LIVE DATA
                         </small>
 
                     </div>
@@ -251,283 +251,192 @@
 
 
             <!-- =============================================
-                 PRIMARY STATISTICS
+                 REVIEW STATISTICS
                  ============================================= -->
 
-            <section class="stats-grid">
-
-                <article class="stat-card">
-
-                    <span class="stat-label">
-                        ACTIVE PILOTS
-                    </span>
-
-                    <strong id="activePilots">
-                        —
-                    </strong>
-
-                    <small>
-                        Registered with BMV
-                    </small>
-
-                </article>
+            <section class="stats-grid review-stats-grid">
 
 
-                <article class="stat-card">
-
-                    <span class="stat-label">
-                        TOTAL FLIGHTS
-                    </span>
-
-                    <strong id="totalFlights">
-                        —
-                    </strong>
-
-                    <small>
-                        Submitted PIREPs
-                    </small>
-
-                </article>
-
-
-                <article class="stat-card">
-
-                    <span class="stat-label">
-                        FLIGHT HOURS
-                    </span>
-
-                    <strong id="flightHours">
-                        —
-                    </strong>
-
-                    <small>
-                        Recorded by ACARS
-                    </small>
-
-                </article>
-
-
-                <article class="stat-card attention">
+                <article class="stat-card review-stat-card">
 
                     <span class="stat-label">
                         REQUIRES REVIEW
                     </span>
 
-                    <strong id="reviewCount">
+                    <strong id="requiresReviewCount">
                         —
                     </strong>
 
                     <small>
-                        Management attention
+                        Awaiting management
                     </small>
 
                 </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        TOTAL PIREPS
+                    </span>
+
+                    <strong id="totalPirepCount">
+                        —
+                    </strong>
+
+                    <small>
+                        Submitted flights
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        AVERAGE SCORE
+                    </span>
+
+                    <strong id="averageScore">
+                        —
+                    </strong>
+
+                    <small>
+                        Across submitted PIREPs
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        REVIEW RATE
+                    </span>
+
+                    <strong id="reviewRate">
+                        —
+                    </strong>
+
+                    <small>
+                        Percentage requiring attention
+                    </small>
+
+                </article>
+
 
             </section>
 
 
             <!-- =============================================
-                 OPERATIONS CONTENT
+                 REVIEW QUEUE
                  ============================================= -->
 
-            <section class="content-grid">
+            <section class="panel review-queue-panel">
 
 
-                <!-- RECENT OPERATIONS -->
+                <div class="review-queue-header">
 
-                <article class="panel operations-panel">
+                    <div>
 
-                    <div class="panel-header">
-
-                        <div>
-
-                            <span class="panel-kicker">
-                                ACARS
-                            </span>
-
-                            <h3>
-                                Recent Operations
-                            </h3>
-
-                        </div>
-
-                        <span class="panel-note">
-                            LATEST PIREPs
+                        <span class="panel-kicker">
+                            OPERATIONS
                         </span>
 
+                        <h3>
+                            Review Queue
+                        </h3>
+
+                        <p>
+                            Select a flight to open its full
+                            operational report.
+                        </p>
+
                     </div>
 
 
-                    <div class="operations-table">
+                    <div class="review-search-wrap">
 
-                        <div class="table-header">
+                        <label for="reviewSearch">
+                            SEARCH
+                        </label>
 
-                            <span>PILOT</span>
-                            <span>FLIGHT</span>
-                            <span>ROUTE</span>
-                            <span>AIRCRAFT</span>
-                            <span>LANDING</span>
-                            <span>SCORE</span>
-
-                        </div>
-
-
-                        <div
-                            id="recentOperations"
-                            class="table-body"
+                        <input
+                            id="reviewSearch"
+                            type="search"
+                            placeholder="Flight, pilot or route"
+                            autocomplete="off"
                         >
 
-                            <div class="empty-state">
-                                Loading recent operations...
-                            </div>
-
-                        </div>
-
                     </div>
 
-                </article>
+                </div>
 
 
-                <!-- REVIEW QUEUE -->
+                <!-- TABLE -->
 
-                <article class="panel review-panel">
+                <div class="review-table-wrap">
 
-                    <div class="panel-header">
 
-                        <div>
+                    <div class="review-table-header">
 
-                            <span class="panel-kicker red">
-                                OPERATIONS
-                            </span>
+                        <span>
+                            PILOT
+                        </span>
 
-                            <h3>
-                                Review Queue
-                            </h3>
+                        <span>
+                            FLIGHT
+                        </span>
 
-                        </div>
+                        <span>
+                            ROUTE
+                        </span>
+
+                        <span>
+                            AIRCRAFT
+                        </span>
+
+                        <span>
+                            LANDING
+                        </span>
+
+                        <span>
+                            SCORE
+                        </span>
+
+                        <span>
+                            STATUS
+                        </span>
 
                     </div>
 
 
                     <div
                         id="reviewQueue"
-                        class="review-content"
+                        class="review-table-body"
                     >
 
-                        <div class="review-zero">
-
-                            <strong>
-                                —
-                            </strong>
-
-                            <span>
-                                Loading review queue...
-                            </span>
-
+                        <div class="review-loading">
+                            Loading ACARS review queue...
                         </div>
 
                     </div>
 
-                </article>
+
+                </div>
+
 
             </section>
 
 
             <!-- =============================================
-                 SYSTEM MODULES
+                 ERROR MESSAGE
                  ============================================= -->
 
-            <section class="panel development-panel">
-
-                <div class="panel-header">
-
-                    <div>
-
-                        <span class="panel-kicker">
-                            OPERATIONS PLATFORM
-                        </span>
-
-                        <h3>
-                            System Modules
-                        </h3>
-
-                    </div>
-
-                </div>
-
-
-                <div class="module-grid">
-
-                    <div class="module live">
-
-                        <span class="module-status">
-                            ACTIVE
-                        </span>
-
-                        <strong>
-                            Management Authentication
-                        </strong>
-
-                        <small>
-                            Supabase Auth + Management RLS
-                        </small>
-
-                    </div>
-
-
-                    <div class="module live">
-
-                        <span class="module-status">
-                            ACTIVE
-                        </span>
-
-                        <strong>
-                            ACARS Statistics
-                        </strong>
-
-                        <small>
-                            Pilot and PIREP database integration
-                        </small>
-
-                    </div>
-
-
-                    <div class="module">
-
-                        <span class="module-status">
-                            PLANNED
-                        </span>
-
-                        <strong>
-                            Live Operations
-                        </strong>
-
-                        <small>
-                            Active flight tracking
-                        </small>
-
-                    </div>
-
-
-                    <div class="module live">
-
-                        <span class="module-status">
-                            ACTIVE
-                        </span>
-
-                        <strong>
-                            Pilot Management
-                        </strong>
-
-                        <small>
-                            Operational pilot roster
-                        </small>
-
-                    </div>
-
-                </div>
-
-            </section>
+            <div
+                id="reviewError"
+                class="review-error hidden"
+            ></div>
 
 
             <!-- =============================================
@@ -541,10 +450,11 @@
                 </span>
 
                 <span>
-                    OPERATIONS CONTROL • RESTRICTED ACCESS
+                    OPERATIONS CONTROL • REVIEW CENTRE
                 </span>
 
             </footer>
+
 
         </main>
 
@@ -552,10 +462,11 @@
 
 
     <!-- =====================================================
-         DASHBOARD APPLICATION
+         JAVASCRIPT
          ===================================================== -->
 
-    <script src="/management/dashboard.js?v=4"></script>
+    <script src="reviews.js?v=1"></script>
 
 </body>
+
 </html>

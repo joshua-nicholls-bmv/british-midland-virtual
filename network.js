@@ -1,0 +1,217 @@
+[
+  {
+    "id": 1,
+    "featured": true,
+    "published": "2026-07-22",
+    "category": "Development",
+    "title": "British Midland Virtual Website Now Live",
+    "summary": "The official British Midland Virtual website is now live.",
+    "content": [
+      "We're delighted to officially launch the British Midland Virtual website.",
+      "After months of planning and development, the new website brings together everything pilots need to discover British Midland Virtual, explore our growing fleet, view our expanding route network and stay up to date with the latest news from across the airline.",
+      "Designed around the heritage of British Midland, the website combines a modern experience with classic airline styling. From fleet information and interactive route maps to future operational resources, this marks the beginning of an exciting new chapter for the airline.",
+      "Although today's launch represents an important milestone, development is far from complete. Over the coming weeks we will continue expanding the website with our Operations Centre, pilot resources, comprehensive documentation and additional community features.",
+      "As our network continues to grow from Birmingham, we look forward to welcoming new pilots who share our passion for realistic airline operations and the history of one of Britain's most recognisable airlines.",
+      "We would like to thank everyone who has supported the project throughout development. Your enthusiasm and feedback have helped shape the airline we are proud to launch today, and we look forward to welcoming you aboard."
+    ],
+    "image": "assets/images/news/launch.jpg",
+    "author": "British Midland Crew Services",
+    "tags": [
+      "Website",
+      "Launch",
+      "Development"
+    ]
+  },
+  {
+    "id": 2,
+    "featured": false,
+    "published": "2026-07-24",
+    "category": "Community",
+    "title": "Now Welcoming New & Type-Rated Airbus Pilots",
+    "summary": "Whether you're taking your first steps into virtual aviation or already experienced on the Airbus family, British Midland Virtual welcomes you to join our growing community.",
+    "content": [
+      "British Midland Virtual is proud to welcome both new and experienced Airbus pilots to our growing community.",
+      "Whether you're flying your very first virtual airline route or already have experience operating the Airbus A320 family, you'll find a friendly and supportive environment built around realistic operations and an appreciation for British Midland's heritage.",
+      "Our current fleet includes the Airbus A320, Airbus A321 and Airbus A350-1000, operating an expanding network of short-haul European and long-haul international services from our Birmingham hub.",
+      "We believe realistic flying should be enjoyable and accessible, with no unnecessary barriers to getting started. New pilots can learn as they fly, while experienced Airbus crews can immediately enjoy our routes and procedures.",
+      "As our network and community continue to grow, we invite anyone with a passion for virtual aviation to become part of British Midland Virtual and help write the next chapter of our story.",
+      "If you're looking for a welcoming Airbus-focused virtual airline inspired by one of Britain's most recognisable carriers, we'd be delighted to have you on board."
+    ],
+    "image": "assets/images/news/airbus-pilot-community.jpg",
+    "author": "British Midland Crew Services",
+    "tags": [
+      "Community",
+      "Pilots",
+      "Airbus",
+      "A320",
+      "A321",
+      "A350",
+      "Join"
+    ]
+  },
+ {
+  "id": 3,
+  "featured": false,
+  "published": "2026-07-23",
+  "category": "Fleet",
+  "title": "Airbus A319, A320 & A321 Fleet Ready for Operations",
+  "summary": "British Midland Virtual's launch fleet is now fully configured, with additional Airbus aircraft already planned for future expansion.",
+  "content": [
+    "Following extensive work behind the scenes, the British Midland Virtual Airbus A319, A320 and A321 fleet is now fully prepared for operations, marking another major milestone ahead of our public launch.",
+    "Our initial fleet consists of three Airbus aircraft, each configured to provide a consistent and immersive experience for our pilots. Leading the fleet are Airbus A319 G-BMFI 'City of Lichfield', Airbus A320 G-BMFB 'City of Coventry' and Airbus A321 G-BMFA 'City of Birmingham'. Every aircraft features a custom livery inspired by the final British Midland colour scheme, reimagined for today's virtual skies.",
+    "Together, the Airbus A319, A320 and A321 will form the backbone of our European operation from Birmingham Airport, with each aircraft assigned to routes best suited to its capacity and operational profile.",
+    "Looking ahead, British Midland Virtual has already committed to expanding the fleet with a further nine Airbus aircraft. Planned additions include A319s G-BMFC 'City of Stoke-on-Trent', G-BMFG 'Spirit of Dudley' and G-BMFK 'Heart of the Black Country'; A320s G-BMFD 'City of Wolverhampton', G-BMFH 'Spirit of Solihull' and G-BMFL 'Heart of Staffordshire'; and A321s G-BMFE 'City of Worcester', G-BMFF 'City of Derby' and G-BMFJ 'Heart of Warwickshire'.",
+    "As these aircraft enter service, they will strengthen our network across Europe while continuing our tradition of celebrating the cities, towns and regions that define the Heart of Britain."
+  ],
+  "image": "assets/images/news/fleet.jpg",
+  "author": "Fleet Management",
+  "tags": [
+    "Fleet",
+    "A319",
+    "A320",
+    "A321",
+    "Operations"
+  ]
+},
+  {
+    "id": 4,
+    "featured": false,
+    "published": "2026-07-25",
+    "category": "Network",
+    "title": "Paris Charles de Gaulle Joins the Network",
+    "summary": "British Midland Virtual continues its European expansion with the addition of Paris Charles de Gaulle.",
+    "content": [
+      "British Midland Virtual is pleased to announce the addition of Paris Charles de Gaulle (CDG) to our growing European network.",
+      "As one of Europe's busiest aviation hubs, Paris Charles de Gaulle strengthens our Western European network while providing pilots with an enjoyable Airbus A320 operation from Birmingham.",
+      "The route reflects British Midland's historic European network and offers realistic schedules within Microsoft Flight Simulator.",
+      "Paris joins our expanding portfolio of European destinations as we continue building a comprehensive network from Birmingham Airport.",
+      "Additional destinations will be announced as development of the airline continues."
+    ],
+    "image": "assets/images/news/paris.jpg",
+    "author": "Network Planning",
+    "tags": [
+      "Network",
+      "Paris",
+      "CDG",
+      "Expansion"
+    ]
+  },
+  {
+    "id": 5,
+    "featured": false,
+    "published": "2026-07-26",
+    "category": "Network",
+    "title": "Frankfurt Added to the European Network",
+    "summary": "Germany's financial capital becomes the latest destination to join the British Midland Virtual route map.",
+    "content": [
+      "British Midland Virtual is pleased to announce the addition of Frankfurt (FRA) to our expanding European network.",
+      "As one of Europe's largest aviation hubs, Frankfurt offers excellent connectivity and a realistic destination for Airbus A320 operations from Birmingham.",
+      "The route reflects British Midland's long-standing links with Germany and provides pilots with another busy European sector to enjoy.",
+      "Frankfurt strengthens our presence across Central Europe and forms part of our commitment to recreating a modern interpretation of British Midland's historic network.",
+      "Further destinations across Europe are already in development as we continue expanding our operations."
+    ],
+    "image": "assets/images/news/frankfurt.jpg",
+    "author": "Network Planning",
+    "tags": [
+      "Network",
+      "Frankfurt",
+      "Germany",
+      "Expansion"
+    ]
+  },
+  {
+    "id": 6,
+    "featured": false,
+    "published": "2026-07-27",
+    "category": "Network",
+    "title": "Faro Brings the Algarve to Our Network",
+    "summary": "British Midland Virtual expands into Portugal with the addition of Faro.",
+    "content": [
+      "British Midland Virtual is delighted to announce Faro (FAO) as the newest addition to our growing route network.",
+      "A popular leisure destination, Faro offers pilots a scenic Airbus A320 operation between Birmingham and Portugal's Algarve coast.",
+      "The route introduces an important holiday destination to our network while complementing our growing collection of European services.",
+      "With realistic schedules and beautiful coastal approaches, Faro promises to become a favourite among our pilots.",
+      "The addition of Faro marks another step towards building a diverse and authentic network inspired by British Midland's heritage."
+    ],
+    "image": "assets/images/news/faro.jpg",
+    "author": "Network Planning",
+    "tags": [
+      "Network",
+      "Faro",
+      "Portugal",
+      "Expansion"
+    ]
+  },
+  {
+    "id": 7,
+    "featured": false,
+    "published": "2026-07-28",
+    "category": "Network",
+    "title": "Rome Ciampino Joins the British Midland Network",
+    "summary": "Italy's historic capital is now served through Rome Ciampino Airport.",
+    "content": [
+      "British Midland Virtual is pleased to welcome Rome Ciampino (CIA) to our expanding European route network.",
+      "Located just outside the Eternal City, Rome Ciampino offers a rewarding Airbus A320 operation with spectacular arrivals into one of Europe's most iconic destinations.",
+      "The route provides another Mediterranean destination while expanding our Italian network alongside Milan.",
+      "Pilots can look forward to realistic operations between Birmingham and Rome as part of our growing European schedule.",
+      "Rome represents another milestone as British Midland Virtual continues connecting Birmingham with destinations across the continent."
+    ],
+    "image": "assets/images/news/rome.jpg",
+    "author": "Network Planning",
+    "tags": [
+      "Network",
+      "Rome",
+      "Ciampino",
+      "Italy"
+    ]
+  },
+  {
+    "id": 8,
+    "featured": false,
+    "published": "2026-07-29",
+    "category": "Network",
+    "title": "Dublin Strengthens Our Irish Operations",
+    "summary": "British Midland Virtual welcomes Dublin as one of its key European destinations.",
+    "content": [
+      "British Midland Virtual is delighted to announce the addition of Dublin (DUB) to our growing European network.",
+      "As one of Birmingham's busiest international routes, Dublin offers a short yet rewarding Airbus A320 operation with frequent services and realistic schedules.",
+      "The route reflects British Midland's historic presence on the Irish market while providing excellent variety for our pilots.",
+      "Dublin strengthens our network across the British Isles and supports our vision of creating a comprehensive Airbus operation from Birmingham.",
+      "Further route announcements are planned as our European network continues to grow."
+    ],
+    "image": "assets/images/news/dublin.jpg",
+    "author": "Network Planning",
+    "tags": [
+      "Network",
+      "Dublin",
+      "Ireland",
+      "Expansion"
+    ]
+  },
+{
+  "id": 9,
+  "featured": false,
+  "published": "2026-07-25",
+  "category": "Partnership",
+  "title": "British Midland Virtual Joins the SayIntentions.AI Virtual Airline Programme",
+  "summary": "British Midland Virtual is now officially part of the SayIntentions.AI Virtual Airline Programme, bringing an even more immersive flying experience to our pilots.",
+  "content": [
+    "We're delighted to announce that British Midland Virtual has officially joined the SayIntentions.AI Virtual Airline Programme.",
+    "This exciting partnership allows our pilots to enhance every flight with realistic AI Air Traffic Control, intelligent cabin crew, AI dispatch services and seamless virtual airline integration through SayIntentions.AI.",
+    "Getting started couldn't be easier. Simply log into your SayIntentions Pilot Portal, navigate to Settings → Virtual Airline and select 'British Midland Virtual' from the drop-down menu before saving your changes. Once linked, your eligible flights will automatically be associated with the airline.",
+    "Thinking of subscribing to SayIntentions.AI? Before purchasing a subscription, speak to a member of the British Midland staff team. We have an exclusive 10% discount code available for all British Midland Virtual pilots.",
+    "This partnership represents another major milestone as we continue building a professional, immersive and realistic virtual airline experience inspired by one of Britain's most iconic airlines. We look forward to welcoming many more pilots aboard as we continue connecting the Heart of Britain with Europe and beyond."
+  ],
+  "image": "assets/images/news/sayintentions-partnership.jpg",
+  "author": "British Midland Crew Services",
+  "tags": [
+    "Partnership",
+    "SayIntentions",
+    "Virtual Airline",
+    "Integration",
+    "AI ATC"
+    ]
+  }
+]
+
+

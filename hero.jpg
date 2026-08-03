@@ -1,0 +1,726 @@
+// ======================================================
+// British Midland Virtual
+// Network Engine v3.3
+// Part 1 - Initialisation & Configuration
+// ======================================================
+
+let map;
+let networkData = null;
+
+const BHX = [52.4539, -1.7480];
+
+// ------------------------------------------------------
+// Fleet Colours
+// ------------------------------------------------------
+
+const colours = {
+
+    A319: "#2E6FA3",      // Regional
+    A320: "#D02823",      // Core network
+    A321: "#C9A227",      // Leisure / High Capacity
+    A350: "#8A8F98",      // Future Long Haul
+    hub: "#001A3A"
+
+};
+
+// ======================================================
+// Helper Functions
+// ======================================================
+
+function isActive(destination) {
+
+    return destination.status === "active";
+
+}
+
+function getAircraft(destination) {
+
+    if (!destination.aircraft || destination.aircraft.length === 0) {
+
+        return "A320";
+
+    }
+
+    return destination.aircraft[0];
+
+}
+
+function getAircraftColour(destination) {
+
+    if (!isActive(destination)) {
+
+        return colours.A350;
+
+    }
+
+    switch (getAircraft(destination)) {
+
+        case "A319":
+            return colours.A319;
+
+        case "A320":
+            return colours.A320;
+
+        case "A321":
+            return colours.A321;
+
+        case "A350-1000":
+            return colours.A350;
+
+        default:
+            return colours.A320;
+
+    }
+
+}
+
+function getRouteWeight(destination) {
+
+    switch (getAircraft(destination)) {
+
+        case "A319":
+            return 2.5;
+
+        case "A320":
+            return 3;
+
+        case "A321":
+            return 3.5;
+
+        case "A350-1000":
+            return 4;
+
+        default:
+            return 3;
+
+    }
+
+}
+
+function getCurveStrength(destination) {
+
+    if (!isActive(destination)) {
+
+        return 0.18;
+
+    }
+
+    switch (getAircraft(destination)) {
+
+        case "A319":
+            return 0.06;
+
+        case "A320":
+            return 0.07;
+
+        case "A321":
+            return 0.08;
+
+        default:
+            return 0.08;
+
+    }
+
+}
+
+// ======================================================
+// Load JSON
+// ======================================================
+
+async function loadNetwork() {
+
+    try {
+
+        const response = await fetch("/assets/data/network.json");
+
+        networkData = await response.json();
+
+        initialiseMap();
+
+        drawRoutes();
+
+        buildDestinationCards();
+
+    }
+
+    catch (error) {
+
+        console.error("Unable to load network.json");
+
+        console.error(error);
+
+    }
+
+}
+
+// ======================================================
+// Leaflet Map
+// ======================================================
+
+function initialiseMap() {
+
+    map = L.map("network-map", {
+
+        zoomControl: true,
+
+        scrollWheelZoom: true,
+
+        attributionControl: false
+
+    });
+
+    map.fitBounds(
+
+        [
+
+            [26, -88],
+            [61, 26]
+
+        ],
+
+        {
+
+            padding: [40, 40]
+
+        }
+
+    );
+
+    L.tileLayer(
+
+        "https://{s}.basemaps.cartocdn.com/light_nolabels/{z}/{x}/{y}{r}.png",
+
+        {
+
+            maxZoom: 18
+
+        }
+
+    ).addTo(map);
+
+    createHub();
+
+}
+
+// ======================================================
+// Birmingham Hub
+// ======================================================
+
+function createHub() {
+
+    const hub = L.circleMarker(BHX, {
+
+        radius: 12,
+
+        color: "#ffffff",
+
+        weight: 4,
+
+        fillColor: colours.A320,
+
+        fillOpacity: 1
+
+    }).addTo(map);
+
+    hub.bindTooltip(
+
+        "<strong>BHX</strong><br>British Midland Hub",
+
+        {
+
+            permanent: true,
+
+            direction: "top",
+
+            offset: [0, -15],
+
+            className: "hub-label"
+
+        }
+
+    );
+
+    L.circle(BHX, {
+
+        radius: 25000,
+
+        color: colours.A320,
+
+        fillColor: colours.A320,
+
+        fillOpacity: 0.08,
+
+        weight: 2
+
+    }).addTo(map);
+
+}
+
+// ======================================================
+// Draw Network
+// ======================================================
+
+function drawRoutes() {
+
+    networkData.destinations.forEach(destination => {
+
+        createAirport(destination);
+
+        createRoute(destination);
+
+    });
+
+}
+// ======================================================
+// Airport Marker
+// ======================================================
+
+function createAirport(destination) {
+
+    const position = [
+
+        destination.lat,
+
+        destination.lon
+
+    ];
+
+    const marker = L.circleMarker(
+
+        position,
+
+        {
+
+            radius: 6,
+
+            color: "#ffffff",
+
+            weight: 1.8,
+
+            fillColor: getAircraftColour(destination),
+
+            fillOpacity: 1
+
+        }
+
+    ).addTo(map);
+
+    marker.on("click", () => {
+
+        const card = document.getElementById(`card-${destination.iata}`);
+
+        if (!card) return;
+
+        card.scrollIntoView({
+
+            behavior: "smooth",
+
+            block: "center"
+
+        });
+
+        document
+
+            .querySelectorAll(".destination-card")
+
+            .forEach(c => c.classList.remove("selected"));
+
+        card.classList.add("selected");
+
+    });
+
+}
+
+// ======================================================
+// Route Line
+// ======================================================
+
+function createRoute(destination) {
+
+    const start = L.latLng(
+
+        BHX[0],
+
+        BHX[1]
+
+    );
+
+    const end = L.latLng(
+
+        destination.lat,
+
+        destination.lon
+
+    );
+
+    const latMid = (start.lat + end.lat) / 2;
+
+    const lngMid = (start.lng + end.lng) / 2;
+
+    const curve = getCurveStrength(destination);
+
+    // -----------------------------------------------
+    // Fan routes out from Birmingham slightly
+    // to prevent nearby destinations overlapping
+    // -----------------------------------------------
+
+    let offset = 0;
+
+    switch (destination.iata) {
+
+        case "AMS":
+            offset = -0.020;
+            break;
+
+        case "BRU":
+            offset = -0.012;
+            break;
+
+        case "CDG":
+            offset = -0.004;
+            break;
+
+        case "DUS":
+            offset = 0.004;
+            break;
+
+        case "FRA":
+            offset = 0.012;
+            break;
+
+        case "MUC":
+            offset = 0.018;
+            break;
+
+        default:
+            offset = 0;
+
+    }
+
+    const control = L.latLng(
+
+        latMid +
+
+            (end.lng - start.lng) * curve +
+
+            offset,
+
+        lngMid -
+
+            (end.lat - start.lat) * curve
+
+    );
+
+    const points = [];
+
+    for (let t = 0; t <= 1; t += 0.025) {
+
+        const lat =
+
+            Math.pow(1 - t, 2) * start.lat +
+
+            2 * (1 - t) * t * control.lat +
+
+            Math.pow(t, 2) * end.lat;
+
+        const lng =
+
+            Math.pow(1 - t, 2) * start.lng +
+
+            2 * (1 - t) * t * control.lng +
+
+            Math.pow(t, 2) * end.lng;
+
+        points.push([lat, lng]);
+
+    }
+
+    L.polyline(points, {
+
+        color: getAircraftColour(destination),
+
+        weight: getRouteWeight(destination),
+
+        opacity: 0.9,
+
+        dashArray: isActive(destination)
+
+            ? null
+
+            : "8 8",
+
+        lineCap: "round",
+
+        lineJoin: "round"
+
+    }).addTo(map);
+
+}
+function getAircraftBadge(aircraft) {
+
+    return aircraft.map(type => {
+
+        let className = "";
+
+        switch (type) {
+
+            case "A319":
+                className = "badge-a319";
+                break;
+
+            case "A320":
+                className = "badge-a320";
+                break;
+
+            case "A321":
+                className = "badge-a321";
+                break;
+
+            case "A350-1000":
+                className = "badge-a350";
+                break;
+
+            default:
+                className = "badge-a320";
+
+        }
+
+        return `<span class="${className}">${type}</span>`;
+
+    }).join(" ");
+
+}
+// ======================================================
+// Destination Information
+// ======================================================
+
+const destinationInfo = {
+        AMS: {
+        flightTime: "1h 20m",
+        description: "A vibrant European capital renowned for its canals, museums and rich history."
+    },
+
+    DUS: {
+        flightTime: "1h 25m",
+        description: "Germany's stylish business city on the Rhine with excellent international connections."
+    },
+
+    FRA: {
+        flightTime: "1h 35m",
+        description: "Europe's financial powerhouse and one of the continent's busiest aviation hubs."
+    },
+
+    CDG: {
+        flightTime: "1h 20m",
+        description: "The gateway to Paris, combining world-famous landmarks with international business."
+    },
+
+    DUB: {
+        flightTime: "1h 00m",
+        description: "A short hop across the Irish Sea to Ireland's welcoming capital."
+    },
+
+    BRU: {
+        flightTime: "1h 15m",
+        description: "The political capital of Europe and an important destination for business travel."
+    },
+
+    CPH: {
+        flightTime: "1h 50m",
+        description: "A modern Scandinavian capital famous for design, culture and waterfront living."
+    },
+
+    ZRH: {
+        flightTime: "1h 45m",
+        description: "Switzerland's financial centre surrounded by stunning Alpine scenery."
+    },
+
+    MAD: {
+        flightTime: "2h 30m",
+        description: "Spain's vibrant capital offering exceptional food, culture and architecture."
+    },
+
+    MXP: {
+        flightTime: "2h 05m",
+        description: "Northern Italy's gateway to fashion, business and the beautiful Italian Lakes."
+    },
+
+    MUC: {
+        flightTime: "1h 45m",
+        description: "Bavaria's capital, combining world-class engineering, culture and Alpine charm."
+    },
+
+    ARN: {
+        flightTime: "2h 20m",
+        description: "Sweden's elegant capital, built across islands and known for Scandinavian design."
+    },
+
+    OSL: {
+        flightTime: "2h 00m",
+        description: "Norway's modern capital and gateway to spectacular fjords."
+    },
+
+    VIE: {
+        flightTime: "2h 15m",
+        description: "Austria's imperial capital, famous for classical music, cafés and history."
+    },
+
+    WAW: {
+        flightTime: "2h 25m",
+        description: "Poland's dynamic capital blending historic architecture with a modern skyline."
+    },
+
+    FCO: {
+        flightTime: "2h 40m",
+        description: "The Eternal City, offering thousands of years of history and Italian culture."
+    },
+
+    LIS: {
+        flightTime: "2h 40m",
+        description: "Portugal's colourful coastal capital overlooking the Atlantic Ocean."
+    },
+
+    ALC: {
+        flightTime: "2h 35m",
+        description: "A popular Mediterranean destination on Spain's Costa Blanca."
+    },
+
+    AGP: {
+        flightTime: "2h 50m",
+        description: "Gateway to Spain's Costa del Sol, renowned for sunshine and beaches."
+    },
+
+    TFS: {
+        flightTime: "4h 30m",
+        description: "The southern gateway to Tenerife and the Canary Islands."
+    },
+
+    LPA: {
+        flightTime: "4h 25m",
+        description: "Gran Canaria's principal airport serving one of Europe's favourite winter destinations."
+    },
+
+    ACE: {
+        flightTime: "4h 10m",
+        description: "Lanzarote's volcanic landscapes make it one of Spain's most unique holiday islands."
+    },
+
+    PRG: {
+        flightTime: "2h 00m",
+        description: "The Czech capital, celebrated for its medieval Old Town and rich history."
+    },
+
+    INN: {
+        flightTime: "2h 10m",
+        description: "An Alpine gateway surrounded by mountains and one of Europe's premier ski destinations."
+    },
+
+    GVA: {
+        flightTime: "1h 50m",
+        description: "An international city on the shores of Lake Geneva, home to diplomacy and finance."
+    },
+
+    JFK: {
+        flightTime: "7h 30m",
+        description: "Our future flagship transatlantic destination connecting Birmingham with New York."
+    },
+
+    MCO: {
+        flightTime: "9h 10m",
+        description: "Florida's home of sunshine, entertainment and world-famous attractions."
+    },
+
+    CUN: {
+        flightTime: "10h 15m",
+        description: "A future Caribbean gateway offering spectacular beaches and luxury resorts."
+    },
+
+    PUJ: {
+        flightTime: "9h 20m",
+        description: "A tropical paradise on the Dominican Republic's eastern coastline."
+    }
+
+};
+
+// ======================================================
+// Destination Cards
+// ======================================================
+
+function buildDestinationCards() {
+
+    const grid = document.getElementById("destination-grid");
+
+    if (!grid) return;
+
+    grid.innerHTML = "";
+
+    networkData.destinations.forEach(destination => {
+
+        const info = destinationInfo[destination.iata];
+
+        const card = document.createElement("div");
+
+        card.className = "destination-card";
+
+        card.id = `card-${destination.iata}`;
+                card.innerHTML = `
+
+            <div class="destination-status ${destination.status}">
+
+                ${destination.status === "active"
+                    ? "ACTIVE"
+                    : "COMING SOON"}
+
+            </div>
+
+            <h3>${destination.city}</h3>
+
+            <p class="airport">
+
+                ${destination.iata} • ${destination.icao}
+
+            </p>
+
+            <p class="destination-description">
+
+                ${info.description}
+
+            </p>
+
+            <div class="destination-info">
+
+                <div>
+
+                    <span>Flight Time</span>
+
+                    <strong>${info.flightTime}</strong>
+
+                </div>
+
+                <div>
+
+                    <span>Aircraft</span>
+
+                    <strong>${getAircraftBadge(destination.aircraft)}</strong>
+
+                </div>
+
+            </div>
+
+        `;
+
+        grid.appendChild(card);
+
+    });
+
+}
+
+// ======================================================
+// Initialise
+// ======================================================
+
+document.addEventListener("DOMContentLoaded", () => {
+
+    loadNetwork();
+
+});
