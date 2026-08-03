@@ -35,8 +35,8 @@ const loginButton =
 const loginMessage =
     document.getElementById("loginMessage");
 
-const emailInput =
-    document.getElementById("email");
+const pilotIdInput =
+    document.getElementById("pilotId");
 
 const passwordInput =
     document.getElementById("password");
@@ -48,11 +48,24 @@ const passwordInput =
 
 function showMessage(message, type = "") {
 
-    loginMessage.textContent = message;
-    loginMessage.className = "login-message";
+    if (!loginMessage) {
+        return;
+    }
+
+
+    loginMessage.textContent =
+        message;
+
+    loginMessage.className =
+        "login-message";
+
 
     if (type) {
-        loginMessage.classList.add(type);
+
+        loginMessage.classList.add(
+            type
+        );
+
     }
 
 }
@@ -64,7 +77,14 @@ function showMessage(message, type = "") {
 
 function setLoading(loading) {
 
-    loginButton.disabled = loading;
+    if (!loginButton) {
+        return;
+    }
+
+
+    loginButton.disabled =
+        loading;
+
 
     loginButton.textContent =
         loading
@@ -75,17 +95,69 @@ function setLoading(loading) {
 
 
 // ------------------------------------------------------------
+// NORMALISE PILOT ID
+// ------------------------------------------------------------
+
+function normalisePilotId(value) {
+
+    return value
+        .trim()
+        .toUpperCase()
+        .replace(/\s+/g, "");
+
+}
+
+
+// ------------------------------------------------------------
+// VALIDATE PILOT ID
+// ------------------------------------------------------------
+
+function isValidPilotId(pilotId) {
+
+    return /^BMA\d{4}$/.test(
+        pilotId
+    );
+
+}
+
+
+// ------------------------------------------------------------
+// CONVERT PILOT ID TO INTERNAL AUTH EMAIL
+// ------------------------------------------------------------
+
+function pilotIdToAuthEmail(pilotId) {
+
+    return (
+        pilotId.toLowerCase() +
+        "@auth.britishmidlandvirtual.internal"
+    );
+
+}
+
+
+// ------------------------------------------------------------
 // VERIFY MANAGEMENT ACCESS
 // ------------------------------------------------------------
 
 async function verifyManagementAccess(userId) {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("management_users")
-            .select("display_name, role, active")
-            .eq("user_id", userId)
-            .eq("active", true)
+            .select(
+                "display_name, role, active"
+            )
+            .eq(
+                "user_id",
+                userId
+            )
+            .eq(
+                "active",
+                true
+            )
             .maybeSingle();
 
 
@@ -114,21 +186,30 @@ async function handleLogin(event) {
 
     event.preventDefault();
 
+
     showMessage("");
+
     setLoading(true);
 
 
-    const email =
-        emailInput.value.trim();
+    const pilotId =
+        normalisePilotId(
+            pilotIdInput.value
+        );
+
 
     const password =
         passwordInput.value;
 
 
-    if (!email || !password) {
+    // --------------------------------------------------------
+    // BASIC VALIDATION
+    // --------------------------------------------------------
+
+    if (!pilotId || !password) {
 
         showMessage(
-            "Please enter your management email and password.",
+            "Please enter your Pilot ID and password.",
             "error"
         );
 
@@ -139,15 +220,65 @@ async function handleLogin(event) {
     }
 
 
+    if (!isValidPilotId(pilotId)) {
+
+        showMessage(
+            "Please enter a valid British Midland Pilot ID, for example BMA0001.",
+            "error"
+        );
+
+        setLoading(false);
+
+        return;
+
+    }
+
+
+    /*
+     * Keep the visible value normalised.
+     *
+     * For example:
+     * bma0001 -> BMA0001
+     */
+
+    pilotIdInput.value =
+        pilotId;
+
+
+    /*
+     * Supabase Auth uses the internal email address.
+     *
+     * The management user never needs to enter or know this.
+     *
+     * Example:
+     *
+     * BMA0001
+     *
+     * becomes:
+     *
+     * bma0001@auth.britishmidlandvirtual.internal
+     */
+
+    const authEmail =
+        pilotIdToAuthEmail(
+            pilotId
+        );
+
+
     try {
 
-        // Authenticate with Supabase
+        // ----------------------------------------------------
+        // AUTHENTICATE USING EXISTING ACARS ACCOUNT
+        // ----------------------------------------------------
 
-        const { data, error } =
+        const {
+            data,
+            error
+        } =
             await supabaseClient
                 .auth
                 .signInWithPassword({
-                    email: email,
+                    email: authEmail,
                     password: password
                 });
 
@@ -159,8 +290,9 @@ async function handleLogin(event) {
                 error.message
             );
 
+
             showMessage(
-                "Email or password is incorrect.",
+                "Pilot ID or password is incorrect.",
                 "error"
             );
 
@@ -181,7 +313,9 @@ async function handleLogin(event) {
         }
 
 
-        // Verify management authorisation
+        // ----------------------------------------------------
+        // VERIFY MANAGEMENT AUTHORISATION
+        // ----------------------------------------------------
 
         const managementUser =
             await verifyManagementAccess(
@@ -191,13 +325,21 @@ async function handleLogin(event) {
 
         if (!managementUser) {
 
+            /*
+             * The Pilot ID and password were valid,
+             * but this pilot does not have active
+             * Management Operations access.
+             *
+             * Destroy the authenticated browser session.
+             */
+
             await supabaseClient
                 .auth
                 .signOut();
 
 
             showMessage(
-                "This account is not authorised for Management Operations.",
+                "This pilot is not authorised for Management Operations.",
                 "error"
             );
 
@@ -206,13 +348,21 @@ async function handleLogin(event) {
         }
 
 
-        // Management access granted
+        // ----------------------------------------------------
+        // MANAGEMENT ACCESS GRANTED
+        // ----------------------------------------------------
 
         console.log(
             "Management authentication successful:",
             {
-                displayName: managementUser.display_name,
-                role: managementUser.role
+                pilotId:
+                    pilotId,
+
+                displayName:
+                    managementUser.display_name,
+
+                role:
+                    managementUser.role
             }
         );
 
@@ -223,7 +373,9 @@ async function handleLogin(event) {
         );
 
 
-        // Redirect to Operations Control dashboard
+        // ----------------------------------------------------
+        // REDIRECT TO OPERATIONS CONTROL
+        // ----------------------------------------------------
 
         window.location.replace(
             "/management/dashboard.html"
@@ -254,6 +406,30 @@ async function handleLogin(event) {
 
 
 // ------------------------------------------------------------
+// PILOT ID INPUT FORMATTING
+// ------------------------------------------------------------
+
+function handlePilotIdInput() {
+
+    if (!pilotIdInput) {
+        return;
+    }
+
+
+    /*
+     * Automatically convert the entered Pilot ID
+     * to uppercase and remove spaces.
+     */
+
+    pilotIdInput.value =
+        pilotIdInput.value
+            .toUpperCase()
+            .replace(/\s+/g, "");
+
+}
+
+
+// ------------------------------------------------------------
 // CHECK FOR EXISTING MANAGEMENT SESSION
 // ------------------------------------------------------------
 
@@ -261,7 +437,10 @@ async function checkExistingSession() {
 
     try {
 
-        const { data, error } =
+        const {
+            data,
+            error
+        } =
             await supabaseClient
                 .auth
                 .getSession();
@@ -290,8 +469,13 @@ async function checkExistingSession() {
             data.session.user;
 
 
-        // A Supabase login alone does not grant management access.
-        // Verify the account against management_users.
+        /*
+         * Having a valid Supabase/ACARS session does NOT
+         * automatically grant Management Portal access.
+         *
+         * The authenticated UUID must also exist as an
+         * active management_users record.
+         */
 
         const managementUser =
             await verifyManagementAccess(
@@ -301,9 +485,20 @@ async function checkExistingSession() {
 
         if (!managementUser) {
 
+            /*
+             * Important:
+             *
+             * The current browser has a valid Supabase
+             * session but the user isn't management.
+             *
+             * Sign the session out before leaving the
+             * Management login page.
+             */
+
             await supabaseClient
                 .auth
                 .signOut();
+
 
             return;
 
@@ -312,12 +507,19 @@ async function checkExistingSession() {
 
         console.log(
             "Existing management session confirmed:",
-            managementUser.display_name
+            {
+                displayName:
+                    managementUser.display_name,
+
+                role:
+                    managementUser.role
+            }
         );
 
 
-        // Already authenticated and authorised.
-        // Go directly to Operations Control.
+        // ----------------------------------------------------
+        // ALREADY AUTHENTICATED AND AUTHORISED
+        // ----------------------------------------------------
 
         window.location.replace(
             "/management/dashboard.html"
@@ -345,6 +547,16 @@ if (loginForm) {
     loginForm.addEventListener(
         "submit",
         handleLogin
+    );
+
+}
+
+
+if (pilotIdInput) {
+
+    pilotIdInput.addEventListener(
+        "input",
+        handlePilotIdInput
     );
 
 }
