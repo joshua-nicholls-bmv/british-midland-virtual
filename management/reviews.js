@@ -5,7 +5,7 @@
 
 
 // ------------------------------------------------------------
-// SUPABASE
+// SUPABASE CONFIGURATION
 // ------------------------------------------------------------
 
 const SUPABASE_URL =
@@ -41,61 +41,38 @@ const managementRole =
 const signOutButton =
     document.getElementById("signOutButton");
 
+const requiresReviewCount =
+    document.getElementById("requiresReviewCount");
 
-const awaitingReview =
-    document.getElementById("awaitingReview");
+const totalPirepCount =
+    document.getElementById("totalPirepCount");
 
-const flaggedPilots =
-    document.getElementById("flaggedPilots");
+const averageScore =
+    document.getElementById("averageScore");
 
-const reviewAverageScore =
-    document.getElementById("reviewAverageScore");
-
-const reviewAverageLanding =
-    document.getElementById("reviewAverageLanding");
-
-
-const sidebarReviewCount =
-    document.getElementById("sidebarReviewCount");
-
-const queueIndicator =
-    document.getElementById("queueIndicator");
-
-const queueStatus =
-    document.getElementById("queueStatus");
-
-const queueStatusDetail =
-    document.getElementById("queueStatusDetail");
-
-
-const reviewSearch =
-    document.getElementById("reviewSearch");
-
-const reviewSort =
-    document.getElementById("reviewSort");
-
-const refreshReviews =
-    document.getElementById("refreshReviews");
-
-const reviewResultCount =
-    document.getElementById("reviewResultCount");
+const reviewRate =
+    document.getElementById("reviewRate");
 
 const reviewQueue =
     document.getElementById("reviewQueue");
 
+const reviewSearch =
+    document.getElementById("reviewSearch");
+
+const reviewError =
+    document.getElementById("reviewError");
+
 
 // ------------------------------------------------------------
-// LOCAL DATA
+// LOCAL STATE
 // ------------------------------------------------------------
 
-let reviewData = [];
-
-let pilotLookup = new Map();
+let reviewFlights = [];
 
 
-// ============================================================
-// NAVIGATION
-// ============================================================
+// ------------------------------------------------------------
+// REDIRECT
+// ------------------------------------------------------------
 
 function redirectToLogin() {
 
@@ -106,9 +83,67 @@ function redirectToLogin() {
 }
 
 
-// ============================================================
-// MANAGEMENT ACCESS
-// ============================================================
+// ------------------------------------------------------------
+// DISPLAY ROLE
+// ------------------------------------------------------------
+
+function formatRole(role) {
+
+    if (!role) {
+        return "MANAGEMENT";
+    }
+
+
+    return role
+        .replace(/_/g, " ")
+        .toUpperCase();
+
+}
+
+
+// ------------------------------------------------------------
+// ERROR HANDLING
+// ------------------------------------------------------------
+
+function showError(message) {
+
+    if (!reviewError) {
+        return;
+    }
+
+
+    reviewError.textContent =
+        message;
+
+
+    reviewError.classList.remove(
+        "hidden"
+    );
+
+}
+
+
+function hideError() {
+
+    if (!reviewError) {
+        return;
+    }
+
+
+    reviewError.textContent =
+        "";
+
+
+    reviewError.classList.add(
+        "hidden"
+    );
+
+}
+
+
+// ------------------------------------------------------------
+// MANAGEMENT AUTHORISATION
+// ------------------------------------------------------------
 
 async function getManagementUser(userId) {
 
@@ -149,9 +184,92 @@ async function getManagementUser(userId) {
 }
 
 
-// ============================================================
-// FORMATTERS
-// ============================================================
+// ------------------------------------------------------------
+// FORMAT FLIGHT TIME
+// ------------------------------------------------------------
+
+function formatMinutes(minutes) {
+
+    const value =
+        Number(minutes) || 0;
+
+
+    const hours =
+        Math.floor(
+            value / 60
+        );
+
+
+    const remaining =
+        value % 60;
+
+
+    return `${hours}h ${remaining}m`;
+
+}
+
+
+// ------------------------------------------------------------
+// FORMAT LANDING RATE
+// ------------------------------------------------------------
+
+function formatLandingRate(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "—";
+
+    }
+
+
+    return `${value} fpm`;
+
+}
+
+
+// ------------------------------------------------------------
+// LANDING CLASS
+// ------------------------------------------------------------
+
+function getLandingClass(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+
+        return "";
+
+    }
+
+
+    const landing =
+        Math.abs(
+            Number(value)
+        );
+
+
+    if (landing >= 500) {
+        return "hard";
+    }
+
+
+    if (landing <= 250) {
+        return "good";
+    }
+
+
+    return "";
+
+}
+
+
+// ------------------------------------------------------------
+// ESCAPE HTML
+// ------------------------------------------------------------
 
 function escapeHtml(value) {
 
@@ -166,139 +284,88 @@ function escapeHtml(value) {
 
 
     return String(value)
-        .replaceAll("&", "&amp;")
-        .replaceAll("<", "&lt;")
-        .replaceAll(">", "&gt;")
-        .replaceAll('"', "&quot;")
-        .replaceAll("'", "&#039;");
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 
 }
 
 
-function formatLanding(value) {
+// ------------------------------------------------------------
+// LOAD ALL PIREPS
+// ------------------------------------------------------------
 
-    if (
-        value === null ||
-        value === undefined
-    ) {
+async function loadPireps() {
 
-        return "—";
+    console.log(
+        "Loading British Midland PIREPs..."
+    );
+
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("pireps")
+            .select(`
+                id,
+                pilot_id,
+                flight_number,
+                departure,
+                arrival,
+                aircraft,
+                registration,
+                block_minutes,
+                landing_rate_fpm,
+                status,
+                submitted_at,
+                flight_score,
+                flight_grade,
+                performance_rating,
+                landing_assessment,
+                score_deduction,
+                requires_review
+            `)
+            .order(
+                "submitted_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Unable to load PIREPs:",
+            error
+        );
+
+
+        throw error;
 
     }
 
 
-    const number =
-        Number(value);
+    console.log(
+        "PIREPs loaded:",
+        data?.length || 0
+    );
 
 
-    if (Number.isNaN(number)) {
-
-        return "—";
-
-    }
-
-
-    return `${number} fpm`;
+    return data || [];
 
 }
 
 
-function formatScore(value) {
+// ------------------------------------------------------------
+// LOAD PILOTS
+// ------------------------------------------------------------
 
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    return String(value);
-
-}
-
-
-function formatDeduction(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    const deduction =
-        Number(value);
-
-
-    if (Number.isNaN(deduction)) {
-
-        return "—";
-
-    }
-
-
-    if (deduction === 0) {
-
-        return "0 pts";
-
-    }
-
-
-    return `${deduction} pts`;
-
-}
-
-
-function formatDate(value) {
-
-    if (!value) {
-
-        return "—";
-
-    }
-
-
-    const date =
-        new Date(value);
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "—";
-
-    }
-
-
-    return new Intl.DateTimeFormat(
-        "en-GB",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false
-        }
-    ).format(date);
-
-}
-
-
-// ============================================================
-// PILOT LOOKUP
-// ============================================================
-
-async function loadPilotLookup() {
+async function loadPilots() {
 
     const {
         data,
@@ -306,455 +373,433 @@ async function loadPilotLookup() {
     } =
         await supabaseClient
             .from("pilots")
-            .select(
-                "id, pilot_id, nickname"
-            );
+            .select(`
+                id,
+                pilot_id,
+                nickname
+            `);
 
 
     if (error) {
 
         console.error(
-            "Unable to load pilots:",
+            "Unable to load pilot records:",
             error
         );
+
 
         throw error;
 
     }
 
 
-    pilotLookup =
+    return data || [];
+
+}
+
+
+// ------------------------------------------------------------
+// BUILD PILOT LOOKUP
+// ------------------------------------------------------------
+
+function buildPilotLookup(pilots) {
+
+    const lookup =
         new Map();
 
 
-    for (
-        const pilot of data || []
-    ) {
+    pilots.forEach(
+        pilot => {
 
-        pilotLookup.set(
-            pilot.id,
-            {
-                pilotId:
-                    pilot.pilot_id ||
-                    "Unknown",
+            lookup.set(
+                pilot.id,
+                pilot
+            );
 
-                nickname:
-                    pilot.nickname?.trim() ||
-                    "Unnamed Pilot"
-            }
-        );
-
-    }
-
-
-    console.log(
-        "Review Centre pilot lookup loaded:",
-        pilotLookup.size
+        }
     );
+
+
+    return lookup;
 
 }
 
 
-function getPilotDetails(
-    pilotUuid
+// ------------------------------------------------------------
+// STATISTICS
+// ------------------------------------------------------------
+
+function updateStatistics(allPireps) {
+
+    const total =
+        allPireps.length;
+
+
+    const reviews =
+        allPireps.filter(
+            pirep =>
+                pirep.requires_review === true
+        );
+
+
+    const scored =
+        allPireps.filter(
+            pirep =>
+                pirep.flight_score !== null &&
+                pirep.flight_score !== undefined
+        );
+
+
+    let average =
+        null;
+
+
+    if (scored.length > 0) {
+
+        const scoreTotal =
+            scored.reduce(
+                (sum, pirep) =>
+                    sum +
+                    Number(
+                        pirep.flight_score
+                    ),
+                0
+            );
+
+
+        average =
+            Math.round(
+                scoreTotal /
+                scored.length
+            );
+
+    }
+
+
+    const rate =
+        total > 0
+            ? (
+                reviews.length /
+                total
+            ) * 100
+            : 0;
+
+
+    requiresReviewCount.textContent =
+        reviews.length;
+
+
+    totalPirepCount.textContent =
+        total;
+
+
+    averageScore.textContent =
+        average !== null
+            ? `${average}%`
+            : "—";
+
+
+    reviewRate.textContent =
+        `${rate.toFixed(1)}%`;
+
+}
+
+
+// ------------------------------------------------------------
+// CREATE REVIEW RECORDS
+// ------------------------------------------------------------
+
+function createReviewRecords(
+    allPireps,
+    pilotLookup
 ) {
 
-    return (
-        pilotLookup.get(
-            pilotUuid
-        ) ||
-        {
-            pilotId:
-                "Unknown",
-
-            nickname:
-                "Unknown Pilot"
-        }
-    );
-
-}
-
-
-// ============================================================
-// LOAD REVIEW QUEUE
-// ============================================================
-
-async function loadReviews() {
-
-    if (refreshReviews) {
-
-        refreshReviews.disabled =
-            true;
-
-
-        refreshReviews.textContent =
-            "REFRESHING...";
-
-    }
-
-
-    if (reviewResultCount) {
-
-        reviewResultCount.textContent =
-            "Loading review queue...";
-
-    }
-
-
-    try {
-
-        const {
-            data,
-            error
-        } =
-            await supabaseClient
-                .from("pireps")
-                .select(`
-                    id,
-                    pilot_id,
-                    flight_number,
-                    departure,
-                    arrival,
-                    aircraft,
-                    registration,
-                    landing_rate_fpm,
-                    go_arounds,
-                    status,
-                    submitted_at,
-                    flight_score,
-                    flight_grade,
-                    performance_rating,
-                    landing_assessment,
-                    score_deduction,
-                    requires_review
-                `)
-                .eq(
-                    "requires_review",
-                    true
-                )
-                .order(
-                    "submitted_at",
-                    {
-                        ascending: false
-                    }
-                );
-
-
-        if (error) {
-
-            console.error(
-                "Unable to load review queue:",
-                error
-            );
-
-            throw error;
-
-        }
-
-
-        reviewData =
-            data || [];
-
-
-        console.log(
-            "Review queue loaded:",
-            reviewData.length
-        );
-
-
-        updateReviewSummary();
-
-        applyReviewFilters();
-
-    }
-    catch (error) {
-
-        console.error(
-            "Review queue failed:",
-            error
-        );
-
-
-        if (reviewQueue) {
-
-            reviewQueue.innerHTML =
-                `
-                <div class="review-empty review-error">
-                    Unable to load the management review queue.
-                </div>
-                `;
-
-        }
-
-
-        if (reviewResultCount) {
-
-            reviewResultCount.textContent =
-                "Unable to load review queue";
-
-        }
-
-    }
-    finally {
-
-        if (refreshReviews) {
-
-            refreshReviews.disabled =
-                false;
-
-
-            refreshReviews.textContent =
-                "REFRESH QUEUE";
-
-        }
-
-    }
-
-}
-
-
-// ============================================================
-// SUMMARY
-// ============================================================
-
-function updateReviewSummary() {
-
-    const count =
-        reviewData.length;
-
-
-    // --------------------------------------------------------
-    // UNIQUE PILOTS
-    // --------------------------------------------------------
-
-    const pilotIds =
-        new Set(
-            reviewData
-                .map(
-                    pirep =>
-                        pirep.pilot_id
-                )
-                .filter(Boolean)
-        );
-
-
-    // --------------------------------------------------------
-    // AVERAGE SCORE
-    // --------------------------------------------------------
-
-    const scores =
-        reviewData
-            .map(
-                pirep =>
-                    pirep.flight_score
-            )
-            .filter(
-                value =>
-                    value !== null &&
-                    value !== undefined &&
-                    !Number.isNaN(
-                        Number(value)
-                    )
-            )
-            .map(Number);
-
-
-    let averageScore =
-        null;
-
-
-    if (scores.length) {
-
-        averageScore =
-            Math.round(
-                scores.reduce(
-                    (total, value) =>
-                        total + value,
-                    0
-                ) /
-                scores.length
-            );
-
-    }
-
-
-    // --------------------------------------------------------
-    // AVERAGE LANDING
-    // --------------------------------------------------------
-
-    const landings =
-        reviewData
-            .map(
-                pirep =>
-                    pirep.landing_rate_fpm
-            )
-            .filter(
-                value =>
-                    value !== null &&
-                    value !== undefined &&
-                    !Number.isNaN(
-                        Number(value)
-                    )
-            )
-            .map(Number);
-
-
-    let averageLanding =
-        null;
-
-
-    if (landings.length) {
-
-        averageLanding =
-            Math.round(
-                landings.reduce(
-                    (total, value) =>
-                        total + value,
-                    0
-                ) /
-                landings.length
-            );
-
-    }
-
-
-    // --------------------------------------------------------
-    // OUTPUT
-    // --------------------------------------------------------
-
-    awaitingReview.textContent =
-        count;
-
-
-    flaggedPilots.textContent =
-        pilotIds.size;
-
-
-    reviewAverageScore.textContent =
-        averageScore === null
-            ? "—"
-            : averageScore;
-
-
-    reviewAverageLanding.textContent =
-        averageLanding === null
-            ? "—"
-            : `${averageLanding} fpm`;
-
-
-    // --------------------------------------------------------
-    // SIDEBAR BADGE
-    // --------------------------------------------------------
-
-    if (count > 0) {
-
-        sidebarReviewCount.textContent =
-            count;
-
-
-        sidebarReviewCount.classList.remove(
-            "hidden"
-        );
-
-    }
-    else {
-
-        sidebarReviewCount.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    // --------------------------------------------------------
-    // QUEUE STATUS
-    // --------------------------------------------------------
-
-    if (count > 0) {
-
-        queueIndicator.className =
-            "queue-indicator attention";
-
-
-        queueStatus.textContent =
-            "ACTION REQUIRED";
-
-
-        queueStatusDetail.textContent =
-            `${count} ${
-                count === 1
-                    ? "PIREP"
-                    : "PIREPs"
-            } AWAITING REVIEW`;
-
-    }
-    else {
-
-        queueIndicator.className =
-            "queue-indicator clear";
-
-
-        queueStatus.textContent =
-            "QUEUE CLEAR";
-
-
-        queueStatusDetail.textContent =
-            "NO REVIEWS OUTSTANDING";
-
-    }
-
-}
-
-
-// ============================================================
-// FILTER / SORT
-// ============================================================
-
-function applyReviewFilters() {
-
-    const search =
-        reviewSearch
-            ? reviewSearch.value
-                .trim()
-                .toLowerCase()
-            : "";
-
-
-    const sort =
-        reviewSort
-            ? reviewSort.value
-            : "newest";
-
-
-    let filtered =
-        reviewData.filter(
+    return allPireps
+        .filter(
+            pirep =>
+                pirep.requires_review === true
+        )
+        .map(
             pirep => {
 
-                if (!search) {
-
-                    return true;
-
-                }
-
-
                 const pilot =
-                    getPilotDetails(
+                    pilotLookup.get(
                         pirep.pilot_id
                     );
 
 
+                return {
+                    ...pirep,
+
+                    pilotNumber:
+                        pilot?.pilot_id ||
+                        "UNKNOWN",
+
+                    pilotName:
+                        pilot?.nickname ||
+                        "Unknown Pilot"
+                };
+
+            }
+        );
+
+}
+
+
+// ------------------------------------------------------------
+// RENDER QUEUE
+// ------------------------------------------------------------
+
+function renderReviewQueue(flights) {
+
+    if (!reviewQueue) {
+        return;
+    }
+
+
+    if (flights.length === 0) {
+
+        reviewQueue.innerHTML = `
+            <div class="review-empty">
+
+                <div class="review-empty-mark"></div>
+
+                <strong>
+                    Review queue clear
+                </strong>
+
+                <span>
+                    No flights currently require management attention.
+                </span>
+
+            </div>
+        `;
+
+
+        return;
+
+    }
+
+
+    reviewQueue.innerHTML =
+        flights
+            .map(
+                flight => {
+
+                    const landingClass =
+                        getLandingClass(
+                            flight.landing_rate_fpm
+                        );
+
+
+                    const aircraft =
+                        flight.registration
+                            ? `${flight.aircraft || "—"} · ${flight.registration}`
+                            : (
+                                flight.aircraft ||
+                                "—"
+                            );
+
+
+                    const score =
+                        flight.flight_score !== null &&
+                        flight.flight_score !== undefined
+                            ? `${flight.flight_score}%`
+                            : "—";
+
+
+                    return `
+                        <div
+                            class="review-row"
+                            data-pirep-id="${escapeHtml(flight.id)}"
+                            tabindex="0"
+                            role="link"
+                        >
+
+                            <div class="review-pilot">
+
+                                <strong>
+                                    ${escapeHtml(flight.pilotName)}
+                                </strong>
+
+                                <span>
+                                    ${escapeHtml(flight.pilotNumber)}
+                                </span>
+
+                            </div>
+
+
+                            <div class="review-flight">
+                                ${escapeHtml(flight.flight_number)}
+                            </div>
+
+
+                            <div class="review-route">
+                                ${escapeHtml(flight.departure)}
+                                →
+                                ${escapeHtml(flight.arrival)}
+                            </div>
+
+
+                            <div class="review-aircraft">
+                                ${escapeHtml(aircraft)}
+                            </div>
+
+
+                            <div class="review-landing ${landingClass}">
+                                ${escapeHtml(
+                                    formatLandingRate(
+                                        flight.landing_rate_fpm
+                                    )
+                                )}
+                            </div>
+
+
+                            <div class="review-score">
+                                ${escapeHtml(score)}
+                            </div>
+
+
+                            <div>
+
+                                <span class="review-status">
+                                    REQUIRES REVIEW
+                                </span>
+
+                            </div>
+
+                        </div>
+                    `;
+
+                }
+            )
+            .join("");
+
+
+    attachReviewRowEvents();
+
+}
+
+
+// ------------------------------------------------------------
+// OPEN FLIGHT REPORT
+// ------------------------------------------------------------
+
+function openFlightReport(pirepId) {
+
+    if (!pirepId) {
+        return;
+    }
+
+
+    /*
+     * Individual flight report page.
+     *
+     * The report receives the PIREP UUID through
+     * the URL query parameter.
+     */
+
+    window.location.href =
+        `/management/report.html?id=${encodeURIComponent(
+            pirepId
+        )}`;
+
+}
+
+
+// ------------------------------------------------------------
+// ROW EVENTS
+// ------------------------------------------------------------
+
+function attachReviewRowEvents() {
+
+    const rows =
+        document.querySelectorAll(
+            ".review-row"
+        );
+
+
+    rows.forEach(
+        row => {
+
+            row.addEventListener(
+                "click",
+                () => {
+
+                    openFlightReport(
+                        row.dataset.pirepId
+                    );
+
+                }
+            );
+
+
+            row.addEventListener(
+                "keydown",
+                event => {
+
+                    if (
+                        event.key === "Enter" ||
+                        event.key === " "
+                    ) {
+
+                        event.preventDefault();
+
+
+                        openFlightReport(
+                            row.dataset.pirepId
+                        );
+
+                    }
+
+                }
+            );
+
+        }
+    );
+
+}
+
+
+// ------------------------------------------------------------
+// FILTER QUEUE
+// ------------------------------------------------------------
+
+function filterReviewQueue() {
+
+    const search =
+        reviewSearch.value
+            .trim()
+            .toLowerCase();
+
+
+    if (!search) {
+
+        renderReviewQueue(
+            reviewFlights
+        );
+
+        return;
+
+    }
+
+
+    const filtered =
+        reviewFlights.filter(
+            flight => {
+
                 const searchable =
                     [
-                        pirep.flight_number,
-                        pirep.departure,
-                        pirep.arrival,
-                        pirep.aircraft,
-                        pirep.registration,
-                        pirep.flight_grade,
-                        pirep.performance_rating,
-                        pirep.landing_assessment,
-                        pilot.pilotId,
-                        pilot.nickname
+                        flight.pilotNumber,
+                        flight.pilotName,
+                        flight.flight_number,
+                        flight.departure,
+                        flight.arrival,
+                        flight.aircraft,
+                        flight.registration,
+                        flight.flight_grade,
+                        flight.performance_rating,
+                        flight.landing_assessment
                     ]
                         .filter(Boolean)
                         .join(" ")
@@ -769,465 +814,106 @@ function applyReviewFilters() {
         );
 
 
-    // --------------------------------------------------------
-    // SORT
-    // --------------------------------------------------------
-
-    filtered =
-        [...filtered];
-
-
-    switch (sort) {
-
-
-        case "oldest":
-
-            filtered.sort(
-                (a, b) =>
-                    new Date(
-                        a.submitted_at || 0
-                    ) -
-                    new Date(
-                        b.submitted_at || 0
-                    )
-            );
-
-            break;
-
-
-        case "score-low":
-
-            filtered.sort(
-                (a, b) => {
-
-                    const aScore =
-                        a.flight_score === null ||
-                        a.flight_score === undefined
-                            ? Infinity
-                            : Number(
-                                a.flight_score
-                            );
-
-
-                    const bScore =
-                        b.flight_score === null ||
-                        b.flight_score === undefined
-                            ? Infinity
-                            : Number(
-                                b.flight_score
-                            );
-
-
-                    return (
-                        aScore -
-                        bScore
-                    );
-
-                }
-            );
-
-            break;
-
-
-        case "landing":
-
-            filtered.sort(
-                (a, b) => {
-
-                    const aLanding =
-                        a.landing_rate_fpm === null ||
-                        a.landing_rate_fpm === undefined
-                            ? Infinity
-                            : Number(
-                                a.landing_rate_fpm
-                            );
-
-
-                    const bLanding =
-                        b.landing_rate_fpm === null ||
-                        b.landing_rate_fpm === undefined
-                            ? Infinity
-                            : Number(
-                                b.landing_rate_fpm
-                            );
-
-
-                    /*
-                     * More negative landing rate first.
-                     */
-
-                    return (
-                        aLanding -
-                        bLanding
-                    );
-
-                }
-            );
-
-            break;
-
-
-        case "newest":
-        default:
-
-            filtered.sort(
-                (a, b) =>
-                    new Date(
-                        b.submitted_at || 0
-                    ) -
-                    new Date(
-                        a.submitted_at || 0
-                    )
-            );
-
-            break;
-
-    }
-
-
     renderReviewQueue(
         filtered
     );
 
-
-    if (reviewResultCount) {
-
-        reviewResultCount.textContent =
-            `${filtered.length} ${
-                filtered.length === 1
-                    ? "PIREP"
-                    : "PIREPs"
-            } awaiting review`;
-
-    }
-
 }
 
 
-// ============================================================
-// ASSESSMENT DISPLAY
-// ============================================================
+// ------------------------------------------------------------
+// LOAD REVIEW CENTRE
+// ------------------------------------------------------------
 
-function getAssessmentText(
-    pirep
-) {
+async function loadReviewCentre() {
 
-    if (
-        pirep.landing_assessment
-    ) {
-
-        return pirep.landing_assessment;
-
-    }
+    hideError();
 
 
-    if (
-        pirep.performance_rating
-    ) {
+    try {
 
-        return pirep.performance_rating;
-
-    }
-
-
-    if (
-        Number(
-            pirep.go_arounds
-        ) > 0
-    ) {
-
-        return `${
-            Number(
-                pirep.go_arounds
-            )
-        } go-around${
-            Number(
-                pirep.go_arounds
-            ) === 1
-                ? ""
-                : "s"
-        } recorded`;
-
-    }
+        const [
+            allPireps,
+            pilots
+        ] =
+            await Promise.all([
+                loadPireps(),
+                loadPilots()
+            ]);
 
 
-    return "Review required";
+        const pilotLookup =
+            buildPilotLookup(
+                pilots
+            );
 
-}
+
+        updateStatistics(
+            allPireps
+        );
 
 
-// ============================================================
-// RENDER QUEUE
-// ============================================================
+        reviewFlights =
+            createReviewRecords(
+                allPireps,
+                pilotLookup
+            );
 
-function renderReviewQueue(rows) {
 
-    if (!reviewQueue) {
+        renderReviewQueue(
+            reviewFlights
+        );
 
-        return;
+
+        console.log(
+            "Review queue loaded:",
+            reviewFlights.length
+        );
 
     }
+    catch (error) {
+
+        console.error(
+            "Review Centre loading failed:",
+            error
+        );
 
 
-    if (!rows.length) {
-
-        reviewQueue.innerHTML =
-            `
+        reviewQueue.innerHTML = `
             <div class="review-empty">
 
-                <div class="queue-clear-mark">
-                    ✓
-                </div>
-
                 <strong>
-                    REVIEW QUEUE CLEAR
+                    Unable to load review queue
                 </strong>
 
                 <span>
-                    No PIREPs currently match the review queue.
+                    Operations Control could not retrieve
+                    the ACARS review data.
                 </span>
 
             </div>
-            `;
+        `;
 
-        return;
+
+        showError(
+            "Unable to retrieve Review Centre data from ACARS."
+        );
 
     }
-
-
-    reviewQueue.innerHTML =
-        rows
-            .map(
-                pirep => {
-
-                    const pilot =
-                        getPilotDetails(
-                            pirep.pilot_id
-                        );
-
-
-                    const route =
-                        `${pirep.departure || "—"} → ${pirep.arrival || "—"}`;
-
-
-                    const assessment =
-                        getAssessmentText(
-                            pirep
-                        );
-
-
-                    return `
-                        <div
-                            class="review-row"
-                            data-pirep="${escapeHtml(
-                                pirep.id
-                            )}"
-                        >
-
-                            <span class="review-flight">
-
-                                <strong>
-                                    ${escapeHtml(
-                                        pirep.flight_number ||
-                                        "—"
-                                    )}
-                                </strong>
-
-                                <small>
-                                    ${escapeHtml(
-                                        pirep.flight_grade
-                                            ? `GRADE ${pirep.flight_grade}`
-                                            : "FLAGGED"
-                                    )}
-                                </small>
-
-                            </span>
-
-
-                            <span class="review-pilot">
-
-                                <strong>
-                                    ${escapeHtml(
-                                        pilot.pilotId
-                                    )}
-                                </strong>
-
-                                <small>
-                                    ${escapeHtml(
-                                        pilot.nickname
-                                    )}
-                                </small>
-
-                            </span>
-
-
-                            <span class="review-route">
-                                ${escapeHtml(route)}
-                            </span>
-
-
-                            <span class="review-score">
-                                ${escapeHtml(
-                                    formatScore(
-                                        pirep.flight_score
-                                    )
-                                )}
-                            </span>
-
-
-                            <span class="review-landing">
-                                ${escapeHtml(
-                                    formatLanding(
-                                        pirep.landing_rate_fpm
-                                    )
-                                )}
-                            </span>
-
-
-                            <span class="review-deduction">
-                                ${escapeHtml(
-                                    formatDeduction(
-                                        pirep.score_deduction
-                                    )
-                                )}
-                            </span>
-
-
-                            <span class="review-assessment">
-
-                                <strong>
-                                    ${escapeHtml(
-                                        assessment
-                                    )}
-                                </strong>
-
-                                <small>
-                                    ${escapeHtml(
-                                        pirep.performance_rating ||
-                                        "ACARS FLAG"
-                                    )}
-                                </small>
-
-                            </span>
-
-
-                            <span class="review-date">
-                                ${escapeHtml(
-                                    formatDate(
-                                        pirep.submitted_at
-                                    )
-                                )}
-                            </span>
-
-
-                            <span>
-
-                                <button
-                                    class="open-review-button"
-                                    type="button"
-                                    data-pirep="${escapeHtml(
-                                        pirep.id
-                                    )}"
-                                >
-                                    REVIEW
-                                </button>
-
-                            </span>
-
-                        </div>
-                    `;
-
-                }
-            )
-            .join("");
-
-
-    // --------------------------------------------------------
-    // REVIEW BUTTONS
-    // --------------------------------------------------------
-
-    document
-        .querySelectorAll(
-            ".open-review-button"
-        )
-        .forEach(
-            button => {
-
-                button.addEventListener(
-                    "click",
-                    event => {
-
-                        event.stopPropagation();
-
-
-                        openPirep(
-                            button.dataset.pirep
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-    // --------------------------------------------------------
-    // CLICKABLE ROWS
-    // --------------------------------------------------------
-
-    document
-        .querySelectorAll(
-            ".review-row"
-        )
-        .forEach(
-            row => {
-
-                row.addEventListener(
-                    "click",
-                    () => {
-
-                        openPirep(
-                            row.dataset.pirep
-                        );
-
-                    }
-                );
-
-            }
-        );
 
 }
 
 
-// ============================================================
-// OPEN PIREP
-// ============================================================
+// ------------------------------------------------------------
+// INITIALISE PAGE
+// ------------------------------------------------------------
 
-function openPirep(id) {
-
-    if (!id) {
-
-        return;
-
-    }
-
-
-    window.location.href =
-        `/management/pirep.html?id=${encodeURIComponent(id)}`;
-
-}
-
-
-// ============================================================
-// INITIALISE
-// ============================================================
-
-async function initialiseReviewCentre() {
+async function initialiseReviews() {
 
     try {
 
         // ----------------------------------------------------
-        // AUTH SESSION
+        // CHECK SUPABASE SESSION
         // ----------------------------------------------------
 
         const {
@@ -1251,13 +937,17 @@ async function initialiseReviewCentre() {
         }
 
 
+        const user =
+            sessionData.session.user;
+
+
         // ----------------------------------------------------
-        // MANAGEMENT AUTHORISATION
+        // VERIFY MANAGEMENT ACCESS
         // ----------------------------------------------------
 
         const manager =
             await getManagementUser(
-                sessionData.session.user.id
+                user.id
             );
 
 
@@ -1275,14 +965,6 @@ async function initialiseReviewCentre() {
         }
 
 
-        managementName.textContent =
-            manager.display_name;
-
-
-        managementRole.textContent =
-            manager.role;
-
-
         console.log(
             "Review Centre access granted:",
             {
@@ -1296,16 +978,21 @@ async function initialiseReviewCentre() {
 
 
         // ----------------------------------------------------
-        // DATA
+        // MANAGEMENT DISPLAY
         // ----------------------------------------------------
 
-        await loadPilotLookup();
+        managementName.textContent =
+            manager.display_name;
 
-        await loadReviews();
+
+        managementRole.textContent =
+            formatRole(
+                manager.role
+            );
 
 
         // ----------------------------------------------------
-        // REVEAL
+        // REVEAL APPLICATION
         // ----------------------------------------------------
 
         authGate.classList.add(
@@ -1317,6 +1004,13 @@ async function initialiseReviewCentre() {
             "hidden"
         );
 
+
+        // ----------------------------------------------------
+        // LOAD REVIEW DATA
+        // ----------------------------------------------------
+
+        await loadReviewCentre();
+
     }
     catch (error) {
 
@@ -1326,43 +1020,18 @@ async function initialiseReviewCentre() {
         );
 
 
-        if (authGate) {
-
-            authGate.classList.add(
-                "hidden"
-            );
-
-        }
-
-
-        if (dashboardApp) {
-
-            dashboardApp.classList.remove(
-                "hidden"
-            );
-
-        }
-
-
-        if (reviewQueue) {
-
-            reviewQueue.innerHTML =
-                `
-                <div class="review-empty review-error">
-                    Unable to initialise the Review Centre.
-                </div>
-                `;
-
-        }
+        showError(
+            "Operations Control could not initialise the Review Centre."
+        );
 
     }
 
 }
 
 
-// ============================================================
+// ------------------------------------------------------------
 // SIGN OUT
-// ============================================================
+// ------------------------------------------------------------
 
 async function signOut() {
 
@@ -1390,35 +1059,15 @@ async function signOut() {
 }
 
 
-// ============================================================
-// EVENTS
-// ============================================================
+// ------------------------------------------------------------
+// EVENT LISTENERS
+// ------------------------------------------------------------
 
 if (reviewSearch) {
 
     reviewSearch.addEventListener(
         "input",
-        applyReviewFilters
-    );
-
-}
-
-
-if (reviewSort) {
-
-    reviewSort.addEventListener(
-        "change",
-        applyReviewFilters
-    );
-
-}
-
-
-if (refreshReviews) {
-
-    refreshReviews.addEventListener(
-        "click",
-        loadReviews
+        filterReviewQueue
     );
 
 }
@@ -1437,9 +1086,7 @@ if (signOutButton) {
 supabaseClient.auth.onAuthStateChange(
     event => {
 
-        if (
-            event === "SIGNED_OUT"
-        ) {
+        if (event === "SIGNED_OUT") {
 
             redirectToLogin();
 
@@ -1449,8 +1096,8 @@ supabaseClient.auth.onAuthStateChange(
 );
 
 
-// ============================================================
-// START
-// ============================================================
+// ------------------------------------------------------------
+// START REVIEW CENTRE
+// ------------------------------------------------------------
 
-initialiseReviewCentre();
+initialiseReviews();
