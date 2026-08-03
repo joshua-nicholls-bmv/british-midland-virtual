@@ -1,0 +1,826 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Flight Report | British Midland Virtual
+    </title>
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/management/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/management/pirep.css?v=1"
+    >
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         AUTHENTICATION
+         ===================================================== -->
+
+    <div
+        id="authGate"
+        class="auth-gate"
+    >
+
+        <div class="auth-gate-inner">
+
+            <div class="auth-mark">
+                BM
+            </div>
+
+            <span>
+                OPERATIONS CONTROL
+            </span>
+
+            <small>
+                AUTHENTICATING MANAGEMENT SESSION
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         APPLICATION
+         ===================================================== -->
+
+    <div
+        id="dashboardApp"
+        class="app hidden"
+    >
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="sidebar">
+
+            <div>
+
+                <div class="sidebar-brand">
+
+                    <div class="brand-mark">
+                        BM
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            BRITISH MIDLAND
+                        </strong>
+
+                        <span>
+                            OPERATIONS CONTROL
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <nav class="navigation">
+
+                    <a
+                        href="/management/dashboard.html"
+                        class="nav-item"
+                    >
+                        <span class="nav-symbol">▦</span>
+                        Dashboard
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="nav-item disabled"
+                    >
+                        <span class="nav-symbol">◉</span>
+                        Live Operations
+                        <small>SOON</small>
+                    </a>
+
+
+                    <a
+                        href="/management/pireps.html"
+                        class="nav-item active"
+                    >
+                        <span class="nav-symbol">✈</span>
+                        PIREPs
+                    </a>
+
+
+                    <a
+                        href="/management/pilots.html"
+                        class="nav-item"
+                    >
+                        <span class="nav-symbol">◎</span>
+                        Pilots
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="nav-item disabled"
+                    >
+                        <span class="nav-symbol">!</span>
+                        Reviews
+                        <small>SOON</small>
+                    </a>
+
+                </nav>
+
+            </div>
+
+
+            <div class="sidebar-footer">
+
+                <span>
+                    BMV OPERATIONS
+                </span>
+
+                <span>
+                    MANAGEMENT SYSTEM
+                </span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN
+             ================================================= -->
+
+        <main class="main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <span class="section-label">
+                        MANAGEMENT PORTAL
+                    </span>
+
+                    <h1>
+                        Flight Report
+                    </h1>
+
+                </div>
+
+
+                <div class="user-area">
+
+                    <div class="user-copy">
+
+                        <strong id="managementName">
+                            —
+                        </strong>
+
+                        <span id="managementRole">
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        id="signOutButton"
+                        type="button"
+                    >
+                        SIGN OUT
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- BACK -->
+
+            <div class="report-toolbar">
+
+                <a
+                    href="/management/pireps.html"
+                    class="back-button"
+                >
+                    ← BACK TO PIREP CENTRE
+                </a>
+
+                <span id="reportReference">
+                    PIREP —
+                </span>
+
+            </div>
+
+
+            <!-- =================================================
+                 FLIGHT HEADER
+                 ================================================= -->
+
+            <section class="flight-hero">
+
+                <div>
+
+                    <span class="eyebrow">
+                        ACARS FLIGHT REPORT
+                    </span>
+
+
+                    <div class="flight-title">
+
+                        <h2 id="flightNumber">
+                            Loading...
+                        </h2>
+
+                        <span
+                            id="flightStatus"
+                            class="flight-status"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <div class="route-display">
+
+                        <div>
+
+                            <span>
+                                DEPARTURE
+                            </span>
+
+                            <strong id="departure">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <span class="route-arrow">
+                            →
+                        </span>
+
+
+                        <div>
+
+                            <span>
+                                ARRIVAL
+                            </span>
+
+                            <strong id="arrival">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div
+                    id="reviewIndicator"
+                    class="review-indicator clear"
+                >
+
+                    <span class="review-dot"></span>
+
+                    <div>
+
+                        <strong id="reviewTitle">
+                            RECORD CLEAR
+                        </strong>
+
+                        <small id="reviewSubtitle">
+                            NO REVIEW REQUIRED
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 PRIMARY STATISTICS
+                 ================================================= -->
+
+            <section class="stats-grid report-stats-grid">
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        PILOT
+                    </span>
+
+                    <strong id="pilotNumber">
+                        —
+                    </strong>
+
+                    <small id="pilotName">
+                        —
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        BLOCK TIME
+                    </span>
+
+                    <strong id="blockTime">
+                        —
+                    </strong>
+
+                    <small>
+                        Off blocks to stand
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        LANDING RATE
+                    </span>
+
+                    <strong id="landingRate">
+                        —
+                    </strong>
+
+                    <small id="landingAssessment">
+                        —
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card score-card">
+
+                    <span class="stat-label">
+                        FLIGHT SCORE
+                    </span>
+
+                    <strong id="flightScore">
+                        —
+                    </strong>
+
+                    <small id="flightGrade">
+                        —
+                    </small>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 AIRCRAFT / PERFORMANCE
+                 ================================================= -->
+
+            <section class="report-grid">
+
+
+                <article class="panel report-panel">
+
+                    <div class="report-panel-heading">
+
+                        <span class="panel-kicker">
+                            AIRCRAFT
+                        </span>
+
+                        <h3>
+                            Flight Information
+                        </h3>
+
+                    </div>
+
+
+                    <div class="report-data-grid">
+
+
+                        <div class="report-data">
+
+                            <span>
+                                AIRCRAFT
+                            </span>
+
+                            <strong id="aircraft">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-data">
+
+                            <span>
+                                REGISTRATION
+                            </span>
+
+                            <strong id="registration">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-data">
+
+                            <span>
+                                AIRBORNE TIME
+                            </span>
+
+                            <strong id="airborneTime">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-data">
+
+                            <span>
+                                FUEL USED
+                            </span>
+
+                            <strong id="fuelUsed">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-data">
+
+                            <span>
+                                MAX ALTITUDE
+                            </span>
+
+                            <strong id="maxAltitude">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="report-data">
+
+                            <span>
+                                MAX GROUND SPEED
+                            </span>
+
+                            <strong id="maxGroundSpeed">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+                <article class="panel report-panel">
+
+                    <div class="report-panel-heading">
+
+                        <span class="panel-kicker">
+                            PERFORMANCE
+                        </span>
+
+                        <h3>
+                            Flight Assessment
+                        </h3>
+
+                    </div>
+
+
+                    <div class="assessment-content">
+
+
+                        <div class="assessment-item">
+
+                            <span>
+                                PERFORMANCE RATING
+                            </span>
+
+                            <strong id="performanceRating">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="assessment-item">
+
+                            <span>
+                                LANDING ASSESSMENT
+                            </span>
+
+                            <strong id="assessmentDetail">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="assessment-item">
+
+                            <span>
+                                SCORE DEDUCTION
+                            </span>
+
+                            <strong id="scoreDeduction">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div class="assessment-item">
+
+                            <span>
+                                GO-AROUNDS
+                            </span>
+
+                            <strong id="goArounds">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                    </div>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 FLIGHT TIMELINE
+                 ================================================= -->
+
+            <section class="panel timeline-panel">
+
+                <div class="report-panel-heading">
+
+                    <span class="panel-kicker">
+                        ACARS TIMELINE
+                    </span>
+
+                    <h3>
+                        Flight Sequence
+                    </h3>
+
+                </div>
+
+
+                <div class="flight-timeline">
+
+
+                    <div class="timeline-event">
+
+                        <span class="timeline-point"></span>
+
+                        <div>
+
+                            <span>
+                                OFF BLOCKS
+                            </span>
+
+                            <strong id="offBlocks">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-line"></div>
+
+
+                    <div class="timeline-event">
+
+                        <span class="timeline-point"></span>
+
+                        <div>
+
+                            <span>
+                                TAKEOFF
+                            </span>
+
+                            <strong id="takeoff">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-line"></div>
+
+
+                    <div class="timeline-event">
+
+                        <span class="timeline-point"></span>
+
+                        <div>
+
+                            <span>
+                                LANDING
+                            </span>
+
+                            <strong id="landing">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="timeline-line"></div>
+
+
+                    <div class="timeline-event">
+
+                        <span class="timeline-point"></span>
+
+                        <div>
+
+                            <span>
+                                ON STAND
+                            </span>
+
+                            <strong id="stand">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 EVENT COUNTERS
+                 ================================================= -->
+
+            <section class="movement-grid">
+
+
+                <article>
+
+                    <span>
+                        TAKEOFFS
+                    </span>
+
+                    <strong id="takeoffs">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        LANDINGS
+                    </span>
+
+                    <strong id="landings">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        GO-AROUNDS
+                    </span>
+
+                    <strong id="movementGoArounds">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article>
+
+                    <span>
+                        SUBMITTED
+                    </span>
+
+                    <strong id="submittedAt">
+                        —
+                    </strong>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- ERROR -->
+
+            <div
+                id="reportError"
+                class="report-error hidden"
+            ></div>
+
+
+            <!-- FOOTER -->
+
+            <footer class="page-footer">
+
+                <span>
+                    BRITISH MIDLAND VIRTUAL
+                </span>
+
+                <span>
+                    OPERATIONS CONTROL • ACARS FLIGHT REPORT
+                </span>
+
+            </footer>
+
+
+        </main>
+
+
+    </div>
+
+
+    <script
+        src="/management/pirep.js?v=1"
+    ></script>
+
+
+</body>
+
+</html>
