@@ -48,19 +48,11 @@ const passwordInput =
 
 function showMessage(message, type = "") {
 
-    loginMessage.textContent =
-        message;
-
-    loginMessage.className =
-        "login-message";
-
+    loginMessage.textContent = message;
+    loginMessage.className = "login-message";
 
     if (type) {
-
-        loginMessage.classList.add(
-            type
-        );
-
+        loginMessage.classList.add(type);
     }
 
 }
@@ -72,9 +64,7 @@ function showMessage(message, type = "") {
 
 function setLoading(loading) {
 
-    loginButton.disabled =
-        loading;
-
+    loginButton.disabled = loading;
 
     loginButton.textContent =
         loading
@@ -90,23 +80,12 @@ function setLoading(loading) {
 
 async function verifyManagementAccess(userId) {
 
-    const {
-        data,
-        error
-    } =
+    const { data, error } =
         await supabaseClient
             .from("management_users")
-            .select(
-                "display_name, role, active"
-            )
-            .eq(
-                "user_id",
-                userId
-            )
-            .eq(
-                "active",
-                true
-            )
+            .select("display_name, role, active")
+            .eq("user_id", userId)
+            .eq("active", true)
             .maybeSingle();
 
 
@@ -135,15 +114,12 @@ async function handleLogin(event) {
 
     event.preventDefault();
 
-
     showMessage("");
-
     setLoading(true);
 
 
     const email =
         emailInput.value.trim();
-
 
     const password =
         passwordInput.value;
@@ -165,14 +141,9 @@ async function handleLogin(event) {
 
     try {
 
-        // ----------------------------------------------------
-        // AUTHENTICATE WITH SUPABASE
-        // ----------------------------------------------------
+        // Authenticate with Supabase
 
-        const {
-            data,
-            error
-        } =
+        const { data, error } =
             await supabaseClient
                 .auth
                 .signInWithPassword({
@@ -187,7 +158,6 @@ async function handleLogin(event) {
                 "Authentication failed:",
                 error.message
             );
-
 
             showMessage(
                 "Email or password is incorrect.",
@@ -211,9 +181,7 @@ async function handleLogin(event) {
         }
 
 
-        // ----------------------------------------------------
-        // VERIFY THAT THE AUTHENTICATED USER IS MANAGEMENT
-        // ----------------------------------------------------
+        // Verify management authorisation
 
         const managementUser =
             await verifyManagementAccess(
@@ -222,13 +190,6 @@ async function handleLogin(event) {
 
 
         if (!managementUser) {
-
-            /*
-             * The Supabase account exists but it is not
-             * authorised in management_users.
-             *
-             * Immediately destroy the authenticated session.
-             */
 
             await supabaseClient
                 .auth
@@ -245,9 +206,16 @@ async function handleLogin(event) {
         }
 
 
-        // ----------------------------------------------------
-        // MANAGEMENT ACCESS GRANTED
-        // ----------------------------------------------------
+        // Management access granted
+
+        console.log(
+            "Management authentication successful:",
+            {
+                displayName: managementUser.display_name,
+                role: managementUser.role
+            }
+        );
+
 
         showMessage(
             `Access granted. Welcome, ${managementUser.display_name}.`,
@@ -255,25 +223,13 @@ async function handleLogin(event) {
         );
 
 
-        console.log(
-            "Management authentication successful:",
-            {
-                displayName:
-                    managementUser.display_name,
+        // Redirect to Operations Control dashboard
 
-                role:
-                    managementUser.role
-            }
+        window.location.replace(
+            "/management/dashboard.html"
         );
 
-
-        // ----------------------------------------------------
-        // REDIRECT TO OPERATIONS CONTROL
-        // ----------------------------------------------------
-
-  window.location.replace(
-    "/management/dashboard.html"
-);
+    }
     catch (error) {
 
         console.error(
@@ -298,17 +254,14 @@ async function handleLogin(event) {
 
 
 // ------------------------------------------------------------
-// EXISTING SESSION CHECK
+// CHECK FOR EXISTING MANAGEMENT SESSION
 // ------------------------------------------------------------
 
 async function checkExistingSession() {
 
     try {
 
-        const {
-            data,
-            error
-        } =
+        const { data, error } =
             await supabaseClient
                 .auth
                 .getSession();
@@ -337,6 +290,9 @@ async function checkExistingSession() {
             data.session.user;
 
 
+        // A Supabase login alone does not grant management access.
+        // Verify the account against management_users.
+
         const managementUser =
             await verifyManagementAccess(
                 user.id
@@ -345,31 +301,28 @@ async function checkExistingSession() {
 
         if (!managementUser) {
 
-            /*
-             * A Supabase session exists but the account
-             * is no longer authorised for management.
-             */
-
             await supabaseClient
                 .auth
                 .signOut();
-
 
             return;
 
         }
 
 
-        /*
-         * User is already authenticated AND remains an
-         * active management user.
-         *
-         * Send them directly to Operations Control.
-         */
+        console.log(
+            "Existing management session confirmed:",
+            managementUser.display_name
+        );
 
-    window.location.replace(
-    "/management/dashboard.html"
-);
+
+        // Already authenticated and authorised.
+        // Go directly to Operations Control.
+
+        window.location.replace(
+            "/management/dashboard.html"
+        );
+
     }
     catch (error) {
 
@@ -387,14 +340,18 @@ async function checkExistingSession() {
 // EVENT LISTENERS
 // ------------------------------------------------------------
 
-loginForm.addEventListener(
-    "submit",
-    handleLogin
-);
+if (loginForm) {
+
+    loginForm.addEventListener(
+        "submit",
+        handleLogin
+    );
+
+}
 
 
 // ------------------------------------------------------------
-// INITIALISE LOGIN PAGE
+// INITIALISE MANAGEMENT LOGIN
 // ------------------------------------------------------------
 
 checkExistingSession();
