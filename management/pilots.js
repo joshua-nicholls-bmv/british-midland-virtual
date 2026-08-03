@@ -1,6 +1,6 @@
 // ============================================================
 // BRITISH MIDLAND VIRTUAL
-// OPERATIONS CONTROL - PILOT MANAGEMENT
+// OPERATIONS CONTROL - INDIVIDUAL PILOT RECORD
 // ============================================================
 
 
@@ -29,9 +29,6 @@ const supabaseClient =
 const authGate =
     document.getElementById("authGate");
 
-const pilotsApp =
-    document.getElementById("pilotsApp");
-
 const dashboardApp =
     document.getElementById("dashboardApp");
 
@@ -44,37 +41,81 @@ const managementRole =
 const signOutButton =
     document.getElementById("signOutButton");
 
-const pilotSearch =
-    document.getElementById("pilotSearch");
 
-const pilotRoster =
-    document.getElementById("pilotRoster");
+// Pilot identity
+
+const pilotName =
+    document.getElementById("pilotName");
+
+const pilotNumber =
+    document.getElementById("pilotNumber");
+
+const pilotStatus =
+    document.getElementById("pilotStatus");
+
+const pilotRole =
+    document.getElementById("pilotRole");
+
+const pilotJoined =
+    document.getElementById("pilotJoined");
+
+const pilotLastFlight =
+    document.getElementById("pilotLastFlight");
 
 
-// Summary cards
+// Main statistics
 
-const activePilotCount =
-    document.getElementById("activePilotCount");
+const pilotFlights =
+    document.getElementById("pilotFlights");
 
-const flyingPilotCount =
-    document.getElementById("flyingPilotCount");
+const pilotFlightTime =
+    document.getElementById("pilotFlightTime");
 
-const totalFlightCount =
-    document.getElementById("totalFlightCount");
+const pilotAverageLanding =
+    document.getElementById("pilotAverageLanding");
 
-const totalFlightTime =
-    document.getElementById("totalFlightTime");
+const pilotBestLanding =
+    document.getElementById("pilotBestLanding");
 
 
-// ------------------------------------------------------------
-// LOCAL DATA
-// ------------------------------------------------------------
+// Career record
 
-let pilotData = [];
+const pilotLandings =
+    document.getElementById("pilotLandings");
+
+const pilotGoArounds =
+    document.getElementById("pilotGoArounds");
+
+const pilotReviewFlights =
+    document.getElementById("pilotReviewFlights");
+
+const pilotLatestScore =
+    document.getElementById("pilotLatestScore");
+
+
+// Account summary
+
+const accountPilotNumber =
+    document.getElementById("accountPilotNumber");
+
+const accountPilotName =
+    document.getElementById("accountPilotName");
+
+const accountPilotStatus =
+    document.getElementById("accountPilotStatus");
+
+
+// History
+
+const historyCount =
+    document.getElementById("historyCount");
+
+const flightHistory =
+    document.getElementById("flightHistory");
 
 
 // ============================================================
-// REDIRECT TO LOGIN
+// HELPERS
 // ============================================================
 
 function redirectToLogin() {
@@ -86,52 +127,14 @@ function redirectToLogin() {
 }
 
 
-// ============================================================
-// MANAGEMENT VERIFICATION
-// ============================================================
+function redirectToPilots() {
 
-async function getManagementUser(userId) {
-
-    const {
-        data,
-        error
-    } =
-        await supabaseClient
-            .from("management_users")
-            .select(
-                "display_name, role, active"
-            )
-            .eq(
-                "user_id",
-                userId
-            )
-            .eq(
-                "active",
-                true
-            )
-            .maybeSingle();
-
-
-    if (error) {
-
-        console.error(
-            "Management verification failed:",
-            error
-        );
-
-        return null;
-
-    }
-
-
-    return data;
+    window.location.replace(
+        "/management/pilots.html"
+    );
 
 }
 
-
-// ============================================================
-// FORMATTERS
-// ============================================================
 
 function escapeHtml(value) {
 
@@ -208,7 +211,7 @@ function formatDate(value) {
 
     if (!value) {
 
-        return "No flights yet";
+        return "—";
 
     }
 
@@ -246,14 +249,99 @@ function getPilotName(pilot) {
         pilot.nickname?.trim();
 
 
-    if (!nickname) {
+    return nickname ||
+        "Unnamed Pilot";
 
-        return "Unnamed Pilot";
+}
+
+
+function formatAircraft(
+    aircraft,
+    registration
+) {
+
+    const aircraftText =
+        aircraft || "—";
+
+
+    if (!registration) {
+
+        return aircraftText;
 
     }
 
 
-    return nickname;
+    return `${aircraftText} · ${registration}`;
+
+}
+
+
+function formatScore(
+    score,
+    grade
+) {
+
+    if (
+        score === null ||
+        score === undefined
+    ) {
+
+        return grade || "—";
+
+    }
+
+
+    if (grade) {
+
+        return `${score} ${grade}`;
+
+    }
+
+
+    return String(score);
+
+}
+
+
+// ============================================================
+// MANAGEMENT VERIFICATION
+// ============================================================
+
+async function getManagementUser(userId) {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("management_users")
+            .select(
+                "display_name, role, active"
+            )
+            .eq(
+                "user_id",
+                userId
+            )
+            .eq(
+                "active",
+                true
+            )
+            .maybeSingle();
+
+
+    if (error) {
+
+        console.error(
+            "Management verification failed:",
+            error
+        );
+
+        return null;
+
+    }
+
+
+    return data;
 
 }
 
@@ -262,12 +350,9 @@ function getPilotName(pilot) {
 // LOAD PILOT STATISTICS
 // ============================================================
 
-async function loadPilots() {
-
-    console.log(
-        "Loading British Midland pilot statistics..."
-    );
-
+async function loadPilotStatistics(
+    requestedPilotId
+) {
 
     const {
         data,
@@ -282,8 +367,6 @@ async function loadPilots() {
                 status,
                 joined_at,
                 total_minutes,
-                total_hours,
-                remaining_minutes,
                 total_flights,
                 total_landings,
                 total_go_arounds,
@@ -291,12 +374,11 @@ async function loadPilots() {
                 best_landing_rate_fpm,
                 last_flight_at
             `)
-            .order(
+            .eq(
                 "pilot_id",
-                {
-                    ascending: true
-                }
-            );
+                requestedPilotId
+            )
+            .maybeSingle();
 
 
     if (error) {
@@ -311,146 +393,268 @@ async function loadPilots() {
     }
 
 
-    pilotData =
-        data || [];
-
-
-    console.log(
-        "Pilot statistics loaded:",
-        pilotData.length
-    );
-
-
-    updateSummaryCards();
-
-    renderPilotRoster(
-        pilotData
-    );
+    return data;
 
 }
 
 
 // ============================================================
-// SUMMARY CARDS
+// RESOLVE INTERNAL PILOT UUID
 // ============================================================
 
-function updateSummaryCards() {
+async function getPilotDatabaseRecord(
+    requestedPilotId
+) {
 
-    const activePilots =
-        pilotData.filter(
-            pilot =>
-                String(
-                    pilot.status || ""
-                ).toLowerCase() === "active"
-        );
-
-
-    const flyingPilots =
-        pilotData.filter(
-            pilot =>
-                (
-                    Number(
-                        pilot.total_flights
-                    ) || 0
-                ) > 0
-        );
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("pilots")
+            .select(
+                "id, pilot_id, nickname, role, status"
+            )
+            .eq(
+                "pilot_id",
+                requestedPilotId
+            )
+            .maybeSingle();
 
 
-    const totalFlights =
-        pilotData.reduce(
-            (total, pilot) => {
-
-                return (
-                    total +
-                    (
-                        Number(
-                            pilot.total_flights
-                        ) || 0
-                    )
-                );
-
-            },
-            0
-        );
-
-
-    const totalMinutes =
-        pilotData.reduce(
-            (total, pilot) => {
-
-                return (
-                    total +
-                    (
-                        Number(
-                            pilot.total_minutes
-                        ) || 0
-                    )
-                );
-
-            },
-            0
-        );
-
-
-    if (activePilotCount) {
-
-        activePilotCount.textContent =
-            activePilots.length;
-
-    }
-
-
-    if (flyingPilotCount) {
-
-        flyingPilotCount.textContent =
-            flyingPilots.length;
-
-    }
-
-
-    if (totalFlightCount) {
-
-        totalFlightCount.textContent =
-            totalFlights;
-
-    }
-
-
-    if (totalFlightTime) {
-
-        totalFlightTime.textContent =
-            formatFlightTime(
-                totalMinutes
-            );
-
-    }
-
-}
-
-
-// ============================================================
-// PILOT ROSTER
-// ============================================================
-
-function renderPilotRoster(pilots) {
-
-    if (!pilotRoster) {
+    if (error) {
 
         console.error(
-            "pilotRoster element was not found."
+            "Unable to resolve pilot database record:",
+            error
         );
 
-        return;
+        throw error;
 
     }
 
 
-    if (!pilots.length) {
+    return data;
 
-        pilotRoster.innerHTML =
+}
+
+
+// ============================================================
+// LOAD PILOT PIREPS
+// ============================================================
+
+async function loadPilotPireps(
+    pilotUuid
+) {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("pireps")
+            .select(`
+                id,
+                flight_number,
+                departure,
+                arrival,
+                aircraft,
+                registration,
+                block_minutes,
+                landing_rate_fpm,
+                status,
+                submitted_at,
+                flight_score,
+                flight_grade,
+                requires_review
+            `)
+            .eq(
+                "pilot_id",
+                pilotUuid
+            )
+            .order(
+                "submitted_at",
+                {
+                    ascending: false
+                }
+            );
+
+
+    if (error) {
+
+        console.error(
+            "Unable to load pilot PIREPs:",
+            error
+        );
+
+        throw error;
+
+    }
+
+
+    return data || [];
+
+}
+
+
+// ============================================================
+// RENDER PILOT PROFILE
+// ============================================================
+
+function renderPilotProfile(
+    pilot,
+    pireps
+) {
+
+    const name =
+        getPilotName(
+            pilot
+        );
+
+
+    const status =
+        pilot.status || "Unknown";
+
+
+    const statusClass =
+        String(status)
+            .toLowerCase() === "active"
+            ? "active"
+            : "inactive";
+
+
+    pilotName.textContent =
+        name;
+
+
+    pilotNumber.textContent =
+        pilot.pilot_id || "—";
+
+
+    pilotStatus.textContent =
+        status;
+
+
+    pilotStatus.className =
+        `profile-status ${statusClass}`;
+
+
+    pilotRole.textContent =
+        pilot.role || "—";
+
+
+    pilotJoined.textContent =
+        formatDate(
+            pilot.joined_at
+        );
+
+
+    pilotLastFlight.textContent =
+        pilot.last_flight_at
+            ? formatDate(
+                pilot.last_flight_at
+            )
+            : "No flights yet";
+
+
+    pilotFlights.textContent =
+        Number(
+            pilot.total_flights
+        ) || 0;
+
+
+    pilotFlightTime.textContent =
+        formatFlightTime(
+            pilot.total_minutes
+        );
+
+
+    pilotAverageLanding.textContent =
+        formatLandingRate(
+            pilot.average_landing_rate_fpm
+        );
+
+
+    pilotBestLanding.textContent =
+        formatLandingRate(
+            pilot.best_landing_rate_fpm
+        );
+
+
+    pilotLandings.textContent =
+        Number(
+            pilot.total_landings
+        ) || 0;
+
+
+    pilotGoArounds.textContent =
+        Number(
+            pilot.total_go_arounds
+        ) || 0;
+
+
+    const reviewCount =
+        pireps.filter(
+            pirep =>
+                pirep.requires_review === true
+        ).length;
+
+
+    pilotReviewFlights.textContent =
+        reviewCount;
+
+
+    const latestPirep =
+        pireps.length > 0
+            ? pireps[0]
+            : null;
+
+
+    pilotLatestScore.textContent =
+        latestPirep
+            ? formatScore(
+                latestPirep.flight_score,
+                latestPirep.flight_grade
+            )
+            : "—";
+
+
+    accountPilotNumber.textContent =
+        pilot.pilot_id || "—";
+
+
+    accountPilotName.textContent =
+        name;
+
+
+    accountPilotStatus.textContent =
+        status;
+
+}
+
+
+// ============================================================
+// RENDER FLIGHT HISTORY
+// ============================================================
+
+function renderFlightHistory(
+    pireps
+) {
+
+    historyCount.textContent =
+        `${pireps.length} ${
+            pireps.length === 1
+                ? "PIREP"
+                : "PIREPs"
+        }`;
+
+
+    if (pireps.length === 0) {
+
+        flightHistory.innerHTML =
             `
-            <div class="pilot-empty">
-                No pilots found.
+            <div class="profile-empty">
+                This pilot has not submitted any PIREPs yet.
             </div>
             `;
 
@@ -459,136 +663,100 @@ function renderPilotRoster(pilots) {
     }
 
 
-    pilotRoster.innerHTML =
-        pilots
+    flightHistory.innerHTML =
+        pireps
             .map(
-                pilot => {
+                pirep => {
 
-                    const pilotId =
-                        pilot.pilot_id || "—";
+                    const route =
+                        `${pirep.departure || "—"} → ${pirep.arrival || "—"}`;
 
 
-                    const pilotName =
-                        getPilotName(
-                            pilot
+                    const aircraft =
+                        formatAircraft(
+                            pirep.aircraft,
+                            pirep.registration
                         );
 
 
-                    const status =
-                        pilot.status || "Unknown";
-
-
-                    const totalFlights =
-                        Number(
-                            pilot.total_flights
-                        ) || 0;
-
-
-                    const totalMinutes =
-                        Number(
-                            pilot.total_minutes
-                        ) || 0;
-
-
-                    const totalGoArounds =
-                        Number(
-                            pilot.total_go_arounds
-                        ) || 0;
-
-
-                    const averageLanding =
+                    const landing =
                         formatLandingRate(
-                            pilot.average_landing_rate_fpm
+                            pirep.landing_rate_fpm
                         );
 
 
-                    const bestLanding =
-                        formatLandingRate(
-                            pilot.best_landing_rate_fpm
+                    const score =
+                        formatScore(
+                            pirep.flight_score,
+                            pirep.flight_grade
                         );
 
 
-                    const lastFlight =
-                        formatDate(
-                            pilot.last_flight_at
-                        );
+                    const reviewClass =
+                        pirep.requires_review === true
+                            ? "review"
+                            : "accepted";
 
 
-                    const statusClass =
-                        String(status)
-                            .toLowerCase() === "active"
-                            ? "active"
-                            : "inactive";
+                    const reviewText =
+                        pirep.requires_review === true
+                            ? "REVIEW"
+                            : (
+                                pirep.status ||
+                                "SUBMITTED"
+                            );
 
 
                     return `
-                        <a
-                            class="pilot-row"
-                            href="/management/pilot.html?id=${encodeURIComponent(pilotId)}"
-                        >
+                        <div class="history-row">
 
-                            <div class="pilot-identity">
+                            <span class="history-flight">
+                                ${escapeHtml(
+                                    pirep.flight_number || "—"
+                                )}
+                            </span>
 
-                                <strong>
-                                    ${escapeHtml(pilotId)}
-                                </strong>
+                            <span>
+                                ${escapeHtml(route)}
+                            </span>
 
-                                <span>
-                                    ${escapeHtml(pilotName)}
-                                </span>
+                            <span>
+                                ${escapeHtml(aircraft)}
+                            </span>
 
-                            </div>
-
-
-                            <div>
-
-                                <span
-                                    class="pilot-status ${statusClass}"
-                                >
-                                    ${escapeHtml(status)}
-                                </span>
-
-                            </div>
-
-
-                            <div class="pilot-number">
-                                ${totalFlights}
-                            </div>
-
-
-                            <div class="pilot-number">
+                            <span>
                                 ${escapeHtml(
                                     formatFlightTime(
-                                        totalMinutes
+                                        pirep.block_minutes
                                     )
                                 )}
-                            </div>
+                            </span>
 
+                            <span>
+                                ${escapeHtml(landing)}
+                            </span>
 
-                            <div class="pilot-number">
+                            <span class="history-score">
+                                ${escapeHtml(score)}
+                            </span>
+
+                            <span>
+                                <span
+                                    class="history-status ${reviewClass}"
+                                >
+                                    ${escapeHtml(reviewText)}
+                                </span>
+                            </span>
+
+                            <span>
                                 ${escapeHtml(
-                                    averageLanding
+                                    formatDate(
+                                        pirep.submitted_at
+                                    )
                                 )}
-                            </div>
+                            </span>
 
-
-                            <div class="pilot-number">
-                                ${escapeHtml(
-                                    bestLanding
-                                )}
-                            </div>
-
-
-                            <div class="pilot-number">
-                                ${totalGoArounds}
-                            </div>
-
-
-                            <div class="pilot-last-flight">
-                                ${escapeHtml(lastFlight)}
-                            </div>
-
-                        </a>
+                        </div>
                     `;
 
                 }
@@ -599,94 +767,51 @@ function renderPilotRoster(pilots) {
 
 
 // ============================================================
-// SEARCH
+// SHOW PROFILE ERROR
 // ============================================================
 
-function filterRoster() {
+function showProfileError(message) {
 
-    const searchTerm =
-        pilotSearch
-            ? pilotSearch.value
-                .trim()
-                .toLowerCase()
-            : "";
+    if (pilotName) {
 
-
-    if (!searchTerm) {
-
-        renderPilotRoster(
-            pilotData
-        );
-
-        return;
+        pilotName.textContent =
+            "Pilot record unavailable";
 
     }
 
 
-    const filteredPilots =
-        pilotData.filter(
-            pilot => {
+    if (pilotNumber) {
 
-                const pilotId =
-                    String(
-                        pilot.pilot_id || ""
-                    ).toLowerCase();
+        pilotNumber.textContent =
+            message;
+
+    }
 
 
-                const nickname =
-                    String(
-                        pilot.nickname || ""
-                    ).toLowerCase();
+    if (flightHistory) {
 
+        flightHistory.innerHTML =
+            `
+            <div class="profile-empty">
+                ${escapeHtml(message)}
+            </div>
+            `;
 
-                const role =
-                    String(
-                        pilot.role || ""
-                    ).toLowerCase();
-
-
-                const status =
-                    String(
-                        pilot.status || ""
-                    ).toLowerCase();
-
-
-                return (
-                    pilotId.includes(
-                        searchTerm
-                    ) ||
-                    nickname.includes(
-                        searchTerm
-                    ) ||
-                    role.includes(
-                        searchTerm
-                    ) ||
-                    status.includes(
-                        searchTerm
-                    )
-                );
-
-            }
-        );
-
-
-    renderPilotRoster(
-        filteredPilots
-    );
+    }
 
 }
 
 
 // ============================================================
-// INITIALISE PILOT MANAGEMENT
+// INITIALISE PILOT PROFILE
 // ============================================================
 
-async function initialisePilots() {
+async function initialisePilotProfile() {
 
     try {
 
         // ----------------------------------------------------
-        // CHECK AUTHENTICATED SESSION
+        // AUTHENTICATION
         // ----------------------------------------------------
 
         const {
@@ -703,11 +828,6 @@ async function initialisePilots() {
             !sessionData.session
         ) {
 
-            console.warn(
-                "No authenticated management session."
-            );
-
-
             redirectToLogin();
 
             return;
@@ -720,7 +840,7 @@ async function initialisePilots() {
 
 
         // ----------------------------------------------------
-        // VERIFY MANAGEMENT AUTHORISATION
+        // MANAGEMENT AUTHORISATION
         // ----------------------------------------------------
 
         const manager =
@@ -730,11 +850,6 @@ async function initialisePilots() {
 
 
         if (!manager) {
-
-            console.warn(
-                "Authenticated account does not have management access."
-            );
-
 
             await supabaseClient
                 .auth
@@ -748,97 +863,154 @@ async function initialisePilots() {
         }
 
 
+        managementName.textContent =
+            manager.display_name;
+
+
+        managementRole.textContent =
+            manager.role;
+
+
         // ----------------------------------------------------
-        // MANAGEMENT SESSION CONFIRMED
+        // READ REQUESTED BMA NUMBER
         // ----------------------------------------------------
 
-        if (managementName) {
-
-            managementName.textContent =
-                manager.display_name;
-
-        }
+        const parameters =
+            new URLSearchParams(
+                window.location.search
+            );
 
 
-        if (managementRole) {
+        const requestedPilotId =
+            (
+                parameters.get("id") ||
+                ""
+            )
+                .trim()
+                .toUpperCase();
 
-            managementRole.textContent =
-                manager.role;
+
+        if (!requestedPilotId) {
+
+            console.warn(
+                "Pilot profile opened without a pilot ID."
+            );
+
+
+            redirectToPilots();
+
+            return;
 
         }
 
 
         console.log(
-            "Pilot Management access granted:",
-            {
-                displayName:
-                    manager.display_name,
-
-                role:
-                    manager.role
-            }
+            "Loading pilot profile:",
+            requestedPilotId
         );
 
 
         // ----------------------------------------------------
-        // LOAD LIVE PILOT DATA
+        // LOAD PILOT RECORDS
         // ----------------------------------------------------
 
-        await loadPilots();
+        const [
+            pilotStatistics,
+            pilotDatabaseRecord
+        ] =
+            await Promise.all([
+                loadPilotStatistics(
+                    requestedPilotId
+                ),
+                getPilotDatabaseRecord(
+                    requestedPilotId
+                )
+            ]);
+
+
+        if (
+            !pilotStatistics ||
+            !pilotDatabaseRecord
+        ) {
+
+            showProfileError(
+                `No pilot record was found for ${requestedPilotId}.`
+            );
+
+
+            authGate.classList.add(
+                "hidden"
+            );
+
+
+            dashboardApp.classList.remove(
+                "hidden"
+            );
+
+
+            return;
+
+        }
+
+
+        const pireps =
+            await loadPilotPireps(
+                pilotDatabaseRecord.id
+            );
+
+
+        // ----------------------------------------------------
+        // RENDER
+        // ----------------------------------------------------
+
+        renderPilotProfile(
+            pilotStatistics,
+            pireps
+        );
+
+
+        renderFlightHistory(
+            pireps
+        );
+
+
+        document.title =
+            `${requestedPilotId} ${getPilotName(pilotStatistics)} | British Midland Virtual`;
 
 
         // ----------------------------------------------------
         // REVEAL PAGE
         // ----------------------------------------------------
 
-        if (authGate) {
-
-            authGate.classList.add(
-                "hidden"
-            );
-
-        }
+        authGate.classList.add(
+            "hidden"
+        );
 
 
-        /*
-         * Support either ID so the file remains compatible
-         * with the generated pilots.html structure.
-         */
-
-        const appElement =
-            pilotsApp ||
-            dashboardApp;
+        dashboardApp.classList.remove(
+            "hidden"
+        );
 
 
-        if (appElement) {
+        console.log(
+            "Pilot profile loaded successfully:",
+            {
+                pilot:
+                    requestedPilotId,
 
-            appElement.classList.remove(
-                "hidden"
-            );
-
-        }
-        else {
-
-            console.error(
-                "Unable to find pilotsApp or dashboardApp."
-            );
-
-        }
+                pireps:
+                    pireps.length
+            }
+        );
 
     }
     catch (error) {
 
         console.error(
-            "Pilot Management initialisation failed:",
+            "Pilot profile initialisation failed:",
             error
         );
 
-
-        /*
-         * Don't leave management staring at the
-         * authentication screen indefinitely if
-         * pilot data itself fails.
-         */
 
         if (authGate) {
 
@@ -849,32 +1021,18 @@ async function initialisePilots() {
         }
 
 
-        const appElement =
-            pilotsApp ||
-            dashboardApp;
+        if (dashboardApp) {
 
-
-        if (appElement) {
-
-            appElement.classList.remove(
+            dashboardApp.classList.remove(
                 "hidden"
             );
 
         }
 
 
-        if (pilotRoster) {
-
-            pilotRoster.innerHTML =
-                `
-                <div class="pilot-empty">
-                    Unable to load pilot records.
-                    Check the Operations Control console
-                    for further information.
-                </div>
-                `;
-
-        }
+        showProfileError(
+            "Unable to load this pilot record."
+        );
 
     }
 
@@ -923,16 +1081,6 @@ async function signOut() {
 // EVENT LISTENERS
 // ============================================================
 
-if (pilotSearch) {
-
-    pilotSearch.addEventListener(
-        "input",
-        filterRoster
-    );
-
-}
-
-
 if (signOutButton) {
 
     signOutButton.addEventListener(
@@ -957,7 +1105,8 @@ supabaseClient.auth.onAuthStateChange(
 
 
 // ============================================================
-// START PILOT MANAGEMENT
+// START PILOT PROFILE
 // ============================================================
 
-initialisePilots();
+initialisePilotProfile();
+
