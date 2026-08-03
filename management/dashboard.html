@@ -95,10 +95,8 @@
 
 
             <div class="sidebar-footer">
-
                 <span>BMV OPERATIONS</span>
                 <span>MANAGEMENT SYSTEM</span>
-
             </div>
 
         </aside>
@@ -168,6 +166,7 @@
                     </p>
 
                 </div>
+
 
                 <div class="system-status">
 
@@ -260,13 +259,15 @@
 
 
             <!-- ======================================
-                 MAIN GRID
+                 OPERATIONS
                  ====================================== -->
 
             <section class="content-grid">
 
 
-                <!-- RECENT OPERATIONS -->
+                <!-- ==================================
+                     RECENT OPERATIONS
+                     ================================== -->
 
                 <article class="panel operations-panel">
 
@@ -292,14 +293,21 @@
                     <div class="operations-table">
 
                         <div class="table-header">
+
                             <span>PILOT</span>
                             <span>FLIGHT</span>
                             <span>ROUTE</span>
                             <span>AIRCRAFT</span>
                             <span>LANDING</span>
                             <span>SCORE</span>
+
                         </div>
 
+
+                        <!--
+                            dashboard.js replaces the contents
+                            of this element with live PIREPs.
+                        -->
 
                         <div
                             id="recentOperations"
@@ -307,7 +315,7 @@
                         >
 
                             <div class="empty-state">
-                                ACARS data will be connected in Step 7.
+                                Loading recent operations...
                             </div>
 
                         </div>
@@ -317,7 +325,9 @@
                 </article>
 
 
-                <!-- REVIEW QUEUE -->
+                <!-- ==================================
+                     REVIEW QUEUE
+                     ================================== -->
 
                 <article class="panel review-panel">
 
@@ -336,14 +346,22 @@
                     </div>
 
 
-                    <div id="reviewQueue" class="review-content">
+                    <!--
+                        dashboard.js replaces the contents
+                        of this element with live review data.
+                    -->
+
+                    <div
+                        id="reviewQueue"
+                        class="review-content"
+                    >
 
                         <div class="review-zero">
 
                             <strong>—</strong>
 
                             <span>
-                                Awaiting ACARS connection
+                                Loading review queue...
                             </span>
 
                         </div>
@@ -357,7 +375,7 @@
 
 
             <!-- ======================================
-                 DEVELOPMENT STATUS
+                 SYSTEM MODULES
                  ====================================== -->
 
             <section class="panel development-panel">
@@ -396,10 +414,10 @@
                     </div>
 
 
-                    <div class="module">
+                    <div class="module live">
 
                         <span class="module-status">
-                            NEXT
+                            ACTIVE
                         </span>
 
                         <strong>
@@ -451,6 +469,10 @@
             </section>
 
 
+            <!-- ======================================
+                 FOOTER
+                 ====================================== -->
+
             <footer class="page-footer">
 
                 <span>
@@ -468,7 +490,12 @@
     </div>
 
 
-    <script src="/management/dashboard.js?v=2"></script>
+    <!--
+        v=3 intentionally cache-busts the previous dashboard.js
+        so Step 7.4 is loaded immediately after deployment.
+    -->
+
+    <script src="/management/dashboard.js?v=3"></script>
 
 </body>
 
