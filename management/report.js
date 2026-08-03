@@ -23,7 +23,19 @@ const supabaseClient =
 
 
 // ------------------------------------------------------------
-// PAGE ELEMENTS
+// STATE
+// ------------------------------------------------------------
+
+let currentPirep = null;
+let currentPilot = null;
+let currentManager = null;
+let currentAuthUser = null;
+let existingReview = null;
+let reviewSubmitting = false;
+
+
+// ------------------------------------------------------------
+// ELEMENTS
 // ------------------------------------------------------------
 
 const authGate =
@@ -41,13 +53,11 @@ const managementRole =
 const signOutButton =
     document.getElementById("signOutButton");
 
-
 const reportReference =
     document.getElementById("reportReference");
 
 const reportError =
     document.getElementById("reportError");
-
 
 const flightNumber =
     document.getElementById("flightNumber");
@@ -61,7 +71,6 @@ const departure =
 const arrival =
     document.getElementById("arrival");
 
-
 const reviewIndicator =
     document.getElementById("reviewIndicator");
 
@@ -71,7 +80,6 @@ const reviewIndicatorTitle =
 const reviewIndicatorDetail =
     document.getElementById("reviewIndicatorDetail");
 
-
 const reviewAlert =
     document.getElementById("reviewAlert");
 
@@ -80,7 +88,6 @@ const reviewReason =
 
 const alertScore =
     document.getElementById("alertScore");
-
 
 const pilotNumber =
     document.getElementById("pilotNumber");
@@ -103,7 +110,6 @@ const flightScore =
 const flightGrade =
     document.getElementById("flightGrade");
 
-
 const aircraft =
     document.getElementById("aircraft");
 
@@ -122,7 +128,6 @@ const maxAltitude =
 const maxGroundSpeed =
     document.getElementById("maxGroundSpeed");
 
-
 const performanceRating =
     document.getElementById("performanceRating");
 
@@ -134,7 +139,6 @@ const scoreDeduction =
 
 const assessmentReviewStatus =
     document.getElementById("assessmentReviewStatus");
-
 
 const offBlocks =
     document.getElementById("offBlocks");
@@ -148,7 +152,6 @@ const landing =
 const stand =
     document.getElementById("stand");
 
-
 const takeoffs =
     document.getElementById("takeoffs");
 
@@ -160,7 +163,6 @@ const goArounds =
 
 const submittedAt =
     document.getElementById("submittedAt");
-
 
 const managementReviewBadge =
     document.getElementById("managementReviewBadge");
@@ -177,6 +179,48 @@ const reviewDeduction =
 const reviewGrade =
     document.getElementById("reviewGrade");
 
+const reviewFormArea =
+    document.getElementById("reviewFormArea");
+
+const reviewerName =
+    document.getElementById("reviewerName");
+
+const managementNotes =
+    document.getElementById("managementNotes");
+
+const notesCounter =
+    document.getElementById("notesCounter");
+
+const reviewActionMessage =
+    document.getElementById("reviewActionMessage");
+
+const clearFlightButton =
+    document.getElementById("clearFlightButton");
+
+const advisoryButton =
+    document.getElementById("advisoryButton");
+
+const rejectButton =
+    document.getElementById("rejectButton");
+
+const completedReviewArea =
+    document.getElementById("completedReviewArea");
+
+const completedDecision =
+    document.getElementById("completedDecision");
+
+const completedReviewer =
+    document.getElementById("completedReviewer");
+
+const completedDate =
+    document.getElementById("completedDate");
+
+const completedDecisionDetail =
+    document.getElementById("completedDecisionDetail");
+
+const completedNotes =
+    document.getElementById("completedNotes");
+
 
 // ============================================================
 // NAVIGATION
@@ -192,7 +236,7 @@ function redirectToLogin() {
 
 
 // ============================================================
-// ROLE DISPLAY
+// GENERAL FORMATTERS
 // ============================================================
 
 function formatRole(role) {
@@ -201,10 +245,242 @@ function formatRole(role) {
         return "MANAGEMENT";
     }
 
-
     return role
         .replace(/_/g, " ")
         .toUpperCase();
+
+}
+
+
+function formatMinutes(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "—";
+    }
+
+    const total =
+        Number(value);
+
+    if (Number.isNaN(total)) {
+        return "—";
+    }
+
+    const hours =
+        Math.floor(total / 60);
+
+    const minutes =
+        total % 60;
+
+    return `${hours}h ${minutes}m`;
+
+}
+
+
+function formatLandingRate(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "—";
+    }
+
+    const number =
+        Number(value);
+
+    if (Number.isNaN(number)) {
+        return "—";
+    }
+
+    return `${number} fpm`;
+
+}
+
+
+function formatFuel(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "—";
+    }
+
+    const number =
+        Number(value);
+
+    if (Number.isNaN(number)) {
+        return "—";
+    }
+
+    return `${number.toLocaleString("en-GB")} lb`;
+
+}
+
+
+function formatAltitude(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "—";
+    }
+
+    const number =
+        Number(value);
+
+    if (Number.isNaN(number)) {
+        return "—";
+    }
+
+    return `${number.toLocaleString("en-GB")} ft`;
+
+}
+
+
+function formatSpeed(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "—";
+    }
+
+    const number =
+        Number(value);
+
+    if (Number.isNaN(number)) {
+        return "—";
+    }
+
+    return `${number.toLocaleString("en-GB")} kt`;
+
+}
+
+
+function formatScore(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "—";
+    }
+
+    return `${value}%`;
+
+}
+
+
+function formatDeduction(value) {
+
+    if (
+        value === null ||
+        value === undefined
+    ) {
+        return "—";
+    }
+
+    const number =
+        Number(value);
+
+    if (Number.isNaN(number)) {
+        return "—";
+    }
+
+    return `${number} pts`;
+
+}
+
+
+function formatTime(value) {
+
+    if (!value) {
+        return "—";
+    }
+
+    const date =
+        new Date(value);
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "—";
+    }
+
+    return new Intl.DateTimeFormat(
+        "en-GB",
+        {
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false,
+            timeZone: "UTC"
+        }
+    ).format(date) + "Z";
+
+}
+
+
+function formatDateTime(value) {
+
+    if (!value) {
+        return "—";
+    }
+
+    const date =
+        new Date(value);
+
+    if (
+        Number.isNaN(
+            date.getTime()
+        )
+    ) {
+        return "—";
+    }
+
+    return new Intl.DateTimeFormat(
+        "en-GB",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit",
+            hour12: false
+        }
+    ).format(date);
+
+}
+
+
+// ============================================================
+// REVIEW DECISION FORMATTER
+// ============================================================
+
+function formatDecision(decision) {
+
+    switch (decision) {
+
+        case "cleared":
+            return "Flight Cleared";
+
+        case "advisory":
+            return "Pilot Advisory";
+
+        case "rejected":
+            return "PIREP Rejected";
+
+        default:
+            return "Management Review";
+
+    }
 
 }
 
@@ -220,10 +496,8 @@ function getPirepId() {
             window.location.search
         );
 
-
     const id =
         params.get("id");
-
 
     return id
         ? id.trim()
@@ -233,7 +507,7 @@ function getPirepId() {
 
 
 // ============================================================
-// MANAGEMENT AUTHORISATION
+// MANAGEMENT ACCESS
 // ============================================================
 
 async function getManagementUser(userId) {
@@ -257,7 +531,6 @@ async function getManagementUser(userId) {
             )
             .maybeSingle();
 
-
     if (error) {
 
         console.error(
@@ -269,267 +542,7 @@ async function getManagementUser(userId) {
 
     }
 
-
     return data;
-
-}
-
-
-// ============================================================
-// FORMATTERS
-// ============================================================
-
-function formatMinutes(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    const total =
-        Number(value);
-
-
-    if (Number.isNaN(total)) {
-        return "—";
-    }
-
-
-    const hours =
-        Math.floor(
-            total / 60
-        );
-
-
-    const minutes =
-        total % 60;
-
-
-    return `${hours}h ${minutes}m`;
-
-}
-
-
-function formatLandingRate(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    const number =
-        Number(value);
-
-
-    if (Number.isNaN(number)) {
-        return "—";
-    }
-
-
-    return `${number} fpm`;
-
-}
-
-
-function formatFuel(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    const number =
-        Number(value);
-
-
-    if (Number.isNaN(number)) {
-        return "—";
-    }
-
-
-    return `${number.toLocaleString("en-GB")} lb`;
-
-}
-
-
-function formatAltitude(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    const number =
-        Number(value);
-
-
-    if (Number.isNaN(number)) {
-        return "—";
-    }
-
-
-    return `${number.toLocaleString("en-GB")} ft`;
-
-}
-
-
-function formatSpeed(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    const number =
-        Number(value);
-
-
-    if (Number.isNaN(number)) {
-        return "—";
-    }
-
-
-    return `${number.toLocaleString("en-GB")} kt`;
-
-}
-
-
-function formatScore(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    return `${value}%`;
-
-}
-
-
-function formatDeduction(value) {
-
-    if (
-        value === null ||
-        value === undefined
-    ) {
-
-        return "—";
-
-    }
-
-
-    const number =
-        Number(value);
-
-
-    if (Number.isNaN(number)) {
-        return "—";
-    }
-
-
-    return `${number} pts`;
-
-}
-
-
-function formatTime(value) {
-
-    if (!value) {
-        return "—";
-    }
-
-
-    const date =
-        new Date(value);
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "—";
-
-    }
-
-
-    return new Intl.DateTimeFormat(
-        "en-GB",
-        {
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false,
-            timeZone: "UTC"
-        }
-    ).format(date) + "Z";
-
-}
-
-
-function formatDateTime(value) {
-
-    if (!value) {
-        return "—";
-    }
-
-
-    const date =
-        new Date(value);
-
-
-    if (
-        Number.isNaN(
-            date.getTime()
-        )
-    ) {
-
-        return "—";
-
-    }
-
-
-    return new Intl.DateTimeFormat(
-        "en-GB",
-        {
-            day: "2-digit",
-            month: "short",
-            year: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
-            hour12: false
-        }
-    ).format(date);
 
 }
 
@@ -539,12 +552,6 @@ function formatDateTime(value) {
 // ============================================================
 
 async function loadPirep(pirepId) {
-
-    console.log(
-        "Loading flight review:",
-        pirepId
-    );
-
 
     const {
         data,
@@ -589,7 +596,6 @@ async function loadPirep(pirepId) {
             )
             .maybeSingle();
 
-
     if (error) {
 
         console.error(
@@ -597,11 +603,9 @@ async function loadPirep(pirepId) {
             error
         );
 
-
         throw error;
 
     }
-
 
     return data;
 
@@ -618,7 +622,6 @@ async function loadPilot(pilotUuid) {
         return null;
     }
 
-
     const {
         data,
         error
@@ -634,7 +637,6 @@ async function loadPilot(pilotUuid) {
             )
             .maybeSingle();
 
-
     if (error) {
 
         console.error(
@@ -642,13 +644,98 @@ async function loadPilot(pilotUuid) {
             error
         );
 
-
         return null;
 
     }
 
+    return data;
+
+}
+
+
+// ============================================================
+// LOAD EXISTING REVIEW
+// ============================================================
+
+async function loadExistingReview(pirepId) {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("pirep_reviews")
+            .select(`
+                id,
+                pirep_id,
+                reviewer_id,
+                decision,
+                management_notes,
+                created_at
+            `)
+            .eq(
+                "pirep_id",
+                pirepId
+            )
+            .order(
+                "created_at",
+                {
+                    ascending: false
+                }
+            )
+            .limit(1)
+            .maybeSingle();
+
+    if (error) {
+
+        console.error(
+            "Unable to load review history:",
+            error
+        );
+
+        throw error;
+
+    }
 
     return data;
+
+}
+
+
+// ============================================================
+// LOAD REVIEWER NAME
+// ============================================================
+
+async function loadReviewerName(userId) {
+
+    if (!userId) {
+        return "Management";
+    }
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("management_users")
+            .select(
+                "display_name"
+            )
+            .eq(
+                "user_id",
+                userId
+            )
+            .maybeSingle();
+
+    if (
+        error ||
+        !data
+    ) {
+        return "Management";
+    }
+
+    return data.display_name ||
+        "Management";
 
 }
 
@@ -661,24 +748,17 @@ function buildReviewReason(pirep) {
 
     const reasons = [];
 
-
     if (pirep.performance_rating) {
-
         reasons.push(
             pirep.performance_rating
         );
-
     }
 
-
     if (pirep.landing_assessment) {
-
         reasons.push(
             pirep.landing_assessment
         );
-
     }
-
 
     if (
         Number(
@@ -692,7 +772,6 @@ function buildReviewReason(pirep) {
 
     }
 
-
     if (
         Number(
             pirep.go_arounds
@@ -704,13 +783,11 @@ function buildReviewReason(pirep) {
                 pirep.go_arounds
             );
 
-
         reasons.push(
             `${count} go-around${count === 1 ? "" : "s"} recorded`
         );
 
     }
-
 
     if (!reasons.length) {
 
@@ -718,93 +795,74 @@ function buildReviewReason(pirep) {
 
     }
 
-
     return reasons.join(" • ");
 
 }
 
 
 // ============================================================
-// REVIEW STATUS
+// RENDER REVIEW STATUS
 // ============================================================
 
 function renderReviewStatus(pirep) {
 
-    const requiresReview =
-        pirep.requires_review === true;
-
-
-    if (requiresReview) {
+    if (
+        pirep.requires_review === true
+    ) {
 
         reviewIndicator.className =
             "review-indicator review";
 
-
         reviewIndicatorTitle.textContent =
             "REVIEW REQUIRED";
-
 
         reviewIndicatorDetail.textContent =
             "MANAGEMENT ATTENTION";
 
-
         assessmentReviewStatus.textContent =
             "Requires Review";
-
 
         managementReviewBadge.textContent =
             "REVIEW REQUIRED";
 
-
         managementReviewBadge.className =
             "management-review-badge review";
-
 
         reviewAlert.classList.remove(
             "hidden"
         );
-
 
         reviewReason.textContent =
             buildReviewReason(
                 pirep
             );
 
-
         alertScore.textContent =
             formatScore(
                 pirep.flight_score
             );
 
-
         return;
 
     }
 
-
     reviewIndicator.className =
         "review-indicator clear";
 
-
     reviewIndicatorTitle.textContent =
-        "RECORD CLEAR";
-
+        "REVIEW COMPLETE";
 
     reviewIndicatorDetail.textContent =
-        "NO REVIEW REQUIRED";
-
+        "MANAGEMENT RESOLVED";
 
     assessmentReviewStatus.textContent =
-        "Clear";
-
+        "Reviewed";
 
     managementReviewBadge.textContent =
-        "RECORD CLEAR";
-
+        "REVIEW COMPLETE";
 
     managementReviewBadge.className =
         "management-review-badge clear";
-
 
     reviewAlert.classList.add(
         "hidden"
@@ -814,7 +872,7 @@ function renderReviewStatus(pirep) {
 
 
 // ============================================================
-// RENDER REPORT
+// RENDER FLIGHT
 // ============================================================
 
 function renderReport(
@@ -822,29 +880,21 @@ function renderReport(
     pilot
 ) {
 
-    // --------------------------------------------------------
-    // HEADER
-    // --------------------------------------------------------
-
     flightNumber.textContent =
         pirep.flight_number ||
         "Unknown Flight";
-
 
     flightStatus.textContent =
         pirep.status ||
         "Submitted";
 
-
     departure.textContent =
         pirep.departure ||
         "—";
 
-
     arrival.textContent =
         pirep.arrival ||
         "—";
-
 
     reportReference.textContent =
         `PIREP ${String(
@@ -854,16 +904,11 @@ function renderReport(
             .toUpperCase()}`;
 
 
-    // --------------------------------------------------------
-    // PILOT
-    // --------------------------------------------------------
-
     if (pilot) {
 
         pilotNumber.textContent =
             pilot.pilot_id ||
             "—";
-
 
         pilotName.textContent =
             pilot.nickname?.trim() ||
@@ -875,39 +920,30 @@ function renderReport(
         pilotNumber.textContent =
             "UNKNOWN";
 
-
         pilotName.textContent =
             "Pilot record unavailable";
 
     }
 
 
-    // --------------------------------------------------------
-    // PRIMARY STATISTICS
-    // --------------------------------------------------------
-
     blockTime.textContent =
         formatMinutes(
             pirep.block_minutes
         );
-
 
     landingRate.textContent =
         formatLandingRate(
             pirep.landing_rate_fpm
         );
 
-
     landingSummary.textContent =
         pirep.landing_assessment ||
         "No landing assessment";
-
 
     flightScore.textContent =
         formatScore(
             pirep.flight_score
         );
-
 
     flightGrade.textContent =
         pirep.flight_grade
@@ -915,37 +951,28 @@ function renderReport(
             : "No grade";
 
 
-    // --------------------------------------------------------
-    // OPERATIONAL RECORD
-    // --------------------------------------------------------
-
     aircraft.textContent =
         pirep.aircraft ||
         "—";
 
-
     registration.textContent =
         pirep.registration ||
         "—";
-
 
     airborneTime.textContent =
         formatMinutes(
             pirep.airborne_minutes
         );
 
-
     fuelUsed.textContent =
         formatFuel(
             pirep.fuel_used_lb
         );
 
-
     maxAltitude.textContent =
         formatAltitude(
             pirep.max_altitude_ft
         );
-
 
     maxGroundSpeed.textContent =
         formatSpeed(
@@ -953,19 +980,13 @@ function renderReport(
         );
 
 
-    // --------------------------------------------------------
-    // ASSESSMENT
-    // --------------------------------------------------------
-
     performanceRating.textContent =
         pirep.performance_rating ||
         "—";
 
-
     landingAssessment.textContent =
         pirep.landing_assessment ||
         "—";
-
 
     scoreDeduction.textContent =
         formatDeduction(
@@ -973,27 +994,20 @@ function renderReport(
         );
 
 
-    // --------------------------------------------------------
-    // TIMELINE
-    // --------------------------------------------------------
-
     offBlocks.textContent =
         formatTime(
             pirep.off_blocks
         );
-
 
     takeoff.textContent =
         formatTime(
             pirep.takeoff
         );
 
-
     landing.textContent =
         formatTime(
             pirep.landing
         );
-
 
     stand.textContent =
         formatTime(
@@ -1001,27 +1015,20 @@ function renderReport(
         );
 
 
-    // --------------------------------------------------------
-    // MOVEMENT DATA
-    // --------------------------------------------------------
-
     takeoffs.textContent =
         Number(
             pirep.takeoffs
         ) || 0;
-
 
     landings.textContent =
         Number(
             pirep.landings
         ) || 0;
 
-
     goArounds.textContent =
         Number(
             pirep.go_arounds
         ) || 0;
-
 
     submittedAt.textContent =
         formatDateTime(
@@ -1029,14 +1036,9 @@ function renderReport(
         );
 
 
-    // --------------------------------------------------------
-    // MANAGEMENT REVIEW
-    // --------------------------------------------------------
-
     reviewPerformance.textContent =
         pirep.performance_rating ||
         "—";
-
 
     reviewLanding.textContent =
         pirep.landing_assessment ||
@@ -1044,12 +1046,10 @@ function renderReport(
             pirep.landing_rate_fpm
         );
 
-
     reviewDeduction.textContent =
         formatDeduction(
             pirep.score_deduction
         );
-
 
     reviewGrade.textContent =
         pirep.flight_grade
@@ -1062,12 +1062,530 @@ function renderReport(
     );
 
 
-    // --------------------------------------------------------
-    // DOCUMENT TITLE
-    // --------------------------------------------------------
-
     document.title =
         `${pirep.flight_number || "Flight"} Review | British Midland Virtual`;
+
+}
+
+
+// ============================================================
+// RENDER ACTIVE REVIEW FORM
+// ============================================================
+
+function renderActiveReviewForm() {
+
+    reviewFormArea.classList.remove(
+        "hidden"
+    );
+
+    completedReviewArea.classList.add(
+        "hidden"
+    );
+
+    reviewerName.textContent =
+        currentManager?.display_name ||
+        "Management";
+
+}
+
+
+// ============================================================
+// RENDER COMPLETED REVIEW
+// ============================================================
+
+async function renderCompletedReview(review) {
+
+    reviewFormArea.classList.add(
+        "hidden"
+    );
+
+    completedReviewArea.classList.remove(
+        "hidden"
+    );
+
+
+    const reviewer =
+        await loadReviewerName(
+            review.reviewer_id
+        );
+
+
+    const decisionLabel =
+        formatDecision(
+            review.decision
+        );
+
+
+    completedDecision.textContent =
+        decisionLabel;
+
+    completedReviewer.textContent =
+        reviewer;
+
+    completedDate.textContent =
+        formatDateTime(
+            review.created_at
+        );
+
+    completedDecisionDetail.textContent =
+        decisionLabel;
+
+    completedNotes.textContent =
+        review.management_notes?.trim() ||
+        "No management notes were recorded.";
+
+}
+
+
+// ============================================================
+// ACTION MESSAGE
+// ============================================================
+
+function showActionMessage(
+    message,
+    type = ""
+) {
+
+    reviewActionMessage.textContent =
+        message;
+
+    reviewActionMessage.className =
+        "review-action-message";
+
+    if (type) {
+
+        reviewActionMessage.classList.add(
+            type
+        );
+
+    }
+
+}
+
+
+function hideActionMessage() {
+
+    reviewActionMessage.textContent =
+        "";
+
+    reviewActionMessage.className =
+        "review-action-message hidden";
+
+}
+
+
+// ============================================================
+// BUTTON STATE
+// ============================================================
+
+function setReviewButtonsDisabled(
+    disabled
+) {
+
+    clearFlightButton.disabled =
+        disabled;
+
+    advisoryButton.disabled =
+        disabled;
+
+    rejectButton.disabled =
+        disabled;
+
+}
+
+
+// ============================================================
+// CONFIRMATION TEXT
+// ============================================================
+
+function getConfirmationText(
+    decision
+) {
+
+    switch (decision) {
+
+        case "cleared":
+
+            return "Clear this flight and remove it from the active Review Centre queue?";
+
+        case "advisory":
+
+            return "Record a Pilot Advisory and resolve this flight review?";
+
+        case "rejected":
+
+            return "Reject this PIREP and resolve the management review?";
+
+        default:
+
+            return "Submit this management review?";
+
+    }
+
+}
+
+
+// ============================================================
+// VALIDATE REVIEW
+// ============================================================
+
+function validateReview(decision) {
+
+    const notes =
+        managementNotes.value.trim();
+
+
+    if (
+        decision === "advisory" &&
+        !notes
+    ) {
+
+        showActionMessage(
+            "Please enter management notes explaining the pilot advisory.",
+            "error"
+        );
+
+        managementNotes.focus();
+
+        return false;
+
+    }
+
+
+    if (
+        decision === "rejected" &&
+        !notes
+    ) {
+
+        showActionMessage(
+            "Please enter management notes explaining why the PIREP is being rejected.",
+            "error"
+        );
+
+        managementNotes.focus();
+
+        return false;
+
+    }
+
+
+    return true;
+
+}
+
+
+// ============================================================
+// CREATE REVIEW AUDIT RECORD
+// ============================================================
+
+async function createReviewRecord(
+    decision,
+    notes
+) {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("pirep_reviews")
+            .insert({
+                pirep_id:
+                    currentPirep.id,
+
+                reviewer_id:
+                    currentAuthUser.id,
+
+                decision:
+                    decision,
+
+                management_notes:
+                    notes || null
+            })
+            .select(`
+                id,
+                pirep_id,
+                reviewer_id,
+                decision,
+                management_notes,
+                created_at
+            `)
+            .single();
+
+
+    if (error) {
+
+        console.error(
+            "Unable to create review record:",
+            error
+        );
+
+        throw error;
+
+    }
+
+
+    return data;
+
+}
+
+
+// ============================================================
+// CLEAR ACTIVE REVIEW FLAG
+// ============================================================
+
+async function clearReviewFlag() {
+
+    const {
+        data,
+        error
+    } =
+        await supabaseClient
+            .from("pireps")
+            .update({
+                requires_review:
+                    false
+            })
+            .eq(
+                "id",
+                currentPirep.id
+            )
+            .select(
+                "id, requires_review"
+            )
+            .single();
+
+
+    if (error) {
+
+        console.error(
+            "Unable to resolve PIREP review flag:",
+            error
+        );
+
+        throw error;
+
+    }
+
+
+    return data;
+
+}
+
+
+// ============================================================
+// SUBMIT MANAGEMENT REVIEW
+// ============================================================
+
+async function submitReview(
+    decision
+) {
+
+    if (
+        reviewSubmitting ||
+        !currentPirep ||
+        !currentAuthUser
+    ) {
+        return;
+    }
+
+
+    hideActionMessage();
+
+
+    if (
+        !validateReview(
+            decision
+        )
+    ) {
+        return;
+    }
+
+
+    const confirmed =
+        window.confirm(
+            getConfirmationText(
+                decision
+            )
+        );
+
+
+    if (!confirmed) {
+        return;
+    }
+
+
+    reviewSubmitting =
+        true;
+
+
+    setReviewButtonsDisabled(
+        true
+    );
+
+
+    const notes =
+        managementNotes.value.trim();
+
+
+    let createdReview =
+        null;
+
+
+    try {
+
+        showActionMessage(
+            "Recording management review..."
+        );
+
+
+        // ----------------------------------------------------
+        // STEP 1
+        // CREATE PERMANENT AUDIT RECORD
+        // ----------------------------------------------------
+
+        createdReview =
+            await createReviewRecord(
+                decision,
+                notes
+            );
+
+
+        console.log(
+            "Management review recorded:",
+            createdReview
+        );
+
+
+        // ----------------------------------------------------
+        // STEP 2
+        // REMOVE FROM ACTIVE REVIEW QUEUE
+        // ----------------------------------------------------
+
+        showActionMessage(
+            "Review recorded. Resolving active Review Centre flag..."
+        );
+
+
+        await clearReviewFlag();
+
+
+        // ----------------------------------------------------
+        // LOCAL STATE
+        // ----------------------------------------------------
+
+        currentPirep.requires_review =
+            false;
+
+
+        existingReview =
+            createdReview;
+
+
+        // ----------------------------------------------------
+        // UPDATE UI
+        // ----------------------------------------------------
+
+        renderReviewStatus(
+            currentPirep
+        );
+
+
+        await renderCompletedReview(
+            createdReview
+        );
+
+
+        showActionMessage(
+            "Management review completed successfully.",
+            "success"
+        );
+
+
+        console.log(
+            "PIREP review completed:",
+            {
+                pirep:
+                    currentPirep.id,
+
+                decision:
+                    decision,
+
+                reviewer:
+                    currentManager?.display_name
+            }
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Review submission failed:",
+            error
+        );
+
+
+        if (createdReview) {
+
+            /*
+             * The permanent audit record was successfully
+             * created, but the PIREP flag was not cleared.
+             *
+             * Do not pretend the entire operation failed.
+             */
+
+            existingReview =
+                createdReview;
+
+
+            await renderCompletedReview(
+                createdReview
+            );
+
+
+            showActionMessage(
+                "The management decision was recorded, but Operations Control could not remove the flight from the active review queue. Do not submit another decision. Check the PIREP update policy before continuing.",
+                "error"
+            );
+
+        }
+        else {
+
+            showActionMessage(
+                "Operations Control could not record this management review. No decision has been saved.",
+                "error"
+            );
+
+
+            setReviewButtonsDisabled(
+                false
+            );
+
+        }
+
+    }
+    finally {
+
+        reviewSubmitting =
+            false;
+
+    }
+
+}
+
+
+// ============================================================
+// NOTES COUNTER
+// ============================================================
+
+function updateNotesCounter() {
+
+    const length =
+        managementNotes.value.length;
+
+
+    notesCounter.textContent =
+        `${length} / 2000`;
 
 }
 
@@ -1078,17 +1596,12 @@ function renderReport(
 
 function showError(message) {
 
-    if (reportError) {
+    reportError.textContent =
+        message;
 
-        reportError.textContent =
-            message;
-
-
-        reportError.classList.remove(
-            "hidden"
-        );
-
-    }
+    reportError.classList.remove(
+        "hidden"
+    );
 
 }
 
@@ -1099,28 +1612,19 @@ function showError(message) {
 
 function revealApplication() {
 
-    if (authGate) {
+    authGate.classList.add(
+        "hidden"
+    );
 
-        authGate.classList.add(
-            "hidden"
-        );
-
-    }
-
-
-    if (dashboardApp) {
-
-        dashboardApp.classList.remove(
-            "hidden"
-        );
-
-    }
+    dashboardApp.classList.remove(
+        "hidden"
+    );
 
 }
 
 
 // ============================================================
-// INITIALISE REPORT
+// INITIALISE
 // ============================================================
 
 async function initialiseReport() {
@@ -1152,22 +1656,25 @@ async function initialiseReport() {
         }
 
 
+        currentAuthUser =
+            sessionData.session.user;
+
+
         // ----------------------------------------------------
-        // MANAGEMENT ACCESS
+        // MANAGEMENT AUTHORISATION
         // ----------------------------------------------------
 
-        const manager =
+        currentManager =
             await getManagementUser(
-                sessionData.session.user.id
+                currentAuthUser.id
             );
 
 
-        if (!manager) {
+        if (!currentManager) {
 
             await supabaseClient
                 .auth
                 .signOut();
-
 
             redirectToLogin();
 
@@ -1177,17 +1684,21 @@ async function initialiseReport() {
 
 
         managementName.textContent =
-            manager.display_name;
+            currentManager.display_name;
 
 
         managementRole.textContent =
             formatRole(
-                manager.role
+                currentManager.role
             );
 
 
+        reviewerName.textContent =
+            currentManager.display_name;
+
+
         // ----------------------------------------------------
-        // PIREP REFERENCE
+        // PIREP ID
         // ----------------------------------------------------
 
         const pirepId =
@@ -1214,16 +1725,16 @@ async function initialiseReport() {
 
 
         // ----------------------------------------------------
-        // LOAD PIREP
+        // LOAD FLIGHT
         // ----------------------------------------------------
 
-        const pirep =
+        currentPirep =
             await loadPirep(
                 pirepId
             );
 
 
-        if (!pirep) {
+        if (!currentPirep) {
 
             revealApplication();
 
@@ -1243,39 +1754,110 @@ async function initialiseReport() {
 
 
         // ----------------------------------------------------
-        // LOAD PILOT
+        // LOAD ASSOCIATED DATA
         // ----------------------------------------------------
 
-        const pilot =
-            await loadPilot(
-                pirep.pilot_id
-            );
+        const [
+            pilot,
+            review
+        ] =
+            await Promise.all([
+                loadPilot(
+                    currentPirep.pilot_id
+                ),
+
+                loadExistingReview(
+                    currentPirep.id
+                )
+            ]);
+
+
+        currentPilot =
+            pilot;
+
+
+        existingReview =
+            review;
 
 
         // ----------------------------------------------------
-        // RENDER
+        // RENDER FLIGHT
         // ----------------------------------------------------
 
         renderReport(
-            pirep,
-            pilot
+            currentPirep,
+            currentPilot
         );
 
 
+        // ----------------------------------------------------
+        // REVIEW UI
+        // ----------------------------------------------------
+
+        if (existingReview) {
+
+            await renderCompletedReview(
+                existingReview
+            );
+
+        }
+        else if (
+            currentPirep.requires_review === true
+        ) {
+
+            renderActiveReviewForm();
+
+        }
+        else {
+
+            /*
+             * Flight is not flagged and there is no
+             * management audit record.
+             */
+
+            reviewFormArea.classList.add(
+                "hidden"
+            );
+
+            completedReviewArea.classList.remove(
+                "hidden"
+            );
+
+            completedDecision.textContent =
+                "No management review required";
+
+            completedReviewer.textContent =
+                "—";
+
+            completedDate.textContent =
+                "—";
+
+            completedDecisionDetail.textContent =
+                "Record Clear";
+
+            completedNotes.textContent =
+                "This flight does not currently require management review.";
+
+        }
+
+
         console.log(
-            "Flight review loaded:",
+            "Flight Review loaded:",
             {
                 pirep:
-                    pirep.id,
+                    currentPirep.id,
 
                 flight:
-                    pirep.flight_number,
+                    currentPirep.flight_number,
 
                 pilot:
-                    pilot?.pilot_id,
+                    currentPilot?.pilot_id,
 
                 requiresReview:
-                    pirep.requires_review
+                    currentPirep.requires_review,
+
+                existingReview:
+                    existingReview?.decision || null
             }
         );
 
@@ -1313,12 +1895,8 @@ async function initialiseReport() {
 
 async function signOut() {
 
-    if (signOutButton) {
-
-        signOutButton.disabled =
-            true;
-
-    }
+    signOutButton.disabled =
+        true;
 
 
     try {
@@ -1341,14 +1919,52 @@ async function signOut() {
 // EVENTS
 // ============================================================
 
-if (signOutButton) {
+managementNotes.addEventListener(
+    "input",
+    updateNotesCounter
+);
 
-    signOutButton.addEventListener(
-        "click",
-        signOut
-    );
 
-}
+clearFlightButton.addEventListener(
+    "click",
+    () => {
+
+        submitReview(
+            "cleared"
+        );
+
+    }
+);
+
+
+advisoryButton.addEventListener(
+    "click",
+    () => {
+
+        submitReview(
+            "advisory"
+        );
+
+    }
+);
+
+
+rejectButton.addEventListener(
+    "click",
+    () => {
+
+        submitReview(
+            "rejected"
+        );
+
+    }
+);
+
+
+signOutButton.addEventListener(
+    "click",
+    signOut
+);
 
 
 supabaseClient.auth.onAuthStateChange(
