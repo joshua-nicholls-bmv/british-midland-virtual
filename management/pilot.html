@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        Pilot Record | British Midland Virtual
+    </title>
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/management/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/management/pilot.css?v=1"
+    >
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- AUTHENTICATION GATE -->
+
+    <div
+        id="authGate"
+        class="auth-gate"
+    >
+
+        <div class="auth-gate-inner">
+
+            <div class="auth-mark">
+                BM
+            </div>
+
+            <span>
+                OPERATIONS CONTROL
+            </span>
+
+            <small>
+                AUTHENTICATING MANAGEMENT SESSION
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- APPLICATION -->
+
+    <div
+        id="dashboardApp"
+        class="app hidden"
+    >
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="sidebar">
+
+            <div>
+
+                <div class="sidebar-brand">
+
+                    <div class="brand-mark">
+                        BM
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            BRITISH MIDLAND
+                        </strong>
+
+                        <span>
+                            OPERATIONS CONTROL
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <nav class="navigation">
+
+                    <a
+                        href="/management/dashboard.html"
+                        class="nav-item"
+                    >
+                        <span class="nav-symbol">▦</span>
+                        Dashboard
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="nav-item disabled"
+                    >
+                        <span class="nav-symbol">◉</span>
+                        Live Operations
+                        <small>SOON</small>
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="nav-item disabled"
+                    >
+                        <span class="nav-symbol">✈</span>
+                        PIREPs
+                        <small>SOON</small>
+                    </a>
+
+
+                    <a
+                        href="/management/pilots.html"
+                        class="nav-item active"
+                    >
+                        <span class="nav-symbol">◎</span>
+                        Pilots
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="nav-item disabled"
+                    >
+                        <span class="nav-symbol">!</span>
+                        Reviews
+                        <small>SOON</small>
+                    </a>
+
+                </nav>
+
+            </div>
+
+
+            <div class="sidebar-footer">
+
+                <span>
+                    BMV OPERATIONS
+                </span>
+
+                <span>
+                    MANAGEMENT SYSTEM
+                </span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- MAIN -->
+
+        <main class="main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <span class="section-label">
+                        MANAGEMENT PORTAL
+                    </span>
+
+                    <h1>
+                        Pilot Record
+                    </h1>
+
+                </div>
+
+
+                <div class="user-area">
+
+                    <div class="user-copy">
+
+                        <strong id="managementName">
+                            —
+                        </strong>
+
+                        <span id="managementRole">
+                            —
+                        </span>
+
+                    </div>
+
+                    <button
+                        id="signOutButton"
+                        type="button"
+                    >
+                        SIGN OUT
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- BACK -->
+
+            <div class="profile-toolbar">
+
+                <a
+                    href="/management/pilots.html"
+                    class="back-button"
+                >
+                    ← BACK TO PILOT ROSTER
+                </a>
+
+            </div>
+
+
+            <!-- PILOT HERO -->
+
+            <section class="pilot-profile-hero">
+
+                <div class="pilot-profile-main">
+
+                    <span class="eyebrow">
+                        CREW RECORD
+                    </span>
+
+                    <div class="pilot-title-line">
+
+                        <h2 id="pilotName">
+                            Loading pilot...
+                        </h2>
+
+                        <span
+                            id="pilotStatus"
+                            class="profile-status"
+                        >
+                            —
+                        </span>
+
+                    </div>
+
+                    <div class="pilot-meta">
+
+                        <strong id="pilotNumber">
+                            —
+                        </strong>
+
+                        <span id="pilotRole">
+                            —
+                        </span>
+
+                        <span id="pilotJoined">
+                            —
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <div class="record-status">
+
+                    <span class="status-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            ACARS RECORD
+                        </strong>
+
+                        <small>
+                            LIVE DATA
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- CAREER STATISTICS -->
+
+            <section class="profile-stats-grid">
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        TOTAL FLIGHTS
+                    </span>
+
+                    <strong id="totalFlights">
+                        —
+                    </strong>
+
+                    <small>
+                        Submitted PIREPs
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        FLIGHT TIME
+                    </span>
+
+                    <strong id="totalFlightTime">
+                        —
+                    </strong>
+
+                    <small>
+                        Recorded by ACARS
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        AVERAGE LANDING
+                    </span>
+
+                    <strong id="averageLanding">
+                        —
+                    </strong>
+
+                    <small>
+                        Career average
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        BEST LANDING
+                    </span>
+
+                    <strong id="bestLanding">
+                        —
+                    </strong>
+
+                    <small>
+                        Career best
+                    </small>
+
+                </article>
+
+            </section>
+
+
+            <!-- SECONDARY STATS -->
+
+            <section class="pilot-detail-grid">
+
+                <article class="detail-card">
+
+                    <span>
+                        TOTAL LANDINGS
+                    </span>
+
+                    <strong id="totalLandings">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="detail-card">
+
+                    <span>
+                        GO-AROUNDS
+                    </span>
+
+                    <strong id="totalGoArounds">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="detail-card">
+
+                    <span>
+                        LAST FLIGHT
+                    </span>
+
+                    <strong id="lastFlight">
+                        —
+                    </strong>
+
+                </article>
+
+
+                <article class="detail-card">
+
+                    <span>
+                        MEMBER SINCE
+                    </span>
+
+                    <strong id="memberSince">
+                        —
+                    </strong>
+
+                </article>
+
+            </section>
+
+
+            <!-- FLIGHT HISTORY -->
+
+            <section class="panel flight-history-panel">
+
+                <div class="flight-history-heading">
+
+                    <div>
+
+                        <span class="panel-kicker">
+                            ACARS
+                        </span>
+
+                        <h3>
+                            Flight History
+                        </h3>
+
+                    </div>
+
+                    <span class="history-label">
+                        RECENT PIREPS
+                    </span>
+
+                </div>
+
+
+                <div class="flight-table-wrap">
+
+
+                    <div class="flight-table-header">
+
+                        <span>
+                            FLIGHT
+                        </span>
+
+                        <span>
+                            ROUTE
+                        </span>
+
+                        <span>
+                            AIRCRAFT
+                        </span>
+
+                        <span>
+                            BLOCK TIME
+                        </span>
+
+                        <span>
+                            LANDING
+                        </span>
+
+                        <span>
+                            SCORE
+                        </span>
+
+                        <span>
+                            DATE
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="flightHistory"
+                        class="flight-table-body"
+                    >
+
+                        <div class="history-loading">
+                            Loading ACARS flight history...
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+            </section>
+
+
+            <!-- FOOTER -->
+
+            <footer class="page-footer">
+
+                <span>
+                    BRITISH MIDLAND VIRTUAL
+                </span>
+
+                <span>
+                    OPERATIONS CONTROL • PILOT RECORD
+                </span>
+
+            </footer>
+
+
+        </main>
+
+    </div>
+
+
+    <script
+        src="/management/pilot.js?v=1"
+    ></script>
+
+
+</body>
+
+</html>
