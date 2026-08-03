@@ -40,7 +40,7 @@
 
     <link
         rel="stylesheet"
-        href="report.css?v=1"
+        href="report.css?v=2"
     >
 
     <script
@@ -267,7 +267,6 @@
 
             <section class="flight-hero">
 
-
                 <div class="flight-hero-main">
 
                     <span class="eyebrow">
@@ -357,7 +356,6 @@
 
                 </div>
 
-
             </section>
 
 
@@ -382,8 +380,7 @@
                     </span>
 
                     <strong id="reviewReason">
-                        This flight has been flagged by the ACARS
-                        assessment system.
+                        This flight has been flagged by ACARS.
                     </strong>
 
                 </div>
@@ -478,19 +475,18 @@
 
                 </article>
 
-
             </section>
 
 
             <!-- =================================================
-                 INFORMATION GRID
+                 REPORT GRID
                  ================================================= -->
 
             <section class="report-grid">
 
 
                 <!-- =============================================
-                     AIRCRAFT / FLIGHT DATA
+                     FLIGHT DATA
                      ============================================= -->
 
                 <article class="panel report-panel">
@@ -513,9 +509,7 @@
 
                         <div class="report-data">
 
-                            <span>
-                                AIRCRAFT
-                            </span>
+                            <span>AIRCRAFT</span>
 
                             <strong id="aircraft">
                                 —
@@ -526,9 +520,7 @@
 
                         <div class="report-data">
 
-                            <span>
-                                REGISTRATION
-                            </span>
+                            <span>REGISTRATION</span>
 
                             <strong id="registration">
                                 —
@@ -539,9 +531,7 @@
 
                         <div class="report-data">
 
-                            <span>
-                                AIRBORNE TIME
-                            </span>
+                            <span>AIRBORNE TIME</span>
 
                             <strong id="airborneTime">
                                 —
@@ -552,9 +542,7 @@
 
                         <div class="report-data">
 
-                            <span>
-                                FUEL USED
-                            </span>
+                            <span>FUEL USED</span>
 
                             <strong id="fuelUsed">
                                 —
@@ -565,9 +553,7 @@
 
                         <div class="report-data">
 
-                            <span>
-                                MAX ALTITUDE
-                            </span>
+                            <span>MAX ALTITUDE</span>
 
                             <strong id="maxAltitude">
                                 —
@@ -578,9 +564,7 @@
 
                         <div class="report-data">
 
-                            <span>
-                                MAX GROUND SPEED
-                            </span>
+                            <span>MAX GROUND SPEED</span>
 
                             <strong id="maxGroundSpeed">
                                 —
@@ -588,14 +572,13 @@
 
                         </div>
 
-
                     </div>
 
                 </article>
 
 
                 <!-- =============================================
-                     ASSESSMENT
+                     ACARS ASSESSMENT
                      ============================================= -->
 
                 <article class="panel assessment-panel">
@@ -667,11 +650,9 @@
 
                         </div>
 
-
                     </div>
 
                 </article>
-
 
             </section>
 
@@ -681,7 +662,6 @@
                  ================================================= -->
 
             <section class="panel timeline-panel">
-
 
                 <div class="report-panel-heading">
 
@@ -705,9 +685,7 @@
 
                         <div>
 
-                            <span>
-                                OFF BLOCKS
-                            </span>
+                            <span>OFF BLOCKS</span>
 
                             <strong id="offBlocks">
                                 —
@@ -727,9 +705,7 @@
 
                         <div>
 
-                            <span>
-                                TAKEOFF
-                            </span>
+                            <span>TAKEOFF</span>
 
                             <strong id="takeoff">
                                 —
@@ -749,9 +725,7 @@
 
                         <div>
 
-                            <span>
-                                LANDING
-                            </span>
+                            <span>LANDING</span>
 
                             <strong id="landing">
                                 —
@@ -771,9 +745,7 @@
 
                         <div>
 
-                            <span>
-                                ON STAND
-                            </span>
+                            <span>ON STAND</span>
 
                             <strong id="stand">
                                 —
@@ -783,9 +755,7 @@
 
                     </div>
 
-
                 </div>
-
 
             </section>
 
@@ -799,9 +769,7 @@
 
                 <article>
 
-                    <span>
-                        TAKEOFFS
-                    </span>
+                    <span>TAKEOFFS</span>
 
                     <strong id="takeoffs">
                         —
@@ -812,9 +780,7 @@
 
                 <article>
 
-                    <span>
-                        LANDINGS
-                    </span>
+                    <span>LANDINGS</span>
 
                     <strong id="landings">
                         —
@@ -825,9 +791,7 @@
 
                 <article>
 
-                    <span>
-                        GO-AROUNDS
-                    </span>
+                    <span>GO-AROUNDS</span>
 
                     <strong id="goArounds">
                         —
@@ -838,9 +802,7 @@
 
                 <article>
 
-                    <span>
-                        SUBMITTED
-                    </span>
+                    <span>SUBMITTED</span>
 
                     <strong id="submittedAt">
                         —
@@ -848,15 +810,17 @@
 
                 </article>
 
-
             </section>
 
 
             <!-- =================================================
-                 REVIEW PANEL
+                 MANAGEMENT REVIEW CONSOLE
                  ================================================= -->
 
-            <section class="panel management-review-panel">
+            <section
+                id="managementReviewPanel"
+                class="panel management-review-panel"
+            >
 
 
                 <div class="review-panel-heading">
@@ -868,7 +832,7 @@
                         </span>
 
                         <h3>
-                            Review Assessment
+                            Review Decision
                         </h3>
 
                     </div>
@@ -938,32 +902,247 @@
 
                     </div>
 
-
                 </div>
 
 
-                <div class="review-action-placeholder">
+                <!-- =============================================
+                     ACTIVE REVIEW FORM
+                     ============================================= -->
 
-                    <div>
+                <div
+                    id="reviewFormArea"
+                    class="review-form-area"
+                >
 
-                        <strong>
-                            MANAGEMENT ACTIONS
-                        </strong>
+                    <div class="review-form-intro">
 
-                        <span>
-                            Review decisions and management notes will
-                            be enabled in the next Operations Control stage.
-                        </span>
+                        <div>
+
+                            <span class="review-form-label">
+                                MANAGEMENT ACTION
+                            </span>
+
+                            <h4>
+                                Resolve this flight review
+                            </h4>
+
+                            <p>
+                                Record the outcome of the management
+                                review. The decision will be permanently
+                                retained in the Operations Control audit
+                                history.
+                            </p>
+
+                        </div>
+
+
+                        <div class="reviewer-box">
+
+                            <span>
+                                REVIEWING MANAGER
+                            </span>
+
+                            <strong id="reviewerName">
+                                —
+                            </strong>
+
+                        </div>
 
                     </div>
 
 
-                    <span class="read-only-badge">
-                        READ ONLY
-                    </span>
+                    <div class="review-notes-group">
+
+                        <label for="managementNotes">
+                            MANAGEMENT NOTES
+                        </label>
+
+                        <textarea
+                            id="managementNotes"
+                            maxlength="2000"
+                            placeholder="Enter review notes, observations or action taken..."
+                        ></textarea>
+
+                        <div class="notes-footer">
+
+                            <span>
+                                Notes are retained in the permanent review record.
+                            </span>
+
+                            <span id="notesCounter">
+                                0 / 2000
+                            </span>
+
+                        </div>
+
+                    </div>
+
+
+                    <div
+                        id="reviewActionMessage"
+                        class="review-action-message hidden"
+                    ></div>
+
+
+                    <div class="review-actions">
+
+                        <button
+                            id="clearFlightButton"
+                            class="review-action-button clear-button"
+                            type="button"
+                        >
+
+                            <span>
+                                CLEAR FLIGHT
+                            </span>
+
+                            <small>
+                                No further action
+                            </small>
+
+                        </button>
+
+
+                        <button
+                            id="advisoryButton"
+                            class="review-action-button advisory-button"
+                            type="button"
+                        >
+
+                            <span>
+                                PILOT ADVISORY
+                            </span>
+
+                            <small>
+                                Record guidance
+                            </small>
+
+                        </button>
+
+
+                        <button
+                            id="rejectButton"
+                            class="review-action-button reject-button"
+                            type="button"
+                        >
+
+                            <span>
+                                REJECT PIREP
+                            </span>
+
+                            <small>
+                                Management rejection
+                            </small>
+
+                        </button>
+
+                    </div>
+
+
+                    <div class="review-action-warning">
+
+                        <strong>
+                            PERMANENT MANAGEMENT RECORD
+                        </strong>
+
+                        <span>
+                            Review decisions cannot be deleted from the
+                            management portal once submitted.
+                        </span>
+
+                    </div>
 
                 </div>
 
+
+                <!-- =============================================
+                     COMPLETED REVIEW
+                     ============================================= -->
+
+                <div
+                    id="completedReviewArea"
+                    class="completed-review-area hidden"
+                >
+
+                    <div class="completed-review-header">
+
+                        <div class="completed-review-mark">
+                            ✓
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                MANAGEMENT REVIEW COMPLETE
+                            </span>
+
+                            <strong id="completedDecision">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="completed-review-grid">
+
+
+                        <div>
+
+                            <span>
+                                REVIEWED BY
+                            </span>
+
+                            <strong id="completedReviewer">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                REVIEW DATE
+                            </span>
+
+                            <strong id="completedDate">
+                                —
+                            </strong>
+
+                        </div>
+
+
+                        <div>
+
+                            <span>
+                                DECISION
+                            </span>
+
+                            <strong id="completedDecisionDetail">
+                                —
+                            </strong>
+
+                        </div>
+
+                    </div>
+
+
+                    <div class="completed-notes">
+
+                        <span>
+                            MANAGEMENT NOTES
+                        </span>
+
+                        <p id="completedNotes">
+                            —
+                        </p>
+
+                    </div>
+
+                </div>
 
             </section>
 
@@ -994,16 +1173,14 @@
 
             </footer>
 
-
         </main>
 
     </div>
 
 
     <script
-        src="report.js?v=1"
+        src="report.js?v=2"
     ></script>
-
 
 </body>
 
