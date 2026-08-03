@@ -271,10 +271,9 @@ async function handleLogin(event) {
         // REDIRECT TO OPERATIONS CONTROL
         // ----------------------------------------------------
 
-        window.location.href =
-            "dashboard.html";
-
-    }
+  window.location.replace(
+    "/management/dashboard.html"
+);
     catch (error) {
 
         console.error(
@@ -368,10 +367,9 @@ async function checkExistingSession() {
          * Send them directly to Operations Control.
          */
 
-        window.location.replace(
-            "dashboard.html"
-        );
-
+    window.location.replace(
+    "/management/dashboard.html"
+);
     }
     catch (error) {
 
