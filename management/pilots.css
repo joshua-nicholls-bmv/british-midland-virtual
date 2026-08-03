@@ -1,44 +1,374 @@
-============================================================
-5. management/pilots.css
-============================================================
-.pilots-intro {
-    padding: 48px 0 34px;
+/* ============================================================
+   BRITISH MIDLAND VIRTUAL
+   OPERATIONS CONTROL - INDIVIDUAL PILOT PROFILE
+   ============================================================ */
+
+
+.pilot-profile-hero {
+    padding: 44px 0 34px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 40px;
+    align-items: end;
+}
+
+
+.back-link {
+    display: inline-block;
+    margin-bottom: 24px;
+    color: #697582;
+    text-decoration: none;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: 1.3px;
+}
+
+
+.back-link:hover {
+    color: #d02823;
+}
+
+
+.pilot-profile-hero .eyebrow {
+    display: block;
+    margin-bottom: 10px;
+}
+
+
+.pilot-title-row {
     display: flex;
-    align-items: flex-end;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.pilot-title-row h2 {
+    margin: 0;
+    color: #001a3a;
+    font-size: clamp(30px, 4vw, 48px);
+    line-height: 1;
+    letter-spacing: -1.8px;
+}
+
+
+.pilot-title-row p {
+    margin: 10px 0 0;
+    color: #697582;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.4px;
+}
+
+
+.profile-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 78px;
+    padding: 7px 12px;
+    border-radius: 999px;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+
+.profile-status.active {
+    background: #edf7f1;
+    color: #207047;
+}
+
+
+.profile-status.inactive {
+    background: #f3f3f1;
+    color: #697582;
+}
+
+
+.pilot-meta {
+    min-width: 300px;
+    padding: 20px 24px;
+    background: #ffffff;
+    border: 1px solid #e8e8e4;
+    border-radius: 3px;
+    display: grid;
+    gap: 16px;
+}
+
+
+.pilot-meta div {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+    align-items: center;
+}
+
+
+.pilot-meta span,
+.career-item span,
+.account-summary span {
+    color: #8a929a;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.1px;
+}
+
+
+.pilot-meta strong,
+.career-item strong,
+.account-summary strong {
+    color: #001a3a;
+    font-size: 10px;
+}
+
+
+.profile-stats-grid {
+    margin-bottom: 28px;
+}
+
+
+.profile-secondary-grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
+
+.profile-detail-panel {
+    min-width: 0;
+}
+
+
+.career-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+
+.career-item {
+    min-height: 100px;
+    padding: 22px;
+    border-right: 1px solid #eeeeeb;
+    display: flex;
+    flex-direction: column;
     justify-content: space-between;
 }
-.pilots-intro h2 { margin: 10px 0 8px; font-size: 40px; letter-spacing: -1.8px; }
-.pilots-intro p { margin: 0; color: var(--muted); font-size: 12px; }
-.roster-status { display: flex; align-items: center; gap: 11px; padding-bottom: 5px; }
-.roster-status strong,.roster-status small { display:block; }
-.roster-status strong { font-size:9px; letter-spacing:1px; }
-.roster-status small { margin-top:3px; color:var(--green); font-size:8px; font-weight:700; }
-.pilot-stats-grid { margin-bottom:18px; }
-.pilot-roster-panel { margin-bottom:24px; }
-.pilot-roster-header { min-height:92px; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:25px; border-bottom:1px solid var(--border); }
-.pilot-roster-header h3 { margin:6px 0 0; font-size:17px; }
-.pilot-search-wrap { width:min(310px,40%); }
-.pilot-search-wrap label { display:block; margin-bottom:7px; color:var(--muted); font-size:7px; font-weight:700; letter-spacing:1.2px; }
-.pilot-search-wrap input { width:100%; height:38px; padding:0 12px; border:1px solid var(--border); outline:none; background:#f8f8f6; color:var(--navy); font-family:inherit; font-size:10px; }
-.pilot-search-wrap input:focus { border-color:var(--navy); background:white; }
-.pilot-table-wrap { overflow-x:auto; }
-.pilot-table-header,.pilot-row { min-width:1040px; display:grid; grid-template-columns:1.35fr .8fr .6fr .85fr 1fr 1fr .75fr 1.1fr; gap:14px; align-items:center; }
-.pilot-table-header { min-height:44px; padding:0 22px; background:#f8f8f6; color:var(--muted); font-size:7px; font-weight:700; letter-spacing:1px; }
-.pilot-row { min-height:68px; padding:0 22px; border-top:1px solid #eeeeeb; color:var(--navy); font-size:10px; cursor:pointer; transition:background .15s ease; }
-.pilot-row:hover,.pilot-row:focus { background:#fbfaf8; outline:none; }
-.pilot-row:hover .pilot-identity strong { color:var(--red); }
-.pilot-identity strong,.pilot-identity small { display:block; }
-.pilot-identity strong { font-size:11px; }
-.pilot-identity small { margin-top:4px; color:var(--muted); font-size:8px; }
-.pilot-status { display:inline-flex; min-width:58px; height:23px; padding:0 8px; align-items:center; justify-content:center; font-size:7px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; }
-.pilot-status.active { color:var(--green); background:rgba(22,155,98,.08); }
-.pilot-status.inactive { color:var(--red); background:rgba(208,40,35,.08); }
-.numeric { font-weight:700; }
-.pilot-loading { min-height:180px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:10px; }
-.pilot-loading.error { color:var(--red); }
-@media (max-width:760px) {
-    .pilots-intro { align-items:flex-start; flex-direction:column; gap:25px; }
-    .pilots-intro h2 { font-size:32px; }
-    .pilot-roster-header { align-items:flex-start; flex-direction:column; }
-    .pilot-search-wrap { width:100%; }
+
+
+.career-item:last-child {
+    border-right: 0;
+}
+
+
+.career-item strong {
+    font-size: 23px;
+    letter-spacing: -0.7px;
+}
+
+
+.account-summary {
+    padding: 8px 24px 18px;
+}
+
+
+.account-summary div {
+    padding: 14px 0;
+    border-bottom: 1px solid #eeeeeb;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+
+.account-summary div:last-child {
+    border-bottom: 0;
+}
+
+
+.flight-history-panel {
+    margin-bottom: 28px;
+    overflow: hidden;
+}
+
+
+.pilot-history-header {
+    padding: 22px 24px;
+    border-bottom: 1px solid #eeeeeb;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+
+.pilot-history-header h3 {
+    margin: 5px 0 0;
+    color: #001a3a;
+    font-size: 18px;
+    letter-spacing: -0.4px;
+}
+
+
+.history-count {
+    color: #697582;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+.history-table-wrap {
+    width: 100%;
+    overflow-x: auto;
+}
+
+
+.history-table-header,
+.history-row {
+    min-width: 930px;
+    display: grid;
+    grid-template-columns:
+        0.75fr
+        0.95fr
+        1.35fr
+        0.85fr
+        0.85fr
+        0.7fr
+        0.85fr
+        0.95fr;
+    gap: 14px;
+    align-items: center;
+}
+
+
+.history-table-header {
+    padding: 12px 24px;
+    background: #f7f7f4;
+    border-bottom: 1px solid #e8e8e4;
+}
+
+
+.history-table-header span {
+    color: #8a929a;
+    font-size: 6px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+.history-row {
+    padding: 17px 24px;
+    border-bottom: 1px solid #eeeeeb;
+    color: #5f6b76;
+    font-size: 8px;
+}
+
+
+.history-row:last-child {
+    border-bottom: 0;
+}
+
+
+.history-row:hover {
+    background: #fbfbf9;
+}
+
+
+.history-flight,
+.history-score {
+    color: #001a3a;
+    font-weight: 700;
+}
+
+
+.history-status {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 5px 8px;
+    border-radius: 999px;
+    font-size: 6px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    text-transform: uppercase;
+}
+
+
+.history-status.accepted {
+    background: #edf7f1;
+    color: #207047;
+}
+
+
+.history-status.review {
+    background: #fff0ef;
+    color: #d02823;
+}
+
+
+.profile-loading,
+.profile-empty {
+    padding: 42px 24px;
+    text-align: center;
+    color: #8a929a;
+    font-size: 9px;
+}
+
+
+@media (max-width: 1100px) {
+
+    .pilot-profile-hero {
+        grid-template-columns: 1fr;
+    }
+
+
+    .pilot-meta {
+        min-width: 0;
+    }
+
+
+    .profile-secondary-grid {
+        grid-template-columns: 1fr;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .pilot-profile-hero {
+        padding-top: 30px;
+    }
+
+
+    .pilot-title-row {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+
+    .pilot-meta div {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+
+    .career-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+
+    .career-item:nth-child(2) {
+        border-right: 0;
+    }
+
+
+    .career-item:nth-child(-n+2) {
+        border-bottom: 1px solid #eeeeeb;
+    }
+
 }
