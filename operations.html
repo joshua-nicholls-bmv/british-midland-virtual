@@ -4,59 +4,111 @@
 <head>
 
     <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
 
     <title>Operations | British Midland Virtual</title>
 
-    <link rel="preconnect"
-          href="https://fonts.googleapis.com">
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
 
-    <link rel="preconnect"
-          href="https://fonts.gstatic.com"
-          crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-          rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    <link rel="stylesheet"
-          href="assets/css/base.css">
+    <link
+        rel="stylesheet"
+        href="assets/css/base.css"
+    >
 
-    <link rel="stylesheet"
-          href="assets/css/operations.css">
+    <link
+        rel="stylesheet"
+        href="assets/css/operations.css?v=4"
+    >
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 </head>
 
+
 <body>
+
+
+<!-- ===========================================================
+     HEADER
+=========================================================== -->
 
 <header class="site-header">
 
     <div class="container navbar">
 
-        <a class="logo"
-           href="index.html">
+        <a
+            class="logo"
+            href="index.html"
+        >
 
-            <img src="assets/images/logo.png"
-                 alt="British Midland Virtual">
+            <img
+                src="assets/images/logo.png"
+                alt="British Midland Virtual"
+            >
 
         </a>
+
 
         <nav>
 
             <ul class="nav-links">
 
-                <li><a href="index.html">HOME</a></li>
+                <li>
+                    <a href="index.html">
+                        HOME
+                    </a>
+                </li>
 
-                <li><a href="fleet.html">FLEET</a></li>
+                <li>
+                    <a href="fleet.html">
+                        FLEET
+                    </a>
+                </li>
 
-                <li><a href="network.html">NETWORK</a></li>
+                <li>
+                    <a href="network.html">
+                        NETWORK
+                    </a>
+                </li>
 
-                <li><a class="active"
-                       href="operations.html">OPERATIONS</a></li>
+                <li>
+                    <a
+                        class="active"
+                        href="operations.html"
+                    >
+                        OPERATIONS
+                    </a>
+                </li>
 
-                <li><a href="news.html">NEWS</a></li>
+                <li>
+                    <a href="news.html">
+                        NEWS
+                    </a>
+                </li>
 
-                <li><a href="join.html">JOIN</a></li>
+                <li>
+                    <a href="join.html">
+                        JOIN
+                    </a>
+                </li>
 
             </ul>
 
@@ -66,7 +118,9 @@
 
 </header>
 
+
 <main>
+
 
 <!-- ===========================================================
      HERO
@@ -76,6 +130,7 @@
 
     <div class="hero-overlay"></div>
 
+
     <div class="container hero-content">
 
         <p class="hero-kicker">
@@ -83,6 +138,7 @@
             BRITISH MIDLAND • OPERATIONS CONTROL
 
         </p>
+
 
         <h1>
 
@@ -92,33 +148,35 @@
 
         </h1>
 
+
         <div class="hero-divider"></div>
+
 
         <p class="hero-copy">
 
             Welcome to the British Midland Operations Control Centre.
 
-            Every flight is planned, monitored and completed using
-            realistic airline procedures inspired by modern commercial
-            operations, providing an immersive experience from dispatch
-            through to arrival.
+            Every flight is recorded through our dedicated ACARS platform,
+            connecting our pilots, aircraft and network to one operational
+            system.
 
         </p>
 
+
         <div class="hero-buttons">
 
-            <a href="#operations-overview"
-               class="primary-button">
-
-                Explore Operations
-
+            <a
+                href="#live-operations"
+                class="primary-button"
+            >
+                View Operations
             </a>
 
-            <a href="#fleet-register"
-               class="secondary-button">
-
-                Fleet Register
-
+            <a
+                href="#recent-operations"
+                class="secondary-button"
+            >
+                Recent Flights
             </a>
 
         </div>
@@ -127,40 +185,40 @@
 
 </section>
 
+
 <!-- ===========================================================
      INTRODUCTION
 =========================================================== -->
 
-<section id="operations-overview"
-         class="operations-intro">
+<section
+    id="operations-overview"
+    class="operations-intro"
+>
 
     <div class="container narrow">
 
         <p class="eyebrow">
-
             OPERATIONS PHILOSOPHY
-
         </p>
 
+
         <h2>
-
             Every Flight Matters
-
         </h2>
+
 
         <div class="title-line"></div>
 
+
         <p class="intro-text">
 
-            British Midland Virtual recreates the structure and
-            professionalism of a modern airline while remaining
-            welcoming to pilots of every experience level.
+            British Midland Virtual combines realistic airline operations
+            with an accessible community experience.
 
-            Every departure begins with careful planning,
-            continues with realistic operational procedures,
-            and ends with accurate flight recording that will
-            eventually integrate with our own custom ACARS
-            platform and Operations Control Centre.
+            From dispatch and departure through to landing and final
+            flight submission, our ACARS platform records the activity
+            taking place across the airline and provides a growing
+            operational history of British Midland Virtual.
 
         </p>
 
@@ -168,8 +226,9 @@
 
 </section>
 
+
 <!-- ===========================================================
-     QUICK OVERVIEW
+     OPERATIONS PILLARS
 =========================================================== -->
 
 <section class="operations-summary">
@@ -178,47 +237,69 @@
 
         <div class="summary-grid">
 
+
             <article class="summary-item">
 
-                <div class="summary-icon">✈</div>
+                <div class="summary-icon">
+                    ✈
+                </div>
 
-                <h3>Flight Dispatch</h3>
+                <h3>
+                    Flight Operations
+                </h3>
 
                 <p>
-                    Every flight begins with structured planning,
-                    operational documentation and realistic airline
-                    procedures before departure.
+
+                    Pilots operate scheduled British Midland services
+                    across our growing network using realistic flight
+                    planning and airline procedures.
+
                 </p>
 
             </article>
 
+
             <article class="summary-item">
 
-                <div class="summary-icon">📡</div>
+                <div class="summary-icon">
+                    ◉
+                </div>
 
-                <h3>Operations Control</h3>
+                <h3>
+                    Operations Control
+                </h3>
 
                 <p>
-                    Our Operations Control Centre oversees aircraft,
-                    fleet availability and network operations across
-                    the British Midland route network.
+
+                    Flight activity, pilot performance and operational
+                    statistics are recorded centrally through the
+                    British Midland ACARS platform.
+
                 </p>
 
             </article>
 
+
             <article class="summary-item">
 
-                <div class="summary-icon">💻</div>
+                <div class="summary-icon">
+                    ▦
+                </div>
 
-                <h3>Future ACARS</h3>
+                <h3>
+                    ACARS
+                </h3>
 
                 <p>
-                    A dedicated British Midland ACARS platform will
-                    provide flight tracking, automatic PIREPs and
-                    integrated pilot logbooks.
+
+                    Our dedicated ACARS application records completed
+                    flights, flight time, landings, go-arounds and
+                    performance information automatically.
+
                 </p>
 
             </article>
+
 
         </div>
 
@@ -226,699 +307,535 @@
 
 </section>
 
+
 <!-- ===========================================================
-     OPERATIONS CONTROL CENTRE
+     LIVE OPERATIONAL OVERVIEW
 =========================================================== -->
 
-<section class="operations-dashboard"
-         id="fleet-register">
+<section
+    id="live-operations"
+    class="operations-dashboard"
+>
 
     <div class="container">
+
 
         <div class="dashboard-header">
 
-            <p class="eyebrow">
-
-                AIRLINE OPERATIONS
-
-            </p>
+            <span class="eyebrow">
+                ACARS NETWORK
+            </span>
 
             <h2>
-
-                Operational Overview - Example Only - Not Live Information
-
+                Operational Overview
             </h2>
 
             <div class="title-line"></div>
 
             <p>
 
-                Explore the operational structure behind British Midland Virtual.
-                From our active fleet and future aircraft deliveries to the departments
-                that support day-to-day airline operations, this overview highlights the
-                organisation, planning and infrastructure that underpin every flight
-                across our growing network.
+                Current British Midland Virtual statistics generated
+                directly from completed ACARS flight reports.
 
             </p>
 
         </div>
-        <!-- PART 2 STARTS HERE -->
-        <!-- ===========================================================
-     OPERATIONS CONTROL CENTRE GRID
-=========================================================== -->
 
-<div class="dashboard-grid">
 
-    <!-- =======================================================
-         FLEET REGISTER
-    ======================================================== -->
+        <!-- LIVE STATUS -->
 
-    <div class="dashboard-card fleet-register">
+        <div class="live-status-bar">
 
-        <div class="card-header">
+            <div class="live-status-left">
 
-            <h3>Fleet Register</h3>
+                <span class="live-dot"></span>
 
-            <span class="card-status active">
+                <div>
 
-                Active Fleet
+                    <strong>
+                        ACARS DATA
+                    </strong>
 
-            </span>
+                    <span id="operationsStatus">
+                        CONNECTING
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="live-status-right">
+
+                <span>
+                    LAST OPERATION
+                </span>
+
+                <strong id="lastOperation">
+                    —
+                </strong>
+
+            </div>
 
         </div>
 
-        <table class="fleet-table">
 
-            <thead>
+        <!-- PRIMARY STATISTICS -->
 
-                <tr>
+        <div class="operations-stats-grid">
 
-                    <th>Registration</th>
-                    <th>Aircraft</th>
-                    <th>Status</th>
-                    <th>Integration</th>
 
-                </tr>
+            <article class="operations-stat">
 
-            </thead>
+                <span class="operations-stat-label">
+                    ACTIVE PILOTS
+                </span>
 
-            <tbody>
+                <strong id="activePilots">
+                    —
+                </strong>
 
-                <!-- A319 -->
+                <small>
+                    Current British Midland roster
+                </small>
 
-                <tr>
+            </article>
 
-                    <td>G-BMKA</td>
 
-                    <td>A319</td>
+            <article class="operations-stat">
 
-                    <td><span class="pill green">Available</span></td>
+                <span class="operations-stat-label">
+                    COMPLETED FLIGHTS
+                </span>
 
-                    <td><span class="pill green">Operational</span></td>
+                <strong id="totalFlights">
+                    —
+                </strong>
 
-                </tr>
+                <small>
+                    Recorded through ACARS
+                </small>
 
-                <tr>
+            </article>
 
-                    <td>G-BMKB</td>
 
-                    <td>A319</td>
+            <article class="operations-stat">
 
-                    <td><span class="pill blue">Flying</span></td>
+                <span class="operations-stat-label">
+                    FLIGHT TIME
+                </span>
 
-                    <td><span class="pill green">Operational</span></td>
+                <strong id="totalFlightTime">
+                    —
+                </strong>
 
-                </tr>
+                <small>
+                    Total recorded block time
+                </small>
 
-                <!-- A320 -->
+            </article>
 
-                <tr>
 
-                    <td>G-BMIA</td>
+            <article class="operations-stat">
 
-                    <td>A320</td>
+                <span class="operations-stat-label">
+                    LANDINGS
+                </span>
 
-                    <td><span class="pill green">Available</span></td>
+                <strong id="totalLandings">
+                    —
+                </strong>
 
-                    <td><span class="pill green">Operational</span></td>
+                <small>
+                    Recorded arrivals
+                </small>
 
-                </tr>
+            </article>
 
-                <tr>
-
-                    <td>G-BMIB</td>
-
-                    <td>A320</td>
-
-                    <td><span class="pill blue">Boarding</span></td>
-
-                    <td><span class="pill green">Operational</span></td>
-
-                </tr>
-
-                <tr>
-
-                    <td>G-BMIC</td>
-
-                    <td>A320</td>
-
-                    <td><span class="pill amber">Integration</span></td>
-
-                    <td><span class="pill amber">In Progress</span></td>
-
-                </tr>
-
-                <tr>
-
-                    <td>G-BMID</td>
-
-                    <td>A320</td>
-
-                    <td><span class="pill grey">Planned</span></td>
-
-                    <td><span class="pill grey">Pending</span></td>
-
-                </tr>
-
-                <!-- A321 -->
-
-                <tr>
-
-                    <td>G-BMJA</td>
-
-                    <td>A321</td>
-
-                    <td><span class="pill green">Operational</span></td>
-
-                    <td><span class="pill green">Operational</span></td>
-
-                </tr>
-
-                <tr>
-
-                    <td>G-BMJB</td>
-
-                    <td>A321</td>
-
-                    <td><span class="pill grey">Planned</span></td>
-
-                    <td><span class="pill grey">Pending</span></td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-    </div>
-
-    <!-- =======================================================
-         FUTURE DELIVERIES
-    ======================================================== -->
-
-    <div class="dashboard-card">
-
-        <div class="card-header">
-
-            <h3>Future Deliveries</h3>
-
-            <span class="card-status future">
-
-                On Order
-
-            </span>
 
         </div>
 
-        <table class="fleet-table">
 
-            <thead>
+        <!-- SECONDARY STATISTICS -->
 
-                <tr>
+        <div class="performance-grid">
 
-                    <th>Registration</th>
-                    <th>Aircraft</th>
-                    <th>Expected</th>
 
-                </tr>
+            <article class="performance-card">
 
-            </thead>
+                <span>
+                    AVERAGE LANDING
+                </span>
 
-            <tbody>
+                <strong id="averageLanding">
+                    —
+                </strong>
 
-                <tr>
+                <small>
+                    FPM
+                </small>
 
-                    <td>G-BMFA</td>
+            </article>
 
-                    <td>A350-1000</td>
 
-                    <td>Q2 2027</td>
+            <article class="performance-card">
 
-                </tr>
+                <span>
+                    BEST LANDING
+                </span>
 
-                <tr>
+                <strong id="bestLanding">
+                    —
+                </strong>
 
-                    <td>G-BMFB</td>
+                <small>
+                    FPM
+                </small>
 
-                    <td>A350-1000</td>
+            </article>
 
-                    <td>Q3 2027</td>
 
-                </tr>
+            <article class="performance-card">
 
-                <tr>
+                <span>
+                    GO-AROUNDS
+                </span>
 
-                    <td>G-BMFC</td>
+                <strong id="totalGoArounds">
+                    —
+                </strong>
 
-                    <td>A350-1000</td>
+                <small>
+                    Recorded by ACARS
+                </small>
 
-                    <td>Planned</td>
+            </article>
 
-                </tr>
-
-                <tr>
-
-                    <td>G-BMFD</td>
-
-                    <td>A350-1000</td>
-
-                    <td>Future Expansion</td>
-
-                </tr>
-
-            </tbody>
-
-        </table>
-
-        <div class="delivery-note">
-
-            <strong>Fleet Strategy</strong>
-
-            <p>
-
-                The Airbus A350 fleet will support future long-haul
-                expansion from Birmingham including North America
-                and Caribbean destinations.
-
-            </p>
 
         </div>
 
     </div>
-
-    <!-- =======================================================
-         OPERATIONS STATIONS
-    ======================================================== -->
-
-    <div class="dashboard-card">
-
-        <div class="card-header">
-
-            <h3>Operations Stations</h3>
-
-            <span class="card-status active">
-
-                OCC Online
-
-            </span>
-
-        </div>
-
-        <div class="station">
-
-            <span>Flight Dispatch</span>
-
-            <span class="pill green">ONLINE</span>
-
-        </div>
-
-        <div class="station">
-
-            <span>Operations Control</span>
-
-            <span class="pill green">ONLINE</span>
-
-        </div>
-
-        <div class="station">
-
-            <span>Crew Scheduling</span>
-
-            <span class="pill green">ONLINE</span>
-
-        </div>
-
-        <div class="station">
-
-            <span>Network Control</span>
-
-            <span class="pill green">ACTIVE</span>
-
-        </div>
-
-        <div class="station">
-
-            <span>Maintenance Control</span>
-
-            <span class="pill green">NORMAL</span>
-
-        </div>
-
-        <div class="station">
-
-            <span>Weather Services</span>
-
-            <span class="pill green">NORMAL</span>
-
-        </div>
-
-        <div class="station">
-
-            <span>ACARS Platform</span>
-
-            <span class="pill amber">DEVELOPMENT</span>
-
-        </div>
-
-    </div>
-
-</div>
-
-</div>
 
 </section>
 
+
 <!-- ===========================================================
-     PART 3
-     LIVE FLIGHT INFORMATION DISPLAY
+     RECENT OPERATIONS
 =========================================================== -->
-    <section class="flight-board">
+
+<section
+    id="recent-operations"
+    class="flight-board"
+>
 
     <div class="container">
+
 
         <div class="board-header">
 
-            <p class="eyebrow">
-
-                FLIGHT INFORMATION DISPLAY
-
-            </p>
+            <span class="eyebrow">
+                OPERATIONS CONTROL
+            </span>
 
             <h2>
-
-                Sample Flight Information Display
-
-            </h2>
-
-            <p>
-
-              The display below demonstrates the planned appearance of the
-British Midland Flight Information Display. Once ACARS is
-available this board will update automatically with live
-departures, arrivals and aircraft status.
-
-
-            </p>
-
-        </div>
-
-        <div class="fids-board">
-
-            <div class="fids-title">
-
-                BRITISH MIDLAND OPERATIONS • LIVE DEPARTURES
-
-            </div>
-
-            <table class="fids-table">
-
-                <thead>
-
-                    <tr>
-
-                        <th>FLT</th>
-
-                        <th>REG</th>
-
-                        <th>DESTINATION</th>
-
-                        <th>TYPE</th>
-
-                        <th>GATE</th>
-
-                        <th>STD</th>
-
-                        <th>STATUS</th>
-
-                    </tr>
-
-                </thead>
-
-                <tbody id="flight-board-body">
-
-                    <tr>
-
-                        <td>BMA201</td>
-
-                        <td>G-BMIA</td>
-
-                        <td>Amsterdam</td>
-
-                        <td>A320</td>
-
-                        <td>52</td>
-
-                        <td>08:00</td>
-
-                        <td class="status-boarding">BOARDING</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>BMA211</td>
-
-                        <td>G-BMKA</td>
-
-                        <td>Dublin</td>
-
-                        <td>A319</td>
-
-                        <td>48</td>
-
-                        <td>08:20</td>
-
-                        <td class="status-taxi">TAXI</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>BMA241</td>
-
-                        <td>G-BMIB</td>
-
-                        <td>Paris CDG</td>
-
-                        <td>A320</td>
-
-                        <td>54</td>
-
-                        <td>09:00</td>
-
-                        <td class="status-airborne">CRUISE</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>BMA271</td>
-
-                        <td>G-BMJA</td>
-
-                        <td>Frankfurt</td>
-
-                        <td>A321</td>
-
-                        <td>55</td>
-
-                        <td>09:30</td>
-
-                        <td class="status-descent">DESCENT</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>BMA501</td>
-
-                        <td>G-BMJC</td>
-
-                        <td>Tenerife</td>
-
-                        <td>A321</td>
-
-                        <td>58</td>
-
-                        <td>10:10</td>
-
-                        <td class="status-scheduled">SCHEDULED</td>
-
-                    </tr>
-
-                    <tr>
-
-                        <td>BMA801</td>
-
-                        <td>G-BMFA</td>
-
-                        <td>New York JFK</td>
-
-                        <td>A350</td>
-
-                        <td>Future</td>
-
-                        <td>2027</td>
-
-                        <td class="status-future">COMING SOON</td>
-
-                    </tr>
-
-                </tbody>
-
-            </table>
-
-        </div>
-
-    </div>
-
-</section>
-
-<!-- ===========================================================
-     FUTURE ACARS
-=========================================================== -->
-    <section class="future-acars">
-
-    <div class="container">
-
-        <div class="acars-header">
-
-            <p class="eyebrow">
-
-                FUTURE DEVELOPMENT
-
-            </p>
-
-            <h2>
-
-                British Midland ACARS
-
+                Recent Operations
             </h2>
 
             <div class="title-line"></div>
 
             <p>
 
-                Our next-generation airline operations platform is currently
-                under development. Designed specifically for Microsoft Flight
-                Simulator, British Midland ACARS will connect every flight to
-                our Operations Control Centre, providing live fleet tracking,
-                dispatch, pilot logbooks and automatic flight reporting.
+                The latest completed British Midland flights submitted
+                through the ACARS network.
 
             </p>
 
         </div>
 
+
+        <div class="fids-board">
+
+
+            <div class="fids-title">
+
+                BRITISH MIDLAND • RECENT ACARS OPERATIONS
+
+            </div>
+
+
+            <div class="fids-scroll">
+
+                <table class="fids-table">
+
+                    <thead>
+
+                        <tr>
+
+                            <th>
+                                FLIGHT
+                            </th>
+
+                            <th>
+                                PILOT
+                            </th>
+
+                            <th>
+                                ROUTE
+                            </th>
+
+                            <th>
+                                AIRCRAFT
+                            </th>
+
+                            <th>
+                                REG
+                            </th>
+
+                            <th>
+                                TIME
+                            </th>
+
+                            <th>
+                                LANDING
+                            </th>
+
+                            <th>
+                                SCORE
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+
+                    <tbody id="recentOperations">
+
+                        <tr>
+
+                            <td
+                                colspan="8"
+                                class="operations-loading"
+                            >
+                                CONNECTING TO BRITISH MIDLAND ACARS...
+                            </td>
+
+                        </tr>
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+        </div>
+
+
+        <p class="board-note">
+
+            <strong>
+                Live operational data.
+            </strong>
+
+            Flights shown above are completed ACARS submissions and
+            do not represent aircraft currently airborne.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ===========================================================
+     ACARS PLATFORM
+=========================================================== -->
+
+<section class="future-acars">
+
+    <div class="container">
+
+
+        <div class="acars-header">
+
+            <span class="eyebrow">
+                BRITISH MIDLAND TECHNOLOGY
+            </span>
+
+            <h2>
+                BM ACARS
+            </h2>
+
+            <div class="title-line"></div>
+
+            <p>
+
+                The operational backbone of British Midland Virtual.
+
+                BM ACARS records our flights and connects pilot activity
+                directly with the airline's operational database.
+
+            </p>
+
+        </div>
+
+
         <div class="acars-grid">
+
+
+            <!-- ACARS WINDOW -->
 
             <div class="acars-preview">
 
+
                 <div class="window-bar">
 
-                    ● ● ●
+                    <span class="window-dot"></span>
 
-                    <span>British Midland ACARS v1.0</span>
+                    BRITISH MIDLAND ACARS
 
                 </div>
+
 
                 <div class="window-body">
 
-                    <div class="mock-line">
-                        Flight BMA201
-                    </div>
 
                     <div class="mock-line">
-                        Aircraft G-BMIA
+
+                        <span>
+                            SYSTEM
+                        </span>
+
+                        <strong class="acars-online">
+                            ONLINE
+                        </strong>
+
                     </div>
+
 
                     <div class="mock-line">
-                        Birmingham → Amsterdam
+
+                        <span>
+                            ACTIVE PILOTS
+                        </span>
+
+                        <strong id="acarsPilotCount">
+                            —
+                        </strong>
+
                     </div>
+
 
                     <div class="mock-line">
-                        FL360
+
+                        <span>
+                            FLIGHTS RECORDED
+                        </span>
+
+                        <strong id="acarsFlightCount">
+                            —
+                        </strong>
+
                     </div>
+
 
                     <div class="mock-line">
-                        GS 451 KT
+
+                        <span>
+                            FLIGHT TIME
+                        </span>
+
+                        <strong id="acarsFlightTime">
+                            —
+                        </strong>
+
                     </div>
+
 
                     <div class="mock-line">
-                        Fuel Remaining 5.6T
+
+                        <span>
+                            LAST SUBMISSION
+                        </span>
+
+                        <strong id="acarsLastSubmission">
+                            —
+                        </strong>
+
                     </div>
 
-                    <div class="mock-line online">
-
-                        ● LIVE TELEMETRY
-
-                    </div>
 
                 </div>
 
             </div>
+
+
+            <!-- ACARS FEATURES -->
 
             <div class="acars-features">
 
+
                 <div class="feature-item">
 
-                    <h3>Live Simulator Integration</h3>
+                    <h3>
+                        Automatic Flight Recording
+                    </h3>
 
                     <p>
 
-                        Automatic connection with supported aircraft including
-                        FlyByWire, Fenix and future Microsoft Flight Simulator
-                        aircraft.
+                        Flight time, aircraft, route, landing performance
+                        and operational events are recorded directly
+                        through the ACARS application.
 
                     </p>
 
                 </div>
 
+
                 <div class="feature-item">
 
-                    <h3>Automatic Flight Tracking</h3>
+                    <h3>
+                        Pilot Statistics
+                    </h3>
 
                     <p>
 
-                        Every phase of flight updates the Operations Control
-                        Centre in real time.
+                        Every completed flight contributes to each pilot's
+                        British Midland career record, including hours,
+                        flights, landings and performance statistics.
 
                     </p>
 
                 </div>
 
+
                 <div class="feature-item">
 
-                    <h3>Pilot Logbook</h3>
+                    <h3>
+                        Operations Integration
+                    </h3>
 
                     <p>
 
-                        Hours, landings, routes and aircraft ratings are
-                        recorded automatically.
+                        ACARS submissions feed directly into British Midland
+                        Operations Control, giving management an up-to-date
+                        view of airline activity.
 
                     </p>
 
                 </div>
 
-                <div class="feature-item">
-
-                    <h3>Dispatch Integration</h3>
-
-                    <p>
-
-                        Import flight plans, routes and briefing packs directly
-                        into the simulator.
-
-                    </p>
-
-                </div>
 
             </div>
+
 
         </div>
 
     </div>
 
 </section>
+
+
 <!-- ===========================================================
      JOIN BRITISH MIDLAND
 =========================================================== -->
@@ -930,41 +847,43 @@ departures, arrivals and aircraft status.
         <div class="cta-panel">
 
             <p class="eyebrow">
-
                 JOIN BRITISH MIDLAND
-
             </p>
 
+
             <h2>
-
                 Ready for Departure?
-
             </h2>
+
 
             <div class="title-line"></div>
 
+
             <p>
 
-                Whether you're flying your very first virtual airline
-                flight or you're an experienced Airbus captain,
-                British Midland Virtual offers a professional,
-                welcoming environment inspired by one of Britain's
-                most iconic airlines.
+                Whether you're flying your first virtual airline flight
+                or you're an experienced Airbus captain, British Midland
+                Virtual offers a professional and welcoming environment
+                backed by our own operational platform.
 
             </p>
 
+
             <div class="cta-buttons">
 
-                <a href="join.html" class="primary-button">
-
+                <a
+                    href="join.html"
+                    class="primary-button"
+                >
                     Become a Pilot
-
                 </a>
 
-                <a href="fleet.html" class="secondary-button">
 
+                <a
+                    href="fleet.html"
+                    class="secondary-button"
+                >
                     Explore Our Fleet
-
                 </a>
 
             </div>
@@ -975,7 +894,9 @@ departures, arrivals and aircraft status.
 
 </section>
 
+
 </main>
+
 
 <!-- ===========================================================
      FOOTER
@@ -987,10 +908,13 @@ departures, arrivals and aircraft status.
 
         <div class="footer-grid">
 
+
             <div class="footer-brand">
 
-                <img src="assets/images/logo.png"
-                     alt="British Midland Virtual">
+                <img
+                    src="assets/images/logo.png"
+                    alt="British Midland Virtual"
+                >
 
                 <p>
 
@@ -1002,47 +926,96 @@ departures, arrivals and aircraft status.
 
             </div>
 
+
             <div class="footer-links">
 
-                <h4>Navigation</h4>
+                <h4>
+                    Navigation
+                </h4>
 
                 <ul>
 
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="fleet.html">Fleet</a></li>
-                    <li><a href="network.html">Network</a></li>
-                    <li><a href="operations.html">Operations</a></li>
-                    <li><a href="news.html">News</a></li>
-                    <li><a href="join.html">Join</a></li>
+                    <li>
+                        <a href="index.html">
+                            Home
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="fleet.html">
+                            Fleet
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="network.html">
+                            Network
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="operations.html">
+                            Operations
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="news.html">
+                            News
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="join.html">
+                            Join
+                        </a>
+                    </li>
 
                 </ul>
 
             </div>
 
+
             <div class="footer-links">
 
-                <h4>Operations</h4>
+                <h4>
+                    Operations
+                </h4>
 
                 <ul>
 
-                    <li>Operations Control Centre</li>
-                    <li>Flight Dispatch</li>
-                    <li>Fleet Register</li>
-                    <li>Future ACARS</li>
-                    <li>Pilot Logbook</li>
+                    <li>
+                        Operations Control
+                    </li>
+
+                    <li>
+                        Flight Dispatch
+                    </li>
+
+                    <li>
+                        BM ACARS
+                    </li>
+
+                    <li>
+                        Pilot Statistics
+                    </li>
+
+                    <li>
+                        Flight Reporting
+                    </li>
 
                 </ul>
 
             </div>
+
 
         </div>
+
 
         <div class="footer-bottom">
 
             <p>
-
                 © 2026 British Midland Virtual. All Rights Reserved.
-
             </p>
 
             <p>
@@ -1058,7 +1031,8 @@ departures, arrivals and aircraft status.
 
 </footer>
 
-<script src="assets/js/operations.js"></script>
+
+<script src="assets/js/operations.js?v=4"></script>
 
 </body>
 
