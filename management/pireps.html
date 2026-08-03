@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        PIREP Centre | British Midland Virtual
+    </title>
+
+    <meta
+        name="robots"
+        content="noindex, nofollow"
+    >
+
+
+    <!-- FONTS -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+        rel="stylesheet"
+    >
+
+
+    <!-- OPERATIONS CONTROL STYLES -->
+
+    <link
+        rel="stylesheet"
+        href="/management/dashboard.css"
+    >
+
+    <link
+        rel="stylesheet"
+        href="/management/pireps.css?v=1"
+    >
+
+
+    <!-- SUPABASE -->
+
+    <script
+        src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"
+    ></script>
+
+</head>
+
+
+<body>
+
+
+    <!-- =====================================================
+         AUTHENTICATION GATE
+         ===================================================== -->
+
+    <div
+        id="authGate"
+        class="auth-gate"
+    >
+
+        <div class="auth-gate-inner">
+
+            <div class="auth-mark">
+                BM
+            </div>
+
+            <span>
+                OPERATIONS CONTROL
+            </span>
+
+            <small>
+                AUTHENTICATING MANAGEMENT SESSION
+            </small>
+
+        </div>
+
+    </div>
+
+
+    <!-- =====================================================
+         APPLICATION
+         ===================================================== -->
+
+    <div
+        id="dashboardApp"
+        class="app hidden"
+    >
+
+
+        <!-- =================================================
+             SIDEBAR
+             ================================================= -->
+
+        <aside class="sidebar">
+
+            <div>
+
+                <div class="sidebar-brand">
+
+                    <div class="brand-mark">
+                        BM
+                    </div>
+
+                    <div>
+
+                        <strong>
+                            BRITISH MIDLAND
+                        </strong>
+
+                        <span>
+                            OPERATIONS CONTROL
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <nav class="navigation">
+
+
+                    <a
+                        href="/management/dashboard.html"
+                        class="nav-item"
+                    >
+                        <span class="nav-symbol">▦</span>
+                        Dashboard
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="nav-item disabled"
+                    >
+                        <span class="nav-symbol">◉</span>
+                        Live Operations
+                        <small>SOON</small>
+                    </a>
+
+
+                    <a
+                        href="/management/pireps.html"
+                        class="nav-item active"
+                    >
+                        <span class="nav-symbol">✈</span>
+                        PIREPs
+                    </a>
+
+
+                    <a
+                        href="/management/pilots.html"
+                        class="nav-item"
+                    >
+                        <span class="nav-symbol">◎</span>
+                        Pilots
+                    </a>
+
+
+                    <a
+                        href="#"
+                        class="nav-item disabled"
+                    >
+                        <span class="nav-symbol">!</span>
+                        Reviews
+                        <small>SOON</small>
+                    </a>
+
+
+                </nav>
+
+            </div>
+
+
+            <div class="sidebar-footer">
+
+                <span>
+                    BMV OPERATIONS
+                </span>
+
+                <span>
+                    MANAGEMENT SYSTEM
+                </span>
+
+            </div>
+
+        </aside>
+
+
+        <!-- =================================================
+             MAIN
+             ================================================= -->
+
+        <main class="main">
+
+
+            <!-- TOP BAR -->
+
+            <header class="topbar">
+
+                <div>
+
+                    <span class="section-label">
+                        MANAGEMENT PORTAL
+                    </span>
+
+                    <h1>
+                        PIREP Centre
+                    </h1>
+
+                </div>
+
+
+                <div class="user-area">
+
+                    <div class="user-copy">
+
+                        <strong id="managementName">
+                            —
+                        </strong>
+
+                        <span id="managementRole">
+                            —
+                        </span>
+
+                    </div>
+
+
+                    <button
+                        id="signOutButton"
+                        type="button"
+                    >
+                        SIGN OUT
+                    </button>
+
+                </div>
+
+            </header>
+
+
+            <!-- INTRO -->
+
+            <section class="pireps-intro">
+
+                <div>
+
+                    <span class="eyebrow">
+                        FLIGHT OPERATIONS
+                    </span>
+
+                    <h2>
+                        Flight Reports
+                    </h2>
+
+                    <p>
+                        Review ACARS flight reports submitted
+                        across British Midland Virtual.
+                    </p>
+
+                </div>
+
+
+                <div class="pirep-live-status">
+
+                    <span class="status-dot"></span>
+
+                    <div>
+
+                        <strong>
+                            ACARS
+                        </strong>
+
+                        <small>
+                            LIVE DATABASE
+                        </small>
+
+                    </div>
+
+                </div>
+
+            </section>
+
+
+            <!-- =================================================
+                 SUMMARY STATISTICS
+                 ================================================= -->
+
+            <section class="stats-grid pirep-stats-grid">
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        TOTAL PIREPS
+                    </span>
+
+                    <strong id="totalPireps">
+                        —
+                    </strong>
+
+                    <small>
+                        Recorded flights
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        FLIGHT TIME
+                    </span>
+
+                    <strong id="totalBlockTime">
+                        —
+                    </strong>
+
+                    <small>
+                        Total block time
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card">
+
+                    <span class="stat-label">
+                        AVG LANDING
+                    </span>
+
+                    <strong id="averageLanding">
+                        —
+                    </strong>
+
+                    <small>
+                        Across recorded landings
+                    </small>
+
+                </article>
+
+
+                <article class="stat-card review-stat">
+
+                    <span class="stat-label">
+                        REQUIRES REVIEW
+                    </span>
+
+                    <strong id="reviewCount">
+                        —
+                    </strong>
+
+                    <small>
+                        Management attention
+                    </small>
+
+                </article>
+
+
+            </section>
+
+
+            <!-- =================================================
+                 PIREP DATABASE
+                 ================================================= -->
+
+            <section class="panel pirep-centre-panel">
+
+
+                <!-- HEADER -->
+
+                <div class="pirep-centre-header">
+
+                    <div>
+
+                        <span class="panel-kicker">
+                            ACARS DATABASE
+                        </span>
+
+                        <h3>
+                            Submitted PIREPs
+                        </h3>
+
+                    </div>
+
+
+                    <div class="pirep-controls">
+
+
+                        <div class="pirep-control">
+
+                            <label for="pirepSearch">
+                                SEARCH
+                            </label>
+
+                            <input
+                                id="pirepSearch"
+                                type="search"
+                                placeholder="Flight, pilot, airport..."
+                                autocomplete="off"
+                            >
+
+                        </div>
+
+
+                        <div class="pirep-control">
+
+                            <label for="reviewFilter">
+                                STATUS
+                            </label>
+
+                            <select id="reviewFilter">
+
+                                <option value="all">
+                                    All PIREPs
+                                </option>
+
+                                <option value="review">
+                                    Requires Review
+                                </option>
+
+                                <option value="clear">
+                                    No Review Required
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+
+
+                <!-- RESULT COUNT -->
+
+                <div class="pirep-result-bar">
+
+                    <span id="resultCount">
+                        Loading PIREPs...
+                    </span>
+
+                    <button
+                        id="refreshButton"
+                        type="button"
+                    >
+                        REFRESH DATA
+                    </button>
+
+                </div>
+
+
+                <!-- TABLE -->
+
+                <div class="pirep-table-wrap">
+
+
+                    <div class="pirep-table-header">
+
+                        <span>
+                            FLIGHT
+                        </span>
+
+                        <span>
+                            PILOT
+                        </span>
+
+                        <span>
+                            ROUTE
+                        </span>
+
+                        <span>
+                            AIRCRAFT
+                        </span>
+
+                        <span>
+                            BLOCK
+                        </span>
+
+                        <span>
+                            LANDING
+                        </span>
+
+                        <span>
+                            SCORE
+                        </span>
+
+                        <span>
+                            STATUS
+                        </span>
+
+                        <span>
+                            SUBMITTED
+                        </span>
+
+                    </div>
+
+
+                    <div
+                        id="pirepRoster"
+                        class="pirep-table-body"
+                    >
+
+                        <div class="pirep-loading">
+                            Loading British Midland flight reports...
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+
+            </section>
+
+
+            <!-- FOOTER -->
+
+            <footer class="page-footer">
+
+                <span>
+                    BRITISH MIDLAND VIRTUAL
+                </span>
+
+                <span>
+                    OPERATIONS CONTROL • PIREP CENTRE
+                </span>
+
+            </footer>
+
+
+        </main>
+
+
+    </div>
+
+
+    <!-- ONE PIREPS SCRIPT ONLY -->
+
+    <script
+        src="/management/pireps.js?v=1"
+    ></script>
+
+
+</body>
+
+</html>
