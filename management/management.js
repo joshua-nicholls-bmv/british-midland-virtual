@@ -1,3 +1,13 @@
+// ============================================================
+// BRITISH MIDLAND VIRTUAL
+// MANAGEMENT PORTAL - LOGIN
+// ============================================================
+
+
+// ------------------------------------------------------------
+// SUPABASE CONFIGURATION
+// ------------------------------------------------------------
+
 const SUPABASE_URL =
     "https://eqbaezhcwnjlcnvtfxho.supabase.co";
 
@@ -12,6 +22,10 @@ const supabaseClient =
     );
 
 
+// ------------------------------------------------------------
+// PAGE ELEMENTS
+// ------------------------------------------------------------
+
 const loginForm =
     document.getElementById("loginForm");
 
@@ -21,6 +35,16 @@ const loginButton =
 const loginMessage =
     document.getElementById("loginMessage");
 
+const emailInput =
+    document.getElementById("email");
+
+const passwordInput =
+    document.getElementById("password");
+
+
+// ------------------------------------------------------------
+// MESSAGE HANDLING
+// ------------------------------------------------------------
 
 function showMessage(message, type = "") {
 
@@ -30,17 +54,27 @@ function showMessage(message, type = "") {
     loginMessage.className =
         "login-message";
 
+
     if (type) {
-        loginMessage.classList.add(type);
+
+        loginMessage.classList.add(
+            type
+        );
+
     }
 
 }
 
 
+// ------------------------------------------------------------
+// LOGIN BUTTON STATE
+// ------------------------------------------------------------
+
 function setLoading(loading) {
 
     loginButton.disabled =
         loading;
+
 
     loginButton.textContent =
         loading
@@ -50,9 +84,16 @@ function setLoading(loading) {
 }
 
 
+// ------------------------------------------------------------
+// VERIFY MANAGEMENT ACCESS
+// ------------------------------------------------------------
+
 async function verifyManagementAccess(userId) {
 
-    const { data, error } =
+    const {
+        data,
+        error
+    } =
         await supabaseClient
             .from("management_users")
             .select(
@@ -86,9 +127,14 @@ async function verifyManagementAccess(userId) {
 }
 
 
+// ------------------------------------------------------------
+// HANDLE LOGIN
+// ------------------------------------------------------------
+
 async function handleLogin(event) {
 
     event.preventDefault();
+
 
     showMessage("");
 
@@ -96,19 +142,32 @@ async function handleLogin(event) {
 
 
     const email =
-        document
-            .getElementById("email")
-            .value
-            .trim();
+        emailInput.value.trim();
 
 
     const password =
-        document
-            .getElementById("password")
-            .value;
+        passwordInput.value;
+
+
+    if (!email || !password) {
+
+        showMessage(
+            "Please enter your management email and password.",
+            "error"
+        );
+
+        setLoading(false);
+
+        return;
+
+    }
 
 
     try {
+
+        // ----------------------------------------------------
+        // AUTHENTICATE WITH SUPABASE
+        // ----------------------------------------------------
 
         const {
             data,
@@ -117,12 +176,18 @@ async function handleLogin(event) {
             await supabaseClient
                 .auth
                 .signInWithPassword({
-                    email,
-                    password
+                    email: email,
+                    password: password
                 });
 
 
         if (error) {
+
+            console.error(
+                "Authentication failed:",
+                error.message
+            );
+
 
             showMessage(
                 "Email or password is incorrect.",
@@ -137,7 +202,7 @@ async function handleLogin(event) {
         if (!data.user) {
 
             showMessage(
-                "Authentication failed.",
+                "Authentication failed. Please try again.",
                 "error"
             );
 
@@ -146,6 +211,10 @@ async function handleLogin(event) {
         }
 
 
+        // ----------------------------------------------------
+        // VERIFY THAT THE AUTHENTICATED USER IS MANAGEMENT
+        // ----------------------------------------------------
+
         const managementUser =
             await verifyManagementAccess(
                 data.user.id
@@ -153,6 +222,13 @@ async function handleLogin(event) {
 
 
         if (!managementUser) {
+
+            /*
+             * The Supabase account exists but it is not
+             * authorised in management_users.
+             *
+             * Immediately destroy the authenticated session.
+             */
 
             await supabaseClient
                 .auth
@@ -169,19 +245,15 @@ async function handleLogin(event) {
         }
 
 
+        // ----------------------------------------------------
+        // MANAGEMENT ACCESS GRANTED
+        // ----------------------------------------------------
+
         showMessage(
             `Access granted. Welcome, ${managementUser.display_name}.`,
             "success"
         );
 
-
-        /*
-         * Dashboard does not exist yet.
-         *
-         * In Step 6 this becomes:
-         *
-         * window.location.href = "dashboard.html";
-         */
 
         console.log(
             "Management authentication successful:",
@@ -194,11 +266,19 @@ async function handleLogin(event) {
             }
         );
 
+
+        // ----------------------------------------------------
+        // REDIRECT TO OPERATIONS CONTROL
+        // ----------------------------------------------------
+
+        window.location.href =
+            "dashboard.html";
+
     }
     catch (error) {
 
         console.error(
-            "Login error:",
+            "Management login error:",
             error
         );
 
@@ -218,7 +298,105 @@ async function handleLogin(event) {
 }
 
 
+// ------------------------------------------------------------
+// EXISTING SESSION CHECK
+// ------------------------------------------------------------
+
+async function checkExistingSession() {
+
+    try {
+
+        const {
+            data,
+            error
+        } =
+            await supabaseClient
+                .auth
+                .getSession();
+
+
+        if (error) {
+
+            console.error(
+                "Unable to check existing session:",
+                error
+            );
+
+            return;
+
+        }
+
+
+        if (!data.session) {
+
+            return;
+
+        }
+
+
+        const user =
+            data.session.user;
+
+
+        const managementUser =
+            await verifyManagementAccess(
+                user.id
+            );
+
+
+        if (!managementUser) {
+
+            /*
+             * A Supabase session exists but the account
+             * is no longer authorised for management.
+             */
+
+            await supabaseClient
+                .auth
+                .signOut();
+
+
+            return;
+
+        }
+
+
+        /*
+         * User is already authenticated AND remains an
+         * active management user.
+         *
+         * Send them directly to Operations Control.
+         */
+
+        window.location.replace(
+            "dashboard.html"
+        );
+
+    }
+    catch (error) {
+
+        console.error(
+            "Existing session check failed:",
+            error
+        );
+
+    }
+
+}
+
+
+// ------------------------------------------------------------
+// EVENT LISTENERS
+// ------------------------------------------------------------
+
 loginForm.addEventListener(
     "submit",
     handleLogin
 );
+
+
+// ------------------------------------------------------------
+// INITIALISE LOGIN PAGE
+// ------------------------------------------------------------
+
+checkExistingSession();
