@@ -102,47 +102,4 @@ if (signOutButton) signOutButton.addEventListener("click", signOut);
 supabaseClient.auth.onAuthStateChange(event => { if (event === "SIGNED_OUT") redirectToLogin(); });
 initialisePilots();
 
-============================================================
-5. management/pilots.css
-============================================================
-.pilots-intro {
-    padding: 48px 0 34px;
-    display: flex;
-    align-items: flex-end;
-    justify-content: space-between;
-}
-.pilots-intro h2 { margin: 10px 0 8px; font-size: 40px; letter-spacing: -1.8px; }
-.pilots-intro p { margin: 0; color: var(--muted); font-size: 12px; }
-.roster-status { display: flex; align-items: center; gap: 11px; padding-bottom: 5px; }
-.roster-status strong,.roster-status small { display:block; }
-.roster-status strong { font-size:9px; letter-spacing:1px; }
-.roster-status small { margin-top:3px; color:var(--green); font-size:8px; font-weight:700; }
-.pilot-stats-grid { margin-bottom:18px; }
-.pilot-roster-panel { margin-bottom:24px; }
-.pilot-roster-header { min-height:92px; padding:18px 22px; display:flex; align-items:center; justify-content:space-between; gap:25px; border-bottom:1px solid var(--border); }
-.pilot-roster-header h3 { margin:6px 0 0; font-size:17px; }
-.pilot-search-wrap { width:min(310px,40%); }
-.pilot-search-wrap label { display:block; margin-bottom:7px; color:var(--muted); font-size:7px; font-weight:700; letter-spacing:1.2px; }
-.pilot-search-wrap input { width:100%; height:38px; padding:0 12px; border:1px solid var(--border); outline:none; background:#f8f8f6; color:var(--navy); font-family:inherit; font-size:10px; }
-.pilot-search-wrap input:focus { border-color:var(--navy); background:white; }
-.pilot-table-wrap { overflow-x:auto; }
-.pilot-table-header,.pilot-row { min-width:1040px; display:grid; grid-template-columns:1.35fr .8fr .6fr .85fr 1fr 1fr .75fr 1.1fr; gap:14px; align-items:center; }
-.pilot-table-header { min-height:44px; padding:0 22px; background:#f8f8f6; color:var(--muted); font-size:7px; font-weight:700; letter-spacing:1px; }
-.pilot-row { min-height:68px; padding:0 22px; border-top:1px solid #eeeeeb; color:var(--navy); font-size:10px; cursor:pointer; transition:background .15s ease; }
-.pilot-row:hover,.pilot-row:focus { background:#fbfaf8; outline:none; }
-.pilot-row:hover .pilot-identity strong { color:var(--red); }
-.pilot-identity strong,.pilot-identity small { display:block; }
-.pilot-identity strong { font-size:11px; }
-.pilot-identity small { margin-top:4px; color:var(--muted); font-size:8px; }
-.pilot-status { display:inline-flex; min-width:58px; height:23px; padding:0 8px; align-items:center; justify-content:center; font-size:7px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; }
-.pilot-status.active { color:var(--green); background:rgba(22,155,98,.08); }
-.pilot-status.inactive { color:var(--red); background:rgba(208,40,35,.08); }
-.numeric { font-weight:700; }
-.pilot-loading { min-height:180px; display:flex; align-items:center; justify-content:center; color:var(--muted); font-size:10px; }
-.pilot-loading.error { color:var(--red); }
-@media (max-width:760px) {
-    .pilots-intro { align-items:flex-start; flex-direction:column; gap:25px; }
-    .pilots-intro h2 { font-size:32px; }
-    .pilot-roster-header { align-items:flex-start; flex-direction:column; }
-    .pilot-search-wrap { width:100%; }
-}
+
