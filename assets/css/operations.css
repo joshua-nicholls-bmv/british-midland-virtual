@@ -81,10 +81,7 @@
 
     justify-content: center;
 
-    background:
-        url("../images/operations/hero.jpg")
-        center center / cover
-        no-repeat;
+    background: #001a3a;
 
     color: var(--text-white);
 
@@ -94,17 +91,7 @@
 
 
 .hero-overlay {
-
-    position: absolute;
-
-    inset: 0;
-
-    background:
-        linear-gradient(
-            rgba(0, 26, 58, .90),
-            rgba(0, 26, 58, .90)
-        );
-
+    display: none;
 }
 
 
