@@ -79,6 +79,8 @@
 
     align-items: center;
 
+    justify-content: center;
+
     background:
         url("../images/operations/hero.jpg")
         center center / cover
@@ -112,14 +114,22 @@
 
     z-index: 2;
 
-    max-width: 640px;
+    width: min(92%, 1100px);
+
+    max-width: 1100px;
+
+    margin: 0 auto;
+
+    text-align: center;
 
 }
 
 
 .hero-kicker {
 
-    margin-bottom: 18px;
+    display: inline-block;
+
+    margin-bottom: 20px;
 
     letter-spacing: .18em;
 
@@ -128,13 +138,15 @@
 
 .operations-hero h1 {
 
-    font-size: clamp(3.25rem, 6vw, 5.6rem);
+    max-width: 1050px;
 
-    line-height: .95;
+    margin: 18px auto 30px;
 
-    letter-spacing: -.035em;
+    font-size: clamp(3.4rem, 6vw, 5.8rem);
 
-    margin: 18px 0 30px;
+    line-height: .96;
+
+    letter-spacing: -.04em;
 
 }
 
@@ -145,7 +157,7 @@
 
     height: 4px;
 
-    margin: 0 0 34px;
+    margin: 0 auto 34px;
 
     background: var(--bm-red);
 
@@ -156,7 +168,9 @@
 
 .hero-copy {
 
-    max-width: 560px;
+    max-width: 760px;
+
+    margin: 0 auto 46px;
 
     font-size: 1.12rem;
 
@@ -164,14 +178,14 @@
 
     color: rgba(255, 255, 255, .92);
 
-    margin-bottom: 46px;
-
 }
 
 
 .hero-buttons {
 
     display: flex;
+
+    justify-content: center;
 
     gap: 24px;
 
@@ -1349,23 +1363,77 @@
 
         min-height: 80vh;
 
-        padding: 120px 0 80px;
+        padding: 150px 0 80px;
+
+    }
+
+
+    .hero-content {
+
+        width: min(90%, 680px);
+
+        max-width: 680px;
+
+        margin: 0 auto;
+
+        text-align: center;
 
     }
 
 
     .operations-hero h1 {
 
-        font-size: 3rem;
+        max-width: 620px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+        font-size: clamp(2.7rem, 12vw, 3.8rem);
+
+        line-height: 1;
+
+    }
+
+
+    .hero-copy {
+
+        max-width: 580px;
+
+        margin-left: auto;
+
+        margin-right: auto;
+
+        margin-bottom: 40px;
+
+        font-size: 1rem;
+
+        line-height: 1.7;
 
     }
 
 
     .hero-buttons {
 
+        width: min(100%, 360px);
+
+        margin-left: auto;
+
+        margin-right: auto;
+
         flex-direction: column;
 
-        align-items: flex-start;
+        align-items: stretch;
+
+    }
+
+
+    .hero-buttons .primary-button,
+    .hero-buttons .secondary-button {
+
+        width: 100%;
+
+        text-align: center;
 
     }
 
@@ -1489,6 +1557,33 @@
     .mock-line strong {
 
         text-align: left;
+
+    }
+
+}
+
+
+@media (max-width: 480px) {
+
+    .operations-hero {
+
+        padding-top: 180px;
+
+    }
+
+
+    .operations-hero h1 {
+
+        font-size: clamp(2.35rem, 12vw, 3rem);
+
+    }
+
+
+    .hero-kicker {
+
+        font-size: .72rem;
+
+        line-height: 1.6;
 
     }
 
