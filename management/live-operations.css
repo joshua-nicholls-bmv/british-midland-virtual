@@ -1,50 +1,849 @@
-/* BRITISH MIDLAND VIRTUAL - MANAGEMENT LIVE OPERATIONS */
-.live-page-heading{padding:42px 0 30px;display:flex;align-items:flex-end;justify-content:space-between;gap:30px}
-.live-page-heading h2{margin:10px 0 8px;font-size:36px;letter-spacing:-1.6px}
-.live-page-heading p{max-width:650px;margin:0;color:var(--muted);font-size:11px;line-height:1.7}
-.live-connection{display:flex;align-items:center;gap:11px;padding-bottom:4px}
-.live-connection-dot{width:9px;height:9px;border-radius:50%;background:#c9992f;box-shadow:0 0 0 4px rgba(201,153,47,.10)}
-.live-connection strong,.live-connection small{display:block}.live-connection strong{font-size:9px;letter-spacing:1px}
-.live-connection small{margin-top:3px;color:#c9992f;font-size:8px;font-weight:700;letter-spacing:.7px}
-.live-connection.connected .live-connection-dot{background:var(--green);box-shadow:0 0 0 4px rgba(22,155,98,.10)}
-.live-connection.connected small{color:var(--green)}.live-connection.error .live-connection-dot{background:var(--red)}
-.live-connection.error small{color:var(--red)}
-.live-summary-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-bottom:18px}
-.live-summary-card{min-height:116px;padding:20px 22px;background:#fff;border-top:3px solid var(--navy)}
-.live-summary-card.attention{border-top-color:var(--red)}.live-summary-card span{display:block;color:var(--muted);font-size:7px;font-weight:700;letter-spacing:1.2px}
-.live-summary-card strong{display:block;margin-top:13px;font-size:30px;letter-spacing:-1.3px}.live-summary-card.attention strong{color:var(--red)}
-.live-summary-card small{display:block;margin-top:5px;color:var(--muted);font-size:8px}
-.live-operations-layout{display:grid;grid-template-columns:minmax(0,2.25fr) minmax(285px,.75fr);gap:18px;margin-bottom:18px}
-.live-map-panel,.flight-detail-panel,.active-flight-panel{background:#fff;border:1px solid var(--border)}
-.live-panel-header{min-height:72px;padding:17px 20px;display:flex;align-items:center;justify-content:space-between;gap:18px;border-bottom:1px solid var(--border)}
-.live-panel-header h3{margin:5px 0 0;font-size:16px}.map-header-status{display:flex;align-items:center;gap:12px}
-.map-header-status span{color:var(--muted);font-size:7px;font-weight:700;letter-spacing:1px}
-#fitFlightsButton{min-height:31px;padding:0 12px;border:1px solid var(--navy);background:transparent;color:var(--navy);font-family:inherit;font-size:7px;font-weight:700;letter-spacing:.8px;cursor:pointer}
-#fitFlightsButton:hover{background:var(--navy);color:#fff}
-.map-shell{position:relative;height:610px;overflow:hidden;background:#07192d}#liveMap{width:100%;height:100%;background:#07192d}
-.leaflet-container{font-family:"Inter",Arial,sans-serif}.leaflet-control-attribution{font-size:8px}
-.aircraft-marker-wrapper{background:transparent;border:0}.aircraft-marker{width:34px;height:34px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:var(--red);color:#fff;border:2px solid #fff;box-shadow:0 5px 18px rgba(0,0,0,.35);transform-origin:center}
-.aircraft-marker span{display:block;font-size:17px;line-height:1;transform:rotate(45deg)}.aircraft-marker.stale{background:#8a650f}
-.aircraft-label{min-width:72px;padding:5px 7px;background:rgba(0,26,58,.94);color:#fff;border:1px solid rgba(255,255,255,.25);box-shadow:0 5px 14px rgba(0,0,0,.18);font-size:8px;font-weight:700;text-align:center;letter-spacing:.5px}
-.leaflet-tooltip.aircraft-label:before{display:none}
-.map-empty-state{position:absolute;z-index:700;inset:50% auto auto 50%;transform:translate(-50%,-50%);min-width:260px;padding:22px;background:rgba(0,26,58,.94);color:#fff;text-align:center;border:1px solid rgba(255,255,255,.18);pointer-events:none}
-.map-empty-state strong,.map-empty-state span{display:block}.map-empty-state strong{font-size:10px;letter-spacing:1.2px}.map-empty-state span{margin-top:7px;color:rgba(255,255,255,.62);font-size:8px}
-.map-legend{position:absolute;z-index:600;left:14px;bottom:14px;display:flex;gap:14px;padding:9px 11px;background:rgba(0,26,58,.90);color:rgba(255,255,255,.72);font-size:7px;font-weight:700;letter-spacing:.7px;pointer-events:none}
-.map-legend span{display:flex;align-items:center;gap:6px}.legend-aircraft{width:8px;height:8px;display:inline-block;border-radius:50%;background:var(--red)}.legend-track{width:18px;height:2px;display:inline-block;background:var(--red)}
-.flight-detail{min-height:610px}.flight-detail-empty{min-height:610px;padding:35px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center}
-.detail-aircraft-symbol{margin-bottom:16px;color:var(--red);font-size:34px}.flight-detail-empty strong{font-size:10px;letter-spacing:1px}.flight-detail-empty span{max-width:190px;margin-top:8px;color:var(--muted);font-size:8px;line-height:1.6}
-.detail-content{padding:22px}.detail-flight-number{color:var(--red);font-size:8px;font-weight:700;letter-spacing:1.4px}.detail-route{margin:7px 0 3px;font-size:23px;letter-spacing:-1px}.detail-aircraft{color:var(--muted);font-size:9px}
-.detail-phase{margin:20px 0;padding:12px 14px;display:flex;align-items:center;justify-content:space-between;background:#f8f8f6;border-left:3px solid var(--green)}.detail-phase.stale{border-left-color:#c9992f}
-.detail-phase span{color:var(--muted);font-size:7px;font-weight:700;letter-spacing:1px}.detail-phase strong{font-size:9px;letter-spacing:.6px}
-.detail-grid{display:grid;grid-template-columns:1fr 1fr;border-top:1px solid var(--border);border-left:1px solid var(--border)}
-.detail-stat{min-height:78px;padding:14px;border-right:1px solid var(--border);border-bottom:1px solid var(--border)}.detail-stat span,.detail-stat strong{display:block}.detail-stat span{color:var(--muted);font-size:6px;font-weight:700;letter-spacing:.9px}.detail-stat strong{margin-top:8px;font-size:13px}
-.detail-meta{margin-top:20px}.detail-meta-row{padding:10px 0;display:flex;justify-content:space-between;gap:14px;border-bottom:1px solid #eeeeeb}.detail-meta-row span{color:var(--muted);font-size:7px;font-weight:700;letter-spacing:.7px}.detail-meta-row strong{font-size:8px;text-align:right}
-.active-flight-panel{margin-bottom:24px}.active-flight-table-wrap{overflow-x:auto}
-.active-flight-table-header,.active-flight-row{min-width:820px;display:grid;grid-template-columns:.8fr 1fr 1.25fr .9fr .8fr .7fr 1fr;gap:12px;align-items:center}
-.active-flight-table-header{min-height:40px;padding:0 20px;background:#f8f8f6;color:var(--muted);font-size:7px;font-weight:700;letter-spacing:.9px}
-.active-flight-row{min-height:58px;padding:0 20px;border-top:1px solid #eeeeeb;font-size:9px;cursor:pointer}.active-flight-row:hover,.active-flight-row.selected{background:#f7f8f8}.active-flight-row.selected{box-shadow:inset 3px 0 0 var(--red)}
-.active-flight-row strong{font-size:10px}.flight-phase-pill{display:inline-flex;width:fit-content;padding:5px 8px;background:rgba(22,155,98,.08);color:var(--green);font-size:7px;font-weight:700;letter-spacing:.5px}.flight-phase-pill.stale{background:rgba(201,153,47,.10);color:#9b7114}
-.heartbeat-good{color:var(--green)}.heartbeat-stale{color:#9b7114}.live-table-empty{min-height:120px;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:9px}
-@media(max-width:1180px){.live-summary-grid{grid-template-columns:repeat(2,1fr)}.live-operations-layout{grid-template-columns:1fr}.flight-detail,.flight-detail-empty{min-height:auto}}
-@media(max-width:760px){.live-page-heading{align-items:flex-start;flex-direction:column}.live-page-heading h2{font-size:30px}.live-summary-grid{grid-template-columns:1fr 1fr}.map-shell{height:480px}.map-header-status{align-items:flex-end;flex-direction:column;gap:7px}.map-legend{max-width:calc(100% - 28px);flex-wrap:wrap}}
-@media(max-width:520px){.live-summary-grid{grid-template-columns:1fr}.map-shell{height:420px}.live-panel-header{align-items:flex-start}.detail-grid{grid-template-columns:1fr 1fr}}
+/* ============================================================
+   BRITISH MIDLAND VIRTUAL
+   MANAGEMENT - LIVE OPERATIONS
+   VISUAL V2
+   ============================================================ */
+
+.live-page-heading {
+    padding: 42px 0 30px;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.live-page-heading h2 {
+    margin: 10px 0 8px;
+    font-size: 36px;
+    letter-spacing: -1.6px;
+}
+
+.live-page-heading p {
+    max-width: 650px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 11px;
+    line-height: 1.7;
+}
+
+
+/* ============================================================
+   CONNECTION STATUS
+   ============================================================ */
+
+.live-connection {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    padding-bottom: 4px;
+}
+
+.live-connection-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+    background: #c9992f;
+    box-shadow: 0 0 0 4px rgba(201, 153, 47, .10);
+}
+
+.live-connection strong,
+.live-connection small {
+    display: block;
+}
+
+.live-connection strong {
+    font-size: 9px;
+    letter-spacing: 1px;
+}
+
+.live-connection small {
+    margin-top: 3px;
+    color: #c9992f;
+    font-size: 8px;
+    font-weight: 700;
+    letter-spacing: .7px;
+}
+
+.live-connection.connected .live-connection-dot {
+    background: var(--green);
+    box-shadow: 0 0 0 4px rgba(22, 155, 98, .10);
+}
+
+.live-connection.connected small {
+    color: var(--green);
+}
+
+.live-connection.error .live-connection-dot {
+    background: var(--red);
+}
+
+.live-connection.error small {
+    color: var(--red);
+}
+
+
+/* ============================================================
+   SUMMARY CARDS
+   ============================================================ */
+
+.live-summary-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 14px;
+    margin-bottom: 18px;
+}
+
+.live-summary-card {
+    min-height: 116px;
+    padding: 20px 22px;
+    background: #fff;
+    border-top: 3px solid var(--navy);
+}
+
+.live-summary-card.attention {
+    border-top-color: var(--red);
+}
+
+.live-summary-card span {
+    display: block;
+    color: var(--muted);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+}
+
+.live-summary-card strong {
+    display: block;
+    margin-top: 13px;
+    font-size: 30px;
+    letter-spacing: -1.3px;
+}
+
+.live-summary-card.attention strong {
+    color: var(--red);
+}
+
+.live-summary-card small {
+    display: block;
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 8px;
+}
+
+
+/* ============================================================
+   MAIN OPERATIONS LAYOUT
+   ============================================================ */
+
+.live-operations-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 2.3fr) minmax(300px, .7fr);
+    gap: 18px;
+    margin-bottom: 18px;
+}
+
+.live-map-panel,
+.flight-detail-panel,
+.active-flight-panel {
+    background: #fff;
+    border: 1px solid var(--border);
+}
+
+.live-panel-header {
+    min-height: 72px;
+    padding: 17px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 18px;
+    border-bottom: 1px solid var(--border);
+}
+
+.live-panel-header h3 {
+    margin: 5px 0 0;
+    font-size: 16px;
+}
+
+.map-header-status {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.map-header-status span {
+    color: var(--muted);
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+
+/* ============================================================
+   MAP CONTROLS
+   ============================================================ */
+
+#fitFlightsButton {
+    min-height: 31px;
+    padding: 0 12px;
+    border: 1px solid var(--navy);
+    background: transparent;
+    color: var(--navy);
+    font-family: inherit;
+    font-size: 7px;
+    font-weight: 700;
+    letter-spacing: .8px;
+    cursor: pointer;
+    transition: .18s ease;
+}
+
+#fitFlightsButton:hover {
+    background: var(--navy);
+    color: #fff;
+}
+
+
+/* ============================================================
+   MAP
+   ============================================================ */
+
+.map-shell {
+    position: relative;
+    height: 610px;
+    overflow: hidden;
+    background: #07192d;
+}
+
+#liveMap {
+    width: 100%;
+    height: 100%;
+    background: #07192d;
+}
+
+.leaflet-container {
+    font-family: "Inter", Arial, sans-serif;
+}
+
+.leaflet-control-attribution {
+    font-size: 8px;
+}
+
+
+/* ============================================================
+   AIRCRAFT MARKERS
+   ============================================================ */
+
+.aircraft-marker-wrapper {
+    background: transparent !important;
+    border: 0 !important;
+}
+
+.aircraft-marker {
+    position: relative;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transform-origin: center;
+}
+
+.aircraft-marker svg {
+    width: 27px;
+    height: 27px;
+    display: block;
+
+    fill: #d02823;
+
+    filter:
+        drop-shadow(0 1px 1px rgba(255, 255, 255, .95))
+        drop-shadow(0 3px 4px rgba(0, 0, 0, .40));
+
+    transition:
+        fill .18s ease,
+        filter .18s ease;
+}
+
+.aircraft-marker:hover svg {
+    filter:
+        drop-shadow(0 0 2px rgba(255, 255, 255, 1))
+        drop-shadow(0 4px 5px rgba(0, 0, 0, .50));
+}
+
+
+/* SELECTED AIRCRAFT */
+
+.aircraft-marker.selected::before {
+    content: "";
+
+    position: absolute;
+
+    width: 38px;
+    height: 38px;
+
+    border: 2px solid rgba(255, 255, 255, .95);
+
+    border-radius: 50%;
+
+    box-shadow:
+        0 0 0 3px rgba(208, 40, 35, .35),
+        0 0 14px rgba(208, 40, 35, .45);
+}
+
+
+/* STALE AIRCRAFT */
+
+.aircraft-marker.stale {
+    opacity: .52;
+}
+
+.aircraft-marker.stale svg {
+    fill: #b58a2c;
+}
+
+
+/* ============================================================
+   AIRCRAFT LABEL
+   ============================================================ */
+
+.aircraft-label {
+    min-width: 68px;
+
+    padding: 5px 7px;
+
+    background: rgba(0, 26, 58, .94);
+
+    color: #fff;
+
+    border: 1px solid rgba(255, 255, 255, .20);
+
+    box-shadow: 0 4px 12px rgba(0, 0, 0, .20);
+
+    font-size: 8px;
+
+    font-weight: 700;
+
+    text-align: center;
+
+    letter-spacing: .5px;
+}
+
+.leaflet-tooltip.aircraft-label::before {
+    display: none;
+}
+
+
+/* ============================================================
+   EMPTY MAP
+   ============================================================ */
+
+.map-empty-state {
+    position: absolute;
+
+    z-index: 700;
+
+    inset: 50% auto auto 50%;
+
+    transform: translate(-50%, -50%);
+
+    min-width: 260px;
+
+    padding: 22px;
+
+    background: rgba(0, 26, 58, .94);
+
+    color: #fff;
+
+    text-align: center;
+
+    border: 1px solid rgba(255, 255, 255, .18);
+
+    pointer-events: none;
+}
+
+.map-empty-state strong,
+.map-empty-state span {
+    display: block;
+}
+
+.map-empty-state strong {
+    font-size: 10px;
+    letter-spacing: 1.2px;
+}
+
+.map-empty-state span {
+    margin-top: 7px;
+
+    color: rgba(255, 255, 255, .62);
+
+    font-size: 8px;
+}
+
+
+/* ============================================================
+   MAP LEGEND
+   ============================================================ */
+
+.map-legend {
+    position: absolute;
+
+    z-index: 600;
+
+    left: 14px;
+    bottom: 14px;
+
+    display: flex;
+
+    gap: 14px;
+
+    padding: 9px 11px;
+
+    background: rgba(0, 26, 58, .90);
+
+    color: rgba(255, 255, 255, .72);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .7px;
+
+    pointer-events: none;
+}
+
+.map-legend span {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-aircraft {
+    width: 8px;
+    height: 8px;
+
+    display: inline-block;
+
+    border-radius: 50%;
+
+    background: var(--red);
+}
+
+.legend-track {
+    width: 18px;
+    height: 2px;
+
+    display: inline-block;
+
+    background: var(--red);
+}
+
+
+/* ============================================================
+   SELECTED FLIGHT
+   ============================================================ */
+
+.flight-detail {
+    min-height: 610px;
+}
+
+.flight-detail-empty {
+    min-height: 610px;
+
+    padding: 35px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+
+    justify-content: center;
+
+    text-align: center;
+}
+
+.detail-aircraft-symbol {
+    margin-bottom: 16px;
+
+    color: var(--red);
+
+    font-size: 34px;
+}
+
+.flight-detail-empty strong {
+    font-size: 10px;
+
+    letter-spacing: 1px;
+}
+
+.flight-detail-empty span {
+    max-width: 190px;
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 8px;
+
+    line-height: 1.6;
+}
+
+
+/* ============================================================
+   FLIGHT DETAIL CONTENT
+   ============================================================ */
+
+.detail-content {
+    padding: 22px;
+}
+
+.detail-flight-number {
+    color: var(--red);
+
+    font-size: 9px;
+
+    font-weight: 700;
+
+    letter-spacing: 1.4px;
+}
+
+.detail-route {
+    margin: 7px 0 3px;
+
+    font-size: 25px;
+
+    letter-spacing: -1px;
+}
+
+.detail-aircraft {
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   FLIGHT PHASE
+   ============================================================ */
+
+.detail-phase {
+    margin: 20px 0;
+
+    padding: 12px 14px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    background: #f8f8f6;
+
+    border-left: 3px solid var(--green);
+}
+
+.detail-phase.stale {
+    border-left-color: #c9992f;
+}
+
+.detail-phase span {
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: 1px;
+}
+
+.detail-phase strong {
+    font-size: 9px;
+
+    letter-spacing: .6px;
+}
+
+
+/* ============================================================
+   FLIGHT TELEMETRY
+   ============================================================ */
+
+.detail-grid {
+    display: grid;
+
+    grid-template-columns: 1fr 1fr;
+
+    border-top: 1px solid var(--border);
+
+    border-left: 1px solid var(--border);
+}
+
+.detail-stat {
+    min-height: 78px;
+
+    padding: 14px;
+
+    border-right: 1px solid var(--border);
+
+    border-bottom: 1px solid var(--border);
+}
+
+.detail-stat span,
+.detail-stat strong {
+    display: block;
+}
+
+.detail-stat span {
+    color: var(--muted);
+
+    font-size: 6px;
+
+    font-weight: 700;
+
+    letter-spacing: .9px;
+}
+
+.detail-stat strong {
+    margin-top: 8px;
+
+    font-size: 13px;
+}
+
+
+/* ============================================================
+   FLIGHT META
+   ============================================================ */
+
+.detail-meta {
+    margin-top: 20px;
+}
+
+.detail-meta-row {
+    padding: 10px 0;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 14px;
+
+    border-bottom: 1px solid #eeeeeb;
+}
+
+.detail-meta-row span {
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .7px;
+}
+
+.detail-meta-row strong {
+    font-size: 8px;
+
+    text-align: right;
+}
+
+
+/* ============================================================
+   ACTIVE FLIGHTS TABLE
+   ============================================================ */
+
+.active-flight-panel {
+    margin-bottom: 24px;
+}
+
+.active-flight-table-wrap {
+    overflow-x: auto;
+}
+
+.active-flight-table-header,
+.active-flight-row {
+    min-width: 820px;
+
+    display: grid;
+
+    grid-template-columns:
+        .8fr
+        1fr
+        1.25fr
+        .9fr
+        .8fr
+        .7fr
+        1fr;
+
+    gap: 12px;
+
+    align-items: center;
+}
+
+.active-flight-table-header {
+    min-height: 40px;
+
+    padding: 0 20px;
+
+    background: #f8f8f6;
+
+    color: var(--muted);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .9px;
+}
+
+.active-flight-row {
+    min-height: 58px;
+
+    padding: 0 20px;
+
+    border-top: 1px solid #eeeeeb;
+
+    font-size: 9px;
+
+    cursor: pointer;
+
+    transition: background .15s ease;
+}
+
+.active-flight-row:hover {
+    background: #f7f8f8;
+}
+
+.active-flight-row.selected {
+    background: #f7f8f8;
+
+    box-shadow: inset 3px 0 0 var(--red);
+}
+
+.active-flight-row strong {
+    font-size: 10px;
+}
+
+
+/* ============================================================
+   FLIGHT PHASE PILL
+   ============================================================ */
+
+.flight-phase-pill {
+    display: inline-flex;
+
+    width: fit-content;
+
+    padding: 5px 8px;
+
+    background: rgba(22, 155, 98, .08);
+
+    color: var(--green);
+
+    font-size: 7px;
+
+    font-weight: 700;
+
+    letter-spacing: .5px;
+}
+
+.flight-phase-pill.stale {
+    background: rgba(201, 153, 47, .10);
+
+    color: #9b7114;
+}
+
+.heartbeat-good {
+    color: var(--green);
+}
+
+.heartbeat-stale {
+    color: #9b7114;
+}
+
+.live-table-empty {
+    min-height: 120px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    color: var(--muted);
+
+    font-size: 9px;
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 1180px) {
+
+    .live-summary-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .live-operations-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .flight-detail,
+    .flight-detail-empty {
+        min-height: auto;
+    }
+
+}
+
+
+@media (max-width: 760px) {
+
+    .live-page-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .live-page-heading h2 {
+        font-size: 30px;
+    }
+
+    .live-summary-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .map-shell {
+        height: 480px;
+    }
+
+    .map-header-status {
+        align-items: flex-end;
+        flex-direction: column;
+        gap: 7px;
+    }
+
+    .map-legend {
+        max-width: calc(100% - 28px);
+        flex-wrap: wrap;
+    }
+
+}
+
+
+@media (max-width: 520px) {
+
+    .live-summary-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .map-shell {
+        height: 420px;
+    }
+
+    .live-panel-header {
+        align-items: flex-start;
+    }
+
+    .detail-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+}
