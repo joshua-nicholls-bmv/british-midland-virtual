@@ -1336,43 +1336,54 @@ async function createReviewRecord(
 
 async function clearReviewFlag() {
 
-    const {
+    console.log(
+        "Attempting to clear review flag for PIREP:",
+        currentPirep.id
+    );
+
+    const { data, error } = await supabaseClient
+        .from("pireps")
+        .update({
+            requires_review: false
+        })
+        .eq("id", currentPirep.id)
+        .select("id, flight_number, requires_review");
+
+    console.log("Review flag update result:", {
         data,
         error
-    } =
-        await supabaseClient
-            .from("pireps")
-            .update({
-                requires_review:
-                    false
-            })
-            .eq(
-                "id",
-                currentPirep.id
-            )
-            .select(
-                "id, requires_review"
-            )
-            .single();
-
+    });
 
     if (error) {
-
         console.error(
-            "Unable to resolve PIREP review flag:",
+            "Unable to clear requires_review:",
             error
         );
 
         throw error;
-
     }
 
+    if (!data || data.length === 0) {
+        throw new Error(
+            "PIREP update completed but no row was returned."
+        );
+    }
 
-    return data;
+    if (data[0].requires_review !== false) {
+        throw new Error(
+            "PIREP was returned but requires_review was not cleared."
+        );
+    }
 
+    currentPirep.requires_review = false;
+
+    console.log(
+        "Review flag successfully cleared:",
+        data[0]
+    );
+
+    return data[0];
 }
-
-
 // ============================================================
 // SUBMIT MANAGEMENT REVIEW
 // ============================================================
