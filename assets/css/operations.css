@@ -186,7 +186,7 @@
 
 .operations-intro {
 
-    padding: 150px 0;
+    padding: 80px 0 35px;
 
 }
 
@@ -237,7 +237,7 @@
 
 .operations-summary {
 
-    padding: 70px 0 140px;
+    padding: 25px 0 80px;
 
 }
 
@@ -257,7 +257,7 @@
 
     text-align: center;
 
-    padding: 20px;
+    padding: 10px 20px;
 
 }
 
@@ -1425,7 +1425,20 @@
 
 @media (max-width: 600px) {
 
-    .operations-intro,
+    .operations-intro {
+
+        padding: 55px 0 20px;
+
+    }
+
+
+    .operations-summary {
+
+        padding: 15px 0 55px;
+
+    }
+
+
     .operations-dashboard,
     .flight-board,
     .future-acars {
