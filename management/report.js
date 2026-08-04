@@ -1349,12 +1349,16 @@ async function clearReviewFlag() {
         .eq("id", currentPirep.id)
         .select("id, flight_number, requires_review");
 
-    console.log("Review flag update result:", {
-        data,
-        error
-    });
+    console.log(
+        "Review flag update result:",
+        {
+            data,
+            error
+        }
+    );
 
     if (error) {
+
         console.error(
             "Unable to clear requires_review:",
             error
@@ -1364,12 +1368,16 @@ async function clearReviewFlag() {
     }
 
     if (!data || data.length === 0) {
+
         throw new Error(
-            "PIREP update completed but no row was returned."
+            "PIREP update completed but no row was returned. " +
+            "PIREP ID: " +
+            currentPirep.id
         );
     }
 
     if (data[0].requires_review !== false) {
+
         throw new Error(
             "PIREP was returned but requires_review was not cleared."
         );
