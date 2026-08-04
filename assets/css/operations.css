@@ -4,7 +4,6 @@
    LIVE ACARS OPERATIONS CENTRE
    ============================================================ */
 
-
 :root {
 
     --bm-blue: #001a3a;
@@ -81,7 +80,11 @@
 
     justify-content: center;
 
-    background: #001a3a;
+    background: linear-gradient(
+        180deg,
+        #001a3a 0%,
+        #032b63 100%
+    );
 
     color: var(--text-white);
 
@@ -90,8 +93,16 @@
 }
 
 
+/*
+   No image overlay is used on the Operations hero.
+   The section uses the same blue gradient treatment
+   as the Fleet page.
+*/
+
 .hero-overlay {
+
     display: none;
+
 }
 
 
@@ -758,6 +769,8 @@
 
     overflow-x: auto;
 
+    -webkit-overflow-scrolling: touch;
+
 }
 
 
@@ -1344,6 +1357,10 @@
 }
 
 
+/* ============================================================
+   TABLET / MOBILE
+   ============================================================ */
+
 @media (max-width: 768px) {
 
     .operations-hero {
@@ -1478,6 +1495,10 @@
 }
 
 
+/* ============================================================
+   SMALL MOBILE
+   ============================================================ */
+
 @media (max-width: 600px) {
 
     .operations-intro {
@@ -1547,8 +1568,23 @@
 
     }
 
+
+    .fids-title {
+
+        padding: 16px;
+
+        font-size: .78rem;
+
+        letter-spacing: .12em;
+
+    }
+
 }
 
+
+/* ============================================================
+   VERY SMALL MOBILE
+   ============================================================ */
 
 @media (max-width: 480px) {
 
