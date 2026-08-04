@@ -65,35 +65,31 @@
 }
 
 
-/* =========================================================
-   OPERATIONS HERO - DESKTOP
-========================================================= */
+/* ============================================================
+   HERO
+   ============================================================ */
 
-.operations-hero .hero-content {
-    max-width: 1050px;
+.operations-hero {
+
+    position: relative;
+
+    min-height: 88vh;
+
+    display: flex;
+
+    align-items: center;
+
+    background:
+        url("../images/operations/hero.jpg")
+        center center / cover
+        no-repeat;
+
+    color: var(--text-white);
+
+    padding: 120px 0 90px;
+
 }
 
-.operations-hero h1 {
-    max-width: 1000px;
-    font-size: clamp(4rem, 6vw, 6.5rem);
-    line-height: 0.95;
-    letter-spacing: -0.055em;
-    margin-bottom: 30px;
-}
-
-.operations-hero .hero-copy {
-    max-width: 760px;
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
-.operations-hero .hero-divider {
-    margin: 28px 0 28px;
-}
-
-.operations-hero .hero-buttons {
-    margin-top: 34px;
-}
 
 .hero-overlay {
 
