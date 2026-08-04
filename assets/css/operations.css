@@ -72,8 +72,6 @@
 
     position: relative;
 
-    min-height: 88vh;
-
     display: flex;
 
     align-items: center;
@@ -86,9 +84,9 @@
         #032b63 100%
     );
 
-    color: var(--text-white);
+    color: #ffffff;
 
-    padding: 120px 0 90px;
+    padding: 150px 0 110px;
 
 }
 
@@ -100,9 +98,7 @@
 */
 
 .hero-overlay {
-
-    display: none;
-
+    display: none !important;
 }
 
 
