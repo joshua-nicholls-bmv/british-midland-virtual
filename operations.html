@@ -289,6 +289,10 @@
      LIVE OPERATIONAL OVERVIEW
 =========================================================== -->
 
+<!-- ===========================================================
+     LIVE OPERATIONS CENTRE
+=========================================================== -->
+
 <section
     id="live-operations"
     class="operations-dashboard"
@@ -296,28 +300,32 @@
 
     <div class="container">
 
-
         <div class="dashboard-header">
 
             <span class="eyebrow">
-                ACARS NETWORK
+                LIVE OPERATIONS
             </span>
 
             <h2>
-                Operational Overview
+                British Midland Operations Centre
             </h2>
 
             <div class="title-line"></div>
 
             <p>
-                Current British Midland Virtual statistics generated
-                directly from completed ACARS flight reports.
+
+                Live aircraft positions are streamed directly from
+                BM ACARS every few seconds, providing a real-time
+                overview of British Midland operations.
+
             </p>
 
         </div>
 
 
-        <!-- LIVE STATUS -->
+        <!-- ===================================================
+             LIVE STATUS BAR
+        ==================================================== -->
 
         <div class="live-status-bar">
 
@@ -328,26 +336,31 @@
                 <div>
 
                     <strong>
-                        ACARS DATA
+                        LIVE ACARS NETWORK
                     </strong>
 
                     <span id="operationsStatus">
+
                         CONNECTING
+
                     </span>
 
                 </div>
 
             </div>
 
-
             <div class="live-status-right">
 
                 <span>
-                    LAST OPERATION
+
+                    ACTIVE AIRCRAFT
+
                 </span>
 
-                <strong id="lastOperation">
+                <strong id="liveAircraftCount">
+
                     —
+
                 </strong>
 
             </div>
@@ -355,10 +368,11 @@
         </div>
 
 
-        <!-- PRIMARY STATISTICS -->
+        <!-- ===================================================
+             OVERVIEW STATS
+        ==================================================== -->
 
         <div class="operations-stats-grid">
-
 
             <article class="operations-stat">
 
@@ -371,11 +385,10 @@
                 </strong>
 
                 <small>
-                    Current British Midland roster
+                    British Midland roster
                 </small>
 
             </article>
-
 
             <article class="operations-stat">
 
@@ -388,16 +401,15 @@
                 </strong>
 
                 <small>
-                    Recorded through ACARS
+                    ACARS recorded
                 </small>
 
             </article>
 
-
             <article class="operations-stat">
 
                 <span class="operations-stat-label">
-                    FLIGHT TIME
+                    FLIGHT HOURS
                 </span>
 
                 <strong id="totalFlightTime">
@@ -405,11 +417,10 @@
                 </strong>
 
                 <small>
-                    Total recorded block time
+                    Recorded block time
                 </small>
 
             </article>
-
 
             <article class="operations-stat">
 
@@ -422,70 +433,102 @@
                 </strong>
 
                 <small>
-                    Recorded arrivals
+                    Successful arrivals
                 </small>
 
             </article>
-
 
         </div>
 
 
-        <!-- SECONDARY STATISTICS -->
+        <!-- ===================================================
+             LIVE OPERATIONS GRID
+        ==================================================== -->
 
-        <div class="performance-grid">
+        <div class="live-operations-grid">
 
+            <!-- MAP -->
 
-            <article class="performance-card">
+            <div class="operations-map-panel">
 
-                <span>
-                    AVERAGE LANDING
-                </span>
+                <div class="panel-header">
 
-                <strong id="averageLanding">
-                    —
-                </strong>
+                    <h3>
 
-                <small>
-                    FPM
-                </small>
+                        Live Flight Map
 
-            </article>
+                    </h3>
 
+                    <span>
 
-            <article class="performance-card">
+                        Refreshes every 5 seconds
 
-                <span>
-                    BEST LANDING
-                </span>
+                    </span>
 
-                <strong id="bestLanding">
-                    —
-                </strong>
+                </div>
 
-                <small>
-                    FPM
-                </small>
+                <div id="liveMap"></div>
 
-            </article>
+            </div>
 
 
-            <article class="performance-card">
+            <!-- SIDEBAR -->
 
-                <span>
-                    GO-AROUNDS
-                </span>
+            <div class="operations-sidebar">
 
-                <strong id="totalGoArounds">
-                    —
-                </strong>
+                <div class="panel-header">
 
-                <small>
-                    Recorded by ACARS
-                </small>
+                    <h3>
 
-            </article>
+                        Active Flights
 
+                    </h3>
+
+                </div>
+
+                <div
+                    id="liveFlights"
+                    class="live-flight-list"
+                >
+
+                    <div class="loading-flights">
+
+                        Waiting for BM ACARS...
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ===================================================
+             SELECTED FLIGHT
+        ==================================================== -->
+
+        <div class="selected-flight-panel">
+
+            <div class="panel-header">
+
+                <h3>
+
+                    Flight Information
+
+                </h3>
+
+            </div>
+
+            <div
+                id="selectedFlight"
+                class="selected-flight-empty"
+            >
+
+                Select an aircraft from the map or list
+                to view live information.
+
+            </div>
 
         </div>
 
