@@ -1,8 +1,8 @@
 /* ============================================================
    BRITISH MIDLAND VIRTUAL
    OPERATIONS PAGE
-   LIVE ACARS OPERATIONS CENTRE
-   ============================================================ */
+   LIVE OPERATIONS CENTRE
+============================================================ */
 
 :root {
 
@@ -23,14 +23,12 @@
     --info: #7fc1ff;
 
     --radius: 20px;
-    --transition: .3s ease;
+    --transition: .30s ease;
 
 }
-
-
 /* ============================================================
    COMMON
-   ============================================================ */
+============================================================ */
 
 .eyebrow {
 
@@ -48,7 +46,6 @@
 
 }
 
-
 .title-line {
 
     width: 72px;
@@ -62,11 +59,9 @@
     border-radius: 999px;
 
 }
-
-
 /* ============================================================
    HERO
-   ============================================================ */
+============================================================ */
 
 .operations-hero {
 
@@ -78,29 +73,24 @@
 
     justify-content: center;
 
-    background: linear-gradient(
-        180deg,
-        #001a3a 0%,
-        #032b63 100%
-    );
-
-    color: #ffffff;
-
     padding: 150px 0 110px;
 
+    color: white;
+
+    background:
+        linear-gradient(
+            180deg,
+            #001a3a 0%,
+            #032b63 100%
+        );
+
 }
-
-
-/*
-   No image overlay is used on the Operations hero.
-   The section uses the same blue gradient treatment
-   as the Fleet page.
-*/
 
 .hero-overlay {
-    display: none !important;
-}
 
+    display: none !important;
+
+}
 
 .hero-content {
 
@@ -110,14 +100,11 @@
 
     width: min(92%, 1100px);
 
-    max-width: 1100px;
-
-    margin: 0 auto;
+    margin: auto;
 
     text-align: center;
 
 }
-
 
 .hero-kicker {
 
@@ -128,7 +115,6 @@
     letter-spacing: .18em;
 
 }
-
 
 .operations-hero h1 {
 
@@ -144,7 +130,6 @@
 
 }
 
-
 .hero-divider {
 
     width: 84px;
@@ -159,21 +144,19 @@
 
 }
 
-
 .hero-copy {
 
     max-width: 760px;
 
     margin: 0 auto 46px;
 
+    color: rgba(255,255,255,.92);
+
     font-size: 1.12rem;
 
     line-height: 1.85;
 
-    color: rgba(255, 255, 255, .92);
-
 }
-
 
 .hero-buttons {
 
@@ -186,18 +169,15 @@
     flex-wrap: wrap;
 
 }
-
-
 /* ============================================================
    INTRODUCTION
-   ============================================================ */
+============================================================ */
 
 .operations-intro {
 
     padding: 80px 0 35px;
 
 }
-
 
 .operations-intro .narrow {
 
@@ -209,13 +189,13 @@
 
 }
 
-
 .operations-intro h2 {
 
     margin: 22px 0 26px;
 
-}
+    color: var(--bm-blue);
 
+}
 
 .operations-intro .title-line {
 
@@ -223,32 +203,28 @@
 
 }
 
-
 .intro-text {
 
     max-width: 700px;
 
     margin: auto;
 
+    color: var(--text);
+
     font-size: 1.12rem;
 
     line-height: 1.95;
 
-    color: var(--text);
-
 }
-
-
 /* ============================================================
    OPERATIONS PILLARS
-   ============================================================ */
+============================================================ */
 
 .operations-summary {
 
-    padding: 25px 0 80px;
+    padding: 30px 0 90px;
 
 }
-
 
 .summary-grid {
 
@@ -256,27 +232,25 @@
 
     grid-template-columns: repeat(3, 1fr);
 
-    gap: 40px;
+    gap: 42px;
 
 }
-
 
 .summary-item {
 
     text-align: center;
 
-    padding: 10px 20px;
+    padding: 18px 22px;
 
 }
 
-
 .summary-icon {
 
-    width: 72px;
+    width: 74px;
 
-    height: 72px;
+    height: 74px;
 
-    margin: 0 auto 24px;
+    margin: 0 auto 26px;
 
     display: flex;
 
@@ -290,21 +264,29 @@
 
     color: var(--bm-blue);
 
-    font-size: 1.8rem;
+    font-size: 1.85rem;
+
+    transition: var(--transition);
 
 }
 
+.summary-item:hover .summary-icon {
+
+    background: var(--bm-blue);
+
+    color: white;
+
+}
 
 .summary-item h3 {
 
-    font-size: 1.4rem;
+    margin-bottom: 18px;
 
     color: var(--bm-blue);
 
-    margin-bottom: 18px;
+    font-size: 1.42rem;
 
 }
-
 
 .summary-item p {
 
@@ -312,16 +294,14 @@
 
     margin: auto;
 
-    line-height: 1.8;
-
     color: var(--text);
 
+    line-height: 1.85;
+
 }
-
-
 /* ============================================================
    SECTION HEADERS
-   ============================================================ */
+============================================================ */
 
 .dashboard-header,
 .board-header,
@@ -335,15 +315,27 @@
 
 }
 
-
 .dashboard-header h2,
 .board-header h2,
 .acars-header h2 {
 
     margin: 18px 0 28px;
 
+    color: white;
+
 }
 
+.board-header h2 {
+
+    color: white;
+
+}
+
+.acars-header h2 {
+
+    color: white;
+
+}
 
 .dashboard-header p,
 .board-header p,
@@ -353,54 +345,75 @@
 
     margin: auto;
 
-    line-height: 1.9;
-
     color: var(--text-light);
 
+    line-height: 1.9;
+
 }
-
-
 /* ============================================================
-   OPERATIONAL OVERVIEW
-   ============================================================ */
+   OPERATIONS DASHBOARD
+============================================================ */
 
 .operations-dashboard {
 
+    position: relative;
+
+    overflow: hidden;
+
     background: var(--bg-dark);
 
-    color: var(--text-white);
+    color: white;
 
     padding: 140px 0;
 
 }
 
+.operations-dashboard::before {
 
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        radial-gradient(
+            circle at top,
+            rgba(255,255,255,.03),
+            transparent 65%
+        );
+
+    pointer-events: none;
+
+}
 /* ============================================================
-   LIVE ACARS STATUS
-   ============================================================ */
+   LIVE STATUS BAR
+============================================================ */
 
 .live-status-bar {
 
-    margin-bottom: 28px;
-
-    padding: 20px 26px;
-
     display: flex;
-
-    align-items: center;
 
     justify-content: space-between;
 
+    align-items: center;
+
     gap: 30px;
+
+    margin-bottom: 36px;
+
+    padding: 22px 28px;
 
     background: #07182b;
 
-    border: 1px solid rgba(255, 255, 255, .09);
+    border: 1px solid rgba(255,255,255,.08);
 
-    border-radius: 14px;
+    border-radius: 18px;
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.18);
 
 }
-
 
 .live-status-left {
 
@@ -408,97 +421,70 @@
 
     align-items: center;
 
-    gap: 14px;
+    gap: 18px;
 
 }
 
-
 .live-dot {
 
-    width: 10px;
+    width: 12px;
 
-    height: 10px;
-
-    flex-shrink: 0;
+    height: 12px;
 
     border-radius: 50%;
 
     background: var(--warning);
 
     box-shadow:
-        0 0 0 5px rgba(255, 200, 87, .08);
+        0 0 0 6px rgba(255,200,87,.10);
+
+    transition: .30s;
 
 }
-
 
 .live-status-bar.connected .live-dot {
 
     background: var(--success);
 
     box-shadow:
-        0 0 0 5px rgba(90, 216, 121, .09);
+        0 0 0 6px rgba(90,216,121,.12);
 
 }
-
 
 .live-status-bar.error .live-dot {
 
     background: var(--bm-red);
 
     box-shadow:
-        0 0 0 5px rgba(208, 40, 35, .10);
+        0 0 0 6px rgba(208,40,35,.12);
 
 }
-
-
-.live-status-left div {
-
-    display: flex;
-
-    flex-direction: column;
-
-    gap: 4px;
-
-}
-
 
 .live-status-left strong {
 
+    display: block;
+
     color: white;
 
-    font-size: .78rem;
+    font-size: .80rem;
 
-    letter-spacing: .1em;
+    letter-spacing: .12em;
 
 }
-
 
 .live-status-left span {
 
-    color: var(--warning);
+    display: block;
 
-    font-size: .7rem;
+    margin-top: 4px;
 
-    font-weight: 700;
+    color: #91a8c4;
 
-    letter-spacing: .1em;
+    font-size: .72rem;
 
-}
-
-
-.live-status-bar.connected .live-status-left span {
-
-    color: var(--success);
+    letter-spacing: .08em;
 
 }
-
-
-.live-status-bar.error .live-status-left span {
-
-    color: #ff8c87;
-
-}
-
 
 .live-status-right {
 
@@ -506,47 +492,42 @@
 
 }
 
-
 .live-status-right span {
 
     display: block;
 
-    margin-bottom: 5px;
+    margin-bottom: 6px;
 
-    color: #8298b3;
+    color: #7f97b4;
 
-    font-size: .68rem;
+    font-size: .70rem;
 
-    font-weight: 700;
-
-    letter-spacing: .1em;
+    letter-spacing: .10em;
 
 }
-
 
 .live-status-right strong {
 
     color: white;
 
-    font-size: .86rem;
+    font-size: 1rem;
 
 }
-
-
 /* ============================================================
-   LIVE STATISTICS
-   ============================================================ */
+   OPERATIONS STATISTICS
+============================================================ */
 
 .operations-stats-grid {
 
     display: grid;
 
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(4,minmax(0,1fr));
 
-    gap: 22px;
+    gap: 24px;
+
+    margin-bottom: 40px;
 
 }
-
 
 .operations-stat {
 
@@ -556,7 +537,7 @@
 
     min-height: 190px;
 
-    padding: 32px;
+    padding: 34px;
 
     display: flex;
 
@@ -566,1044 +547,485 @@
 
     background: var(--bg-panel);
 
-    border: 1px solid rgba(255, 255, 255, .08);
+    border-radius: 20px;
 
-    border-radius: var(--radius);
+    border: 1px solid rgba(255,255,255,.08);
 
-    box-shadow: 0 20px 60px rgba(0, 0, 0, .18);
+    box-shadow:
+        0 20px 60px rgba(0,0,0,.20);
 
 }
-
 
 .operations-stat::before {
 
-    content: "";
+    content:"";
 
-    position: absolute;
+    position:absolute;
 
-    left: 0;
+    top:0;
 
-    top: 0;
+    left:0;
 
-    width: 100%;
+    width:100%;
 
-    height: 3px;
+    height:3px;
 
-    background: var(--bm-red);
+    background:var(--bm-red);
 
 }
-
 
 .operations-stat-label {
 
-    margin-bottom: 16px;
+    margin-bottom:16px;
 
-    color: #8ea8cb;
+    color:#8ea8cb;
 
-    font-size: .7rem;
+    font-size:.70rem;
 
-    font-weight: 700;
+    font-weight:700;
 
-    letter-spacing: .12em;
+    letter-spacing:.12em;
 
 }
-
 
 .operations-stat strong {
 
-    color: white;
+    color:white;
 
-    font-size: clamp(2.2rem, 4vw, 3.3rem);
+    font-size:clamp(2.3rem,4vw,3.4rem);
 
-    line-height: 1;
+    line-height:1;
 
-    letter-spacing: -.04em;
+    letter-spacing:-.04em;
 
 }
-
 
 .operations-stat small {
 
-    margin-top: 14px;
+    margin-top:14px;
 
-    color: var(--text-light);
+    color:#c4d0dd;
 
-    font-size: .78rem;
+    font-size:.78rem;
 
 }
-
-
 /* ============================================================
-   PERFORMANCE STATISTICS
-   ============================================================ */
+   LIVE OPERATIONS LAYOUT
+============================================================ */
 
-.performance-grid {
+.live-operations-grid {
 
-    display: grid;
+    display:grid;
 
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns:2fr 1fr;
 
-    gap: 22px;
+    gap:28px;
 
-    margin-top: 22px;
-
-}
-
-
-.performance-card {
-
-    padding: 26px 30px;
-
-    display: grid;
-
-    grid-template-columns: 1fr auto auto;
-
-    align-items: baseline;
-
-    gap: 10px;
-
-    background: #07182b;
-
-    border: 1px solid rgba(255, 255, 255, .08);
-
-    border-radius: 14px;
+    margin-top:36px;
 
 }
 
+.operations-map-panel,
+.operations-sidebar,
+.selected-flight-panel {
 
-.performance-card span {
+    overflow:hidden;
 
-    color: #8ea8cb;
+    background:var(--bg-panel);
 
-    font-size: .7rem;
+    border-radius:20px;
 
-    font-weight: 700;
-
-    letter-spacing: .1em;
-
-}
-
-
-.performance-card strong {
-
-    color: white;
-
-    font-size: 1.45rem;
-
-}
-
-
-.performance-card small {
-
-    color: var(--text-light);
-
-    font-size: .68rem;
-
-    font-weight: 700;
-
-}
-
-
-/* ============================================================
-   RECENT OPERATIONS
-   ============================================================ */
-
-.flight-board {
-
-    background: #04101f;
-
-    color: var(--text-white);
-
-    padding: 140px 0;
-
-    border-top:
-        1px solid rgba(255, 255, 255, .06);
-
-}
-
-
-.fids-board {
-
-    background: #02060c;
-
-    border: 2px solid #1d2d44;
-
-    border-radius: var(--radius);
-
-    overflow: hidden;
+    border:1px solid rgba(255,255,255,.08);
 
     box-shadow:
-        0 35px 90px rgba(0, 0, 0, .35);
+        0 22px 65px rgba(0,0,0,.25);
 
 }
 
+.panel-header {
 
-.fids-title {
+    display:flex;
 
-    background: #061528;
+    justify-content:space-between;
 
-    color: var(--warning);
+    align-items:center;
 
-    text-align: center;
+    padding:22px 28px;
 
-    font-family: monospace;
+    background:rgba(255,255,255,.02);
 
-    font-size: .95rem;
-
-    font-weight: 700;
-
-    letter-spacing: .18em;
-
-    padding: 20px;
+    border-bottom:
+        1px solid rgba(255,255,255,.08);
 
 }
 
+.panel-header h3 {
 
-.fids-scroll {
+    margin:0;
 
-    width: 100%;
+    color:white;
 
-    overflow-x: auto;
-
-    -webkit-overflow-scrolling: touch;
-
-}
-
-
-.fids-table {
-
-    width: 100%;
-
-    min-width: 960px;
-
-    border-collapse: collapse;
-
-    font-family: Inter, sans-serif;
+    font-size:1rem;
 
 }
 
+.panel-header span {
 
-.fids-table thead {
+    color:#8ea8cb;
 
-    background: #08131f;
+    font-size:.72rem;
 
-}
+    text-transform:uppercase;
 
-
-.fids-table th {
-
-    text-align: left;
-
-    padding: 20px;
-
-    font-size: .72rem;
-
-    font-weight: 700;
-
-    text-transform: uppercase;
-
-    letter-spacing: .08em;
-
-    color: #8ea8cb;
+    letter-spacing:.08em;
 
 }
 
+#liveMap {
 
-.fids-table td {
+    width:100%;
 
-    padding: 18px 20px;
+    height:650px;
 
-    border-top:
-        1px solid rgba(255, 255, 255, .06);
-
-    color: #e6edf7;
-
-    font-size: .88rem;
-
-    transition: var(--transition);
+    background:#081523;
 
 }
+/* ============================================================
+   LIVE FLIGHT LIST
+============================================================ */
 
-
-.fids-table tbody tr {
-
-    transition: var(--transition);
-
-}
-
-
-.fids-table tbody tr:hover {
-
-    background: #0b1624;
-
-}
-
-
-.flight-number {
-
-    color: white;
-
-    font-weight: 700;
-
-}
-
-
-.pilot-cell {
+.live-flight-list {
 
     display: flex;
 
     flex-direction: column;
 
-    gap: 3px;
+    max-height: 650px;
+
+    overflow-y: auto;
+
+    scrollbar-width: thin;
+
+    scrollbar-color: rgba(255,255,255,.18) transparent;
 
 }
 
+.live-flight-list::-webkit-scrollbar {
 
-.pilot-cell strong {
+    width: 8px;
+
+}
+
+.live-flight-list::-webkit-scrollbar-thumb {
+
+    background: rgba(255,255,255,.18);
+
+    border-radius: 999px;
+
+}
+
+.loading-flights {
+
+    padding: 60px 20px;
+
+    text-align: center;
+
+    color: #8ea8cb;
+
+    font-family: monospace;
+
+    letter-spacing: .08em;
+
+}
+
+.live-flight-card {
+
+    position: relative;
+
+    padding: 22px 24px;
+
+    cursor: pointer;
+
+    transition: .25s ease;
+
+    border-bottom: 1px solid rgba(255,255,255,.05);
+
+}
+
+.live-flight-card:last-child {
+
+    border-bottom: none;
+
+}
+
+.live-flight-card:hover {
+
+    background: rgba(255,255,255,.05);
+
+}
+
+.live-flight-card.active {
+
+    background: rgba(208,40,35,.14);
+
+    border-left: 4px solid var(--bm-red);
+
+}
+
+.live-flight-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    margin-bottom: 14px;
+
+}
+
+.live-flight-number {
 
     color: white;
 
-    font-size: .86rem;
-
-}
-
-
-.pilot-cell small {
-
-    color: #7189a5;
-
-    font-size: .67rem;
-
-    font-weight: 700;
-
-    letter-spacing: .06em;
-
-}
-
-
-.route-cell {
-
-    color: white;
+    font-size: 1rem;
 
     font-weight: 700;
 
     letter-spacing: .04em;
 
-    white-space: nowrap;
-
 }
 
+.live-flight-phase {
 
-.route-arrow {
-
-    margin: 0 6px;
-
-    color: var(--bm-red);
-
-}
-
-
-.aircraft-cell {
-
-    max-width: 190px;
-
-    overflow: hidden;
-
-    text-overflow: ellipsis;
-
-    white-space: nowrap;
-
-}
-
-
-.registration-cell {
-
-    color: var(--info);
-
-    font-weight: 700;
-
-}
-
-
-.landing-good {
-
-    color: var(--success) !important;
-
-    font-weight: 700;
-
-}
-
-
-.landing-medium {
-
-    color: var(--warning) !important;
-
-    font-weight: 700;
-
-}
-
-
-.landing-hard {
-
-    color: #ff7670 !important;
-
-    font-weight: 700;
-
-}
-
-
-.score-pill {
-
-    display: inline-flex;
-
-    min-width: 46px;
-
-    padding: 5px 9px;
-
-    align-items: center;
-
-    justify-content: center;
+    padding: 4px 10px;
 
     border-radius: 999px;
 
-    background: rgba(90, 216, 121, .12);
+    background: rgba(90,216,121,.14);
 
     color: var(--success);
 
-    font-size: .75rem;
+    font-size: .68rem;
 
     font-weight: 700;
-
-}
-
-
-.score-pill.score-medium {
-
-    background: rgba(255, 200, 87, .12);
-
-    color: var(--warning);
-
-}
-
-
-.score-pill.score-low {
-
-    background: rgba(208, 40, 35, .14);
-
-    color: #ff8b87;
-
-}
-
-
-.operations-loading,
-.operations-error,
-.operations-empty {
-
-    padding: 40px !important;
-
-    text-align: center !important;
-
-    color: #8ea8cb !important;
-
-    font-family: monospace;
 
     letter-spacing: .08em;
 
 }
 
+.live-route {
 
-.operations-error {
+    margin-bottom: 14px;
 
-    color: #ff8b87 !important;
-
-}
-
-
-/* ============================================================
-   BOARD NOTE
-   ============================================================ */
-
-.board-note {
-
-    margin-top: 28px;
-
-    text-align: center;
-
-    color: #9fb2c9;
-
-    font-size: .92rem;
-
-    line-height: 1.8;
-
-}
-
-
-.board-note strong {
-
-    color: white;
-
-}
-
-
-/* ============================================================
-   ACARS
-   ============================================================ */
-
-.future-acars {
-
-    background: #081727;
-
-    padding: 140px 0;
-
-    color: var(--text-white);
-
-}
-
-
-.acars-grid {
-
-    display: grid;
-
-    grid-template-columns: 1.2fr 1fr;
-
-    gap: 70px;
-
-    align-items: center;
-
-}
-
-
-/* ============================================================
-   ACARS WINDOW
-   ============================================================ */
-
-.acars-preview {
-
-    background: var(--bg-panel-light);
-
-    border:
-        1px solid rgba(255, 255, 255, .12);
-
-    border-radius: var(--radius);
-
-    overflow: hidden;
-
-    box-shadow:
-        0 30px 80px rgba(0, 0, 0, .30);
-
-}
-
-
-.window-bar {
-
-    display: flex;
-
-    align-items: center;
-
-    gap: 14px;
-
-    padding: 16px 24px;
-
-    background: #16375d;
-
-    color: #c8d7e8;
-
-    font-size: .9rem;
+    color: #d8e2ef;
 
     font-weight: 600;
 
 }
 
-
-.window-dot {
-
-    width: 9px;
-
-    height: 9px;
-
-    border-radius: 50%;
-
-    background: var(--success);
-
-    box-shadow:
-        0 0 0 4px rgba(90, 216, 121, .10);
-
-}
-
-
-.window-body {
-
-    padding: 30px;
-
-    font-family: monospace;
-
-}
-
-
-.mock-line {
-
-    padding: 16px 0;
-
-    display: flex;
-
-    align-items: center;
-
-    justify-content: space-between;
-
-    gap: 20px;
-
-    border-bottom:
-        1px solid rgba(255, 255, 255, .08);
-
-    color: #d8e1ed;
-
-}
-
-
-.mock-line:last-child {
-
-    border-bottom: none;
-
-}
-
-
-.mock-line span {
-
-    color: #8ea8cb;
-
-    font-size: .76rem;
-
-    letter-spacing: .08em;
-
-}
-
-
-.mock-line strong {
-
-    color: white;
-
-    text-align: right;
-
-}
-
-
-.acars-online {
-
-    color: var(--success) !important;
-
-}
-
-
-/* ============================================================
-   ACARS FEATURE LIST
-   ============================================================ */
-
-.acars-features {
+.live-flight-details {
 
     display: grid;
 
-    gap: 30px;
+    grid-template-columns: repeat(2,1fr);
+
+    gap: 12px;
 
 }
 
+.live-detail {
 
-.feature-item {
+    display: flex;
 
-    padding-bottom: 24px;
+    flex-direction: column;
 
-    border-bottom:
-        1px solid rgba(255, 255, 255, .08);
-
-}
-
-
-.feature-item:last-child {
-
-    border-bottom: none;
+    gap: 4px;
 
 }
 
+.live-detail label {
 
-.feature-item h3 {
+    color: #8298b3;
+
+    font-size: .64rem;
+
+    font-weight: 700;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+}
+
+.live-detail span {
 
     color: white;
 
-    margin-bottom: 12px;
+    font-size: .88rem;
 
-    font-size: 1.25rem;
+    font-weight: 600;
+
+}
+/* ============================================================
+   SELECTED FLIGHT PANEL
+============================================================ */
+
+.selected-flight-panel {
+
+    margin-top: 28px;
 
 }
 
+.selected-flight-empty {
 
-.feature-item p {
+    padding: 70px;
 
-    color: var(--text-light);
+    text-align: center;
+
+    color: #8ea8cb;
 
     line-height: 1.8;
 
 }
 
+.selected-flight-content {
 
-/* ============================================================
-   CTA
-   ============================================================ */
-
-.operations-cta {
-
-    padding: 140px 0;
-
-    background: var(--bm-cream);
+    padding: 32px;
 
 }
 
-
-.cta-panel {
-
-    max-width: 900px;
-
-    margin: auto;
-
-    text-align: center;
-
-    background: white;
-
-    padding: 70px;
-
-    border-radius: var(--radius);
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, .08);
-
-}
-
-
-.cta-panel h2 {
-
-    color: var(--bm-blue);
-
-    margin: 22px 0 28px;
-
-}
-
-
-.cta-panel p {
-
-    max-width: 650px;
-
-    margin: 0 auto;
-
-    color: var(--text);
-
-    line-height: 1.9;
-
-}
-
-
-.cta-buttons {
+.selected-flight-title {
 
     display: flex;
 
-    justify-content: center;
+    justify-content: space-between;
 
-    gap: 20px;
+    align-items: center;
 
-    margin-top: 45px;
-
-    flex-wrap: wrap;
+    margin-bottom: 30px;
 
 }
 
+.selected-flight-title h3 {
 
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+    margin: 0;
 
-@media (max-width: 1100px) {
-
-    .summary-grid {
-
-        grid-template-columns: 1fr;
-
-        gap: 50px;
-
-    }
-
-
-    .operations-stats-grid {
-
-        grid-template-columns:
-            repeat(2, minmax(0, 1fr));
-
-    }
-
-
-    .performance-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .acars-grid {
-
-        grid-template-columns: 1fr;
-
-    }
+    color: white;
 
 }
 
+.selected-grid {
 
-/* ============================================================
-   TABLET / MOBILE
-   ============================================================ */
+    display: grid;
 
-@media (max-width: 768px) {
+    grid-template-columns: repeat(3,1fr);
 
-    .operations-hero {
-
-        min-height: 80vh;
-
-        padding: 150px 0 80px;
-
-    }
-
-
-    .hero-content {
-
-        width: min(90%, 680px);
-
-        max-width: 680px;
-
-        margin: 0 auto;
-
-        text-align: center;
-
-    }
-
-
-    .operations-hero h1 {
-
-        max-width: 620px;
-
-        margin-left: auto;
-
-        margin-right: auto;
-
-        font-size: clamp(2.7rem, 12vw, 3.8rem);
-
-        line-height: 1;
-
-    }
-
-
-    .hero-copy {
-
-        max-width: 580px;
-
-        margin-left: auto;
-
-        margin-right: auto;
-
-        margin-bottom: 40px;
-
-        font-size: 1rem;
-
-        line-height: 1.7;
-
-    }
-
-
-    .hero-buttons {
-
-        width: min(100%, 360px);
-
-        margin-left: auto;
-
-        margin-right: auto;
-
-        flex-direction: column;
-
-        align-items: stretch;
-
-    }
-
-
-    .hero-buttons .primary-button,
-    .hero-buttons .secondary-button {
-
-        width: 100%;
-
-        text-align: center;
-
-    }
-
-
-    .live-status-bar {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-    }
-
-
-    .live-status-right {
-
-        text-align: left;
-
-    }
-
-
-    .operations-stats-grid {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .operations-stat {
-
-        min-height: 160px;
-
-    }
-
-
-    .performance-card {
-
-        grid-template-columns: 1fr;
-
-    }
-
-
-    .performance-card strong {
-
-        margin-top: 5px;
-
-    }
-
-
-    .window-body {
-
-        padding: 22px;
-
-    }
+    gap: 22px;
 
 }
 
+.selected-item {
 
-/* ============================================================
-   SMALL MOBILE
-   ============================================================ */
+    padding: 18px;
 
-@media (max-width: 600px) {
+    background: #07182b;
 
-    .operations-intro {
+    border: 1px solid rgba(255,255,255,.06);
 
-        padding: 55px 0 20px;
-
-    }
-
-
-    .operations-summary {
-
-        padding: 15px 0 55px;
-
-    }
-
-
-    .operations-dashboard,
-    .flight-board,
-    .future-acars {
-
-        padding: 100px 0;
-
-    }
-
-
-    .dashboard-header,
-    .board-header,
-    .acars-header {
-
-        margin-bottom: 50px;
-
-    }
-
-
-    .summary-icon {
-
-        width: 64px;
-
-        height: 64px;
-
-        font-size: 1.5rem;
-
-    }
-
-
-    .cta-panel {
-
-        padding: 48px 28px;
-
-    }
-
-
-    .mock-line {
-
-        align-items: flex-start;
-
-        flex-direction: column;
-
-        gap: 8px;
-
-    }
-
-
-    .mock-line strong {
-
-        text-align: left;
-
-    }
-
-
-    .fids-title {
-
-        padding: 16px;
-
-        font-size: .78rem;
-
-        letter-spacing: .12em;
-
-    }
+    border-radius: 14px;
 
 }
 
+.selected-item label {
 
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #8ea8cb;
+
+    font-size: .66rem;
+
+    font-weight: 700;
+
+    letter-spacing: .08em;
+
+    text-transform: uppercase;
+
+}
+
+.selected-item strong {
+
+    color: white;
+
+    font-size: 1rem;
+
+    font-weight: 700;
+
+}
 /* ============================================================
-   VERY SMALL MOBILE
-   ============================================================ */
+   LEAFLET
+============================================================ */
 
-@media (max-width: 480px) {
+.leaflet-container {
 
-    .operations-hero {
+    background: #081523;
 
-        padding-top: 180px;
+    font-family: Inter, sans-serif;
 
-    }
+}
 
+.leaflet-control-zoom {
 
-    .operations-hero h1 {
+    border: none !important;
 
-        font-size: clamp(2.35rem, 12vw, 3rem);
+}
 
-    }
+.leaflet-control-zoom a {
 
+    background: white;
 
-    .hero-kicker {
+    color: var(--bm-blue);
 
-        font-size: .72rem;
+}
 
-        line-height: 1.6;
+.leaflet-popup-content-wrapper {
 
-    }
+    border-radius: 14px;
+
+}
+
+.leaflet-popup-content {
+
+    margin: 14px 18px;
+
+    min-width: 180px;
+
+}
+
+.live-aircraft-popup strong {
+
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: var(--bm-blue);
+
+    font-size: 1rem;
+
+}
+
+.live-aircraft-popup div {
+
+    margin: 6px 0;
+
+    color: #444;
+
+}
+
+.live-aircraft-popup span {
+
+    font-weight: 600;
 
 }
