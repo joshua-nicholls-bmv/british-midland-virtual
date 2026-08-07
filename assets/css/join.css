@@ -1,8 +1,7 @@
 /* ==========================================================
    BRITISH MIDLAND VIRTUAL
-   JOIN PAGE v4.0
-   Join Specific Styles Only
-   Requires: base.css v4
+   JOIN PAGE v5.0
+   Designed for the new Join HTML
 ========================================================== */
 
 /* ==========================================================
@@ -19,9 +18,9 @@
 
     max-width:760px;
 
-    padding-top:160px;
+    padding-top:170px;
 
-    padding-bottom:140px;
+    padding-bottom:150px;
 
 }
 
@@ -30,18 +29,26 @@
     background:
         linear-gradient(
             90deg,
-            rgba(0,26,58,.88),
-            rgba(0,26,58,.58),
+            rgba(0,26,58,.90),
+            rgba(0,26,58,.60),
             rgba(0,26,58,.18)
         );
 
 }
 
+/* ==========================================================
+   BUTTONS
+========================================================== */
+
 .hero-buttons{
 
-    justify-content:flex-start;
+    display:flex;
 
-    margin-top:50px;
+    gap:22px;
+
+    margin-top:48px;
+
+    align-items:center;
 
 }
 
@@ -51,24 +58,62 @@
 
 }
 
-/* ==========================================================
-   INTRO
-========================================================== */
+.discord-button{
 
-.section-intro{
+    display:inline-flex;
 
-    max-width:760px;
+    align-items:center;
 
-    margin:28px 0 60px;
+    justify-content:center;
 
-    color:var(--text);
+    gap:12px;
 
-    line-height:1.95;
+    height:58px;
+
+    padding:0 34px;
+
+    border-radius:999px;
+
+    background:#5865F2;
+
+    color:#ffffff;
+
+    font-weight:700;
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+    box-shadow:
+        0 12px 28px rgba(88,101,242,.32);
 
 }
 
+.discord-button:hover{
+
+    background:#4752C4;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 22px 42px rgba(88,101,242,.40);
+
+}
+
+.discord-button i{
+
+    font-size:1.15rem;
+
+}
+
+.hero-buttons .secondary-button{
+
+    background:transparent;
+
+}
 /* ==========================================================
-   STANDARD
+   WHY BRITISH MIDLAND
 ========================================================== */
 
 .join-standard{
@@ -79,21 +124,127 @@
 
 }
 
-.join-standard .cards{
+.section-intro{
 
-    grid-template-columns:repeat(2,1fr);
+    max-width:760px;
 
-    gap:36px;
+    margin:28px 0 60px;
+
+    color:var(--text);
+
+    line-height:1.9;
 
 }
 
-.join-standard .card{
+.standard-grid{
 
-    min-height:260px;
+    display:grid;
+
+    grid-template-columns:repeat(4,1fr);
+
+    gap:32px;
+
+}
+
+.standard-grid .card{
+
+    position:relative;
+
+    overflow:hidden;
+
+    padding:42px 34px;
+
+    border-radius:var(--radius-lg);
+
+    background:#ffffff;
+
+    box-shadow:var(--shadow);
+
+    transition:
+        transform .30s ease,
+        box-shadow .30s ease;
+
+}
+
+.standard-grid .card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+.standard-grid .card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:4px;
+
+    background:var(--bm-red);
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:transform .30s ease;
+
+}
+
+.standard-grid .card:hover::before{
+
+    transform:scaleX(1);
+
+}
+
+.standard-grid i{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:68px;
+
+    height:68px;
+
+    margin-bottom:26px;
+
+    border-radius:18px;
+
+    background:rgba(208,40,35,.08);
+
+    color:var(--bm-red);
+
+    font-size:1.7rem;
+
+}
+
+.standard-grid h3{
+
+    margin-bottom:18px;
+
+    color:var(--bm-blue);
+
+}
+
+.standard-grid p{
+
+    color:var(--text);
+
+    line-height:1.85;
 
 }
 /* ==========================================================
-   JOURNEY
+   YOUR JOURNEY
 ========================================================== */
 
 .join-journey{
@@ -106,13 +257,40 @@
 
 .journey-grid{
 
+    position:relative;
+
     display:grid;
 
     grid-template-columns:repeat(4,1fr);
 
-    gap:32px;
+    gap:34px;
 
-    margin-top:60px;
+    margin-top:70px;
+
+}
+
+.journey-grid::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:40px;
+
+    left:12%;
+
+    right:12%;
+
+    height:2px;
+
+    background:
+        linear-gradient(
+            90deg,
+            var(--bm-red),
+            rgba(208,40,35,.25)
+        );
+
+    z-index:0;
 
 }
 
@@ -120,7 +298,7 @@
 
     position:relative;
 
-    overflow:hidden;
+    z-index:2;
 
     background:#ffffff;
 
@@ -146,7 +324,7 @@
 
 }
 
-.step-number{
+.step-icon{
 
     display:flex;
 
@@ -154,21 +332,38 @@
 
     justify-content:center;
 
-    width:74px;
+    width:80px;
 
-    height:74px;
+    height:80px;
 
-    margin:0 auto 28px;
+    margin:0 auto 18px;
 
     border-radius:50%;
 
-    background:var(--bm-red);
+    background:var(--bm-blue);
 
     color:#ffffff;
 
-    font-size:1.7rem;
+    font-size:1.8rem;
+
+    box-shadow:
+        0 14px 30px rgba(0,26,58,.20);
+
+}
+
+.step-number{
+
+    display:block;
+
+    margin-bottom:18px;
+
+    color:var(--bm-red);
+
+    font-size:.8rem;
 
     font-weight:800;
+
+    letter-spacing:.22em;
 
 }
 
@@ -187,60 +382,8 @@
     line-height:1.85;
 
 }
-
 /* ==========================================================
-   PILOT TYPES
-========================================================== */
-
-.pilot-types{
-
-    padding:120px 0;
-
-    background:#ffffff;
-
-}
-
-.pilot-types .cards{
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:36px;
-
-}
-
-.pilot-types .card{
-
-    min-height:320px;
-
-}
-
-/* ==========================================================
-   COMMUNITY VALUES
-========================================================== */
-
-.community-values{
-
-    padding:120px 0;
-
-    background:var(--bm-cream);
-
-}
-
-.community-values .cards{
-
-    grid-template-columns:repeat(3,1fr);
-
-    gap:32px;
-
-}
-
-.community-values .card{
-
-    min-height:240px;
-
-}
-/* ==========================================================
-   MEMBERSHIP
+   MEMBERSHIP REQUIREMENTS
 ========================================================== */
 
 .membership{
@@ -269,7 +412,7 @@
 
     overflow:hidden;
 
-    padding:36px 26px;
+    padding:42px 28px;
 
     background:#ffffff;
 
@@ -293,9 +436,61 @@
 
 }
 
+.requirement::before{
+
+    content:"";
+
+    position:absolute;
+
+    inset:0 auto auto 0;
+
+    width:100%;
+
+    height:4px;
+
+    background:var(--bm-red);
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:transform .30s ease;
+
+}
+
+.requirement:hover::before{
+
+    transform:scaleX(1);
+
+}
+
+.requirement i{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:72px;
+
+    height:72px;
+
+    margin:0 auto 24px;
+
+    border-radius:18px;
+
+    background:rgba(0,26,58,.08);
+
+    color:var(--bm-blue);
+
+    font-size:1.8rem;
+
+}
+
 .requirement h3{
 
-    margin-bottom:18px;
+    margin-bottom:14px;
 
     color:var(--bm-blue);
 
@@ -308,7 +503,6 @@
     line-height:1.8;
 
 }
-
 /* ==========================================================
    CTA
 ========================================================== */
@@ -324,9 +518,9 @@
             var(--bm-blue-light)
         );
 
-    text-align:center;
-
     color:#ffffff;
+
+    text-align:center;
 
 }
 
@@ -340,7 +534,7 @@
 
     color:#ffffff;
 
-    margin-bottom:26px;
+    margin-bottom:24px;
 
 }
 
@@ -358,142 +552,69 @@
 
 .join-cta .cta-buttons{
 
+    display:flex;
+
     justify-content:center;
 
-    margin-top:50px;
+    gap:20px;
 
-}
-/* ==========================================================
-   CARD ENHANCEMENTS
-========================================================== */
-
-.join-standard .card,
-.pilot-types .card,
-.community-values .card,
-.requirement,
-.journey-step{
-
-    position:relative;
-
-    overflow:hidden;
-
-}
-
-.join-standard .card::before,
-.pilot-types .card::before,
-.community-values .card::before,
-.requirement::before,
-.journey-step::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    width:100%;
-
-    height:4px;
-
-    background:var(--bm-red);
-
-    transform:scaleX(0);
-
-    transform-origin:left;
-
-    transition:transform .35s ease;
-
-}
-
-.join-standard .card:hover::before,
-.pilot-types .card:hover::before,
-.community-values .card:hover::before,
-.requirement:hover::before,
-.journey-step:hover::before{
-
-    transform:scaleX(1);
+    margin-top:48px;
 
 }
 
 /* ==========================================================
-   DISCORD BUTTON
+   FOOTER FIX
 ========================================================== */
 
-.discord-button{
+footer{
 
-    display:inline-flex;
+    margin-top:0;
 
-    align-items:center;
-
-    justify-content:center;
-
-    gap:10px;
-
-    min-width:220px;
-
-    height:58px;
-
-    padding:0 34px;
-
-    border-radius:999px;
-
-    background:#5865F2;
+    background:var(--bm-blue) !important;
 
     color:#ffffff;
 
-    font-weight:700;
-
-    box-shadow:
-        0 12px 28px rgba(88,101,242,.32);
-
-    transition:
-        transform .25s ease,
-        background .25s ease,
-        box-shadow .25s ease;
-
 }
 
-.discord-button:hover{
-
-    background:#4752C4;
-
-    transform:translateY(-3px);
-
-    box-shadow:
-        0 20px 40px rgba(88,101,242,.42);
-
-}
-
-.discord-button i{
-
-    font-size:1.15rem;
-
-}
-
-.hero-buttons .secondary-button{
+.footer-grid{
 
     background:transparent;
 
 }
 
-.hero-buttons .secondary-button:hover{
+.footer-bottom{
 
-    background:#ffffff;
-
-    color:var(--bm-blue);
+    background:rgba(0,0,0,.15);
 
 }
+
+.footer-bottom p{
+
+    color:rgba(255,255,255,.75);
+
+}
+
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
 
 @media(max-width:1200px){
 
+    .standard-grid{
+
+        grid-template-columns:repeat(2,1fr);
+
+    }
+
     .journey-grid{
 
         grid-template-columns:repeat(2,1fr);
+
+    }
+
+    .journey-grid::before{
+
+        display:none;
 
     }
 
@@ -505,75 +626,41 @@
 
 }
 
-@media(max-width:992px){
-
-    .join-standard .cards,
-
-    .pilot-types .cards,
-
-    .community-values .cards{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .requirements-grid{
-
-        grid-template-columns:repeat(2,1fr);
-
-    }
-
-}
-
 @media(max-width:768px){
-
-    .join-hero .hero-content{
-
-        padding-top:180px;
-
-        padding-bottom:110px;
-
-        margin:auto;
-
-        text-align:center;
-
-    }
-
-    .hero-buttons{
-
-        justify-content:center;
-
-        flex-direction:column;
-
-        align-items:center;
-
-    }
-
-    .journey-grid{
-
-        grid-template-columns:1fr;
-
-    }
-
-    .requirements-grid{
-
-        grid-template-columns:1fr;
-
-    }
 
     .join-standard,
 
     .join-journey,
-
-    .pilot-types,
-
-    .community-values,
 
     .membership,
 
     .join-cta{
 
         padding:90px 0;
+
+    }
+
+    .hero-buttons{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .standard-grid,
+
+    .journey-grid,
+
+    .requirements-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .hero-buttons a{
+
+        width:100%;
 
     }
 
@@ -587,33 +674,86 @@
 
     }
 
-    .section-intro{
+}
+/* ==========================================================
+   MICRO INTERACTIONS
+========================================================== */
 
-        font-size:1rem;
+.standard-grid .card,
+.journey-step,
+.requirement{
 
-    }
-
-    .hero-buttons a,
-
-    .discord-button{
-
-        width:100%;
-
-        max-width:320px;
-
-    }
+    will-change:transform;
 
 }
 
+.standard-grid .card:hover i{
+
+    transform:rotate(-6deg) scale(1.08);
+
+    background:var(--bm-red);
+
+    color:#ffffff;
+
+}
+
+.requirement:hover i{
+
+    transform:translateY(-4px);
+
+    background:var(--bm-blue);
+
+    color:#ffffff;
+
+}
+
+.step-icon{
+
+    transition:
+        transform .30s ease,
+        background .30s ease;
+
+}
+
+.journey-step:hover .step-icon{
+
+    transform:scale(1.08);
+
+    background:var(--bm-red);
+
+}
+
+/* ==========================================================
+   ICON TRANSITIONS
+========================================================== */
+
+.standard-grid i,
+.requirement i{
+
+    transition:
+        transform .30s ease,
+        background .30s ease,
+        color .30s ease;
+
+}
+
+/* ==========================================================
+   ACCESSIBILITY
+========================================================== */
+
 @media(prefers-reduced-motion:reduce){
+
+    .standard-grid .card,
 
     .journey-step,
 
     .requirement,
 
-    .discord-button,
+    .standard-grid i,
 
-    .card{
+    .requirement i,
+
+    .step-icon{
 
         transition:none !important;
 
