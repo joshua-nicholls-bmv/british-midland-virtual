@@ -1029,3 +1029,91 @@
     font-weight: 600;
 
 }
+/* ==========================================================================
+   BRITISH MIDLAND VIRTUAL
+   OPERATIONS PAGE
+   RECENT OPERATIONS REDESIGN ADDITIONS
+   --------------------------------------------------------------------------
+   Append this block to the end of operations.css or merge into your stylesheet.
+   ========================================================================== */
+
+.flight-board{
+    background:linear-gradient(180deg,#071525 0%,#0b1d33 100%);
+    padding:120px 0;
+}
+
+.fids-board{
+    background:#0d2340;
+    border:1px solid rgba(255,255,255,.08);
+    border-radius:22px;
+    overflow:hidden;
+    box-shadow:0 24px 70px rgba(0,0,0,.28);
+}
+
+.fids-title{
+    background:linear-gradient(90deg,#001a3a,#032b63);
+    color:#fff;
+    padding:22px 28px;
+    font-weight:700;
+    letter-spacing:.16em;
+    text-transform:uppercase;
+    border-bottom:3px solid #d02823;
+}
+
+.fids-scroll{
+    overflow-x:auto;
+}
+
+.fids-table{
+    width:100%;
+    border-collapse:collapse;
+    min-width:980px;
+}
+
+.fids-table thead th{
+    position:sticky;
+    top:0;
+    background:#112949;
+    color:#d8e4f1;
+    padding:18px 16px;
+    text-transform:uppercase;
+    letter-spacing:.10em;
+    font-size:.72rem;
+    border-bottom:1px solid rgba(255,255,255,.08);
+}
+
+.fids-table tbody td{
+    padding:18px 16px;
+    color:#f8f3ee;
+    border-bottom:1px solid rgba(255,255,255,.06);
+    font-size:.92rem;
+}
+
+.fids-table tbody tr:nth-child(even){
+    background:rgba(255,255,255,.02);
+}
+
+.fids-table tbody tr:hover{
+    background:rgba(208,40,35,.12);
+    transition:.25s ease;
+}
+
+.operations-loading{
+    text-align:center;
+    padding:48px!important;
+    color:#8ea8cb!important;
+    letter-spacing:.12em;
+}
+
+.board-note{
+    margin-top:24px;
+    color:#b8c8da;
+    text-align:center;
+    line-height:1.8;
+}
+
+@media (max-width:900px){
+    .flight-board{
+        padding:90px 0;
+    }
+}
