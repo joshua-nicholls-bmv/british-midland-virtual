@@ -1,12 +1,13 @@
-/* =======================================================
+/* ==========================================================
    BRITISH MIDLAND VIRTUAL
-   JOIN PAGE
-   Version 3.3
-======================================================= */
+   JOIN PAGE v4.0
+   Join Specific Styles Only
+   Requires: base.css v4
+========================================================== */
 
-/* ------------------------------
+/* ==========================================================
    HERO
------------------------------- */
+========================================================== */
 
 .join-hero{
 
@@ -16,11 +17,11 @@
 
 .join-hero .hero-content{
 
-    padding-top:150px;
+    max-width:760px;
 
-    padding-bottom:130px;
+    padding-top:160px;
 
-    max-width:720px;
+    padding-bottom:140px;
 
 }
 
@@ -36,31 +37,45 @@
 
 }
 
-/* ------------------------------
+.hero-buttons{
+
+    justify-content:flex-start;
+
+    margin-top:50px;
+
+}
+
+.hero-buttons a{
+
+    min-width:220px;
+
+}
+
+/* ==========================================================
    INTRO
------------------------------- */
+========================================================== */
 
 .section-intro{
 
     max-width:760px;
 
-    margin:25px 0 55px;
+    margin:28px 0 60px;
 
-    font-size:1.08rem;
+    color:var(--text);
 
-    line-height:1.9;
-
-    color:#44556b;
+    line-height:1.95;
 
 }
 
-/* ------------------------------
+/* ==========================================================
    STANDARD
------------------------------- */
+========================================================== */
 
 .join-standard{
 
-    background:var(--bm-white);
+    padding:120px 0;
+
+    background:#ffffff;
 
 }
 
@@ -68,22 +83,24 @@
 
     grid-template-columns:repeat(2,1fr);
 
-    gap:35px;
+    gap:36px;
 
 }
 
 .join-standard .card{
 
-    min-height:250px;
+    min-height:260px;
 
 }
-/* ------------------------------
+/* ==========================================================
    JOURNEY
------------------------------- */
+========================================================== */
 
 .join-journey{
 
-    background:#ffffff;
+    padding:120px 0;
+
+    background:var(--bm-cream);
 
 }
 
@@ -93,9 +110,9 @@
 
     grid-template-columns:repeat(4,1fr);
 
-    gap:30px;
+    gap:32px;
 
-    margin-top:50px;
+    margin-top:60px;
 
 }
 
@@ -103,17 +120,21 @@
 
     position:relative;
 
-    background:white;
+    overflow:hidden;
 
-    border-radius:22px;
+    background:#ffffff;
 
-    padding:40px 30px;
+    border-radius:var(--radius-lg);
+
+    padding:42px 34px;
 
     text-align:center;
 
     box-shadow:var(--shadow);
 
-    transition:.3s;
+    transition:
+        transform .30s ease,
+        box-shadow .30s ease;
 
 }
 
@@ -121,27 +142,29 @@
 
     transform:translateY(-8px);
 
+    box-shadow:var(--shadow-xl);
+
 }
 
 .step-number{
-
-    width:70px;
-
-    height:70px;
-
-    margin:0 auto 25px;
-
-    border-radius:50%;
-
-    background:var(--bm-red);
-
-    color:white;
 
     display:flex;
 
     align-items:center;
 
     justify-content:center;
+
+    width:74px;
+
+    height:74px;
+
+    margin:0 auto 28px;
+
+    border-radius:50%;
+
+    background:var(--bm-red);
+
+    color:#ffffff;
 
     font-size:1.7rem;
 
@@ -151,29 +174,29 @@
 
 .journey-step h3{
 
-    color:var(--bm-blue);
-
     margin-bottom:18px;
 
-    font-size:1.3rem;
+    color:var(--bm-blue);
 
 }
 
 .journey-step p{
 
-    color:#55657d;
+    color:var(--text);
 
-    line-height:1.8;
+    line-height:1.85;
 
 }
 
-/* ------------------------------
+/* ==========================================================
    PILOT TYPES
------------------------------- */
+========================================================== */
 
 .pilot-types{
 
-    background:var(--bm-white);
+    padding:120px 0;
+
+    background:#ffffff;
 
 }
 
@@ -181,28 +204,25 @@
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:35px;
+    gap:36px;
 
 }
 
 .pilot-types .card{
 
-    min-height:300px;
+    min-height:320px;
 
 }
 
-.pilot-types h3{
-
-    margin-bottom:20px;
-
-}
-/* ------------------------------
-   COMMUNITY EXPECTATIONS
------------------------------- */
+/* ==========================================================
+   COMMUNITY VALUES
+========================================================== */
 
 .community-values{
 
-    background:#ffffff;
+    padding:120px 0;
+
+    background:var(--bm-cream);
 
 }
 
@@ -210,29 +230,24 @@
 
     grid-template-columns:repeat(3,1fr);
 
-    gap:30px;
+    gap:32px;
 
 }
 
 .community-values .card{
 
-    min-height:220px;
+    min-height:240px;
 
 }
-
-.community-values .card:hover{
-
-    transform:translateY(-8px);
-
-}
-
-/* ------------------------------
+/* ==========================================================
    MEMBERSHIP
------------------------------- */
+========================================================== */
 
 .membership{
 
-    background:var(--bm-white);
+    padding:120px 0;
+
+    background:#ffffff;
 
 }
 
@@ -242,25 +257,31 @@
 
     grid-template-columns:repeat(5,1fr);
 
-    gap:25px;
+    gap:28px;
 
-    margin-top:50px;
+    margin-top:60px;
 
 }
 
 .requirement{
 
-    background:white;
+    position:relative;
 
-    border-radius:20px;
+    overflow:hidden;
 
-    padding:35px 25px;
+    padding:36px 26px;
+
+    background:#ffffff;
+
+    border-radius:var(--radius-lg);
 
     text-align:center;
 
     box-shadow:var(--shadow);
 
-    transition:.3s;
+    transition:
+        transform .30s ease,
+        box-shadow .30s ease;
 
 }
 
@@ -268,52 +289,58 @@
 
     transform:translateY(-8px);
 
+    box-shadow:var(--shadow-xl);
+
 }
 
 .requirement h3{
 
-    color:var(--bm-blue);
-
     margin-bottom:18px;
 
-    font-size:1.2rem;
+    color:var(--bm-blue);
 
 }
 
 .requirement p{
 
-    color:#55657d;
+    color:var(--text);
 
-    font-weight:600;
-
-    line-height:1.6;
+    line-height:1.8;
 
 }
 
-/* ------------------------------
+/* ==========================================================
    CTA
------------------------------- */
+========================================================== */
 
 .join-cta{
+
+    padding:140px 0;
 
     background:
         linear-gradient(
             135deg,
             var(--bm-blue),
-            #032b63
+            var(--bm-blue-light)
         );
 
-    color:white;
-
     text-align:center;
+
+    color:#ffffff;
+
+}
+
+.join-cta .container{
+
+    max-width:900px;
 
 }
 
 .join-cta h2{
 
-    color:white;
+    color:#ffffff;
 
-    margin-bottom:25px;
+    margin-bottom:26px;
 
 }
 
@@ -321,27 +348,30 @@
 
     max-width:720px;
 
-    margin:0 auto 40px;
+    margin:0 auto;
 
     color:rgba(255,255,255,.88);
 
-    line-height:1.9;
+    line-height:1.95;
 
 }
 
-.join-cta .section-label{
+.join-cta .cta-buttons{
 
-    color:var(--bm-red);
+    justify-content:center;
+
+    margin-top:50px;
 
 }
-/* ------------------------------
+/* ==========================================================
    CARD ENHANCEMENTS
------------------------------- */
+========================================================== */
 
 .join-standard .card,
 .pilot-types .card,
 .community-values .card,
-.requirement{
+.requirement,
+.journey-step{
 
     position:relative;
 
@@ -352,17 +382,20 @@
 .join-standard .card::before,
 .pilot-types .card::before,
 .community-values .card::before,
-.requirement::before{
+.requirement::before,
+.journey-step::before{
 
     content:"";
 
     position:absolute;
 
     top:0;
+
     left:0;
 
     width:100%;
-    height:5px;
+
+    height:4px;
 
     background:var(--bm-red);
 
@@ -370,22 +403,91 @@
 
     transform-origin:left;
 
-    transition:.35s;
+    transition:transform .35s ease;
 
 }
 
 .join-standard .card:hover::before,
 .pilot-types .card:hover::before,
 .community-values .card:hover::before,
-.requirement:hover::before{
+.requirement:hover::before,
+.journey-step:hover::before{
 
     transform:scaleX(1);
 
 }
 
-/* ------------------------------
+/* ==========================================================
+   DISCORD BUTTON
+========================================================== */
+
+.discord-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    gap:10px;
+
+    min-width:220px;
+
+    height:58px;
+
+    padding:0 34px;
+
+    border-radius:999px;
+
+    background:#5865F2;
+
+    color:#ffffff;
+
+    font-weight:700;
+
+    box-shadow:
+        0 12px 28px rgba(88,101,242,.32);
+
+    transition:
+        transform .25s ease,
+        background .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.discord-button:hover{
+
+    background:#4752C4;
+
+    transform:translateY(-3px);
+
+    box-shadow:
+        0 20px 40px rgba(88,101,242,.42);
+
+}
+
+.discord-button i{
+
+    font-size:1.15rem;
+
+}
+
+.hero-buttons .secondary-button{
+
+    background:transparent;
+
+}
+
+.hero-buttons .secondary-button:hover{
+
+    background:#ffffff;
+
+    color:var(--bm-blue);
+
+}
+/* ==========================================================
    RESPONSIVE
------------------------------- */
+========================================================== */
 
 @media(max-width:1200px){
 
@@ -403,10 +505,12 @@
 
 }
 
-@media(max-width:900px){
+@media(max-width:992px){
 
     .join-standard .cards,
+
     .pilot-types .cards,
+
     .community-values .cards{
 
         grid-template-columns:1fr;
@@ -427,9 +531,21 @@
 
         padding-top:180px;
 
-        text-align:center;
+        padding-bottom:110px;
 
         margin:auto;
+
+        text-align:center;
+
+    }
+
+    .hero-buttons{
+
+        justify-content:center;
+
+        flex-direction:column;
+
+        align-items:center;
 
     }
 
@@ -445,13 +561,29 @@
 
     }
 
+    .join-standard,
+
+    .join-journey,
+
+    .pilot-types,
+
+    .community-values,
+
+    .membership,
+
+    .join-cta{
+
+        padding:90px 0;
+
+    }
+
 }
 
 @media(max-width:480px){
 
     .join-hero h1{
 
-        font-size:2.5rem;
+        font-size:2.4rem;
 
     }
 
@@ -461,159 +593,36 @@
 
     }
 
-}
-/* ------------------------------
-   DISCORD BUTTON
------------------------------- */
+    .hero-buttons a,
 
-Read my reply, I dont want image gen
+    .discord-button{
 
-You're right—and thanks for calling that out. I misinterpreted your previous message.
+        width:100%;
 
-Looking at your screenshot, I can see three issues:
+        max-width:320px;
 
-❌ The Discord button isn't the same height as View Operations.
-❌ It's not using the Discord blurple colour.
-❌ The icon/text aren't vertically aligned like the other button.
-
-Let's make it look like a proper primary button instead of plain text.
-
-Replace your .discord-button CSS with this
-/* ------------------------------
-   DISCORD BUTTON
------------------------------- */
-
-.discord-button{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    gap:10px;
-
-    min-width:220px;
-
-    height:62px;
-
-    padding:0 36px;
-
-    background:#5865F2;
-
-    color:#ffffff;
-
-    border-radius:999px;
-
-    font-weight:700;
-
-    font-size:1rem;
-
-    transition:.25s;
-
-    box-shadow:0 10px 25px rgba(88,101,242,.35);
+    }
 
 }
 
-.discord-button:hover{
+@media(prefers-reduced-motion:reduce){
 
-    background:#4752C4;
+    .journey-step,
 
-    transform:translateY(-3px);
+    .requirement,
 
-    box-shadow:0 15px 35px rgba(88,101,242,.45);
+    .discord-button,
 
-}
+    .card{
 
-.discord-button i{
+        transition:none !important;
 
-    font-size:1.25rem;
+        animation:none !important;
 
-}
-/* ------------------------------
-   HERO BUTTONS
------------------------------- */
-
-.hero-buttons{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:24px;
-
-    margin-top:45px;
+    }
 
 }
 
-.hero-buttons a{
-
-    width:220px;
-
-    height:58px;
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    border-radius:999px;
-
-    font-weight:700;
-
-    text-decoration:none;
-
-    transition:.25s ease;
-
-}
-
-/* Discord */
-
-.discord-button{
-
-    background:#5865F2;
-
-    color:#ffffff;
-
-    box-shadow:0 10px 25px rgba(88,101,242,.35);
-
-}
-
-.discord-button:hover{
-
-    background:#4752C4;
-
-    transform:translateY(-3px);
-
-    box-shadow:0 15px 35px rgba(88,101,242,.45);
-
-}
-
-.discord-button i{
-
-    margin-right:10px;
-
-    font-size:1.2rem;
-
-}
-
-/* View Operations */
-
-.hero-buttons .secondary-button{
-
-    border:2px solid #ffffff;
-
-    color:#ffffff;
-
-    background:transparent;
-
-}
-
-.hero-buttons .secondary-button:hover{
-
-    background:#ffffff;
-
-    color:var(--bm-blue);
-
-}
+/* ==========================================================
+   END OF JOIN.CSS
+========================================================== */
