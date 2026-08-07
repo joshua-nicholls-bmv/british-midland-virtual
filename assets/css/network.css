@@ -1,62 +1,48 @@
-/* ===========================================================
+/* ==========================================================
    BRITISH MIDLAND VIRTUAL
-   Network v3.2
-=========================================================== */
+   NETWORK PAGE v4.0
+   Network Specific Styles Only
+   Requires: base.css v4
+========================================================== */
 
-:root{
-
-    --bm-blue:#001a3a;
-    --bm-red:#d02823;
-    --bm-cream:#f8f3ee;
-    --text:#44556b;
-
-    --radius:22px;
-
-    --shadow:
-        0 25px 60px rgba(0,0,0,.12);
-
-}
-
-/* =========================================================== */
-
-body{
-
-    background:var(--bm-cream);
-
-}
-
-/* =========================================================== */
+/* ==========================================================
+   HERO
+========================================================== */
 
 .network-hero{
 
-    padding-top:170px;
-
-    padding-bottom:80px;
-
-    text-align:center;
+    padding:180px 0 110px;
 
     background:
         linear-gradient(
             180deg,
             var(--bm-blue),
-            #032b63
+            var(--bm-blue-light)
         );
 
-    color:white;
+    text-align:center;
+
+    color:#ffffff;
+
+}
+
+.network-hero .container{
+
+    max-width:900px;
 
 }
 
 .network-hero h1{
 
-    font-size:clamp(3.2rem,6vw,5.5rem);
+    margin-bottom:26px;
 
-    margin-bottom:20px;
+    color:#ffffff;
 
 }
 
 .network-hero .hero-divider{
 
-    margin:35px auto;
+    margin:38px auto;
 
 }
 
@@ -64,247 +50,43 @@ body{
 
     max-width:760px;
 
-    margin:auto;
+    margin-inline:auto;
 
-    font-size:1.15rem;
+    color:rgba(255,255,255,.90);
 
-    line-height:1.9;
-
-}
-
-/* =========================================================== */
-
-.network-map-section{
-
-    padding:90px 0;
+    line-height:1.95;
 
 }
 
-/* =========================================================== */
-
-#network-map{
-
-    width:100%;
-
-    height:700px;
-
-    border-radius:26px;
-
-    overflow:hidden;
-
-    box-shadow:var(--shadow);
-
-    border:8px solid white;
-
-}
-
-/* =========================================================== */
-
-.leaflet-container{
-
-    background:#dfe9f4;
-
-    font-family:'Inter',sans-serif;
-
-}
-/* ===========================================================
-   DESTINATION GRID
-=========================================================== */
-
-.network-destinations{
-
-    padding:0 0 120px;
-
-}
-
-#destination-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-
-    gap:30px;
-
-}
-
-/* ===========================================================
-   DESTINATION CARD
-=========================================================== */
-
-.destination-card{
-
-    background:white;
-
-    border-radius:22px;
-
-    padding:34px;
-
-    box-shadow:var(--shadow);
-
-    transition:
-        transform .3s ease,
-        box-shadow .3s ease,
-        border-color .3s ease;
-
-    border:2px solid transparent;
-
-}
-
-.destination-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:
-        0 30px 80px rgba(0,0,0,.15);
-
-}
-
-/* =========================================================== */
-
-.destination-card.selected{
-
-    border-color:var(--bm-red);
-
-    transform:translateY(-6px);
-
-}
-
-/* =========================================================== */
-
-.destination-status{
-
-    display:inline-block;
-
-    padding:8px 16px;
-
-    border-radius:999px;
-
-    font-size:.72rem;
-
-    font-weight:700;
-
-    letter-spacing:.12em;
-
-    text-transform:uppercase;
-
-    margin-bottom:22px;
-
-}
-
-.destination-status.active{
-
-    background:#e7f6eb;
-
-    color:#1d7c3d;
-
-}
-
-.destination-status.coming-soon{
-
-    background:#eef0f3;
-
-    color:#6d7683;
-
-}
-
-/* =========================================================== */
-
-.destination-card h3{
-
-    font-size:2rem;
-
-    color:var(--bm-blue);
-
-    margin-bottom:8px;
-
-}
-
-.airport{
-
-    color:#8a93a3;
-
-    font-weight:600;
-
-    margin-bottom:22px;
-
-    letter-spacing:.05em;
-
-}
-
-.destination-description{
-
-    color:var(--text);
-
-    line-height:1.8;
-
-    margin-bottom:30px;
-
-}
-
-/* ===========================================================
-   INFO GRID
-=========================================================== */
-
-.destination-info{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:18px;
-
-}
-
-.destination-info div{
-
-    background:var(--bm-cream);
-
-    border-radius:16px;
-
-    padding:18px;
-
-}
-
-.destination-info span{
-
-    display:block;
-
-    font-size:.78rem;
-
-    text-transform:uppercase;
-
-    letter-spacing:.12em;
-
-    color:#8d97a8;
-
-    margin-bottom:8px;
-
-}
-
-.destination-info strong{
-
-    color:var(--bm-blue);
-
-    font-size:1rem;
-
-}
-/* ===========================================================
-   MAP POLISH
-=========================================================== */
+/* ==========================================================
+   MAP
+========================================================== */
 
 .network-map-section{
 
     position:relative;
 
-    margin-top:-40px;
+    margin-top:-45px;
+
+    padding:0 0 110px;
 
     z-index:5;
 
 }
 
-/* =========================================================== */
-
 #network-map{
+
+    width:100%;
+
+    height:720px;
+
+    overflow:hidden;
+
+    border-radius:var(--radius-lg);
+
+    border:8px solid #ffffff;
+
+    box-shadow:var(--shadow-xl);
 
     transition:
         transform .35s ease,
@@ -314,100 +96,29 @@ body{
 
 #network-map:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-5px);
 
     box-shadow:
-        0 40px 100px rgba(0,0,0,.18);
+        0 40px 90px rgba(0,0,0,.18);
 
 }
 
-/* ===========================================================
-   LEAFLET CONTROLS
-=========================================================== */
+.leaflet-container{
 
-.leaflet-control-zoom{
+    background:#DFE9F4;
 
-    border:none !important;
-
-    box-shadow:none !important;
+    font-family:inherit;
 
 }
-
-.leaflet-control-zoom a{
-
-    width:42px !important;
-
-    height:42px !important;
-
-    line-height:42px !important;
-
-    background:white !important;
-
-    color:var(--bm-blue) !important;
-
-    border-radius:12px !important;
-
-    margin-bottom:8px;
-
-    font-weight:700;
-
-    box-shadow:0 8px 20px rgba(0,0,0,.12);
-
-}
-
-.leaflet-control-zoom a:hover{
-
-    background:var(--bm-red) !important;
-
-    color:white !important;
-
-}
-
-/* ===========================================================
-   POPUPS
-=========================================================== */
-
-.leaflet-popup-content-wrapper{
-
-    border-radius:16px;
-
-    font-family:'Inter',sans-serif;
-
-}
-
-.leaflet-popup-content{
-
-    margin:16px 18px;
-
-    line-height:1.6;
-
-}
-
-.leaflet-popup-tip{
-
-    background:white;
-
-}
-
-/* ===========================================================
-   MARKERS
-=========================================================== */
-
-.leaflet-interactive{
-
-    transition:
-        stroke .25s ease,
-        fill .25s ease;
-
-}
-
-/* ===========================================================
-   SECTION TRANSITION
-=========================================================== */
+/* ==========================================================
+   DESTINATIONS
+========================================================== */
 
 .network-destinations{
 
     position:relative;
+
+    padding:0 0 130px;
 
 }
 
@@ -421,46 +132,447 @@ body{
 
     height:4px;
 
-    background:var(--bm-red);
-
     margin:0 auto 70px;
 
-}
-/* ===========================================================
-   FOOTER SPACING
-=========================================================== */
+    background:var(--bm-red);
 
-footer{
-
-    margin-top:0;
+    border-radius:999px;
 
 }
 
-/* ===========================================================
+#destination-grid{
+
+    display:grid;
+
+    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+
+    gap:32px;
+
+}
+
+/* ==========================================================
+   DESTINATION CARD
+========================================================== */
+
+.destination-card{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    background:#ffffff;
+
+    border-radius:var(--radius-lg);
+
+    padding:36px;
+
+    border:2px solid transparent;
+
+    box-shadow:var(--shadow);
+
+    transition:
+        transform .30s ease,
+        box-shadow .30s ease,
+        border-color .30s ease;
+
+}
+
+.destination-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-xl);
+
+}
+
+.destination-card.selected{
+
+    border-color:var(--bm-red);
+
+}
+
+.destination-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    align-self:flex-start;
+
+    padding:8px 16px;
+
+    border-radius:999px;
+
+    font-size:.72rem;
+
+    font-weight:700;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+
+    margin-bottom:24px;
+
+}
+
+.destination-status.active{
+
+    background:#E8F8EE;
+
+    color:#1D7C3D;
+
+}
+
+.destination-status.coming-soon{
+
+    background:#EEF1F5;
+
+    color:#6B7483;
+
+}
+
+.destination-card h3{
+
+    margin-bottom:10px;
+
+    color:var(--bm-blue);
+
+}
+
+.airport{
+
+    margin-bottom:24px;
+
+    color:#8892A2;
+
+    font-weight:600;
+
+    letter-spacing:.05em;
+
+}
+
+.destination-description{
+
+    color:var(--text);
+
+    line-height:1.9;
+
+    margin-bottom:34px;
+
+}
+/* ==========================================================
+   DESTINATION INFORMATION
+========================================================== */
+
+.destination-info{
+
+    display:grid;
+
+    grid-template-columns:repeat(2,1fr);
+
+    gap:18px;
+
+}
+
+.destination-info > div{
+
+    background:var(--bm-cream);
+
+    border-radius:18px;
+
+    padding:20px;
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease;
+
+}
+
+.destination-info > div:hover{
+
+    transform:translateY(-3px);
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+.destination-info span{
+
+    display:block;
+
+    margin-bottom:8px;
+
+    color:#8C96A6;
+
+    font-size:.78rem;
+
+    font-weight:700;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+
+}
+
+.destination-info strong{
+
+    color:var(--bm-blue);
+
+    font-size:1rem;
+
+    font-weight:700;
+
+}
+
+/* ==========================================================
+   AIRCRAFT BADGES
+========================================================== */
+
+.badge-a319,
+.badge-a320,
+.badge-a321,
+.badge-a350{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:5px 10px;
+
+    border-radius:999px;
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    line-height:1;
+
+}
+
+.destination-info strong .badge-a319{
+
+    background:#2E6FA3;
+
+    color:#ffffff;
+
+}
+
+.destination-info strong .badge-a320{
+
+    background:#D02823;
+
+    color:#ffffff;
+
+}
+
+.destination-info strong .badge-a321{
+
+    background:#C9A227;
+
+    color:#001A3A;
+
+}
+
+.destination-info strong .badge-a350{
+
+    background:#8A8F98;
+
+    color:#ffffff;
+
+}
+
+/* ==========================================================
+   MAP CONTROLS
+========================================================== */
+
+.leaflet-control-zoom{
+
+    border:none !important;
+
+    box-shadow:none !important;
+
+}
+
+.leaflet-control-zoom a{
+
+    width:44px !important;
+
+    height:44px !important;
+
+    line-height:44px !important;
+
+    border-radius:12px !important;
+
+    background:#ffffff !important;
+
+    color:var(--bm-blue) !important;
+
+    font-weight:700;
+
+    box-shadow:0 10px 22px rgba(0,0,0,.12);
+
+}
+
+.leaflet-control-zoom a:hover{
+
+    background:var(--bm-red) !important;
+
+    color:#ffffff !important;
+
+}
+
+.leaflet-popup-content-wrapper{
+
+    border-radius:18px;
+
+}
+
+.leaflet-popup-content{
+
+    margin:18px;
+
+    line-height:1.7;
+
+}
+
+.leaflet-popup-tip{
+
+    background:#ffffff;
+
+}
+
+/* ==========================================================
+   HUB LABEL
+========================================================== */
+
+.hub-label{
+
+    background:var(--bm-blue);
+
+    color:#ffffff;
+
+    border:none;
+
+    border-radius:14px;
+
+    padding:10px 14px;
+
+    font-weight:700;
+
+    letter-spacing:.05em;
+
+    box-shadow:0 12px 26px rgba(0,0,0,.18);
+
+}
+
+.hub-label::before{
+
+    display:none;
+
+}
+/* ==========================================================
+   MICRO INTERACTIONS
+========================================================== */
+
+.destination-card{
+
+    overflow:hidden;
+
+}
+
+.destination-card::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:var(--bm-red);
+
+    transform:scaleX(0);
+
+    transform-origin:left;
+
+    transition:transform .35s ease;
+
+}
+
+.destination-card:hover::before,
+.destination-card.selected::before{
+
+    transform:scaleX(1);
+
+}
+
+.destination-card:hover h3{
+
+    color:var(--bm-red);
+
+}
+
+.destination-card h3{
+
+    transition:color .25s ease;
+
+}
+
+/* ==========================================================
+   MAP POLISH
+========================================================== */
+
+.leaflet-interactive{
+
+    transition:
+        stroke .25s ease,
+        fill .25s ease;
+
+}
+
+.leaflet-marker-icon{
+
+    transition:
+        transform .25s ease;
+
+}
+
+.leaflet-marker-icon:hover{
+
+    transform:scale(1.08);
+
+}
+
+/* ==========================================================
    RESPONSIVE
-=========================================================== */
+========================================================== */
 
-@media (max-width:1200px){
+@media(max-width:1200px){
 
     #network-map{
 
-        height:620px;
+        height:640px;
 
     }
 
 }
 
-@media (max-width:992px){
+@media(max-width:992px){
 
     .network-hero{
 
-        padding-top:150px;
-
-    }
-
-    .network-hero h1{
-
-        font-size:3.5rem;
+        padding:160px 0 90px;
 
     }
 
@@ -478,33 +590,19 @@ footer{
 
 }
 
-@media (max-width:768px){
+@media(max-width:768px){
 
     .network-hero{
 
-        padding-top:130px;
-
-        padding-bottom:60px;
-
-    }
-
-    .network-hero h1{
-
-        font-size:2.8rem;
-
-    }
-
-    .network-hero .hero-copy{
-
-        font-size:1rem;
+        padding:140px 0 70px;
 
     }
 
     .network-map-section{
 
-        padding:60px 0;
-
         margin-top:-20px;
+
+        padding-bottom:80px;
 
     }
 
@@ -522,12 +620,6 @@ footer{
 
     }
 
-    .destination-card h3{
-
-        font-size:1.6rem;
-
-    }
-
     .destination-info{
 
         grid-template-columns:1fr;
@@ -536,11 +628,11 @@ footer{
 
 }
 
-@media (max-width:480px){
+@media(max-width:480px){
 
     .network-hero h1{
 
-        font-size:2.2rem;
+        font-size:2.3rem;
 
     }
 
@@ -550,203 +642,35 @@ footer{
 
     }
 
-    .destination-status{
-
-        font-size:.68rem;
-
-    }
-
     .destination-card{
 
         padding:22px;
 
     }
 
-}
-/* ===========================================================
-   HUB LABEL
-=========================================================== */
+    .destination-status{
 
-.hub-label{
+        font-size:.68rem;
 
-    background:#001a3a;
-
-    color:white;
-
-    border:none;
-
-    border-radius:14px;
-
-    padding:10px 14px;
-
-    font-weight:700;
-
-    letter-spacing:.04em;
-
-    box-shadow:0 10px 25px rgba(0,0,0,.18);
+    }
 
 }
 
-.hub-label::before{
+@media(prefers-reduced-motion:reduce){
 
-    display:none;
+    #network-map,
+    .destination-card,
+    .destination-info > div,
+    .leaflet-marker-icon{
 
-}
-.badge-a319,
-.badge-a320,
-.badge-a321,
-.badge-a350 {
+        transition:none !important;
 
-    display:inline-block;
+        animation:none !important;
 
-    padding:5px 10px;
-
-    border-radius:999px;
-
-    font-size:.82rem;
-
-    font-weight:700;
-
-    line-height:1;
+    }
 
 }
 
-.destination-info strong .badge-a319{
-    background:#2E6FA3;
-    color:#fff !important;
-}
-
-.destination-info strong .badge-a320{
-    background:#D02823;
-    color:#fff !important;
-}
-
-.destination-info strong .badge-a321{
-    background:#C9A227;
-    color:#001A3A !important;
-}
-
-.destination-info strong .badge-a350{
-    background:#8A8F98;
-    color:#fff !important;
-}
 /* ==========================================================
-   SITE FOOTER
+   END OF NETWORK.CSS
 ========================================================== */
-
-.site-footer{
-    background:var(--bm-blue);
-    color:#fff;
-    margin-top:0;
-}
-
-.site-footer .container{
-    width:min(94%,1500px);
-    margin-inline:auto;
-}
-
-.footer-grid{
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:70px;
-    padding:90px 0;
-    align-items:start;
-}
-
-.footer-brand{
-    max-width:380px;
-}
-
-.footer-brand img{
-    display:block;
-    width:220px;
-    margin-bottom:28px;
-}
-
-.footer-brand p{
-    color:rgba(255,255,255,.72);
-    line-height:1.9;
-    margin:0;
-}
-
-.site-footer h4{
-    margin:0 0 22px;
-    color:#fff;
-    font-size:.9rem;
-    font-weight:700;
-    letter-spacing:.14em;
-    text-transform:uppercase;
-}
-
-.site-footer ul{
-    list-style:none;
-    margin:0;
-    padding:0;
-}
-
-.site-footer li{
-    margin-bottom:14px;
-}
-
-.site-footer li:last-child{
-    margin-bottom:0;
-}
-
-.site-footer a{
-    color:rgba(255,255,255,.72);
-    text-decoration:none;
-    transition:.25s;
-}
-
-.site-footer a:hover{
-    color:#fff;
-    padding-left:8px;
-}
-
-.footer-bottom{
-    border-top:1px solid rgba(255,255,255,.08);
-}
-
-.footer-bottom-content{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:28px 0;
-}
-
-.footer-bottom p{
-    margin:0;
-    color:rgba(255,255,255,.55);
-    font-size:.9rem;
-}
-
-@media(max-width:1000px){
-
-    .footer-grid{
-        grid-template-columns:1fr 1fr;
-        gap:50px;
-    }
-
-}
-
-@media(max-width:768px){
-
-    .footer-grid{
-        grid-template-columns:1fr;
-        text-align:center;
-    }
-
-    .footer-brand{
-        max-width:100%;
-    }
-
-    .footer-brand img{
-        margin:0 auto 24px;
-    }
-
-    .footer-bottom-content{
-        flex-direction:column;
-        gap:12px;
-    }
-
-}
