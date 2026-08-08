@@ -1380,7 +1380,24 @@
     }
 
 }
+/* ==========================================================
+   FIDS TABLE OVERLAY FIX
+========================================================== */
 
+.flight-board,
+.fids-board,
+.fids-scroll,
+.fids-table {
+    position: relative;
+}
+
+.fids-board::before,
+.fids-board::after,
+.fids-scroll::before,
+.fids-scroll::after {
+    content: none !important;
+    display: none !important;
+}
 /* ==========================================================
    END OF OPERATIONS.CSS
 ========================================================== */
