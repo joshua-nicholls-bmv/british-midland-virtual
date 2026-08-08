@@ -165,19 +165,17 @@ function initialiseMap() {
 
         scrollWheelZoom: true,
 
-        attributionControl: false
+        attributionControl: false,
+
+        center: [48, -15],
+
+        zoom: 4,
+
+        minZoom: 2,
+
+        maxZoom: 18
 
     });
-
-  map.fitBounds(
-    [
-        [25, -70],
-        [65, 35]
-    ],
-    {
-        padding: [40, 40]
-    }
-);
 
     L.tileLayer(
 
@@ -185,13 +183,21 @@ function initialiseMap() {
 
         {
 
-            maxZoom: 18
+            maxZoom: 18,
+
+            noWrap: true
 
         }
 
     ).addTo(map);
 
     createHub();
+
+    setTimeout(() => {
+
+        map.invalidateSize();
+
+    }, 100);
 
 }
 
