@@ -57,7 +57,60 @@
     border-radius:18px;
 
 }
+/* ==========================================================
+   FLEET INTRODUCTION
+========================================================== */
 
+.fleet-introduction{
+
+    padding:110px 0;
+
+    text-align:center;
+
+}
+
+.fleet-introduction .container{
+
+    max-width:900px;
+
+    margin-inline:auto;
+
+}
+
+.fleet-introduction .eyebrow{
+
+    text-align:center;
+
+}
+
+.fleet-introduction h1{
+
+    text-align:center;
+
+    margin-inline:auto;
+
+}
+
+.fleet-introduction .title-line{
+
+    margin-left:auto;
+    margin-right:auto;
+
+}
+
+.fleet-introduction .intro-text{
+
+    max-width:760px;
+
+    margin:42px auto 0;
+
+    color:var(--text);
+
+    line-height:1.9;
+
+    text-align:center;
+
+}
 /* ==========================================================
    INTRODUCTION
 ========================================================== */
