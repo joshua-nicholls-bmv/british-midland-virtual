@@ -610,7 +610,7 @@ function createAircraftIcon(
         html:
 
             `<div style="
-                transform:rotate(${heading}deg);
+                transform:rotate(${heading + 45}deg);
                 color:#d02823;
                 font-size:22px;
                 text-shadow:0 0 10px rgba(0,0,0,.45);
