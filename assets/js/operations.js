@@ -596,31 +596,77 @@ async function initialiseLiveMap() {
 // ------------------------------------------------------------
 // AIRCRAFT ICON
 // ------------------------------------------------------------
+const aircraftSvg = `
+<svg
+    viewBox="0 0 64 64"
+    xmlns="http://www.w3.org/2000/svg"
+    aria-hidden="true"
+    width="28"
+    height="28"
+>
+    <path
+        fill="#d02823"
+        stroke="#ffffff"
+        stroke-width="1.2"
+        stroke-linejoin="round"
+        d="
+        M32 3
+        C29.8 3 28.5 5.2 28.1 8
+        L25.9 25
+        L8.5 34.5
+        C7.2 35.2 6.5 36.5 6.8 37.8
+        L7.4 40.2
+        L27.1 35.7
+        L28.1 50
+        L20.8 55
+        L21.5 58
+        L32 55
+        L42.5 58
+        L43.2 55
+        L35.9 50
+        L36.9 35.7
+        L56.6 40.2
+        L57.2 37.8
+        C57.5 36.5 56.8 35.2 55.5 34.5
+        L38.1 25
+        L35.9 8
+        C35.5 5.2 34.2 3 32 3
+        Z
+        "
+    />
+</svg>
+`;
+// ------------------------------------------------------------
+// AIRCRAFT ICON
+// ------------------------------------------------------------
 
-function createAircraftIcon(
+function createAircraftIcon(heading = 0) {
 
-    heading = 0
-
-) {
+    const hdg = Number(heading) || 0;
 
     return L.divIcon({
 
         className: "bm-aircraft",
 
-        html:
-
-            `<div style="
-                transform:rotate(${heading + 45}deg);
-                color:#d02823;
-                font-size:22px;
-                text-shadow:0 0 10px rgba(0,0,0,.45);
+        html: `
+            <div style="
+                width:32px;
+                height:32px;
+                display:flex;
+                align-items:center;
+                justify-content:center;
+                transform:rotate(${hdg}deg);
+                transform-origin:center center;
             ">
-                ✈
-            </div>`,
+                ${aircraftSvg}
+            </div>
+        `,
 
-        iconSize: [24,24],
+        iconSize: [32, 32],
 
-        iconAnchor: [12,12]
+        iconAnchor: [16, 16],
+
+        popupAnchor: [0, -16]
 
     });
 
@@ -674,9 +720,9 @@ function updateAircraftMarkers() {
                     {
 
                         icon:
-                            createAircraftIcon(
-                                flight.heading || 0
-                            )
+                          createAircraftIcon(
+    Number(flight.heading)
+)
 
                     }
 
@@ -717,9 +763,9 @@ function updateAircraftMarkers() {
 
         marker.setIcon(
 
-            createAircraftIcon(
-
-                flight.heading || 0
+          createAircraftIcon(
+    Number(flight.heading)
+)
 
             )
 
