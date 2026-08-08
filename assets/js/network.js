@@ -169,22 +169,15 @@ function initialiseMap() {
 
     });
 
-    map.fitBounds(
-
-        [
-
-            [26, -88],
-            [61, 26]
-
-        ],
-
-        {
-
-            padding: [40, 40]
-
-        }
-
-    );
+  map.fitBounds(
+    [
+        [25, -70],
+        [65, 35]
+    ],
+    {
+        padding: [40, 40]
+    }
+);
 
     L.tileLayer(
 
