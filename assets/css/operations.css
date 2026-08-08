@@ -1014,21 +1014,35 @@
 
 }
 
-.fids-table tbody td{
+.fids-table tbody{
 
-    padding:18px 16px;
+    background:#0D2340;
 
-    color:#F8F3EE;
+}
 
-    font-size:.92rem;
+.fids-table tbody tr{
 
-    border-bottom:1px solid rgba(255,255,255,.06);
+    background:#0D2340;
 
 }
 
 .fids-table tbody tr:nth-child(even){
 
     background:rgba(255,255,255,.02);
+
+}
+
+.fids-table tbody td{
+
+    padding:18px 16px;
+
+    background:transparent;
+
+    color:#F8F3EE;
+
+    font-size:.92rem;
+
+    border-bottom:1px solid rgba(255,255,255,.06);
 
 }
 
