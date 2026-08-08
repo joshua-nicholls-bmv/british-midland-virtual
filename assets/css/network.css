@@ -670,6 +670,11 @@
     }
 
 }
+.navbar{
+    position:relative;
+    z-index:20;
+}
+
 .network-hero{
     position:relative;
     z-index:10;
