@@ -213,5 +213,125 @@
     ]
   }
 ]
-
-
+{
+  "id": 10,
+  "featured": false,
+  "published": "2026-08-08",
+  "category": "Partnership",
+  "title": "British Midland Virtual Announces Partnership with BATC",
+  "summary": "British Midland Virtual is pleased to announce a new partnership with BATC, strengthening our commitment to professional and immersive virtual airline operations.",
+  "content": [
+    "We're delighted to announce that British Midland Virtual has entered into a new partnership with BATC.",
+    "This partnership represents another important step in our continued development as we look to build a more professional, immersive and realistic virtual airline experience for our pilots.",
+    "Working alongside BATC will allow British Midland Virtual to further strengthen its operational foundations while providing our community with new opportunities and resources as the airline continues to grow.",
+    "The partnership forms part of our wider commitment to building meaningful relationships within the aviation community and bringing the experience of British Midland Virtual closer to the standards and atmosphere of real-world airline operations.",
+    "We look forward to developing this partnership further and sharing more details with our pilots as the relationship progresses."
+  ],
+  "image": "assets/images/news/batc-partnership.jpg",
+  "author": "British Midland Crew Services",
+  "tags": [
+    "Partnership",
+    "BATC",
+    "British Midland",
+    "Operations",
+    "Community"
+  ]
+}
+{
+  "id": 11,
+  "featured": false,
+  "published": "2026-08-08",
+  "category": "Fleet",
+  "title": "Foundry Class Coming Soon to British Midland Virtual",
+  "summary": "A new chapter of regional flying is approaching as the Foundry Class prepares to join British Midland Virtual for short-haul regional operations.",
+  "content": [
+    "The next addition to the British Midland Virtual fleet is taking shape, with the Foundry Class set to arrive soon.",
+    "Designed around the demands of our regional network, the Foundry Class will introduce a new capability to British Midland operations, focusing on short-haul and regional services from our Birmingham hub.",
+    "The new class will allow British Midland to expand its network with aircraft suited to routes where capacity, frequency and regional connectivity are key. It will complement our existing Airbus fleet while opening the door to a wider range of destinations across the network.",
+    "The Foundry Class forms part of our wider fleet development strategy as British Midland continues to build a diverse and realistic operation around the Heart of Britain.",
+    "More information, including the aircraft type, routes and operational details, will be revealed ahead of its entry into service."
+  ],
+  "image": "assets/images/news/foundry-class.jpg",
+  "author": "British Midland Crew Services",
+  "tags": [
+    "Fleet",
+    "Foundry Class",
+    "Regional",
+    "Short Haul",
+    "Expansion"
+  ]
+}
+{
+  "id": 12,
+  "featured": false,
+  "published": "2026-08-08",
+  "category": "Fleet",
+  "title": "Pioneer Class Set for August Arrival",
+  "summary": "British Midland Virtual is preparing to welcome the Pioneer Class, with the new aircraft class scheduled to enter the fleet this August.",
+  "content": [
+    "A new era of British Midland Virtual flying is almost here, with the Pioneer Class preparing to make its arrival this August.",
+    "The Pioneer Class represents an important milestone in the continued development of our fleet and network. Its introduction will expand the capabilities of British Midland Virtual and support the next stage of our growth from Birmingham.",
+    "While the aircraft has yet to enter service, preparations are already underway to ensure the Pioneer Class is fully integrated into our operations and ready to serve British Midland pilots.",
+    "Its arrival forms part of an exciting period of fleet development, with further aircraft and new operational opportunities planned as we continue expanding the airline.",
+    "The Pioneer Class will be revealed in full ahead of its introduction, with more details on its role and destinations to follow. August marks the beginning of its journey with British Midland Virtual."
+  ],
+  "image": "assets/images/news/pioneer-class.jpg",
+  "author": "British Midland Crew Services",
+  "tags": [
+    "Fleet",
+    "Pioneer Class",
+    "August",
+    "Expansion",
+    "British Midland"
+  ]
+}
+{
+  "id": 13,
+  "featured": false,
+  "published": "2026-08-08",
+  "category": "Fleet",
+  "title": "British Midland Agrees Lease for Airbus A330-900",
+  "summary": "British Midland Virtual has agreed a lease for an Airbus A330-900 through SMBC Capital, with the aircraft to be operated using the Headwind A330-900.",
+  "content": [
+    "British Midland Virtual is pleased to announce that a lease agreement has been secured for an Airbus A330-900 through SMBC Capital.",
+    "The aircraft will be introduced to the British Midland Virtual fleet using the Headwind A330-900, marking another significant step in the airline's long-haul fleet development.",
+    "The A330-900 will provide British Midland with a modern widebody platform capable of supporting longer-range operations as the airline continues to expand beyond its European network.",
+    "The lease agreement further strengthens British Midland's long-haul ambitions and follows continued investment in the development of our fleet and network from Birmingham.",
+    "The aircraft will form part of the next generation of British Midland long-haul operations, with its eventual routes and entry into service details to be announced separately."
+  ],
+  "image": "assets/images/news/a330-900-lease.jpg",
+  "author": "British Midland Crew Services",
+  "tags": [
+    "Fleet",
+    "Airbus A330-900",
+    "SMBC Capital",
+    "Headwind",
+    "Long Haul",
+    "Lease"
+  ]
+}
+{
+  "id": 14,
+  "featured": false,
+  "published": "2026-08-08",
+  "category": "Company",
+  "title": "British Midland Group Takes Ownership of European Cargo Operations",
+  "summary": "British Midland Group has completed the acquisition of its European Cargo Operations, marking a significant expansion of the group's aviation portfolio.",
+  "content": [
+    "British Midland Group is pleased to announce that it has taken ownership of its European Cargo Operations.",
+    "The move represents a significant expansion of the British Midland Group and marks the beginning of a new chapter beyond our established passenger operations.",
+    "European Cargo Operations will provide the group with a dedicated cargo presence within Europe, creating new opportunities for network development and operational growth while complementing the group's existing aviation activities.",
+    "The acquisition reflects our long-term ambition to build British Midland into a broader aviation group with a diverse range of operations. From passenger services across Europe and beyond to dedicated cargo operations, the group continues to expand its presence across the aviation sector.",
+    "Further details regarding the fleet, network and future development of European Cargo Operations will be announced as the operation progresses."
+  ],
+  "image": "assets/images/news/european-cargo-operations.jpg",
+  "author": "British Midland Group",
+  "tags": [
+    "British Midland Group",
+    "Cargo",
+    "European Cargo",
+    "Acquisition",
+    "Operations",
+    "Expansion"
+  ]
+}
