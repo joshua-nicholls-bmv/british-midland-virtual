@@ -761,9 +761,9 @@ function updateAircraftMarkers() {
 
         ]);
 
-       marker.setIcon(
-    createAircraftIcon(Number(flight.heading))
-);
+              marker.setIcon(
+            createAircraftIcon(Number(flight.heading))
+        );
 
         marker.bindPopup(
 
