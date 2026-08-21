@@ -955,7 +955,7 @@ section{
 
     z-index:10;
 
-    max-width:760px;
+   max-width:900px;
 
     padding-top:140px;
 
@@ -991,21 +991,15 @@ section{
 
 .hero h1{
 
-    color:white;
+    max-width:880px;
 
-    font-size:clamp(3.8rem,7vw,5.8rem);
+    font-size:clamp(3.6rem,5.6vw,5.1rem);
 
-    line-height:.94;
+    line-height:1.08;
 
-    font-weight:800;
+    letter-spacing:-.035em;
 
-    letter-spacing:-.04em;
-
-    margin-bottom:34px;
-
-    text-shadow:
-
-        0 6px 22px rgba(0,0,0,.30);
+    text-wrap:balance;
 
 }
 
@@ -1031,13 +1025,11 @@ section{
 
 .hero-copy{
 
-    max-width:640px;
+    max-width:650px;
 
-    font-size:1.18rem;
+    font-size:1.1rem;
 
-    line-height:1.95;
-
-    color:rgba(255,255,255,.92);
+    line-height:1.8;
 
 }
 
