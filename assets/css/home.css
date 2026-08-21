@@ -858,6 +858,77 @@
 
         animation:none !important;
 
+       /* ==========================================================
+   HERO TYPOGRAPHY POLISH
+========================================================== */
+
+.hero-content{
+
+    max-width:900px;
+
+    text-align:left;
+
+    margin-left:0;
+    margin-right:auto;
+
+}
+
+.hero-kicker{
+
+    margin-bottom:24px;
+
+    font-size:.88rem;
+
+    letter-spacing:.28em;
+
+}
+
+.hero h1{
+
+    max-width:880px;
+
+    font-size:clamp(3.6rem,5.6vw,5.1rem);
+
+    line-height:1.08;
+
+    letter-spacing:-.035em;
+
+    margin-bottom:30px;
+
+    text-align:left;
+
+}
+
+.hero-divider{
+
+    width:80px;
+
+    height:4px;
+
+    margin:32px 0;
+
+}
+
+.hero-copy{
+
+    max-width:650px;
+
+    font-size:1.1rem;
+
+    line-height:1.8;
+
+    text-align:left;
+
+}
+
+.hero-buttons{
+
+    justify-content:flex-start;
+
+    margin-top:40px;
+
+}
+
     }
 
 }
