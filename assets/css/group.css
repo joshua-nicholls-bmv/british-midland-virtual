@@ -7,6 +7,7 @@
 
 /* ==========================================================
    GROUP HERO
+   Matches HOME HERO styling
 ========================================================== */
 
 .group-hero{
@@ -27,6 +28,9 @@
 
 }
 
+
+/* HERO IMAGE */
+
 .group-hero-image{
 
     position:absolute;
@@ -37,15 +41,18 @@
 
     height:100%;
 
+    display:block;
+
     object-fit:cover;
 
     object-position:center;
 
-    display:block;
-
     z-index:0;
 
 }
+
+
+/* DARK OVERLAY */
 
 .group-hero-overlay{
 
@@ -58,12 +65,15 @@
     background:
         linear-gradient(
             90deg,
-            rgba(0,26,58,.92) 0%,
-            rgba(0,26,58,.72) 42%,
-            rgba(0,26,58,.25) 100%
+            rgba(0,26,58,.90) 0%,
+            rgba(0,26,58,.72) 45%,
+            rgba(0,26,58,.35) 100%
         );
 
 }
+
+
+/* CONTENT */
 
 .group-hero-content{
 
@@ -73,41 +83,145 @@
 
     width:100%;
 
-    padding-top:100px;
+    padding-top:110px;
 
-    padding-bottom:100px;
-
-}
-
-.group-hero h1{
-
-    color:#ffffff;
-
-    max-width:850px;
-
-    margin-bottom:28px;
+    padding-bottom:90px;
 
 }
+
+
+/* KICKER */
 
 .group-hero .hero-kicker{
 
+    margin-bottom:24px;
+
+    color:var(--bm-red);
+
+    font-size:.78rem;
+
+    font-weight:800;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+}
+
+
+/* MAIN HEADING */
+
+.group-hero h1{
+
+    max-width:850px;
+
+    margin:0;
+
     color:#ffffff;
 
-}
+    font-size:clamp(3rem,5vw,5.2rem);
 
-.group-hero .hero-copy{
+    font-weight:800;
 
-    max-width:700px;
+    line-height:1.02;
 
-    color:rgba(255,255,255,.9);
-
-    line-height:1.9;
+    letter-spacing:-.045em;
 
 }
+
+
+/* RED DIVIDER */
 
 .group-hero .hero-divider{
 
+    width:60px;
+
+    height:3px;
+
     margin:30px 0;
+
+    background:var(--bm-red);
+
+    border-radius:999px;
+
+}
+
+
+/* BODY COPY */
+
+.group-hero .hero-copy{
+
+    max-width:650px;
+
+    margin:0;
+
+    color:rgba(255,255,255,.88);
+
+    font-size:1rem;
+
+    font-weight:400;
+
+    line-height:1.8;
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:768px){
+
+    .group-hero{
+
+        min-height:560px;
+
+    }
+
+    .group-hero-content{
+
+        padding-top:90px;
+
+        padding-bottom:70px;
+
+    }
+
+    .group-hero h1{
+
+        font-size:3rem;
+
+    }
+
+    .group-hero .hero-copy{
+
+        font-size:.95rem;
+
+    }
+
+}
+
+
+@media(max-width:480px){
+
+    .group-hero{
+
+        min-height:520px;
+
+    }
+
+    .group-hero-content{
+
+        padding-top:80px;
+
+        padding-bottom:60px;
+
+    }
+
+    .group-hero h1{
+
+        font-size:2.5rem;
+
+    }
 
 }
 
