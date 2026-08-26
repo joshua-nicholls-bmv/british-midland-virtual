@@ -1,618 +1,372 @@
 /* ==========================================================
    BRITISH MIDLAND VIRTUAL
-   FLEET PAGE v4.0
-   Fleet Specific Styles Only
-   Requires: base.css v4
+   FLEET PAGE
+   Version 4.0
 ========================================================== */
+
 
 /* ==========================================================
-   HERO POSTER
+   FLEET HERO
 ========================================================== */
 
-.hero-poster{
-
-    padding:150px 0 90px;
-
-    background:
-        linear-gradient(
-            180deg,
-            var(--bm-blue),
-            var(--bm-blue-light)
-        );
-
-}
-
-.poster-card{
-
-    background:#ffffff;
-
-    padding:14px;
-
-    border-radius:var(--radius-lg);
-
-    box-shadow:var(--shadow-xl);
-
-    overflow:hidden;
-
-    transition:
-        transform .35s ease,
-        box-shadow .35s ease;
-
-}
-
-.poster-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:0 40px 90px rgba(0,0,0,.22);
-
-}
-
-.poster-card img{
-
-    display:block;
-
-    width:100%;
-
-    border-radius:18px;
-
-}
-/* ==========================================================
-   FLEET INTRODUCTION
-========================================================== */
-
-.fleet-introduction{
-
-    padding:110px 0;
-
-    text-align:center;
-
-}
-
-.fleet-introduction .container{
-
-    max-width:900px;
-
-    margin-inline:auto;
-
-}
-
-.fleet-introduction .eyebrow{
-
-    text-align:center;
-
-}
-
-.fleet-introduction h1{
-
-    text-align:center;
-
-    margin-inline:auto;
-
-}
-
-.fleet-introduction .title-line{
-
-    margin-left:auto;
-    margin-right:auto;
-
-}
-
-.fleet-introduction .intro-text{
-
-    max-width:760px;
-
-    margin:42px auto 0;
-
-    color:var(--text);
-
-    line-height:1.9;
-
-    text-align:center;
-
-}
-/* ==========================================================
-   INTRODUCTION
-========================================================== */
-
-.fleet-overview{
-
-    padding:110px 0;
-
-    text-align:center;
-
-}
-
-.fleet-overview .container{
-
-    max-width:900px;
-
-}
-
-.overview-text{
-
-    margin:42px auto 0;
-
-    max-width:760px;
-
-    color:var(--text);
-
-    line-height:1.9;
-
-}
-
-/* ==========================================================
-   AIRCRAFT SECTIONS
-========================================================== */
-
-.aircraft-section{
+.fleet-hero{
 
     position:relative;
 
-    padding:130px 0;
+    min-height:72vh;
 
-}
-
-.aircraft-section:nth-child(odd){
-
-    background:#ffffff;
-
-}
-
-.aircraft-section:nth-child(even){
-
-    background:var(--bm-cream);
-
-}
-
-.aircraft-layout{
-
-    display:grid;
-
-    grid-template-columns:1.1fr .9fr;
+    display:flex;
 
     align-items:center;
 
-    gap:90px;
-
-}
-
-.aircraft-section.alternate .aircraft-photo{
-
-    order:2;
-
-}
-
-.aircraft-section.alternate .aircraft-information{
-
-    order:1;
-
-}
-
-/* ==========================================================
-   AIRCRAFT IMAGE
-========================================================== */
-
-.aircraft-photo{
-
-    position:relative;
-
     overflow:hidden;
 
-    border-radius:var(--radius-lg);
-
-    box-shadow:var(--shadow-lg);
+    color:#ffffff;
 
 }
 
-.aircraft-photo img{
-
-    width:100%;
-
-    display:block;
-
-    transition:transform .45s ease;
-
-}
-
-.aircraft-photo:hover img{
-
-    transform:scale(1.05);
-
-}
-
-.aircraft-photo::after{
-
-    content:"";
+.fleet-hero-image{
 
     position:absolute;
 
     inset:0;
 
-    border-radius:inherit;
+    width:100%;
+    height:100%;
 
-    box-shadow:
-        inset 0 0 0 1px rgba(255,255,255,.12);
-
-}
-
-/* ==========================================================
-   AIRCRAFT CONTENT
-========================================================== */
-
-.aircraft-information{
-
-    max-width:560px;
+    object-fit:cover;
 
 }
 
-.aircraft-family{
-
-    margin-bottom:18px;
-
-    color:var(--bm-red);
-
-    text-transform:uppercase;
-
-    font-size:.88rem;
-
-    font-weight:700;
-
-    letter-spacing:.20em;
-
-}
-
-.aircraft-information h2{
-
-    margin-bottom:22px;
-
-}
-
-.aircraft-information p{
-
-    color:var(--text);
-
-    line-height:1.9;
-
-    margin-bottom:36px;
-
-}
-/* ==========================================================
-   ROUTE CHIPS
-========================================================== */
-
-.route-chips{
-
-    display:flex;
-
-    flex-wrap:wrap;
-
-    gap:12px;
-
-    margin:34px 0 42px;
-
-    padding:0;
-
-}
-
-.route-chips li{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:11px 20px;
-
-    border-radius:999px;
-
-    background:#ffffff;
-
-    border:1px solid rgba(0,26,58,.08);
-
-    color:var(--bm-blue);
-
-    font-size:.92rem;
-
-    font-weight:600;
-
-    transition:
-        transform .25s ease,
-        background .25s ease,
-        color .25s ease,
-        border-color .25s ease;
-
-}
-
-.route-chips li:hover{
-
-    background:var(--bm-blue);
-
-    color:#ffffff;
-
-    border-color:var(--bm-blue);
-
-    transform:translateY(-3px);
-
-}
-
-/* ==========================================================
-   SPECIFICATIONS
-========================================================== */
-
-.spec-grid{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:20px;
-
-    margin-top:35px;
-
-}
-
-.spec{
-
-    background:#ffffff;
-
-    border:1px solid rgba(0,26,58,.08);
-
-    border-radius:18px;
-
-    padding:24px;
-
-    transition:
-        transform .30s ease,
-        box-shadow .30s ease;
-
-}
-
-.spec:hover{
-
-    transform:translateY(-4px);
-
-    box-shadow:var(--shadow);
-
-}
-
-.spec span{
-
-    display:block;
-
-    margin-bottom:10px;
-
-    color:#8B95A5;
-
-    font-size:.78rem;
-
-    font-weight:700;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-
-}
-
-.spec strong{
-
-    color:var(--bm-blue);
-
-    font-size:1.05rem;
-
-    font-weight:700;
-
-}
-
-/* ==========================================================
-   AIRCRAFT LIST
-========================================================== */
-
-.section-heading{
-
-    margin:46px 0 20px;
-
-}
-
-.fleet-aircraft-list{
-
-    display:grid;
-
-    gap:14px;
-
-}
-
-.fleet-aircraft{
-
-    display:flex;
-
-    align-items:center;
-
-    justify-content:space-between;
-
-    gap:22px;
-
-    padding:18px 22px;
-
-    background:#ffffff;
-
-    border:1px solid rgba(0,26,58,.08);
-
-    border-radius:16px;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-
-}
-
-.fleet-aircraft:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:var(--shadow);
-
-}
-
-.fleet-aircraft strong{
-
-    color:var(--bm-blue);
-
-    font-size:.92rem;
-
-    letter-spacing:.08em;
-
-}
-
-.registration-right{
-
-    display:flex;
-
-    align-items:center;
-
-    gap:16px;
-
-    margin-left:auto;
-
-}
-
-.fleet-status{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    min-width:95px;
-
-    padding:6px 12px;
-
-    border-radius:999px;
-
-    font-size:.70rem;
-
-    font-weight:700;
-
-    letter-spacing:.08em;
-
-    text-transform:uppercase;
-
-}
-
-.fleet-status.active{
-
-    background:#E8F8EE;
-
-    color:#1D7C3D;
-
-}
-
-.fleet-status.on-order{
-
-    background:#FFF5DF;
-
-    color:#B67B18;
-
-}
-/* ==========================================================
-   FUTURE FLEET
-========================================================== */
-
-.future-fleet{
-
-    position:relative;
-
-    overflow:hidden;
-
-    padding:140px 0;
-
-    background:
-        linear-gradient(
-            135deg,
-            var(--bm-blue),
-            var(--bm-blue-light)
-        );
-
-    color:#ffffff;
-
-    text-align:center;
-
-}
-
-.future-fleet::before{
-
-    content:"";
+.fleet-hero-overlay{
 
     position:absolute;
 
     inset:0;
 
     background:
-        radial-gradient(
-            circle at top right,
-            rgba(255,255,255,.08),
-            transparent 45%
+        linear-gradient(
+            90deg,
+            rgba(0,26,58,.92),
+            rgba(0,26,58,.58)
         );
-
-    pointer-events:none;
 
 }
 
-.future-content{
+.fleet-hero-content{
 
     position:relative;
 
     z-index:2;
 
-    max-width:900px;
+    max-width:850px;
 
-    margin:0 auto;
-
-}
-
-.future-fleet .section-kicker{
-
-    color:rgba(255,255,255,.72);
+    padding-top:120px;
+    padding-bottom:100px;
 
 }
 
-.future-fleet h2{
+.fleet-hero-content h1{
+
+    max-width:800px;
+
+    margin:0 0 28px;
 
     color:#ffffff;
 
-    margin-bottom:28px;
+    font-size:clamp(3.5rem,6vw,5.5rem);
+
+    line-height:.98;
+
+    font-weight:800;
 
 }
 
-.future-fleet p{
+.fleet-hero-content p{
 
-    max-width:720px;
+    max-width:650px;
 
-    margin:0 auto;
+    margin:0;
 
     color:rgba(255,255,255,.88);
 
-    line-height:1.95;
+    font-size:1.2rem;
+
+    line-height:1.8;
 
 }
 
-.future-destinations{
+
+/* ==========================================================
+   FLEET INTRO
+========================================================== */
+
+.fleet-intro{
+
+    background:#ffffff;
+
+    text-align:center;
+
+}
+
+.fleet-intro .container{
+
+    max-width:900px;
+
+}
+
+.fleet-intro h2{
+
+    margin-bottom:25px;
+
+}
+
+.fleet-intro p{
+
+    max-width:700px;
+
+    margin:0 auto;
+
+    color:#516279;
+
+    font-size:1.08rem;
+
+    line-height:1.85;
+
+}
+
+
+/* ==========================================================
+   FLEET CLASS
+========================================================== */
+
+.fleet-class{
+
+    background:#f8f3ee;
+
+}
+
+.fleet-class:nth-of-type(even){
+
+    background:#ffffff;
+
+}
+
+.fleet-class-heading{
+
+    max-width:800px;
+
+    margin-bottom:60px;
+
+}
+
+.fleet-class-heading h2{
+
+    margin-bottom:24px;
+
+}
+
+.fleet-class-heading p{
+
+    max-width:700px;
+
+    color:#516279;
+
+    font-size:1.08rem;
+
+    line-height:1.85;
+
+}
+
+.fleet-class-label{
+
+    display:inline-block;
+
+    margin-bottom:18px;
+
+    color:var(--bm-red);
+
+    font-size:.82rem;
+
+    font-weight:800;
+
+    letter-spacing:.18em;
+
+    text-transform:uppercase;
+
+}
+
+
+/* ==========================================================
+   AIRCRAFT CARDS
+========================================================== */
+
+.aircraft-card{
+
+    display:grid;
+
+    grid-template-columns:1.15fr .85fr;
+
+    overflow:hidden;
+
+    background:#ffffff;
+
+    border-radius:22px;
+
+    box-shadow:
+        0 20px 50px rgba(0,0,0,.08);
+
+    margin-bottom:35px;
+
+}
+
+.aircraft-card:last-child{
+
+    margin-bottom:0;
+
+}
+
+.aircraft-image{
+
+    min-height:500px;
+
+    overflow:hidden;
+
+}
+
+.aircraft-image img{
+
+    display:block;
+
+    width:100%;
+    height:100%;
+
+    object-fit:cover;
+
+    transition:transform .45s ease;
+
+}
+
+.aircraft-card:hover .aircraft-image img{
+
+    transform:scale(1.035);
+
+}
+
+.aircraft-content{
 
     display:flex;
 
+    flex-direction:column;
+
     justify-content:center;
 
-    flex-wrap:wrap;
-
-    gap:16px;
-
-    margin-top:55px;
+    padding:65px;
 
 }
 
-.future-destinations span{
+.aircraft-class{
+
+    margin-bottom:15px;
+
+    color:var(--bm-red);
+
+    font-size:.78rem;
+
+    font-weight:800;
+
+    letter-spacing:.16em;
+
+    text-transform:uppercase;
+
+}
+
+.aircraft-content h3{
+
+    margin-bottom:20px;
+
+    color:var(--bm-blue);
+
+    font-size:2.6rem;
+
+    line-height:1.05;
+
+}
+
+.aircraft-content p{
+
+    margin-bottom:35px;
+
+    color:#516279;
+
+    line-height:1.8;
+
+}
+
+
+/* ==========================================================
+   AIRCRAFT SPECIFICATIONS
+========================================================== */
+
+.aircraft-specs{
+
+    display:grid;
+
+    grid-template-columns:repeat(3,1fr);
+
+    gap:15px;
+
+    padding:25px 0;
+
+    margin-bottom:30px;
+
+    border-top:1px solid #e3e8ee;
+    border-bottom:1px solid #e3e8ee;
+
+}
+
+.aircraft-specs div{
+
+    text-align:center;
+
+}
+
+.aircraft-specs strong{
+
+    display:block;
+
+    margin-bottom:6px;
+
+    color:var(--bm-blue);
+
+    font-size:1.15rem;
+
+    font-weight:800;
+
+}
+
+.aircraft-specs span{
+
+    display:block;
+
+    color:#7b8798;
+
+    font-size:.7rem;
+
+    font-weight:700;
+
+    letter-spacing:.1em;
+
+    text-transform:uppercase;
+
+}
+
+
+/* ==========================================================
+   FLEET BUTTON
+========================================================== */
+
+.fleet-button{
 
     display:inline-flex;
 
@@ -620,445 +374,411 @@
 
     justify-content:center;
 
-    padding:14px 24px;
+    align-self:flex-start;
+
+    padding:15px 28px;
+
+    background:var(--bm-red);
+
+    color:#ffffff;
 
     border-radius:999px;
 
-    background:rgba(255,255,255,.08);
-
-    border:1px solid rgba(255,255,255,.16);
-
-    backdrop-filter:blur(12px);
-
-    font-weight:600;
+    font-weight:700;
 
     transition:
-        background .25s ease,
-        transform .25s ease;
+        transform .25s ease,
+        background .25s ease;
 
 }
 
-.future-destinations span:hover{
-
-    background:rgba(255,255,255,.16);
+.fleet-button:hover{
 
     transform:translateY(-3px);
 
+    background:#b8211d;
+
 }
+
 
 /* ==========================================================
-   FLEET STATISTICS
+   PIONEER CLASS
 ========================================================== */
 
-.fleet-statistics{
-
-    padding:120px 0;
-
-    text-align:center;
-
-}
-
-.fleet-statistics .container{
-
-    max-width:1280px;
-
-}
-
-.fleet-statistics h2{
-
-    margin-bottom:18px;
-
-}
-
-.fleet-statistics .section-intro{
-
-    margin-inline:auto;
-
-}
-
-.fleet-statistics .stats-grid{
-
-    margin-top:60px;
-
-}
-
-.stat-card{
-
-    background:#ffffff;
-
-    border-radius:var(--radius-lg);
-
-    padding:42px 26px;
-
-    box-shadow:var(--shadow);
-
-    transition:
-        transform .30s ease,
-        box-shadow .30s ease;
-
-}
-
-.stat-card:hover{
-
-    transform:translateY(-8px);
-
-    box-shadow:var(--shadow-xl);
-
-}
-
-.stat-card h3{
-
-    margin-bottom:14px;
-
-    color:var(--bm-red);
-
-    font-size:3rem;
-
-    font-weight:800;
-
-}
-
-.stat-card p{
-
-    color:var(--text);
-
-    font-weight:600;
-
-}
-
-/* ==========================================================
-   CTA
-========================================================== */
-
-.fleet-cta{
-
-    padding:140px 0;
+.pioneer-class{
 
     background:var(--bm-blue);
 
     color:#ffffff;
 
+}
+
+.pioneer-class .fleet-class-heading h2{
+
+    color:#ffffff;
+
+}
+
+.pioneer-class .fleet-class-heading p{
+
+    color:rgba(255,255,255,.72);
+
+}
+
+
+/* ==========================================================
+   FLAGSHIP AIRCRAFT
+========================================================== */
+
+.aircraft-card-flagship{
+
+    grid-template-columns:1.35fr .65fr;
+
+}
+
+.aircraft-card-flagship .aircraft-image{
+
+    min-height:600px;
+
+}
+
+.aircraft-card-flagship .aircraft-content{
+
+    background:#ffffff;
+
+}
+
+
+/* ==========================================================
+   PIONEER NOTE
+========================================================== */
+
+.fleet-class-note{
+
+    max-width:760px;
+
+    margin:75px auto 0;
+
     text-align:center;
 
 }
 
-.fleet-cta .container{
+.fleet-class-note h3{
+
+    margin-bottom:20px;
+
+    color:#ffffff;
+
+    font-size:2rem;
+
+}
+
+.fleet-class-note p{
+
+    max-width:650px;
+
+    margin:0 auto 35px;
+
+    color:rgba(255,255,255,.7);
+
+    line-height:1.8;
+
+}
+
+.fleet-class-note .primary-button{
+
+    display:inline-flex;
+
+    margin-top:10px;
+
+}
+
+
+/* ==========================================================
+   FLEET PHILOSOPHY
+========================================================== */
+
+.fleet-philosophy{
+
+    background:#ffffff;
+
+    text-align:center;
+
+}
+
+.fleet-philosophy .container{
+
+    max-width:850px;
+
+}
+
+.fleet-philosophy h2{
+
+    margin-bottom:25px;
+
+}
+
+.fleet-philosophy p{
+
+    max-width:700px;
+
+    margin:0 auto;
+
+    color:#516279;
+
+    font-size:1.08rem;
+
+    line-height:1.85;
+
+}
+
+
+/* ==========================================================
+   JOIN SECTION
+========================================================== */
+
+.join-home{
+
+    background:#ffffff;
+
+    text-align:center;
+
+    border-top:1px solid rgba(0,26,58,.06);
+
+}
+
+.join-home .container{
 
     max-width:900px;
 
 }
 
-.fleet-cta h2{
+.join-home h2{
 
-    color:#ffffff;
-
-    margin-bottom:28px;
+    margin-bottom:25px;
 
 }
 
-.fleet-cta p{
+.join-home p{
 
-    max-width:720px;
+    max-width:650px;
 
     margin:0 auto;
 
-    color:rgba(255,255,255,.86);
-
-    line-height:1.9;
+    color:#516279;
 
 }
 
-.fleet-cta .cta-buttons{
+.join-home .hero-buttons{
+
+    display:flex;
 
     justify-content:center;
 
-    margin-top:55px;
+    align-items:center;
+
+    gap:20px;
+
+    flex-wrap:wrap;
+
+    margin-top:50px;
 
 }
 
-.fleet-cta .primary-button,
-.fleet-cta .secondary-button{
+.join-home .primary-button,
+.join-home .feature-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
 
     min-width:220px;
 
 }
-/* ==========================================================
-   MICRO INTERACTIONS
-========================================================== */
 
-.aircraft-section{
-
-    transition:background .35s ease;
-
-}
-
-.aircraft-information{
-
-    transition:transform .35s ease;
-
-}
-
-.aircraft-section:hover .aircraft-information{
-
-    transform:translateY(-4px);
-
-}
-
-.aircraft-photo::before{
-
-    content:"";
-
-    position:absolute;
-
-    inset:0;
-
-    background:linear-gradient(
-        180deg,
-        rgba(255,255,255,0),
-        rgba(0,26,58,.06)
-    );
-
-    opacity:0;
-
-    transition:opacity .35s ease;
-
-    z-index:1;
-
-}
-
-.aircraft-section:hover .aircraft-photo::before{
-
-    opacity:1;
-
-}
-
-/* ==========================================================
-   SPACING
-========================================================== */
-
-.aircraft-section + .aircraft-section{
-
-    border-top:1px solid rgba(0,26,58,.05);
-
-}
-
-/* ==========================================================
-   BUTTON POLISH
-========================================================== */
-
-.aircraft-information .primary-button{
-
-    box-shadow:
-        0 12px 28px rgba(208,40,35,.22);
-
-}
-
-.aircraft-information .primary-button:hover{
-
-    box-shadow:
-        0 20px 42px rgba(208,40,35,.32);
-
-}
-
-.fleet-cta .primary-button{
-
-    box-shadow:
-        0 12px 28px rgba(208,40,35,.25);
-
-}
-
-.fleet-cta .primary-button:hover{
-
-    box-shadow:
-        0 22px 44px rgba(208,40,35,.34);
-
-}
 
 /* ==========================================================
    RESPONSIVE
 ========================================================== */
 
-@media(max-width:1200px){
+@media(max-width:1100px){
 
-    .aircraft-layout{
+    .aircraft-card,
+    .aircraft-card-flagship{
 
         grid-template-columns:1fr;
 
-        gap:70px;
+    }
+
+    .aircraft-image,
+    .aircraft-card-flagship .aircraft-image{
+
+        min-height:420px;
 
     }
 
-    .aircraft-section.alternate .aircraft-photo,
-    .aircraft-section.alternate .aircraft-information{
+    .aircraft-content{
 
-        order:unset;
+        padding:50px;
 
     }
 
-    .aircraft-information{
+}
 
-        max-width:760px;
 
-        margin:auto;
+/* ==========================================================
+   TABLET
+========================================================== */
+
+@media(max-width:768px){
+
+    .fleet-hero{
+
+        min-height:75vh;
+
+    }
+
+    .fleet-hero-content{
+
+        padding-top:150px;
+        padding-bottom:90px;
 
         text-align:center;
 
     }
 
-    .route-chips{
+    .fleet-hero-content p{
 
-        justify-content:center;
-
-    }
-
-}
-
-@media(max-width:992px){
-
-    .spec-grid{
-
-        grid-template-columns:1fr;
+        margin-inline:auto;
 
     }
 
-    .fleet-aircraft{
+    .fleet-class-heading{
 
-        flex-direction:column;
+        text-align:center;
 
-        align-items:flex-start;
-
-        gap:14px;
+        margin-inline:auto;
 
     }
 
-    .registration-right{
+    .aircraft-image,
+    .aircraft-card-flagship .aircraft-image{
 
-        width:100%;
-
-        justify-content:space-between;
-
-        margin-left:0;
+        min-height:300px;
 
     }
 
-    .future-destinations{
+    .aircraft-content{
 
-        gap:12px;
+        padding:40px 30px;
 
-    }
-
-}
-
-@media(max-width:768px){
-
-    .hero-poster{
-
-        padding:130px 0 70px;
+        text-align:center;
 
     }
 
-    .fleet-overview,
-    .aircraft-section,
-    .future-fleet,
-    .fleet-statistics,
-    .fleet-cta{
+    .aircraft-content p{
 
-        padding:90px 0;
+        margin-inline:auto;
 
     }
 
-    .aircraft-layout{
-
-        gap:50px;
-
-    }
-
-    .future-destinations{
-
-        flex-direction:column;
-
-        align-items:center;
-
-    }
-
-    .future-destinations span{
-
-        width:100%;
-
-        max-width:320px;
-
-    }
-
-    .fleet-cta .cta-buttons{
-
-        flex-direction:column;
-
-        align-items:center;
-
-    }
-
-    .fleet-cta .primary-button,
-    .fleet-cta .secondary-button{
-
-        width:100%;
-
-        max-width:320px;
-
-    }
-
-}
-
-@media(max-width:480px){
-
-    .route-chips{
+    .aircraft-specs{
 
         gap:10px;
 
     }
 
-    .route-chips li{
+    .fleet-button{
+
+        align-self:center;
+
+    }
+
+    .fleet-class-note{
+
+        margin-top:55px;
+
+    }
+
+}
+
+
+/* ==========================================================
+   MOBILE
+========================================================== */
+
+@media(max-width:480px){
+
+    .fleet-hero-content h1{
+
+        font-size:2.8rem;
+
+    }
+
+    .fleet-hero-content p{
+
+        font-size:1rem;
+
+    }
+
+    .fleet-intro,
+    .fleet-class,
+    .fleet-philosophy,
+    .join-home{
+
+        padding:80px 0;
+
+    }
+
+    .fleet-class-heading h2{
+
+        font-size:2.25rem;
+
+    }
+
+    .aircraft-image,
+    .aircraft-card-flagship .aircraft-image{
+
+        min-height:240px;
+
+    }
+
+    .aircraft-content{
+
+        padding:35px 22px;
+
+    }
+
+    .aircraft-content h3{
+
+        font-size:2.1rem;
+
+    }
+
+    .aircraft-specs{
+
+        grid-template-columns:1fr;
+
+        gap:20px;
+
+    }
+
+    .fleet-button,
+    .join-home .primary-button,
+    .join-home .feature-button{
 
         width:100%;
 
-        justify-content:center;
+        max-width:300px;
 
     }
 
-    .spec{
+    .join-home .hero-buttons{
 
-        padding:20px;
-
-    }
-
-    .poster-card{
-
-        padding:8px;
+        flex-direction:column;
 
     }
 
 }
-
-@media(prefers-reduced-motion:reduce){
-
-    .poster-card,
-    .aircraft-photo,
-    .aircraft-photo img,
-    .aircraft-information,
-    .route-chips li,
-    .spec,
-    .fleet-aircraft,
-    .stat-card,
-    .primary-button,
-    .secondary-button{
-
-        transition:none !important;
-
-        animation:none !important;
-
-    }
-
-}
-
-/* ==========================================================
-   END OF FLEET.CSS
-========================================================== */
