@@ -1,32 +1,30 @@
 /* ==========================================================
    BRITISH MIDLAND VIRTUAL
-   NETWORK PAGE v4.0
-   Network Specific Styles Only
-   Requires: base.css v4
+   NETWORK PAGE
+   Network CSS v8
 ========================================================== */
 
+
 /* ==========================================================
-   HERO
+   NETWORK HERO
 ========================================================== */
 
 .network-hero{
 
     position:relative;
 
-    z-index:10;
-
-    padding:210px 0 90px;
+    padding:120px 0 90px;
 
     background:
         linear-gradient(
             180deg,
             var(--bm-blue),
-            var(--bm-blue-light)
+            #06264d
         );
 
-    text-align:center;
-
     color:#ffffff;
+
+    text-align:center;
 
 }
 
@@ -38,7 +36,7 @@
 
 .network-hero h1{
 
-    margin-bottom:26px;
+    margin:0 0 26px;
 
     color:#ffffff;
 
@@ -54,27 +52,53 @@
 
     max-width:760px;
 
-    margin-inline:auto;
+    margin:0 auto;
 
-    color:rgba(255,255,255,.90);
+    color:rgba(255,255,255,.88);
 
-    line-height:1.95;
+    line-height:1.9;
 
 }
 
+
 /* ==========================================================
-   MAP
+   NETWORK SECTION HEADING
+========================================================== */
+
+.network-section-heading{
+
+    text-align:center;
+
+    max-width:760px;
+
+    margin:0 auto 50px;
+
+}
+
+.network-section-heading h2{
+
+    margin-bottom:16px;
+
+}
+
+.network-section-heading p{
+
+    margin:0 auto;
+
+    color:#697384;
+
+}
+
+
+/* ==========================================================
+   MAP SECTION
 ========================================================== */
 
 .network-map-section{
 
-    position:relative;
+    padding:110px 0 120px;
 
-    margin-top:0;
-
-    padding:0 0 110px;
-
-    z-index:5;
+    background:var(--bm-cream);
 
 }
 
@@ -86,73 +110,229 @@
 
     overflow:hidden;
 
-    border-radius:var(--radius-lg);
-
     border:8px solid #ffffff;
 
-    box-shadow:var(--shadow-xl);
+    border-radius:22px;
+
+    box-shadow:
+
+        0 20px 50px rgba(0,0,0,.10),
+
+        0 35px 80px rgba(0,0,0,.08);
 
     transition:
+
         transform .35s ease,
+
         box-shadow .35s ease;
 
 }
 
 #network-map:hover{
 
-    transform:translateY(-5px);
+    transform:translateY(-4px);
 
     box-shadow:
-        0 40px 90px rgba(0,0,0,.18);
+
+        0 30px 70px rgba(0,0,0,.14),
+
+        0 45px 90px rgba(0,0,0,.10);
 
 }
 
 .leaflet-container{
 
-    background:#DFE9F4;
+    background:#dfe9f4;
 
-    font-family:inherit;
+    font-family:'Inter',sans-serif;
 
 }
+
+
 /* ==========================================================
-   DESTINATIONS
+   NETWORK CLASS SECTIONS
 ========================================================== */
 
-.network-destinations{
+.network-class-section{
 
     position:relative;
 
-    padding:0 0 130px;
+    padding:120px 0;
 
 }
 
-.network-destinations::before{
+.beating-heart-section{
 
-    content:"";
+    background:#ffffff;
+
+}
+
+.pioneer-section{
+
+    background:var(--bm-blue);
+
+    color:#ffffff;
+
+}
+
+.foundry-section{
+
+    background:#f8f3ee;
+
+}
+
+
+/* ==========================================================
+   CLASS HEADER
+========================================================== */
+
+.network-class-header{
+
+    display:flex;
+
+    align-items:flex-end;
+
+    justify-content:space-between;
+
+    gap:60px;
+
+    margin-bottom:60px;
+
+}
+
+.network-class-header > div:first-child{
+
+    max-width:780px;
+
+}
+
+.network-class-header h2{
+
+    margin-bottom:20px;
+
+}
+
+.network-class-header p{
+
+    max-width:720px;
+
+    margin:0;
+
+    line-height:1.9;
+
+    color:#697384;
+
+}
+
+.pioneer-section .network-class-header p{
+
+    color:rgba(255,255,255,.72);
+
+}
+
+
+/* ==========================================================
+   CLASS STAT
+========================================================== */
+
+.network-class-stat{
+
+    flex-shrink:0;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    min-width:150px;
+
+    min-height:150px;
+
+    padding:25px;
+
+    border-radius:22px;
+
+    background:var(--bm-cream);
+
+    border:1px solid rgba(0,26,58,.06);
+
+}
+
+.network-class-stat strong{
 
     display:block;
 
-    width:90px;
+    color:var(--bm-blue);
 
-    height:4px;
+    font-size:2.7rem;
 
-    margin:0 auto 70px;
+    line-height:1;
 
-    background:var(--bm-red);
-
-    border-radius:999px;
+    font-weight:800;
 
 }
 
-#destination-grid{
+.network-class-stat span{
+
+    margin-top:12px;
+
+    color:#7b8492;
+
+    font-size:.7rem;
+
+    font-weight:700;
+
+    letter-spacing:.16em;
+
+    text-align:center;
+
+}
+
+.pioneer-section .network-class-stat{
+
+    background:rgba(255,255,255,.08);
+
+    border:1px solid rgba(255,255,255,.12);
+
+}
+
+.pioneer-section .network-class-stat strong{
+
+    color:#ffffff;
+
+}
+
+.pioneer-section .network-class-stat span{
+
+    color:rgba(255,255,255,.58);
+
+}
+
+.foundry-stat{
+
+    background:#ffffff;
+
+}
+
+
+/* ==========================================================
+   ROUTE GRID
+========================================================== */
+
+.route-grid{
 
     display:grid;
 
-    grid-template-columns:repeat(auto-fit,minmax(340px,1fr));
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
 
-    gap:32px;
+    gap:30px;
 
 }
+
 
 /* ==========================================================
    DESTINATION CARD
@@ -166,327 +346,29 @@
 
     flex-direction:column;
 
+    min-width:0;
+
+    padding:34px;
+
+    overflow:hidden;
+
     background:#ffffff;
 
-    border-radius:var(--radius-lg);
-
-    padding:36px;
+    border-radius:20px;
 
     border:2px solid transparent;
 
-    box-shadow:var(--shadow);
+    box-shadow:
+
+        0 15px 35px rgba(0,0,0,.06);
 
     transition:
-        transform .30s ease,
-        box-shadow .30s ease,
-        border-color .30s ease;
 
-}
+        transform .3s ease,
 
-.destination-card:hover{
+        box-shadow .3s ease,
 
-    transform:translateY(-8px);
-
-    box-shadow:var(--shadow-xl);
-
-}
-
-.destination-card.selected{
-
-    border-color:var(--bm-red);
-
-}
-
-.destination-status{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    align-self:flex-start;
-
-    padding:8px 16px;
-
-    border-radius:999px;
-
-    font-size:.72rem;
-
-    font-weight:700;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-
-    margin-bottom:24px;
-
-}
-
-.destination-status.active{
-
-    background:#E8F8EE;
-
-    color:#1D7C3D;
-
-}
-
-.destination-status.coming-soon{
-
-    background:#EEF1F5;
-
-    color:#6B7483;
-
-}
-
-.destination-card h3{
-
-    margin-bottom:10px;
-
-    color:var(--bm-blue);
-
-}
-
-.airport{
-
-    margin-bottom:24px;
-
-    color:#8892A2;
-
-    font-weight:600;
-
-    letter-spacing:.05em;
-
-}
-
-.destination-description{
-
-    color:var(--text);
-
-    line-height:1.9;
-
-    margin-bottom:34px;
-
-}
-/* ==========================================================
-   DESTINATION INFORMATION
-========================================================== */
-
-.destination-info{
-
-    display:grid;
-
-    grid-template-columns:repeat(2,1fr);
-
-    gap:18px;
-
-}
-
-.destination-info > div{
-
-    background:var(--bm-cream);
-
-    border-radius:18px;
-
-    padding:20px;
-
-    transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-
-}
-
-.destination-info > div:hover{
-
-    transform:translateY(-3px);
-
-    box-shadow:var(--shadow-sm);
-
-}
-
-.destination-info span{
-
-    display:block;
-
-    margin-bottom:8px;
-
-    color:#8C96A6;
-
-    font-size:.78rem;
-
-    font-weight:700;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-
-}
-
-.destination-info strong{
-
-    color:var(--bm-blue);
-
-    font-size:1rem;
-
-    font-weight:700;
-
-}
-
-/* ==========================================================
-   AIRCRAFT BADGES
-========================================================== */
-
-.badge-a319,
-.badge-a320,
-.badge-a321,
-.badge-a350{
-
-    display:inline-flex;
-
-    align-items:center;
-
-    justify-content:center;
-
-    padding:5px 10px;
-
-    border-radius:999px;
-
-    font-size:.82rem;
-
-    font-weight:700;
-
-    line-height:1;
-
-}
-
-.destination-info strong .badge-a319{
-
-    background:#2E6FA3;
-
-    color:#ffffff;
-
-}
-
-.destination-info strong .badge-a320{
-
-    background:#D02823;
-
-    color:#ffffff;
-
-}
-
-.destination-info strong .badge-a321{
-
-    background:#C9A227;
-
-    color:#001A3A;
-
-}
-
-.destination-info strong .badge-a350{
-
-    background:#8A8F98;
-
-    color:#ffffff;
-
-}
-
-/* ==========================================================
-   MAP CONTROLS
-========================================================== */
-
-.leaflet-control-zoom{
-
-    border:none !important;
-
-    box-shadow:none !important;
-
-}
-
-.leaflet-control-zoom a{
-
-    width:44px !important;
-
-    height:44px !important;
-
-    line-height:44px !important;
-
-    border-radius:12px !important;
-
-    background:#ffffff !important;
-
-    color:var(--bm-blue) !important;
-
-    font-weight:700;
-
-    box-shadow:0 10px 22px rgba(0,0,0,.12);
-
-}
-
-.leaflet-control-zoom a:hover{
-
-    background:var(--bm-red) !important;
-
-    color:#ffffff !important;
-
-}
-
-.leaflet-popup-content-wrapper{
-
-    border-radius:18px;
-
-}
-
-.leaflet-popup-content{
-
-    margin:18px;
-
-    line-height:1.7;
-
-}
-
-.leaflet-popup-tip{
-
-    background:#ffffff;
-
-}
-
-/* ==========================================================
-   HUB LABEL
-========================================================== */
-
-.hub-label{
-
-    background:var(--bm-blue);
-
-    color:#ffffff;
-
-    border:none;
-
-    border-radius:14px;
-
-    padding:10px 14px;
-
-    font-weight:700;
-
-    letter-spacing:.05em;
-
-    box-shadow:0 12px 26px rgba(0,0,0,.18);
-
-}
-
-.hub-label::before{
-
-    display:none;
-
-}
-/* ==========================================================
-   MICRO INTERACTIONS
-========================================================== */
-
-.destination-card{
-
-    overflow:hidden;
+        border-color .3s ease;
 
 }
 
@@ -510,14 +392,108 @@
 
     transform-origin:left;
 
-    transition:transform .35s ease;
+    transition:transform .3s ease;
+
+}
+
+.destination-card:hover{
+
+    transform:translateY(-7px);
+
+    box-shadow:
+
+        0 25px 55px rgba(0,0,0,.12);
 
 }
 
 .destination-card:hover::before,
+
 .destination-card.selected::before{
 
     transform:scaleX(1);
+
+}
+
+.destination-card.selected{
+
+    border-color:var(--bm-red);
+
+}
+
+
+/* ==========================================================
+   FLIGHT NUMBER
+========================================================== */
+
+.route-card-flight{
+
+    margin-bottom:12px;
+
+    color:var(--bm-red);
+
+    font-size:.8rem;
+
+    font-weight:800;
+
+    letter-spacing:.14em;
+
+}
+
+
+/* ==========================================================
+   DESTINATION STATUS
+========================================================== */
+
+.destination-status{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    align-self:flex-start;
+
+    margin-bottom:20px;
+
+    padding:7px 14px;
+
+    border-radius:999px;
+
+    font-size:.65rem;
+
+    font-weight:800;
+
+    letter-spacing:.14em;
+
+    text-transform:uppercase;
+
+}
+
+.destination-status.active{
+
+    background:#e8f8ee;
+
+    color:#1d7c3d;
+
+}
+
+
+/* ==========================================================
+   DESTINATION TITLE
+========================================================== */
+
+.destination-card h3{
+
+    margin:0 0 8px;
+
+    color:var(--bm-blue);
+
+    font-size:1.65rem;
+
+    line-height:1.15;
+
+    transition:color .25s ease;
 
 }
 
@@ -527,28 +503,427 @@
 
 }
 
-.destination-card h3{
+.airport{
 
-    transition:color .25s ease;
+    margin:0 0 24px;
+
+    color:#8993a2;
+
+    font-size:.85rem;
+
+    font-weight:700;
+
+    letter-spacing:.08em;
 
 }
+
 
 /* ==========================================================
-   MAP POLISH
+   DESCRIPTION
 ========================================================== */
 
-.leaflet-interactive{
+.destination-description{
 
-    transition:
-        stroke .25s ease,
-        fill .25s ease;
+    flex:1;
+
+    margin:0 0 30px;
+
+    color:#626d7d;
+
+    line-height:1.8;
 
 }
+
+
+/* ==========================================================
+   DESTINATION INFORMATION
+========================================================== */
+
+.destination-info{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:14px;
+
+}
+
+.destination-info > div{
+
+    min-width:0;
+
+    padding:17px;
+
+    background:var(--bm-cream);
+
+    border-radius:15px;
+
+}
+
+.destination-info span{
+
+    display:block;
+
+    margin-bottom:7px;
+
+    color:#8b95a4;
+
+    font-size:.65rem;
+
+    font-weight:800;
+
+    letter-spacing:.13em;
+
+    text-transform:uppercase;
+
+}
+
+.destination-info strong{
+
+    display:block;
+
+    color:var(--bm-blue);
+
+    font-size:.95rem;
+
+}
+
+
+/* ==========================================================
+   AIRCRAFT BADGES
+========================================================== */
+
+.badge-a319,
+.badge-a320,
+.badge-a321,
+.badge-a350{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:6px 11px;
+
+    border-radius:999px;
+
+    font-size:.75rem;
+
+    font-weight:800;
+
+    line-height:1;
+
+}
+
+.destination-info strong .badge-a319{
+
+    background:#2e6fa3;
+
+    color:#ffffff;
+
+}
+
+.destination-info strong .badge-a320{
+
+    background:#d02823;
+
+    color:#ffffff;
+
+}
+
+.destination-info strong .badge-a321{
+
+    background:#c9a227;
+
+    color:#001a3a;
+
+}
+
+.destination-info strong .badge-a350{
+
+    background:#8a8f98;
+
+    color:#ffffff;
+
+}
+
+
+/* ==========================================================
+   CAPTAINS ONLY
+========================================================== */
+
+.route-note{
+
+    display:block;
+
+    margin-top:18px;
+
+    color:#8b95a4;
+
+    font-size:.65rem;
+
+    font-weight:800;
+
+    letter-spacing:.1em;
+
+}
+
+
+/* ==========================================================
+   PIONEER CLASS
+========================================================== */
+
+.pioneer-section{
+
+    background:
+
+        linear-gradient(
+            180deg,
+            var(--bm-blue),
+            #00132c
+        );
+
+}
+
+.pioneer-section .section-kicker{
+
+    color:var(--bm-red);
+
+}
+
+.pioneer-section h2{
+
+    color:#ffffff;
+
+}
+
+.pioneer-grid{
+
+    grid-template-columns:
+        repeat(3,minmax(0,1fr));
+
+}
+
+.pioneer-card{
+
+    background:#ffffff;
+
+}
+
+
+/* ==========================================================
+   FOUNDRY CLASS
+========================================================== */
+
+.foundry-section{
+
+    border-top:1px solid rgba(0,0,0,.05);
+
+}
+
+.foundry-coming-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:30px;
+
+}
+
+.foundry-placeholder{
+
+    min-height:300px;
+
+    display:flex;
+
+    flex-direction:column;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:50px;
+
+    text-align:center;
+
+    background:#ffffff;
+
+    border:2px dashed rgba(0,26,58,.14);
+
+    border-radius:22px;
+
+}
+
+.foundry-placeholder-icon{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    width:70px;
+
+    height:70px;
+
+    margin-bottom:25px;
+
+    border-radius:50%;
+
+    background:var(--bm-blue);
+
+    color:#ffffff;
+
+    font-size:1.5rem;
+
+}
+
+.foundry-placeholder .section-kicker{
+
+    margin-bottom:12px;
+
+}
+
+.foundry-placeholder h3{
+
+    margin-bottom:15px;
+
+    color:var(--bm-blue);
+
+}
+
+.foundry-placeholder p{
+
+    max-width:480px;
+
+    margin:0;
+
+    color:#697384;
+
+    line-height:1.8;
+
+}
+
+
+/* ==========================================================
+   MAP CONTROLS
+========================================================== */
+
+.leaflet-control-zoom{
+
+    border:none !important;
+
+    box-shadow:none !important;
+
+}
+
+.leaflet-control-zoom a{
+
+    width:44px !important;
+
+    height:44px !important;
+
+    line-height:44px !important;
+
+    margin-bottom:5px;
+
+    border:none !important;
+
+    border-radius:12px !important;
+
+    background:#ffffff !important;
+
+    color:var(--bm-blue) !important;
+
+    font-weight:800;
+
+    box-shadow:
+
+        0 10px 22px rgba(0,0,0,.12);
+
+}
+
+.leaflet-control-zoom a:hover{
+
+    background:var(--bm-red) !important;
+
+    color:#ffffff !important;
+
+}
+
+
+/* ==========================================================
+   HUB LABEL
+========================================================== */
+
+.hub-label{
+
+    padding:9px 13px;
+
+    background:var(--bm-blue);
+
+    color:#ffffff;
+
+    border:none;
+
+    border-radius:12px;
+
+    font-weight:800;
+
+    letter-spacing:.04em;
+
+    box-shadow:
+
+        0 10px 24px rgba(0,0,0,.18);
+
+}
+
+.hub-label::before{
+
+    display:none;
+
+}
+
+
+/* ==========================================================
+   LEAFLET POPUPS
+========================================================== */
+
+.leaflet-popup-content-wrapper{
+
+    border-radius:16px;
+
+}
+
+.leaflet-popup-content{
+
+    margin:17px;
+
+    line-height:1.6;
+
+}
+
+.leaflet-popup-tip{
+
+    background:#ffffff;
+
+}
+
+
+/* ==========================================================
+   MAP MARKERS
+========================================================== */
 
 .leaflet-marker-icon{
 
     transition:
-        transform .25s ease;
+
+        transform .2s ease;
 
 }
 
@@ -558,55 +933,94 @@
 
 }
 
+.leaflet-interactive{
+
+    transition:
+
+        stroke .2s ease,
+
+        fill .2s ease;
+
+}
+
+
 /* ==========================================================
-   RESPONSIVE
+   RESPONSIVE — 1200PX
 ========================================================== */
 
 @media(max-width:1200px){
 
+    .route-grid{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
+
+    }
+
     #network-map{
 
-        height:640px;
+        height:540px;
 
     }
 
 }
+
+
+/* ==========================================================
+   RESPONSIVE — 992PX
+========================================================== */
 
 @media(max-width:992px){
 
     .network-hero{
 
-        padding:160px 0 90px;
+        padding:100px 0 80px;
 
     }
 
-    #network-map{
+    .network-class-header{
 
-        height:560px;
+        align-items:flex-start;
+
+        flex-direction:column;
+
+        gap:35px;
 
     }
 
-    #destination-grid{
+    .network-class-stat{
 
-        grid-template-columns:1fr;
+        min-width:130px;
+
+        min-height:130px;
+
+    }
+
+    .route-grid{
+
+        grid-template-columns:
+            repeat(2,minmax(0,1fr));
 
     }
 
 }
 
+
+/* ==========================================================
+   RESPONSIVE — 768PX
+========================================================== */
+
 @media(max-width:768px){
 
     .network-hero{
 
-        padding:140px 0 70px;
+        padding:90px 0 70px;
 
     }
 
     .network-map-section{
 
-        margin-top:-20px;
-
-        padding-bottom:80px;
+        padding:80px 0 90px;
 
     }
 
@@ -616,6 +1030,26 @@
 
         border-width:5px;
 
+        border-radius:18px;
+
+    }
+
+    .network-class-section{
+
+        padding:90px 0;
+
+    }
+
+    .route-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .foundry-coming-grid{
+
+        grid-template-columns:1fr;
+
     }
 
     .destination-card{
@@ -624,19 +1058,30 @@
 
     }
 
-    .destination-info{
-
-        grid-template-columns:1fr;
-
-    }
-
 }
+
+
+/* ==========================================================
+   RESPONSIVE — 480PX
+========================================================== */
 
 @media(max-width:480px){
 
     .network-hero h1{
 
-        font-size:2.3rem;
+        font-size:2.4rem;
+
+    }
+
+    .network-section-heading h2{
+
+        font-size:2.2rem;
+
+    }
+
+    .network-class-header h2{
+
+        font-size:2.2rem;
 
     }
 
@@ -646,25 +1091,31 @@
 
     }
 
-    .destination-card{
+    .destination-info{
 
-        padding:22px;
+        grid-template-columns:1fr;
 
     }
 
-    .destination-status{
+    .foundry-placeholder{
 
-        font-size:.68rem;
+        min-height:260px;
+
+        padding:35px 25px;
 
     }
 
 }
 
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
 @media(prefers-reduced-motion:reduce){
 
     #network-map,
     .destination-card,
-    .destination-info > div,
     .leaflet-marker-icon{
 
         transition:none !important;
@@ -674,31 +1125,3 @@
     }
 
 }
-.navbar{
-    position:relative;
-    z-index:20;
-}
-
-.network-hero{
-    position:relative;
-    z-index:10;
-}
-/* ==========================================================
-   NETWORK HEADER LAYOUT FIX
-========================================================== */
-
-.site-header{
-    position:relative !important;
-    top:auto;
-    left:auto;
-    width:100%;
-    z-index:1000;
-    background:var(--bm-blue);
-}
-
-.network-hero{
-    padding:70px 0 90px !important;
-}
-/* ==========================================================
-   END OF NETWORK.CSS
-========================================================== */
