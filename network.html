@@ -11,41 +11,86 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
-    <link rel="stylesheet"
-          href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <link
+        rel="stylesheet"
+        href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    >
 
     <link rel="stylesheet" href="assets/css/base.css">
-  <link rel="stylesheet" href="assets/css/network.css?v=7">
+
+    <link
+        rel="stylesheet"
+        href="assets/css/network.css?v=8"
+    >
 
 </head>
 
 <body>
 
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
 <header class="site-header">
 
     <div class="container navbar">
 
-        <a class="logo" href="index.html">
-            <img src="assets/images/logo.png" alt="British Midland Virtual">
+        <a
+            class="logo"
+            href="index.html"
+        >
+
+            <img
+                src="assets/images/logo.png"
+                alt="British Midland Virtual"
+            >
+
         </a>
 
         <nav>
 
             <ul class="nav-links">
 
-                <li><a href="index.html">HOME</a></li>
+                <li>
+                    <a href="index.html">
+                        HOME
+                    </a>
+                </li>
 
-                <li><a href="fleet.html">FLEET</a></li>
+                <li>
+                    <a href="fleet.html">
+                        FLEET
+                    </a>
+                </li>
 
-                <li><a class="active" href="network.html">NETWORK</a></li>
+                <li>
+                    <a class="active" href="network.html">
+                        NETWORK
+                    </a>
+                </li>
 
-                <li><a href="operations.html">OPERATIONS</a></li>
+                <li>
+                    <a href="operations.html">
+                        OPERATIONS
+                    </a>
+                </li>
 
-                <li><a href="news.html">NEWS</a></li>
+                <li>
+                    <a href="news.html">
+                        NEWS
+                    </a>
+                </li>
 
-                <li><a href="join.html">JOIN</a></li>
+                <li>
+                    <a href="join.html">
+                        JOIN
+                    </a>
+                </li>
 
             </ul>
 
@@ -55,69 +100,299 @@
 
 </header>
 
+
 <main>
 
-    <section class="network-hero">
 
-        <div class="container">
+<!-- =========================================================
+     NETWORK HERO
+========================================================= -->
 
-            <p class="hero-kicker">
+<section class="network-hero">
 
-                BRITISH MIDLAND • ROUTE NETWORK
+    <div class="container">
 
-            </p>
+        <p class="hero-kicker">
 
-            <h1>
+            BRITISH MIDLAND • ROUTE NETWORK
 
-                Explore Our Network
+        </p>
 
-            </h1>
+        <h1>
 
-            <div class="hero-divider"></div>
+            Birmingham to the World
 
-            <p class="hero-copy">
+        </h1>
 
-                Discover British Midland Virtual's growing network from Birmingham
-                to key destinations across Europe, with exciting long-haul services
-                planned for the future.
+        <div class="hero-divider"></div>
 
+        <p class="hero-copy">
+
+            Explore the British Midland Virtual network from our
+            home at Birmingham Airport, from European short-haul
+            services to our growing Pioneer Class long-haul operation.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     NETWORK MAP
+========================================================= -->
+
+<section class="network-map-section">
+
+    <div class="container">
+
+        <div class="network-section-heading">
+
+            <span class="section-kicker">
+                OUR NETWORK
+            </span>
+
+            <h2>
+                The Heart of Britain
+            </h2>
+
+            <p>
+                Every route begins at Birmingham Airport.
             </p>
 
         </div>
 
-    </section>
+        <div id="network-map"></div>
 
-    <section class="network-map-section">
+    </div>
 
-        <div class="container">
+</section>
 
-            <div id="network-map"></div>
 
-        </div>
+<!-- =========================================================
+     BEATING HEART CLASS
+========================================================= -->
 
-    </section>
+<section class="network-class-section beating-heart-section">
 
-    <section class="network-destinations">
+    <div class="container">
 
-        <div class="container">
+        <div class="network-class-header">
 
-            <div id="destination-grid">
+            <div>
 
-                <!-- Destination cards generated automatically -->
+                <span class="section-kicker">
+                    BEATING HEART CLASS
+                </span>
+
+                <h2>
+                    European Network
+                </h2>
+
+                <p>
+                    The core of British Midland Virtual operations,
+                    connecting Birmingham with destinations across
+                    Europe and the Mediterranean.
+                </p>
+
+            </div>
+
+            <div class="network-class-stat">
+
+                <strong>
+                    26
+                </strong>
+
+                <span>
+                    DESTINATIONS
+                </span>
 
             </div>
 
         </div>
 
-    </section>
+
+        <div
+            id="beating-heart-grid"
+            class="route-grid"
+        >
+
+            <!-- Generated by network.js -->
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     PIONEER CLASS
+========================================================= -->
+
+<section class="network-class-section pioneer-section">
+
+    <div class="container">
+
+        <div class="network-class-header pioneer-header">
+
+            <div>
+
+                <span class="section-kicker">
+                    PIONEER CLASS
+                </span>
+
+                <h2>
+                    Long-Haul Network
+                </h2>
+
+                <p>
+                    Our flagship A350-1000 operation, connecting
+                    Birmingham with destinations across North America
+                    and the Caribbean.
+                </p>
+
+            </div>
+
+            <div class="network-class-stat">
+
+                <strong>
+                    5
+                </strong>
+
+                <span>
+                    DESTINATIONS
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div
+            id="pioneer-grid"
+            class="route-grid pioneer-grid"
+        >
+
+            <!-- Generated by network.js -->
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOUNDRY CLASS
+========================================================= -->
+
+<section class="network-class-section foundry-section">
+
+    <div class="container">
+
+        <div class="network-class-header">
+
+            <div>
+
+                <span class="section-kicker">
+                    FOUNDRY CLASS
+                </span>
+
+                <h2>
+                    Regional Network
+                </h2>
+
+                <p>
+                    A new generation of regional operations is
+                    being prepared for launch from Birmingham
+                    and additional regional bases.
+                </p>
+
+            </div>
+
+            <div class="network-class-stat foundry-stat">
+
+                <strong>
+                    SOON
+                </strong>
+
+                <span>
+                    NETWORK LAUNCH
+                </span>
+
+            </div>
+
+        </div>
+
+
+        <div class="foundry-coming-grid">
+
+
+            <article class="foundry-placeholder">
+
+                <div class="foundry-placeholder-icon">
+                    ✈
+                </div>
+
+                <span class="section-kicker">
+                    COMING SOON
+                </span>
+
+                <h3>
+                    Birmingham Regional Network
+                </h3>
+
+                <p>
+                    Regional routes from Birmingham will be
+                    revealed when Foundry Class enters service.
+                </p>
+
+            </article>
+
+
+            <article class="foundry-placeholder">
+
+                <div class="foundry-placeholder-icon">
+                    ✈
+                </div>
+
+                <span class="section-kicker">
+                    COMING SOON
+                </span>
+
+                <h3>
+                    Regional Bases
+                </h3>
+
+                <p>
+                    Additional Foundry Class operations and
+                    regional bases will be announced ahead
+                    of launch.
+                </p>
+
+            </article>
+
+
+        </div>
+
+    </div>
+
+</section>
+
 
 </main>
 
-<!-- Footer -->
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
 
 <footer class="site-footer">
 
     <div class="container footer-grid">
+
 
         <!-- Brand -->
 
@@ -125,7 +400,8 @@
 
             <img
                 src="assets/images/logo.png"
-                alt="British Midland Virtual">
+                alt="British Midland Virtual"
+            >
 
             <p>
 
@@ -136,56 +412,120 @@
 
         </div>
 
+
         <!-- Explore -->
 
         <div>
 
-            <h4>Explore</h4>
+            <h4>
+                Explore
+            </h4>
 
             <ul>
 
-                <li><a href="fleet.html">Fleet</a></li>
-                <li><a href="network.html">Network</a></li>
-                <li><a href="operations.html">Operations</a></li>
-                <li><a href="news.html">News</a></li>
+                <li>
+                    <a href="fleet.html">
+                        Fleet
+                    </a>
+                </li>
+
+                <li>
+                    <a href="network.html">
+                        Network
+                    </a>
+                </li>
+
+                <li>
+                    <a href="operations.html">
+                        Operations
+                    </a>
+                </li>
+
+                <li>
+                    <a href="news.html">
+                        News
+                    </a>
+                </li>
 
             </ul>
 
         </div>
+
 
         <!-- Community -->
 
         <div>
 
-            <h4>Community</h4>
+            <h4>
+                Community
+            </h4>
 
             <ul>
 
-                <li><a href="join.html">Join British Midland</a></li>
-                <li><a href="#">Discord</a></li>
-                <li><a href="news.html?id=9">SayIntentions</a></li>
+                <li>
+                    <a href="join.html">
+                        Join British Midland
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Discord
+                    </a>
+                </li>
+
+                <li>
+                    <a href="news.html?id=9">
+                        SayIntentions
+                    </a>
+                </li>
 
             </ul>
 
         </div>
 
-      <!-- Company -->
 
-<div>
+        <!-- Company -->
 
-    <h4>Company</h4>
+        <div>
 
-    <ul>
+            <h4>
+                Company
+            </h4>
 
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms & Conditions</a></li>
-        <li><a href="contact.html">Contact</a></li>
-        <li><a href="/management/">Management Portal</a></li>
+            <ul>
 
-    </ul>
+                <li>
+                    <a href="privacy.html">
+                        Privacy Policy
+                    </a>
+                </li>
 
-</div>
+                <li>
+                    <a href="terms.html">
+                        Terms & Conditions
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/management/">
+                        Management Portal
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
     </div>
+
 
     <div class="footer-bottom">
 
@@ -208,10 +548,21 @@
 
     </div>
 
-<footer class="site-footer">
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+</footer>
 
-<script src="assets/js/network.js?v=2"></script>
+
+<!-- =========================================================
+     SCRIPTS
+========================================================= -->
+
+<script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js">
+</script>
+
+<script
+    src="assets/js/network.js?v=8">
+</script>
+
 
 </body>
 
