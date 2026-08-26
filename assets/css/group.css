@@ -1,0 +1,867 @@
+/* ==========================================================
+   BRITISH MIDLAND VIRTUAL
+   GROUP PAGE
+   Requires: base.css
+========================================================== */
+
+
+/* ==========================================================
+   GROUP HERO
+========================================================== */
+
+.group-hero{
+
+    position:relative;
+
+    padding:190px 0 100px;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--bm-blue),
+            var(--bm-blue-light)
+        );
+
+    color:#ffffff;
+
+    text-align:center;
+
+}
+
+.group-hero .container{
+
+    max-width:920px;
+
+}
+
+.group-hero h1{
+
+    margin:0 0 28px;
+
+    color:#ffffff;
+
+    font-size:clamp(2.8rem,5vw,4.6rem);
+
+    line-height:1.08;
+
+    letter-spacing:-.035em;
+
+}
+
+.group-hero .hero-kicker{
+
+    margin-bottom:22px;
+
+}
+
+.group-hero .hero-divider{
+
+    margin:38px auto;
+
+}
+
+.group-hero .hero-copy{
+
+    max-width:760px;
+
+    margin:0 auto;
+
+    color:rgba(255,255,255,.86);
+
+    font-size:1.05rem;
+
+    line-height:1.9;
+
+}
+
+
+/* ==========================================================
+   GROUP INTRO
+========================================================== */
+
+.group-intro{
+
+    padding:110px 0;
+
+    background:#ffffff;
+
+    text-align:center;
+
+}
+
+.group-intro-content{
+
+    max-width:850px;
+
+    margin:0 auto;
+
+}
+
+.group-intro h2{
+
+    margin:12px 0 25px;
+
+    color:var(--bm-blue);
+
+    font-size:clamp(2rem,4vw,3rem);
+
+}
+
+.group-intro p{
+
+    max-width:760px;
+
+    margin:0 auto;
+
+    color:#697384;
+
+    line-height:1.9;
+
+    font-size:1rem;
+
+}
+
+
+/* ==========================================================
+   GROUP STRUCTURE
+========================================================== */
+
+.group-structure{
+
+    padding:110px 0 125px;
+
+    background:var(--bm-cream);
+
+}
+
+.group-section-heading{
+
+    max-width:760px;
+
+    margin:0 auto 65px;
+
+    text-align:center;
+
+}
+
+.group-section-heading h2{
+
+    margin:12px 0 12px;
+
+    color:var(--bm-blue);
+
+    font-size:clamp(2rem,4vw,3rem);
+
+}
+
+.group-section-heading p{
+
+    margin:0;
+
+    color:#697384;
+
+    line-height:1.7;
+
+}
+
+
+/* ==========================================================
+   GROUP TREE
+========================================================== */
+
+.group-tree{
+
+    max-width:1100px;
+
+    margin:0 auto;
+
+}
+
+.group-parent{
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.group-parent-inner{
+
+    position:relative;
+
+    width:min(520px,100%);
+
+    padding:36px 45px;
+
+    background:var(--bm-blue);
+
+    color:#ffffff;
+
+    border-radius:20px;
+
+    text-align:center;
+
+    box-shadow:
+        0 18px 45px rgba(0,0,0,.12);
+
+}
+
+.group-parent-kicker{
+
+    display:block;
+
+    margin-bottom:10px;
+
+    color:rgba(255,255,255,.60);
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    letter-spacing:.16em;
+
+    text-transform:uppercase;
+
+}
+
+.group-parent-inner h3{
+
+    margin:0 0 10px;
+
+    color:#ffffff;
+
+    font-size:1.55rem;
+
+}
+
+.group-parent-inner p{
+
+    margin:0;
+
+    color:rgba(255,255,255,.72);
+
+    font-size:.9rem;
+
+    line-height:1.65;
+
+}
+
+
+/* ==========================================================
+   STRUCTURE CONNECTOR
+========================================================== */
+
+.group-connector{
+
+    position:relative;
+
+    width:100%;
+
+    height:70px;
+
+}
+
+.group-connector::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:50%;
+
+    width:2px;
+
+    height:35px;
+
+    background:rgba(0,26,58,.20);
+
+    transform:translateX(-50%);
+
+}
+
+.group-connector::after{
+
+    content:"";
+
+    position:absolute;
+
+    top:35px;
+
+    left:25%;
+
+    width:50%;
+
+    height:2px;
+
+    background:rgba(0,26,58,.20);
+
+}
+
+
+/* ==========================================================
+   GROUP COMPANIES
+========================================================== */
+
+.group-companies{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
+
+    gap:28px;
+
+}
+
+.group-company{
+
+    position:relative;
+
+    padding:38px;
+
+    background:#ffffff;
+
+    border-radius:20px;
+
+    border:1px solid rgba(0,26,58,.07);
+
+    box-shadow:
+        0 12px 35px rgba(0,0,0,.06);
+
+    overflow:hidden;
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
+
+}
+
+.group-company::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:var(--bm-red);
+
+}
+
+.group-company:hover{
+
+    transform:translateY(-6px);
+
+    box-shadow:
+        0 22px 45px rgba(0,0,0,.10);
+
+}
+
+.group-company-top{
+
+    display:flex;
+
+    align-items:center;
+
+    justify-content:space-between;
+
+    gap:15px;
+
+    margin-bottom:18px;
+
+}
+
+.group-company-top .section-kicker{
+
+    margin:0;
+
+}
+
+.group-company-tag{
+
+    color:#8b95a4;
+
+    font-size:.62rem;
+
+    font-weight:700;
+
+    letter-spacing:.10em;
+
+    text-align:right;
+
+}
+
+.group-company h3{
+
+    margin:0 0 15px;
+
+    color:var(--bm-blue);
+
+    font-size:1.65rem;
+
+}
+
+.group-company p{
+
+    margin:0 0 28px;
+
+    color:#697384;
+
+    line-height:1.8;
+
+    font-size:.92rem;
+
+}
+
+
+/* ==========================================================
+   BUSINESS SECTIONS
+========================================================== */
+
+.group-business{
+
+    padding:120px 0;
+
+}
+
+.group-business-mainline{
+
+    background:#ffffff;
+
+}
+
+.group-business-regional{
+
+    background:var(--bm-cream);
+
+}
+
+.group-business-grid{
+
+    display:grid;
+
+    grid-template-columns:
+        minmax(0,1.35fr)
+        minmax(320px,.65fr);
+
+    align-items:center;
+
+    gap:90px;
+
+}
+
+.group-business-regional .group-business-grid{
+
+    grid-template-columns:
+        minmax(320px,.65fr)
+        minmax(0,1.35fr);
+
+}
+
+.group-business-content{
+
+    max-width:700px;
+
+}
+
+.group-business-content h2{
+
+    margin:12px 0 24px;
+
+    color:var(--bm-blue);
+
+    font-size:clamp(2rem,4vw,3rem);
+
+}
+
+.group-business-content p{
+
+    margin:0 0 20px;
+
+    color:#697384;
+
+    line-height:1.9;
+
+}
+
+.group-business-links{
+
+    display:flex;
+
+    flex-wrap:wrap;
+
+    align-items:center;
+
+    gap:14px;
+
+    margin-top:32px;
+
+}
+
+
+/* ==========================================================
+   BUSINESS PANEL
+========================================================== */
+
+.group-business-panel{
+
+    position:relative;
+
+    padding:50px 42px;
+
+    background:var(--bm-blue);
+
+    border-radius:22px;
+
+    color:#ffffff;
+
+    box-shadow:
+        0 25px 55px rgba(0,0,0,.12);
+
+    overflow:hidden;
+
+}
+
+.group-business-panel::before{
+
+    content:"";
+
+    position:absolute;
+
+    top:0;
+
+    left:0;
+
+    width:100%;
+
+    height:5px;
+
+    background:var(--bm-red);
+
+}
+
+.panel-label{
+
+    display:block;
+
+    margin-bottom:18px;
+
+    color:rgba(255,255,255,.55);
+
+    font-size:.68rem;
+
+    font-weight:700;
+
+    letter-spacing:.16em;
+
+    text-transform:uppercase;
+
+}
+
+.group-business-panel strong{
+
+    display:block;
+
+    margin-bottom:18px;
+
+    color:#ffffff;
+
+    font-size:1.55rem;
+
+    line-height:1.25;
+
+}
+
+.group-business-panel p{
+
+    margin:0;
+
+    color:rgba(255,255,255,.72);
+
+    line-height:1.8;
+
+    font-size:.92rem;
+
+}
+
+
+/* ==========================================================
+   CLOSING SECTION
+========================================================== */
+
+.group-closing{
+
+    padding:125px 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            var(--bm-blue),
+            var(--bm-blue-light)
+        );
+
+    color:#ffffff;
+
+    text-align:center;
+
+}
+
+.group-closing .container{
+
+    max-width:850px;
+
+}
+
+.group-closing h2{
+
+    margin:12px 0 25px;
+
+    color:#ffffff;
+
+    font-size:clamp(2.2rem,4vw,3.4rem);
+
+}
+
+.group-closing .section-kicker{
+
+    color:rgba(255,255,255,.65);
+
+}
+
+.group-closing .hero-divider{
+
+    margin:35px auto;
+
+}
+
+.group-closing p{
+
+    max-width:680px;
+
+    margin:0 auto 12px;
+
+    color:rgba(255,255,255,.78);
+
+    line-height:1.9;
+
+    font-size:1rem;
+
+}
+
+
+/* ==========================================================
+   FEATURE BUTTON
+========================================================== */
+
+.group-company .feature-button{
+
+    display:inline-flex;
+
+    align-items:center;
+
+    justify-content:center;
+
+    padding:13px 21px;
+
+    border:1px solid rgba(0,26,58,.15);
+
+    border-radius:999px;
+
+    background:#ffffff;
+
+    color:var(--bm-blue);
+
+    font-size:.82rem;
+
+    font-weight:700;
+
+    text-decoration:none;
+
+    transition:
+        background .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        transform .25s ease;
+
+}
+
+.group-company .feature-button:hover{
+
+    background:var(--bm-blue);
+
+    border-color:var(--bm-blue);
+
+    color:#ffffff;
+
+    transform:translateY(-2px);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media(max-width:992px){
+
+    .group-hero{
+
+        padding:160px 0 90px;
+
+    }
+
+    .group-business-grid,
+    .group-business-regional .group-business-grid{
+
+        grid-template-columns:1fr;
+
+        gap:55px;
+
+    }
+
+    .group-business-regional .group-business-panel{
+
+        order:2;
+
+    }
+
+    .group-business-regional .group-business-content{
+
+        order:1;
+
+    }
+
+}
+
+@media(max-width:768px){
+
+    .group-hero{
+
+        padding:140px 0 75px;
+
+    }
+
+    .group-intro,
+    .group-structure,
+    .group-business,
+    .group-closing{
+
+        padding:80px 0;
+
+    }
+
+    .group-companies{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .group-connector{
+
+        height:45px;
+
+    }
+
+    .group-connector::before{
+
+        height:22px;
+
+    }
+
+    .group-connector::after{
+
+        display:none;
+
+    }
+
+    .group-parent-inner{
+
+        padding:30px 25px;
+
+    }
+
+    .group-company{
+
+        padding:30px;
+
+    }
+
+    .group-company-top{
+
+        align-items:flex-start;
+
+        flex-direction:column;
+
+    }
+
+    .group-company-tag{
+
+        text-align:left;
+
+    }
+
+    .group-business-panel{
+
+        padding:38px 30px;
+
+    }
+
+}
+
+@media(max-width:480px){
+
+    .group-hero h1{
+
+        font-size:2.4rem;
+
+    }
+
+    .group-company{
+
+        padding:25px;
+
+    }
+
+    .group-business-links{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .group-business-links a{
+
+        width:100%;
+
+        text-align:center;
+
+    }
+
+}
+
+
+/* ==========================================================
+   REDUCED MOTION
+========================================================== */
+
+@media(prefers-reduced-motion:reduce){
+
+    .group-company,
+    .group-company .feature-button{
+
+        transition:none !important;
+
+        animation:none !important;
+
+    }
+
+}
