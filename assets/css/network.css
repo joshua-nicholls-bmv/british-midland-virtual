@@ -1248,3 +1248,99 @@
     }
 
 }
+/* ==========================================================
+   FOUNDRY FINAL OVERRIDE
+========================================================== */
+
+.foundry-section .foundry-coming-grid{
+
+    display:grid !important;
+
+    grid-template-columns:
+        repeat(2, minmax(0, 1fr)) !important;
+
+    gap:22px !important;
+
+    max-width:900px !important;
+
+    margin:0 auto !important;
+
+}
+
+.foundry-section .foundry-placeholder{
+
+    min-height:220px !important;
+
+    padding:35px !important;
+
+    display:flex !important;
+
+    flex-direction:column !important;
+
+    align-items:center !important;
+
+    justify-content:center !important;
+
+    text-align:center !important;
+
+    background:#ffffff !important;
+
+    border:1px dashed rgba(0,26,58,.20) !important;
+
+    border-radius:18px !important;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.04) !important;
+
+}
+
+.foundry-section .foundry-placeholder-icon{
+
+    width:54px !important;
+
+    height:54px !important;
+
+    margin-bottom:18px !important;
+
+    border-radius:50% !important;
+
+    background:var(--bm-blue) !important;
+
+    color:#ffffff !important;
+
+    font-size:1.15rem !important;
+
+}
+
+.foundry-section .foundry-placeholder h3{
+
+    margin-bottom:10px !important;
+
+    color:var(--bm-blue) !important;
+
+    font-size:1.3rem !important;
+
+}
+
+.foundry-section .foundry-placeholder p{
+
+    max-width:400px !important;
+
+    margin:0 !important;
+
+    color:#697384 !important;
+
+    font-size:.9rem !important;
+
+    line-height:1.7 !important;
+
+}
+
+@media(max-width:700px){
+
+    .foundry-section .foundry-coming-grid{
+
+        grid-template-columns:1fr !important;
+
+    }
+
+}
