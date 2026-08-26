@@ -3,794 +3,544 @@
 
 <head>
 
-    <meta charset="UTF-8">
+    <!-- Favicons -->
+    <link rel="icon" href="/favicon.ico" sizes="any">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="manifest" href="/site.webmanifest">
 
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#001A3A">
 
     <title>Fleet | British Midland Virtual</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
-
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
 
     <link rel="stylesheet" href="assets/css/base.css">
-
     <link rel="stylesheet" href="assets/css/fleet.css">
 
 </head>
 
 <body>
 
+
+<!-- ==========================================================
+     HEADER
+========================================================== -->
+
 <header class="site-header">
 
-    <div class="container navbar">
+    <nav class="navbar container">
 
         <a class="logo" href="index.html">
 
-            <img src="assets/images/logo.png"
-                 alt="British Midland Virtual">
+            <img
+                src="assets/images/logo.png"
+                alt="British Midland Virtual"
+            >
 
         </a>
 
-        <nav>
+        <ul class="nav-links">
 
-            <ul class="nav-links">
+            <li>
+                <a href="index.html">
+                    HOME
+                </a>
+            </li>
 
-                <li><a href="index.html">HOME</a></li>
+            <li>
+                <a class="active" href="fleet.html">
+                    FLEET
+                </a>
+            </li>
 
-                <li><a class="active" href="fleet.html">FLEET</a></li>
+            <li>
+                <a href="network.html">
+                    NETWORK
+                </a>
+            </li>
 
-                <li><a href="network.html">NETWORK</a></li>
+            <li>
+                <a href="news.html">
+                    NEWS
+                </a>
+            </li>
 
-                <li><a href="operations.html">OPERATIONS</a></li>
+            <li>
+                <a href="operations.html">
+                    OPERATIONS
+                </a>
+            </li>
 
-                <li><a href="news.html">NEWS</a></li>
+            <li class="nav-cta">
 
-                <li><a href="join.html">JOIN</a></li>
+                <a href="join.html">
+                    JOIN
+                </a>
 
-            </ul>
+            </li>
 
-        </nav>
+        </ul>
 
-    </div>
+    </nav>
 
 </header>
 
-<main>
 
-    <!-- ===========================================================
-         HERO
-    ============================================================ -->
+<!-- ==========================================================
+     FLEET HERO
+========================================================== -->
 
-    <section class="hero-poster">
+<section class="fleet-hero">
 
-        <div class="container">
+    <img
+        class="fleet-hero-image"
+        src="assets/images/fleet/fleet-hero.jpg"
+        alt="British Midland Airbus fleet"
+    >
 
-            <div class="poster-card">
+    <div class="fleet-hero-overlay"></div>
 
-                <img
-                    src="assets/images/fleet/Fleetoverview.jpg"
-                    alt="British Midland Virtual Fleet">
+    <div class="fleet-hero-content container">
 
-            </div>
+        <span class="section-kicker">
+            The British Midland Fleet
+        </span>
 
-        </div>
+        <h1>
+            Built for the Heart of Britain.
+        </h1>
 
-    </section>
+        <p>
+            A modern fleet designed around the routes,
+            missions and destinations that define
+            British Midland Virtual.
+        </p>
 
-    <!-- ===========================================================
-         INTRODUCTION
-    ============================================================ -->
+    </div>
 
-    <section class="fleet-introduction">
+</section>
 
-        <div class="container narrow">
 
-            <p class="eyebrow">
+<!-- ==========================================================
+     FLEET INTRODUCTION
+========================================================== -->
 
-                THE BRITISH MIDLAND FLEET
-
-            </p>
-
-            <h1>
-
-                Purpose Built.<br>
-                Ready for Every Mission.
-
-            </h1>
-
-            <div class="title-line"></div>
-
-            <p class="intro-text">
-
-                The British Midland Virtual fleet has been carefully structured around
-                the operational demands of our growing network from Birmingham Airport.
-                Every aircraft type has a clearly defined role, allowing us to match
-                capacity, range and performance to each destination while maintaining
-                a consistent Airbus operating philosophy throughout the airline.
-
-            </p>
-
-            <p class="intro-text">
-
-                From regional European services aboard the Airbus A319, to our core
-                short-haul operation with the Airbus A320 and higher-capacity Airbus
-                A321 fleet, each aircraft contributes to delivering a realistic and
-                immersive virtual airline experience.
-
-                Looking ahead, the Airbus A350-1000 will lead the next chapter as
-                British Midland expands into long-haul operations across North America
-                and the Caribbean.
-
-            </p>
-
-        </div>
-
-    </section>
-
-    <!-- ===========================================================
-         FLEET OVERVIEW
-    ============================================================ -->
-
-    <section class="fleet-overview">
-
-        <div class="container">
-
-            <p class="eyebrow">
-
-                OUR OPERATION
-
-            </p>
-
-            <h2>
-
-                Built Around Birmingham.<br>
-                Connected Across Europe.
-
-            </h2>
-
-            <div class="title-line"></div>
-
-            <p class="overview-text">
-
-                Every aircraft within the British Midland Virtual fleet is assigned
-                to routes where it performs best. This allows us to operate an
-                efficient, realistic schedule whilst reflecting the network planning
-                of a modern airline. From regional business services to high-capacity
-                Mediterranean operations, every fleet type has a clearly defined role
-                within the airline.
-
-            </p>
-
-            <div class="stats-grid">
-
-                <div class="stat-card">
-
-                    <h3>9</h3>
-
-                    <p>Aircraft in Fleet</p>
-
-                </div>
-
-                <div class="stat-card">
-
-                    <h3>3</h3>
-
-                    <p>Airbus Families</p>
-
-                </div>
-
-                <div class="stat-card">
-
-                    <h3>25</h3>
-
-                    <p>European Destinations</p>
-
-                </div>
-
-                <div class="stat-card">
-
-                    <h3>BHX</h3>
-
-                    <p>Primary Hub</p>
-
-                </div>
-
-            </div>
-
-        </div>
-
-    </section>
-
-   <!-- ===========================================================
-     AIRBUS A319
-=========================================================== -->
-
-<section class="aircraft-section">
+<section class="fleet-intro">
 
     <div class="container">
 
-        <div class="aircraft-layout">
+        <span class="section-kicker">
+            Our Fleet
+        </span>
 
-            <div class="aircraft-photo">
+        <h2>
+            Three Classes. One British Midland.
+        </h2>
+
+        <p>
+            From the aircraft at the heart of our European
+            operation to our flagship long-haul fleet,
+            every aircraft has a purpose within the
+            British Midland network.
+        </p>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================================
+     BEATING HEART CLASS
+========================================================== -->
+
+<section class="fleet-class beating-heart-class">
+
+    <div class="container">
+
+        <div class="fleet-class-heading">
+
+            <span class="fleet-class-label">
+                Beating Heart Class
+            </span>
+
+            <h2>
+                At the heart of every operation.
+            </h2>
+
+            <p>
+                Our Airbus narrowbody fleet forms the
+                backbone of British Midland Virtual,
+                connecting Birmingham with destinations
+                across Britain and Europe.
+            </p>
+
+        </div>
+
+
+        <!-- A319 -->
+
+        <article class="aircraft-card">
+
+            <div class="aircraft-image">
 
                 <img
                     src="assets/images/fleet/a319.jpg"
-                    alt="British Midland Airbus A319">
+                    alt="British Midland Airbus A319"
+                >
 
             </div>
 
-            <div class="aircraft-information">
+            <div class="aircraft-content">
 
-                <p class="aircraft-family">
+                <span class="aircraft-class">
+                    Beating Heart Class
+                </span>
 
-                    AIRBUS A319
-
-                </p>
-
-                <h2>
-
-                    Regional Specialist
-
-                </h2>
-
-                <div class="title-line"></div>
+                <h3>
+                    Airbus A319
+                </h3>
 
                 <p>
-
-                    The Airbus A319 is the most versatile aircraft within the
-                    British Midland fleet. Its lower seating capacity makes it
-                    perfectly suited to regional business markets and thinner
-                    European routes while retaining complete Airbus cockpit
-                    commonality across the fleet.
-
+                    Compact, capable and perfectly suited
+                    to the shorter sectors across the
+                    British Midland European network.
                 </p>
 
-                <h3 class="section-heading">
+                <div class="aircraft-specs">
 
-                    Routes Served
+                    <div>
+                        <strong>
+                            144
+                        </strong>
 
-                </h3>
-
-                <ul class="route-chips">
-
-                    <li>DUB — Dublin</li>
-                    <li>DUS — Düsseldorf</li>
-                    <li>BRU — Brussels</li>
-                    <li>PRG — Prague</li>
-                    <li>INN — Innsbruck</li>
-                    <li>GVA — Geneva</li>
-
-                </ul>
-
-                <h3 class="section-heading">
-
-                    Fleet Aircraft
-
-                </h3>
-
-                <div class="fleet-aircraft-list">
-
-                    <div class="fleet-aircraft">
-
-                        <strong>G-BMFI</strong>
-
-                        <div class="registration-right">
-
-                            <span>City of Lichfield</span>
-
-                        </div>
-
+                        <span>
+                            Seats
+                        </span>
                     </div>
 
-                    <div class="fleet-aircraft">
+                    <div>
+                        <strong>
+                            3,750 NM
+                        </strong>
 
-                        <strong>G-BMFC</strong>
-
-                        <div class="registration-right">
-
-                            <span>City of Stoke-on-Trent</span>
-
-                            <span class="fleet-status on-order">
-
-                                On Order
-
-                            </span>
-
-                        </div>
-
+                        <span>
+                            Range
+                        </span>
                     </div>
 
-                    <div class="fleet-aircraft">
+                    <div>
+                        <strong>
+                            Airbus
+                        </strong>
 
-                        <strong>G-BMFG</strong>
-
-                        <div class="registration-right">
-
-                            <span>Spirit of Dudley</span>
-
-                            <span class="fleet-status on-order">
-
-                                On Order
-
-                            </span>
-
-                        </div>
-
+                        <span>
+                            Family
+                        </span>
                     </div>
 
                 </div>
 
-                <div class="spec-grid">
-
-                    <div class="spec">
-
-                        <span>Aircraft</span>
-
-                        <strong>3</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Mission</span>
-
-                        <strong>Regional Europe</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Typical Sector</span>
-
-                        <strong>1–2 Hours</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Status</span>
-
-                        <strong>1 Active / 2 On Order</strong>
-
-                    </div>
-
-                </div>
+                <a
+                    href="fleet.html#a319"
+                    class="fleet-button"
+                >
+                    Explore A319
+                </a>
 
             </div>
 
-        </div>
+        </article>
 
-    </div>
 
-</section>
+        <!-- A320 -->
 
-<!-- ===========================================================
-     AIRBUS A320
-=========================================================== -->
+        <article class="aircraft-card">
 
-<section class="aircraft-section alternate">
-
-    <div class="container">
-
-        <div class="aircraft-layout">
-
-            <div class="aircraft-information">
-
-                <p class="aircraft-family">
-
-                    AIRBUS A320
-
-                </p>
-
-                <h2>
-
-                    The Backbone of the Network
-
-                </h2>
-
-                <div class="title-line"></div>
-
-                <p>
-
-                    The Airbus A320 forms the heart of British Midland Virtual's
-                    operation. Combining efficiency, flexibility and Airbus
-                    commonality, it operates the majority of our scheduled
-                    European network from Birmingham, serving both business and
-                    leisure destinations.
-
-                </p>
-
-                <h3 class="section-heading">
-
-                    Routes Served
-
-                </h3>
-
-                <ul class="route-chips">
-
-                    <li>AMS — Amsterdam</li>
-                    <li>CDG — Paris Charles de Gaulle</li>
-                    <li>MUC — Munich</li>
-                    <li>ZRH — Zurich</li>
-                    <li>CPH — Copenhagen</li>
-                    <li>ARN — Stockholm</li>
-                    <li>OSL — Oslo</li>
-                    <li>VIE — Vienna</li>
-                    <li>MAD — Madrid</li>
-                    <li>BCN — Barcelona</li>
-                    <li>MXP — Milan Malpensa</li>
-                    <li>WAW — Warsaw</li>
-
-                </ul>
-
-                <h3 class="section-heading">
-
-                    Fleet Aircraft
-
-                </h3>
-
-                <div class="fleet-aircraft-list">
-
-                    <div class="fleet-aircraft">
-
-                        <strong>G-BMFB</strong>
-
-                        <div class="registration-right">
-
-                            <span>City of Coventry</span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="fleet-aircraft">
-
-                        <strong>G-BMFD</strong>
-
-                        <div class="registration-right">
-
-                            <span>City of Wolverhampton</span>
-
-                            <span class="fleet-status on-order">
-
-                                On Order
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                    <div class="fleet-aircraft">
-
-                        <strong>G-BMFH</strong>
-
-                        <div class="registration-right">
-
-                            <span>Spirit of Solihull</span>
-
-                            <span class="fleet-status on-order">
-
-                                On Order
-
-                            </span>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="spec-grid">
-
-                    <div class="spec">
-
-                        <span>Aircraft</span>
-
-                        <strong>3</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Mission</span>
-
-                        <strong>Core European Network</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Typical Sector</span>
-
-                        <strong>1–3 Hours</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Status</span>
-
-                        <strong>1 Active / 2 On Order</strong>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="aircraft-photo">
+            <div class="aircraft-image">
 
                 <img
                     src="assets/images/fleet/a320.jpg"
-                    alt="British Midland Airbus A320">
+                    alt="British Midland Airbus A320"
+                >
 
             </div>
 
-        </div>
+            <div class="aircraft-content">
 
-    </div>
+                <span class="aircraft-class">
+                    Beating Heart Class
+                </span>
 
-</section>
+                <h3>
+                    Airbus A320
+                </h3>
 
-<!-- ===========================================================
-     AIRBUS A321
-=========================================================== -->
+                <p>
+                    The principal workhorse of British Midland,
+                    balancing capacity, efficiency and
+                    flexibility across our network.
+                </p>
 
-<section class="aircraft-section">
+                <div class="aircraft-specs">
 
-    <div class="container">
+                    <div>
+                        <strong>
+                            180
+                        </strong>
 
-        <div class="aircraft-layout">
+                        <span>
+                            Seats
+                        </span>
+                    </div>
 
-            <div class="aircraft-photo">
+                    <div>
+                        <strong>
+                            3,300 NM
+                        </strong>
+
+                        <span>
+                            Range
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>
+                            Airbus
+                        </strong>
+
+                        <span>
+                            Family
+                        </span>
+                    </div>
+
+                </div>
+
+                <a
+                    href="fleet.html#a320"
+                    class="fleet-button"
+                >
+                    Explore A320
+                </a>
+
+            </div>
+
+        </article>
+
+
+        <!-- A321 -->
+
+        <article class="aircraft-card">
+
+            <div class="aircraft-image">
 
                 <img
                     src="assets/images/fleet/a321.jpg"
-                    alt="British Midland Airbus A321">
+                    alt="British Midland Airbus A321"
+                >
 
             </div>
 
-            <div class="aircraft-information">
+            <div class="aircraft-content">
 
-                <p class="aircraft-family">
+                <span class="aircraft-class">
+                    Beating Heart Class
+                </span>
 
-                    AIRBUS A321
-
-                </p>
-
-                <h2>
-
-                    High-Capacity European Operations
-
-                </h2>
-
-                <div class="title-line"></div>
+                <h3>
+                    Airbus A321
+                </h3>
 
                 <p>
-
-                    The Airbus A321 is assigned to British Midland's busiest
-                    European markets, combining greater capacity with the same
-                    Airbus operating philosophy found throughout the fleet.
-                    It is ideally suited to high-demand city pairs and longer
-                    leisure routes from Birmingham.
-
+                    Our largest narrowbody aircraft,
+                    bringing increased capacity to the
+                    busiest routes in the network.
                 </p>
 
-                <h3 class="section-heading">
+                <div class="aircraft-specs">
 
-                    Routes Served
+                    <div>
+                        <strong>
+                            220
+                        </strong>
 
-                </h3>
-
-                <ul class="route-chips">
-
-                    <li>FRA — Frankfurt</li>
-                    <li>FCO — Rome</li>
-                    <li>ALC — Alicante</li>
-                    <li>AGP — Málaga</li>
-                    <li>LIS — Lisbon</li>
-                    <li>TFS — Tenerife South</li>
-                    <li>LPA — Gran Canaria</li>
-                    <li>ACE — Lanzarote</li>
-
-                </ul>
-
-                <h3 class="section-heading">
-
-                    Fleet Aircraft
-
-                </h3>
-
-                <div class="fleet-aircraft-list">
-
-                    <div class="fleet-aircraft">
-
-                        <strong>G-BMFA</strong>
-
-                        <div class="registration-right">
-
-                            <span>City of Birmingham</span>
-
-                        </div>
-
+                        <span>
+                            Seats
+                        </span>
                     </div>
 
-                    <div class="fleet-aircraft">
+                    <div>
+                        <strong>
+                            3,500 NM
+                        </strong>
 
-                        <strong>G-BMFE</strong>
-
-                        <div class="registration-right">
-
-                            <span>City of Worcester</span>
-
-                            <span class="fleet-status on-order">
-
-                                On Order
-
-                            </span>
-
-                        </div>
-
+                        <span>
+                            Range
+                        </span>
                     </div>
 
-                    <div class="fleet-aircraft">
+                    <div>
+                        <strong>
+                            Airbus
+                        </strong>
 
-                        <strong>G-BMFF</strong>
-
-                        <div class="registration-right">
-
-                            <span>City of Derby</span>
-
-                            <span class="fleet-status on-order">
-
-                                On Order
-
-                            </span>
-
-                        </div>
-
+                        <span>
+                            Family
+                        </span>
                     </div>
 
                 </div>
 
-                <div class="spec-grid">
-
-                    <div class="spec">
-
-                        <span>Aircraft</span>
-
-                        <strong>3</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Mission</span>
-
-                        <strong>High Capacity Europe</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Typical Sector</span>
-
-                        <strong>2–5 Hours</strong>
-
-                    </div>
-
-                    <div class="spec">
-
-                        <span>Status</span>
-
-                        <strong>1 Active / 2 On Order</strong>
-
-                    </div>
-
-                </div>
+                <a
+                    href="fleet.html#a321"
+                    class="fleet-button"
+                >
+                    Explore A321
+                </a>
 
             </div>
 
-        </div>
+        </article>
 
     </div>
+    <!-- ==========================================================
+     PIONEER CLASS
+========================================================== -->
 
-</section>
-
-<!-- ===========================================================
-     FUTURE FLEET
-=========================================================== -->
-
-<section class="future-fleet">
+<section class="fleet-class pioneer-class">
 
     <div class="container">
 
-        <div class="future-content">
+        <div class="fleet-class-heading">
 
-            <p class="eyebrow">
-
-                FUTURE FLEET
-
-            </p>
+            <span class="fleet-class-label">
+                Pioneer Class
+            </span>
 
             <h2>
-
-                Airbus A350-1000<br>
-                The Pioneers Class
-
+                Taking British Midland further.
             </h2>
 
-            <div class="title-line"></div>
-
-            <p class="future-text">
-
-                The Airbus A350-1000 represents the next chapter in the British
-                Midland story. As our future flagship, the Pioneers Class will
-                introduce long-haul operations from Birmingham Airport, connecting
-                the Heart of Britain with destinations across North America and
-                the Caribbean while maintaining the premium Airbus experience that
-                defines our airline.
-
+            <p>
+                Our flagship Airbus A350-1000 brings a new
+                generation of long-haul capability to
+                British Midland Virtual, connecting the
+                Heart of Britain with destinations beyond Europe.
             </p>
 
-            <h3 class="section-heading">
+        </div>
 
-                Planned Destinations
 
-            </h3>
+        <!-- A350-1000 -->
 
-            <div class="future-destinations">
+        <article class="aircraft-card aircraft-card-flagship">
 
-                <span>New York JFK</span>
-                <span>Orlando</span>
-                <span>Cancún</span>
-                <span>Punta Cana</span>
+            <div class="aircraft-image">
+
+                <img
+                    src="assets/images/fleet/a350-1000.jpg"
+                    alt="British Midland Airbus A350-1000"
+                >
 
             </div>
 
-            <h3 class="section-heading">
+            <div class="aircraft-content">
 
-                Planned Fleet
+                <span class="aircraft-class">
+                    Pioneer Class
+                </span>
 
-            </h3>
+                <h3>
+                    Airbus A350-1000
+                </h3>
 
-            <div class="fleet-aircraft-list">
+                <p>
+                    The flagship of the British Midland fleet.
+                    Designed for long-haul operations, the A350-1000
+                    extends our network beyond Europe to North America
+                    and the Caribbean.
+                </p>
 
-                <div class="fleet-aircraft">
+                <div class="aircraft-specs">
 
-                    <strong>G-BMLH</strong>
+                    <div>
+                        <strong>
+                            369
+                        </strong>
 
-                    <div class="registration-right">
-
-                        <span>Sir Adrian Cadbury</span>
-
-                        <span class="fleet-status on-order">
-
-                            Delivered 20/08/2026
-
+                        <span>
+                            Seats
                         </span>
+                    </div>
 
+                    <div>
+                        <strong>
+                            8,700 NM
+                        </strong>
+
+                        <span>
+                            Range
+                        </span>
+                    </div>
+
+                    <div>
+                        <strong>
+                            Long Haul
+                        </strong>
+
+                        <span>
+                            Role
+                        </span>
                     </div>
 
                 </div>
 
-                <div class="fleet-aircraft">
-
-                    <strong>Future Delivery</strong>
-
-                    <div class="registration-right">
-
-                        <span>Additional Aircraft Planned</span>
-
-                    </div>
-
-                </div>
+                <a
+                    href="fleet.html#a350"
+                    class="fleet-button"
+                >
+                    Explore A350-1000
+                </a>
 
             </div>
+
+        </article>
+
+
+        <!-- Pioneer Network -->
+
+        <div class="fleet-class-note">
+
+            <span class="section-kicker">
+                Long-Haul Operations
+            </span>
+
+            <h3>
+                From Birmingham to the world.
+            </h3>
+
+            <p>
+                The Pioneer Class opens the door to a new chapter
+                of British Midland operations, serving carefully
+                selected long-haul destinations from our Birmingham hub.
+            </p>
+
+            <a
+                href="network.html"
+                class="primary-button"
+            >
+                Explore Our Network
+            </a>
 
         </div>
 
@@ -798,135 +548,75 @@
 
 </section>
 
-<!-- ===========================================================
-     FLEET STATISTICS
-=========================================================== -->
 
-<section class="fleet-statistics">
+<!-- ==========================================================
+     FLEET PHILOSOPHY
+========================================================== -->
+
+<section class="fleet-philosophy">
 
     <div class="container">
 
-        <p class="eyebrow">
-
-            THE OPERATION TODAY
-
-        </p>
+        <span class="section-kicker">
+            The British Midland Fleet
+        </span>
 
         <h2>
-
-            Built for Today.<br>
-            Ready for Tomorrow.
-
+            Built around the Heart of Britain.
         </h2>
 
-        <div class="title-line"></div>
-
-        <p class="overview-text">
-
-            Every flight within British Midland Virtual is designed around a
-            realistic route structure, authentic Airbus procedures and a
-            single-hub operation from Birmingham Airport. As our network
-            continues to expand, our fleet will evolve alongside it while
-            remaining true to the values that defined one of Britain's most
-            respected airlines.
-
+        <p>
+            Every aircraft within British Midland Virtual
+            has a role to play. From the narrowbody fleet
+            connecting Birmingham with Europe to our flagship
+            long-haul aircraft, our fleet is designed to
+            reflect the way a modern British airline operates.
         </p>
-
-        <div class="stats-grid">
-
-            <div class="stat-card">
-
-                <h3>9</h3>
-
-                <p>Aircraft</p>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h3>25</h3>
-
-                <p>European Routes</p>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h3>4</h3>
-
-                <p>Future Long-Haul Destinations</p>
-
-            </div>
-
-            <div class="stat-card">
-
-                <h3>1</h3>
-
-                <p>Birmingham Hub</p>
-
-            </div>
-
-        </div>
 
     </div>
 
 </section>
 
-<!-- ===========================================================
-     JOIN CTA
-=========================================================== -->
+</section>
+<!-- ==========================================================
+     JOIN BRITISH MIDLAND
+========================================================== -->
 
-<section class="fleet-cta">
+<section class="join-home">
 
-    <div class="container narrow">
+    <div class="container">
 
-        <p class="eyebrow">
-
-            FLY WITH US
-
-        </p>
+        <span class="section-kicker">
+            Join British Midland
+        </span>
 
         <h2>
-
-            Join the Crew.
-
+            Ready for Departure?
         </h2>
 
-        <div class="title-line"></div>
-
-        <p class="intro-text">
-
-            Take your place on the flight deck and experience realistic airline
-            operations from Birmingham Airport to destinations across Europe.
-
-            <br><br>
-
-            Whether you're flying regional sectors aboard the Airbus A319,
-            operating our core Airbus A320 network, or commanding the
-            high-capacity Airbus A321 on some of our busiest routes,
-            British Midland Virtual offers a professional, welcoming and
-            immersive environment for every pilot.
-
-            <br><br>
-
-            Join a community inspired by one of Britain's most iconic airlines
-            and help write the next chapter of British Midland.
-
+        <p>
+            Whether you're an experienced virtual pilot
+            or taking your very first flight,
+            British Midland Virtual offers a welcoming community,
+            realistic operations and a growing route network
+            from the Heart of Britain.
         </p>
 
-        <div class="cta-buttons">
+        <div class="hero-buttons">
 
-            <a href="join.html"
-               class="fleet-button">
+            <a
+                href="join.html"
+                class="primary-button">
 
-                Join British Midland
+                Become a Pilot
 
             </a>
 
-            <a href="network.html"
-               class="fleet-button secondary">
+            <a
+                href="operations.html"
+                class="feature-button">
 
-                Explore Our Network
+                Explore Operations
 
             </a>
 
@@ -936,72 +626,160 @@
 
 </section>
 
-<!-- ===========================================================
+
+<!-- ==========================================================
      FOOTER
-=========================================================== -->
+========================================================== -->
 
-<footer class="fleet-footer">
+<footer class="site-footer">
 
     <div class="container footer-grid">
+
+        <!-- Brand -->
 
         <div class="footer-brand">
 
             <img
                 src="assets/images/logo.png"
-                alt="British Midland Virtual">
+                alt="British Midland Virtual"
+            >
 
             <p>
-
                 The Heart of Britain.<br>
-                Connected Across Europe.
-
+                Connected to the World.
             </p>
 
         </div>
 
+
+        <!-- Explore -->
+
         <div>
 
-            <h4>Fleet</h4>
+            <h4>
+                Explore
+            </h4>
 
-            <a href="fleet.html">Airbus A319</a>
-            <a href="fleet.html">Airbus A320</a>
-            <a href="fleet.html">Airbus A321</a>
-            <a href="fleet.html">Future Fleet</a>
+            <ul>
+
+                <li>
+                    <a href="fleet.html">
+                        Fleet
+                    </a>
+                </li>
+
+                <li>
+                    <a href="network.html">
+                        Network
+                    </a>
+                </li>
+
+                <li>
+                    <a href="operations.html">
+                        Operations
+                    </a>
+                </li>
+
+                <li>
+                    <a href="news.html">
+                        News
+                    </a>
+                </li>
+
+            </ul>
 
         </div>
 
+
+        <!-- Community -->
+
         <div>
 
-            <h4>Network</h4>
+            <h4>
+                Community
+            </h4>
 
-            <a href="network.html">European Routes</a>
-            <a href="network.html">Future Network</a>
-            <a href="network.html">Route Map</a>
+            <ul>
+
+                <li>
+                    <a href="join.html">
+                        Join British Midland
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Discord
+                    </a>
+                </li>
+
+                <li>
+                    <a href="news.html?id=9">
+                        SayIntentions
+                    </a>
+                </li>
+
+            </ul>
 
         </div>
 
+
+        <!-- Company -->
+
         <div>
 
-            <h4>British Midland</h4>
+            <h4>
+                Company
+            </h4>
 
-            <a href="join.html">Join Us</a>
-            <a href="news.html">Latest News</a>
-            <a href="operations.html">Operations</a>
+            <ul>
+
+                <li>
+                    <a href="privacy.html">
+                        Privacy Policy
+                    </a>
+                </li>
+
+                <li>
+                    <a href="terms.html">
+                        Terms &amp; Conditions
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+            </ul>
 
         </div>
 
     </div>
 
-    <div class="copyright">
 
-        © 2026 British Midland Virtual. All Rights Reserved.
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+        <div class="container footer-bottom-content">
+
+            <p>
+                © 2026 British Midland Virtual.
+                All rights reserved.
+            </p>
+
+            <p>
+                Inspired by the heritage of British Midland Airways.
+            </p>
+
+        </div>
 
     </div>
 
-<footer class="site-footer">
+</footer>
 
-</main>
 
 </body>
-
 </html>
