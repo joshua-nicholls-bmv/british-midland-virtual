@@ -327,9 +327,50 @@
     display:grid;
 
     grid-template-columns:
-        repeat(3,minmax(0,1fr));
+        repeat(3, minmax(0, 1fr));
 
-    gap:30px;
+    gap:22px;
+
+    max-width:1100px;
+
+    margin:0 auto;
+
+}
+
+.destination-card{
+
+    position:relative;
+
+    display:flex;
+
+    flex-direction:column;
+
+    padding:24px;
+
+    overflow:hidden;
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    border:1px solid rgba(0,26,58,.08);
+
+    box-shadow:
+        0 8px 24px rgba(0,0,0,.05);
+
+    transition:
+        transform .25s ease,
+        box-shadow .25s ease,
+        border-color .25s ease;
+
+}
+
+.destination-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:
+        0 16px 35px rgba(0,0,0,.09);
 
 }
 
@@ -485,35 +526,74 @@
 
 .destination-card h3{
 
-    margin:0 0 8px;
+    margin:0 0 6px;
 
     color:var(--bm-blue);
 
-    font-size:1.65rem;
+    font-size:1.35rem;
 
     line-height:1.15;
-
-    transition:color .25s ease;
-
-}
-
-.destination-card:hover h3{
-
-    color:var(--bm-red);
 
 }
 
 .airport{
 
-    margin:0 0 24px;
+    margin:0 0 16px;
 
     color:#8993a2;
 
-    font-size:.85rem;
+    font-size:.78rem;
 
     font-weight:700;
 
     letter-spacing:.08em;
+
+}
+
+.destination-description{
+
+    margin:0 0 20px;
+
+    color:#626d7d;
+
+    font-size:.9rem;
+
+    line-height:1.65;
+
+}
+
+.destination-info{
+
+    display:grid;
+
+    grid-template-columns:
+        repeat(2, minmax(0,1fr));
+
+    gap:10px;
+
+}
+
+.destination-info > div{
+
+    padding:13px;
+
+    border-radius:12px;
+
+    background:var(--bm-cream);
+
+}
+
+.destination-info span{
+
+    margin-bottom:5px;
+
+    font-size:.58rem;
+
+}
+
+.destination-info strong{
+
+    font-size:.82rem;
 
 }
 
@@ -720,6 +800,10 @@
 
 .foundry-section{
 
+    padding:110px 0;
+
+    background:var(--bm-cream);
+
     border-top:1px solid rgba(0,0,0,.05);
 
 }
@@ -731,13 +815,17 @@
     grid-template-columns:
         repeat(2,minmax(0,1fr));
 
-    gap:30px;
+    gap:22px;
+
+    max-width:900px;
+
+    margin:0 auto;
 
 }
 
 .foundry-placeholder{
 
-    min-height:300px;
+    min-height:220px;
 
     display:flex;
 
@@ -747,15 +835,18 @@
 
     justify-content:center;
 
-    padding:50px;
+    padding:35px;
 
     text-align:center;
 
     background:#ffffff;
 
-    border:2px dashed rgba(0,26,58,.14);
+    border:1px dashed rgba(0,26,58,.20);
 
-    border-radius:22px;
+    border-radius:18px;
+
+    box-shadow:
+        0 8px 25px rgba(0,0,0,.04);
 
 }
 
@@ -767,11 +858,11 @@
 
     justify-content:center;
 
-    width:70px;
+    width:54px;
 
-    height:70px;
+    height:54px;
 
-    margin-bottom:25px;
+    margin-bottom:18px;
 
     border-radius:50%;
 
@@ -779,36 +870,68 @@
 
     color:#ffffff;
 
-    font-size:1.5rem;
+    font-size:1.15rem;
 
 }
 
 .foundry-placeholder .section-kicker{
 
-    margin-bottom:12px;
+    margin-bottom:9px;
 
 }
 
 .foundry-placeholder h3{
 
-    margin-bottom:15px;
+    margin-bottom:10px;
 
     color:var(--bm-blue);
+
+    font-size:1.3rem;
 
 }
 
 .foundry-placeholder p{
 
-    max-width:480px;
+    max-width:400px;
 
     margin:0;
 
     color:#697384;
 
-    line-height:1.8;
+    font-size:.9rem;
+
+    line-height:1.7;
 
 }
 
+
+/* ==========================================================
+   FOUNDRY RESPONSIVE
+========================================================== */
+
+@media(max-width:700px){
+
+    .foundry-section{
+
+        padding:80px 0;
+
+    }
+
+    .foundry-coming-grid{
+
+        grid-template-columns:1fr;
+
+    }
+
+    .foundry-placeholder{
+
+        min-height:200px;
+
+        padding:30px 25px;
+
+    }
+
+}
 
 /* ==========================================================
    MAP CONTROLS
