@@ -34,8 +34,6 @@
 }
 
 
-/* HERO CONTENT */
-
 .news-hero-content {
 
     position: relative;
@@ -53,10 +51,6 @@
 
 }
 
-
-/* ==========================================================
-   HERO EYEBROW
-========================================================== */
 
 .news-hero .eyebrow {
 
@@ -79,10 +73,6 @@
 }
 
 
-/* ==========================================================
-   HERO TITLE
-========================================================== */
-
 .news-hero h1 {
 
     max-width: 850px;
@@ -102,10 +92,6 @@
 }
 
 
-/* ==========================================================
-   HERO DIVIDER
-========================================================== */
-
 .news-hero .hero-divider {
 
     width: 52px;
@@ -120,10 +106,6 @@
 
 }
 
-
-/* ==========================================================
-   HERO DESCRIPTION
-========================================================== */
 
 .news-hero p {
 
@@ -143,12 +125,136 @@
 
 
 /* ==========================================================
+   NEWS FILTER
+========================================================== */
+
+.news-filter-section {
+
+    position: relative;
+
+    z-index: 5;
+
+    padding: 0;
+
+    background: #ffffff;
+
+    border-bottom: 1px solid rgba(0, 26, 58, .10);
+
+}
+
+
+.news-filter {
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    gap: 38px;
+
+    min-height: 76px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+
+}
+
+
+.news-filter::-webkit-scrollbar {
+
+    display: none;
+
+}
+
+
+.news-filter-button {
+
+    position: relative;
+
+    flex: 0 0 auto;
+
+    padding: 28px 0 25px;
+
+    border: 0;
+
+    background: transparent;
+
+    color: #737d8d;
+
+    font-family: inherit;
+
+    font-size: .72rem;
+
+    font-weight: 800;
+
+    letter-spacing: .12em;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+
+    cursor: pointer;
+
+    transition:
+        color .25s ease;
+
+}
+
+
+.news-filter-button::after {
+
+    content: "";
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    width: 100%;
+    height: 3px;
+
+    background: var(--bm-red);
+
+    transform: scaleX(0);
+
+    transform-origin: center;
+
+    transition:
+        transform .25s ease;
+
+}
+
+
+.news-filter-button:hover {
+
+    color: var(--bm-blue);
+
+}
+
+
+.news-filter-button.active {
+
+    color: var(--bm-blue);
+
+}
+
+
+.news-filter-button.active::after {
+
+    transform: scaleX(1);
+
+}
+
+
+/* ==========================================================
    FEATURED ARTICLE
 ========================================================== */
 
 .featured-section {
 
-    padding: 120px 0;
+    padding: 110px 0;
 
     background: var(--bm-cream);
 
@@ -188,8 +294,6 @@
 }
 
 
-/* FEATURED IMAGE */
-
 .featured-card img {
 
     width: 100%;
@@ -202,7 +306,8 @@
 
     object-fit: cover;
 
-    transition: transform .45s ease;
+    transition:
+        transform .45s ease;
 
 }
 
@@ -213,8 +318,6 @@
 
 }
 
-
-/* FEATURED CONTENT */
 
 .featured-content {
 
@@ -306,13 +409,11 @@
 }
 
 
-/* SECTION TITLE */
-
 .section-title {
 
     max-width: 760px;
 
-    margin: 0 auto 70px;
+    margin: 0 auto 65px;
 
     text-align: center;
 
@@ -404,8 +505,6 @@
 }
 
 
-/* CARD IMAGE */
-
 .news-card img {
 
     width: 100%;
@@ -416,7 +515,8 @@
 
     object-fit: cover;
 
-    transition: transform .40s ease;
+    transition:
+        transform .40s ease;
 
 }
 
@@ -427,8 +527,6 @@
 
 }
 
-
-/* CARD CONTENT */
 
 .news-card-content {
 
@@ -442,8 +540,6 @@
 
 }
 
-
-/* CARD CATEGORY */
 
 .news-card .badge {
 
@@ -466,8 +562,6 @@
 }
 
 
-/* CARD TITLE */
-
 .news-card h3 {
 
     margin: 0 0 16px;
@@ -481,8 +575,6 @@
 }
 
 
-/* CARD COPY */
-
 .news-card p {
 
     flex: 1;
@@ -495,8 +587,6 @@
 
 }
 
-
-/* CARD LINK */
 
 .news-card a {
 
@@ -535,6 +625,65 @@
 
 
 /* ==========================================================
+   EMPTY STATE
+========================================================== */
+
+.news-empty {
+
+    max-width: 650px;
+
+    margin: 60px auto 0;
+
+    padding: 65px 35px;
+
+    border: 1px solid rgba(0, 26, 58, .08);
+
+    border-radius: var(--radius-lg);
+
+    background: var(--bm-cream);
+
+    text-align: center;
+
+}
+
+
+.news-empty[hidden] {
+
+    display: none;
+
+}
+
+
+.news-empty .section-kicker {
+
+    display: block;
+
+    margin-bottom: 12px;
+
+}
+
+
+.news-empty h3 {
+
+    margin: 0 0 14px;
+
+    color: var(--bm-blue);
+
+}
+
+
+.news-empty p {
+
+    margin: 0;
+
+    color: var(--text-light);
+
+    line-height: 1.8;
+
+}
+
+
+/* ==========================================================
    MICRO INTERACTIONS
 ========================================================== */
 
@@ -557,7 +706,8 @@
 
     transform-origin: left;
 
-    transition: transform .35s ease;
+    transition:
+        transform .35s ease;
 
     z-index: 5;
 
@@ -575,7 +725,8 @@
 .featured-content h2,
 .news-card h3 {
 
-    transition: color .25s ease;
+    transition:
+        color .25s ease;
 
 }
 
@@ -587,10 +738,6 @@
 
 }
 
-
-/* ==========================================================
-   READ BUTTON
-========================================================== */
 
 .read-button {
 
@@ -662,7 +809,7 @@
 
 
 /* ==========================================================
-   RESPONSIVE — TABLET
+   RESPONSIVE — LARGE TABLET
 ========================================================== */
 
 @media (max-width: 1100px) {
@@ -701,7 +848,7 @@
 
 
 /* ==========================================================
-   RESPONSIVE — MOBILE
+   RESPONSIVE — TABLET / MOBILE
 ========================================================== */
 
 @media (max-width: 768px) {
@@ -731,6 +878,26 @@
     .news-hero p {
 
         font-size: .94rem;
+
+    }
+
+
+    .news-filter {
+
+        justify-content: flex-start;
+
+        gap: 28px;
+
+        min-height: 68px;
+
+        padding: 0 20px;
+
+    }
+
+
+    .news-filter-button {
+
+        padding: 25px 0 22px;
 
     }
 
@@ -803,6 +970,22 @@
     }
 
 
+    .news-filter {
+
+        gap: 24px;
+
+        padding: 0 16px;
+
+    }
+
+
+    .news-filter-button {
+
+        font-size: .66rem;
+
+    }
+
+
     .featured-content {
 
         padding: 28px;
@@ -825,6 +1008,13 @@
 
     }
 
+
+    .news-empty {
+
+        padding: 50px 25px;
+
+    }
+
 }
 
 
@@ -838,7 +1028,9 @@
     .featured-card img,
     .news-card,
     .news-card img,
-    .read-button {
+    .read-button,
+    .news-filter-button,
+    .news-filter-button::after {
 
         transition: none !important;
 
