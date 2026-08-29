@@ -185,7 +185,7 @@
       "European Cargo joins British Midland Ltd and British Midland Regional Ltd as one of three aviation businesses within British Midland Group.",
       "Further details regarding European Cargo's fleet, network and future development will be announced as the operation continues to take shape."
     ],
-    "image": "assets/images/news/european-cargo-operations.jpg",
+    "image": "assets/images/news/british-midland-group.jpg",
     "author": "British Midland Group",
     "tags": [
       "Group",
@@ -210,7 +210,7 @@
       "As development continues, the system will evolve through testing, feedback and additional features. The Alpha phase allows us to develop the platform around the real requirements of British Midland operations rather than relying on a generic virtual airline system.",
       "This is an important milestone in the development of British Midland Virtual and represents another step towards creating a fully connected airline operation."
     ],
-    "image": "assets/images/news/acars.jpg",
+    "image": "assets/images/news/british-midland-group.jpg",
     "author": "British Midland Development",
     "tags": [
       "ACARS",
@@ -248,6 +248,105 @@
   {
     "id": 11,
     "featured": false,
+    "published": "2026-08-29",
+    "category": "Community",
+    "title": "Join the British Midland Community on Discord",
+    "summary": "Our Discord community is the home of British Midland Virtual, bringing pilots together to fly, chat and stay connected.",
+    "content": [
+      "British Midland Virtual is a community first, and our Discord server is at the heart of it.",
+      "Whether you're preparing for your first flight, planning your next trip across the network or simply looking to talk aviation with fellow pilots, our Discord provides a place to stay connected with the wider British Midland community.",
+      "Pilots can use the server to keep up with airline announcements, discuss operations, share screenshots and flights, ask questions and get support from other members of the community.",
+      "As British Midland Group continues to grow, Discord will remain an important part of how our pilots stay connected across the different operations within the Group.",
+      "If you're already flying with British Midland, we'd love to see you there. If you're considering joining us, our Discord is a great place to meet the community before taking to the skies."
+    ],
+    "image": "assets/images/news/british-midland-group.jpg",
+    "author": "British Midland Crew Services",
+    "tags": [
+      "Community",
+      "Discord",
+      "Pilots",
+      "Join"
+    ],
+    "link": "https://discord.com/invite/SU2WzHXWSz"
+  },
+  {
+    "id": 12,
+    "featured": false,
+    "published": "2026-08-29",
+    "category": "Community",
+    "title": "British Midland Group Flight — Birmingham to Palma",
+    "summary": "Six British Midland pilots came together for a group flight from Birmingham to Palma as part of our Mediterranean Express.",
+    "content": [
+      "British Midland pilots recently took to the skies together for a community group flight from Birmingham Airport to Palma de Mallorca.",
+      "Six pilots joined the Mediterranean Express, flying together from our Birmingham base and demonstrating exactly what makes the British Midland community special.",
+      "Group flights give our pilots the opportunity to experience the network together rather than simply operating individual flights. They provide a chance to fly alongside fellow members, share the experience and bring the community together away from the usual day-to-day operations.",
+      "The Mediterranean Express to Palma was another example of our pilots getting involved and making the most of the network we are building.",
+      "We look forward to organising more group flights in the future and seeing even more British Midland pilots taking part."
+    ],
+    "image": "assets/images/news/british-midland-group.jpg",
+    "author": "British Midland Crew Services",
+    "tags": [
+      "Community",
+      "Group Flight",
+      "Mediterranean Express",
+      "Palma",
+      "Pilots"
+    ]
+  },
+  {
+    "id": 13,
+    "featured": false,
+    "published": "2026-08-29",
+    "category": "Operations",
+    "title": "Building the Future of British Midland Operations",
+    "summary": "British Midland is developing a connected operational platform built around its pilots, aircraft and the wider Group.",
+    "content": [
+      "British Midland is continuing to develop the technology and infrastructure behind our operations.",
+      "At the centre of this work is our custom ACARS platform, which provides the foundation for connecting pilots and flights with the wider British Midland operational environment.",
+      "The aim is to create more than a simple flight tracker. Our operational systems are being developed around the way British Midland actually operates, allowing us to build tools and processes that support our pilots while giving the airline greater control over its own infrastructure.",
+      "This work will continue to support the development of our future Operations Centre and the wider systems used across British Midland Group.",
+      "As the platform develops, new capabilities will be introduced through testing and operational feedback. The result will be a connected operational environment designed specifically for the needs of British Midland and its pilots."
+    ],
+    "image": "assets/images/news/british-midland-group.jpg",
+    "author": "British Midland Development",
+    "tags": [
+      "Operations",
+      "Technology",
+      "ACARS",
+      "Operations Centre",
+      "Development"
+    ]
+  },
+  {
+    "id": 14,
+    "featured": false,
+    "published": "2026-08-29",
+    "category": "Group",
+    "title": "British Midland Group — One Organisation, Three Aviation Businesses",
+    "summary": "Our new Group structure brings mainline, regional and cargo aviation together while allowing each operation to retain its own identity.",
+    "content": [
+      "The formation of British Midland Group establishes a new structure for the organisation, bringing together three distinct aviation businesses under one Group.",
+      "British Midland Ltd represents our mainline operation, continuing the British Midland identity and its core passenger services.",
+      "British Midland Regional Ltd provides the foundation for regional flying, creating opportunities for a different style of operation and a fleet tailored to regional connectivity.",
+      "European Cargo brings dedicated cargo operations into the Group, expanding our aviation portfolio beyond passenger services.",
+      "Although each business has its own role and identity, the three operations can benefit from shared technology, expertise, infrastructure and processes.",
+      "The structure also provides a foundation for supporting other virtual airlines in the future, allowing British Midland Group to share the tools and knowledge developed through our own operations.",
+      "For pilots, this creates an opportunity to remain part of the wider British Midland community while exploring different types of aviation within the Group."
+    ],
+    "image": "assets/images/news/british-midland-group.jpg",
+    "author": "British Midland Group",
+    "tags": [
+      "Group",
+      "Corporate",
+      "British Midland",
+      "Regional",
+      "Cargo",
+      "Mainline"
+    ]
+  },
+  {
+    "id": 15,
+    "featured": false,
     "hidden": true,
     "published": "2026-08-29",
     "category": "Fleet",
@@ -261,7 +360,7 @@
       "Further details regarding aircraft allocations, routes and entry into service will be announced ahead of the public launch.",
       "Foundry Class represents another step in the development of a diverse aviation organisation capable of operating across mainline, regional and cargo markets."
     ],
-    "image": "assets/images/news/foundry-class.jpg",
+    "image": "assets/images/news/british-midland-group.jpg",
     "author": "British Midland Fleet Management",
     "tags": [
       "Fleet",
