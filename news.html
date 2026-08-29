@@ -8,44 +8,86 @@
     =========================================================== -->
 
     <link rel="icon" href="/favicon.ico" sizes="any">
-    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
 
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/site.webmanifest">
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="32x32"
+        href="/favicon-32x32.png"
+    >
 
-    <meta name="theme-color" content="#001A3A">
+    <link
+        rel="icon"
+        type="image/png"
+        sizes="16x16"
+        href="/favicon-16x16.png"
+    >
+
+    <link
+        rel="apple-touch-icon"
+        href="/apple-touch-icon.png"
+    >
+
+    <link
+        rel="manifest"
+        href="/site.webmanifest"
+    >
+
+    <meta
+        name="theme-color"
+        content="#001A3A"
+    >
+
 
     <!-- ==========================================================
          META
     =========================================================== -->
 
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>British Midland News | British Midland Virtual</title>
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        British Midland News | British Midland Virtual
+    </title>
+
 
     <!-- ==========================================================
          FONTS
     =========================================================== -->
 
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
 
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
         rel="stylesheet"
     >
 
+
     <!-- ==========================================================
          CSS
     =========================================================== -->
 
-    <link rel="stylesheet" href="assets/css/base.css">
+    <link
+        rel="stylesheet"
+        href="assets/css/base.css"
+    >
 
     <link
         rel="stylesheet"
-        href="assets/css/news.css?v=5"
+        href="assets/css/news.css?v=6"
     >
 
 </head>
@@ -61,6 +103,7 @@
 <header class="site-header">
 
     <div class="container navbar">
+
 
         <!-- Logo -->
 
@@ -114,7 +157,10 @@
                 </li>
 
                 <li>
-                    <a class="active" href="news.html">
+                    <a
+                        class="active"
+                        href="news.html"
+                    >
                         NEWS
                     </a>
                 </li>
@@ -170,6 +216,82 @@
 
 
 <!-- ==========================================================
+     NEWS FILTER
+========================================================== -->
+
+<section class="news-filter-section">
+
+    <div class="container">
+
+        <nav
+            class="news-filter"
+            aria-label="News categories"
+        >
+
+            <button
+                class="news-filter-button active"
+                type="button"
+                data-category="all"
+            >
+                All News
+            </button>
+
+            <button
+                class="news-filter-button"
+                type="button"
+                data-category="group"
+            >
+                Corporate
+            </button>
+
+            <button
+                class="news-filter-button"
+                type="button"
+                data-category="fleet"
+            >
+                Fleet
+            </button>
+
+            <button
+                class="news-filter-button"
+                type="button"
+                data-category="operations"
+            >
+                Operations
+            </button>
+
+            <button
+                class="news-filter-button"
+                type="button"
+                data-category="partnership"
+            >
+                Partnerships
+            </button>
+
+            <button
+                class="news-filter-button"
+                type="button"
+                data-category="community"
+            >
+                Community
+            </button>
+
+            <button
+                class="news-filter-button"
+                type="button"
+                data-category="development"
+            >
+                Development
+            </button>
+
+        </nav>
+
+    </div>
+
+</section>
+
+
+<!-- ==========================================================
      FEATURED STORY
 ========================================================== -->
 
@@ -192,6 +314,7 @@
 
     <div class="container">
 
+
         <div class="section-title">
 
             <span class="section-kicker">
@@ -203,7 +326,8 @@
             </h2>
 
             <p>
-                The latest updates from across British Midland Virtual.
+                The latest major announcements from across
+                British Midland Virtual.
             </p>
 
         </div>
@@ -213,6 +337,30 @@
             id="news-grid"
             class="news-grid"
         ></div>
+
+
+        <!-- Empty State -->
+
+        <div
+            id="news-empty"
+            class="news-empty"
+            hidden
+        >
+
+            <span class="section-kicker">
+                NO STORIES
+            </span>
+
+            <h3>
+                No news in this category
+            </h3>
+
+            <p>
+                There are currently no published stories
+                in this section.
+            </p>
+
+        </div>
 
     </div>
 
@@ -391,7 +539,7 @@
 
 
 <!-- ==========================================================
-     NEWS JAVASCRIPT
+     JAVASCRIPT
 ========================================================== -->
 
 <script src="assets/js/news.js"></script>
