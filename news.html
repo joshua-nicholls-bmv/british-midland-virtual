@@ -3,7 +3,10 @@
 
 <head>
 
-    <!-- Favicons -->
+    <!-- ==========================================================
+         FAVICONS
+    =========================================================== -->
+
     <link rel="icon" href="/favicon.ico" sizes="any">
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
     <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
@@ -13,146 +16,386 @@
 
     <meta name="theme-color" content="#001A3A">
 
+    <!-- ==========================================================
+         META
+    =========================================================== -->
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <title>British Midland News | British Midland Virtual</title>
 
-    <!-- Google Fonts -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- ==========================================================
+         FONTS
+    =========================================================== -->
 
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
-    <!-- Styles -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@500;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <!-- ==========================================================
+         CSS
+    =========================================================== -->
+
     <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/news.css">
+
+    <link
+        rel="stylesheet"
+        href="assets/css/news.css?v=5"
+    >
 
 </head>
 
+
 <body>
 
-    <!-- =========================
-         Navigation
-    ========================== -->
 
-    <header class="site-header">
+<!-- ==========================================================
+     HEADER / NAVIGATION
+========================================================== -->
 
-        <nav class="navbar container">
+<header class="site-header">
 
-            <a class="logo" href="index.html">
-                <img src="assets/images/logo.png"
-                     alt="British Midland Virtual">
-            </a>
+    <div class="container navbar">
+
+        <!-- Logo -->
+
+        <a
+            class="logo"
+            href="index.html"
+        >
+
+            <img
+                src="assets/images/logo.png"
+                alt="British Midland Virtual"
+            >
+
+        </a>
+
+
+        <!-- Navigation -->
+
+        <nav>
 
             <ul class="nav-links">
-                <li><a href="index.html">HOME</a></li>
-                <li><a href="fleet.html">FLEET</a></li>
-                <li><a href="network.html">NETWORK</a></li>
-                <li><a class="active" href="news.html">NEWS</a></li>
-                <li><a href="operations.html">OPERATIONS</a></li>
-                <li><a href="join.html">JOIN</a></li>
+
+                <li>
+                    <a href="index.html">
+                        HOME
+                    </a>
+                </li>
+
+                <li>
+                    <a href="group.html">
+                        GROUP
+                    </a>
+                </li>
+
+                <li>
+                    <a href="fleet.html">
+                        FLEET
+                    </a>
+                </li>
+
+                <li>
+                    <a href="network.html">
+                        NETWORK
+                    </a>
+                </li>
+
+                <li>
+                    <a href="operations.html">
+                        OPERATIONS
+                    </a>
+                </li>
+
+                <li>
+                    <a class="active" href="news.html">
+                        NEWS
+                    </a>
+                </li>
+
+                <li>
+                    <a href="join.html">
+                        JOIN
+                    </a>
+                </li>
+
             </ul>
 
         </nav>
 
-    </header>
+    </div>
 
-    <main class="news-page">
+</header>
 
-        <!-- =========================
-             Hero
-        ========================== -->
 
-        <section class="news-hero">
+<!-- ==========================================================
+     MAIN
+========================================================== -->
 
-            <div class="container">
+<main class="news-page">
 
-                <span class="eyebrow">
-                    NEWSROOM
-                </span>
 
-                <h1>
-                    British Midland News
-                </h1>
+<!-- ==========================================================
+     NEWS HERO
+========================================================== -->
 
-                <p>
-                    Fleet announcements, network expansion, operational updates,
-                    community news and everything happening across British Midland Virtual.
-                </p>
+<section class="news-hero">
 
-            </div>
+    <div class="container news-hero-content">
 
-        </section>
+        <span class="eyebrow">
+            NEWSROOM
+        </span>
 
-        <!-- =========================
-             Featured Story
-        ========================== -->
+        <h1>
+            British Midland News
+        </h1>
 
-        <section class="featured-section">
+        <div class="hero-divider"></div>
 
-            <div class="container">
+        <p>
+            Fleet announcements, network expansion, operational updates,
+            community news and everything happening across British Midland Virtual.
+        </p>
 
-                <div id="featured-news"></div>
+    </div>
 
-            </div>
+</section>
 
-        </section>
 
-        <!-- =========================
-             Latest News
-        ========================== -->
+<!-- ==========================================================
+     FEATURED STORY
+========================================================== -->
 
-        <section class="news-section">
+<section class="featured-section">
 
-            <div class="container">
+    <div class="container">
 
-                <div class="section-title">
+        <div id="featured-news"></div>
 
-                    <h2>
-                        Latest News
-                    </h2>
+    </div>
 
-                    <p>
-                        The latest updates from across the airline.
-                    </p>
+</section>
 
-                </div>
 
-                <div id="news-grid"
-                     class="news-grid"></div>
+<!-- ==========================================================
+     LATEST NEWS
+========================================================== -->
 
-            </div>
+<section class="news-section">
 
-        </section>
+    <div class="container">
 
-    </main>
+        <div class="section-title">
 
-    <!-- =========================
-         Footer
-    ========================== -->
+            <span class="section-kicker">
+                LATEST UPDATES
+            </span>
 
-    <footer>
-
-        <div class="container">
-
-            <p><strong>British Midland Virtual</strong></p>
+            <h2>
+                Latest News
+            </h2>
 
             <p>
-                The Heart of Britain. Connected to the World.
-            </p>
-
-            <p>
-                &copy; 2026 British Midland Virtual
+                The latest updates from across British Midland Virtual.
             </p>
 
         </div>
 
-  <footer class="site-footer">
 
-    <!-- Scripts -->
+        <div
+            id="news-grid"
+            class="news-grid"
+        ></div>
 
-    <script src="assets/js/news.js"></script>
+    </div>
+
+</section>
+
+
+</main>
+
+
+<!-- ==========================================================
+     FOOTER
+========================================================== -->
+
+<footer class="site-footer">
+
+    <div class="container footer-grid">
+
+
+        <!-- Brand -->
+
+        <div class="footer-brand">
+
+            <img
+                src="assets/images/logo.png"
+                alt="British Midland Virtual"
+            >
+
+            <p>
+                The Heart of Britain.<br>
+                Connected to the World.
+            </p>
+
+        </div>
+
+
+        <!-- Explore -->
+
+        <div>
+
+            <h4>
+                Explore
+            </h4>
+
+            <ul>
+
+                <li>
+                    <a href="group.html">
+                        Group
+                    </a>
+                </li>
+
+                <li>
+                    <a href="fleet.html">
+                        Fleet
+                    </a>
+                </li>
+
+                <li>
+                    <a href="network.html">
+                        Network
+                    </a>
+                </li>
+
+                <li>
+                    <a href="operations.html">
+                        Operations
+                    </a>
+                </li>
+
+                <li>
+                    <a href="news.html">
+                        News
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- Community -->
+
+        <div>
+
+            <h4>
+                Community
+            </h4>
+
+            <ul>
+
+                <li>
+                    <a href="join.html">
+                        Join British Midland
+                    </a>
+                </li>
+
+                <li>
+                    <a href="#">
+                        Discord
+                    </a>
+                </li>
+
+                <li>
+                    <a href="news.html?id=9">
+                        SayIntentions
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+        <!-- Company -->
+
+        <div>
+
+            <h4>
+                Company
+            </h4>
+
+            <ul>
+
+                <li>
+                    <a href="privacy.html">
+                        Privacy Policy
+                    </a>
+                </li>
+
+                <li>
+                    <a href="terms.html">
+                        Terms & Conditions
+                    </a>
+                </li>
+
+                <li>
+                    <a href="contact.html">
+                        Contact
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/management/">
+                        Management Portal
+                    </a>
+                </li>
+
+            </ul>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- Footer Bottom -->
+
+    <div class="footer-bottom">
+
+        <div class="container footer-bottom-content">
+
+            <p>
+                © 2026 British Midland Virtual.
+                All rights reserved.
+            </p>
+
+            <p>
+                Inspired by the heritage of British Midland Airways.
+            </p>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+<!-- ==========================================================
+     NEWS JAVASCRIPT
+========================================================== -->
+
+<script src="assets/js/news.js"></script>
+
 
 </body>
 
