@@ -8,11 +8,11 @@
     "summary": "The official British Midland Virtual website is now live.",
     "content": [
       "We're delighted to officially launch the British Midland Virtual website.",
-      "After months of planning and development, the new website brings together everything pilots need to discover British Midland Virtual, explore our growing fleet, view our expanding route network and stay up to date with the latest news from across the airline.",
+      "After months of planning and development, the new website brings together everything pilots need to discover British Midland Virtual, explore our growing fleet, view our expanding network and stay up to date with the latest news from across the airline.",
       "Designed around the heritage of British Midland, the website combines a modern experience with classic airline styling. From fleet information and interactive route maps to future operational resources, this marks the beginning of an exciting new chapter for the airline.",
-      "Although today's launch represents an important milestone, development is far from complete. Over the coming weeks we will continue expanding the website with our Operations Centre, pilot resources, comprehensive documentation and additional community features.",
-      "As our network continues to grow from Birmingham, we look forward to welcoming new pilots who share our passion for realistic airline operations and the history of one of Britain's most recognisable airlines.",
-      "We would like to thank everyone who has supported the project throughout development. Your enthusiasm and feedback have helped shape the airline we are proud to launch today, and we look forward to welcoming you aboard."
+      "Although today's launch represents an important milestone, development is far from complete. We will continue expanding the website with our Operations Centre, pilot resources, comprehensive documentation and additional community features.",
+      "As our network continues to grow from Birmingham, we look forward to welcoming new pilots who share our passion for realistic airline operations and the history of British Midland.",
+      "We would like to thank everyone who has supported the project throughout development. Your enthusiasm and feedback have helped shape the airline we are proud to build today."
     ],
     "image": "assets/images/news/launch.jpg",
     "author": "British Midland Crew Services",
@@ -31,11 +31,11 @@
     "summary": "Whether you're taking your first steps into virtual aviation or already experienced on the Airbus family, British Midland Virtual welcomes you to join our growing community.",
     "content": [
       "British Midland Virtual is proud to welcome both new and experienced Airbus pilots to our growing community.",
-      "Whether you're flying your very first virtual airline route or already have experience operating the Airbus A320 family, you'll find a friendly and supportive environment built around realistic operations and an appreciation for British Midland's heritage.",
-      "Our current fleet includes the Airbus A320, Airbus A321 and Airbus A350-1000, operating an expanding network of short-haul European and long-haul international services from our Birmingham hub.",
-      "We believe realistic flying should be enjoyable and accessible, with no unnecessary barriers to getting started. New pilots can learn as they fly, while experienced Airbus crews can immediately enjoy our routes and procedures.",
+      "Whether you're flying your very first virtual airline route or already have experience operating the Airbus A320 family, you'll find a friendly and supportive environment built around realistic operations and an appreciation of British Midland's heritage.",
+      "Our current fleet provides a range of Airbus aircraft for short-haul European and long-haul international services from our Birmingham hub.",
+      "We believe realistic flying should be enjoyable and accessible, with no unnecessary barriers to getting started. New pilots can learn as they fly, while experienced crews can immediately enjoy our routes and procedures.",
       "As our network and community continue to grow, we invite anyone with a passion for virtual aviation to become part of British Midland Virtual and help write the next chapter of our story.",
-      "If you're looking for a welcoming Airbus-focused virtual airline inspired by one of Britain's most recognisable carriers, we'd be delighted to have you on board."
+      "If you're looking for a welcoming virtual airline inspired by one of Britain's most recognisable carriers, we'd be delighted to have you on board."
     ],
     "image": "assets/images/news/airbus-pilot-community.jpg",
     "author": "British Midland Crew Services",
@@ -43,9 +43,6 @@
       "Community",
       "Pilots",
       "Airbus",
-      "A320",
-      "A321",
-      "A350",
       "Join"
     ]
   },
@@ -55,13 +52,14 @@
     "published": "2026-07-23",
     "category": "Fleet",
     "title": "Airbus A319, A320 & A321 Fleet Ready for Operations",
-    "summary": "British Midland Virtual's launch fleet is now fully configured, with additional Airbus aircraft already planned for future expansion.",
+    "summary": "British Midland Virtual's launch Airbus fleet is fully configured and ready for operations, with further aircraft planned for future expansion.",
     "content": [
-      "Following extensive work behind the scenes, the British Midland Virtual Airbus A319, A320 and A321 fleet is now fully prepared for operations, marking another major milestone ahead of our public launch.",
-      "Our initial fleet consists of three Airbus aircraft, each configured to provide a consistent and immersive experience for our pilots. Leading the fleet are Airbus A319 G-BMFI 'City of Lichfield', Airbus A320 G-BMFB 'City of Coventry' and Airbus A321 G-BMFA 'City of Birmingham'. Every aircraft features a custom livery inspired by the final British Midland colour scheme, reimagined for today's virtual skies.",
-      "Together, the Airbus A319, A320 and A321 will form the backbone of our European operation from Birmingham Airport, with each aircraft assigned to routes best suited to its capacity and operational profile.",
-      "Looking ahead, British Midland Virtual has already committed to expanding the fleet with a further nine Airbus aircraft. Planned additions include A319s G-BMFC 'City of Stoke-on-Trent', G-BMFG 'Spirit of Dudley' and G-BMFK 'Heart of the Black Country'; A320s G-BMFD 'City of Wolverhampton', G-BMFH 'Spirit of Solihull' and G-BMFL 'Heart of Staffordshire'; and A321s G-BMFE 'City of Worcester', G-BMFF 'City of Derby' and G-BMFJ 'Heart of Warwickshire'.",
-      "As these aircraft enter service, they will strengthen our network across Europe while continuing our tradition of celebrating the cities, towns and regions that define the Heart of Britain."
+      "Following extensive work behind the scenes, the British Midland Virtual Airbus A319, A320 and A321 fleet is now fully prepared for operations.",
+      "Our initial fleet consists of three Airbus aircraft, each configured to provide a consistent and immersive experience for our pilots. Leading the fleet are Airbus A319 G-BMFI 'City of Lichfield', Airbus A320 G-BMFB 'City of Coventry' and Airbus A321 G-BMFA 'City of Birmingham'.",
+      "Every aircraft features a custom livery inspired by the final British Midland colour scheme, reimagined for today's virtual skies.",
+      "Together, the Airbus A319, A320 and A321 form the backbone of our European operation from Birmingham Airport, with each aircraft assigned to routes suited to its capacity and operational profile.",
+      "Further aircraft are planned as British Midland continues to expand its fleet and strengthen its network across Europe and beyond.",
+      "As the fleet grows, we will continue celebrating the cities, towns and regions that define the Heart of Britain."
     ],
     "image": "assets/images/news/fleet.jpg",
     "author": "Fleet Management",
@@ -77,130 +75,15 @@
     "id": 4,
     "featured": false,
     "published": "2026-07-25",
-    "category": "Network",
-    "title": "Paris Charles de Gaulle Joins the Network",
-    "summary": "British Midland Virtual continues its European expansion with the addition of Paris Charles de Gaulle.",
-    "content": [
-      "British Midland Virtual is pleased to announce the addition of Paris Charles de Gaulle (CDG) to our growing European network.",
-      "As one of Europe's busiest aviation hubs, Paris Charles de Gaulle strengthens our Western European network while providing pilots with an enjoyable Airbus A320 operation from Birmingham.",
-      "The route reflects British Midland's historic European network and offers realistic schedules within Microsoft Flight Simulator.",
-      "Paris joins our expanding portfolio of European destinations as we continue building a comprehensive network from Birmingham Airport.",
-      "Additional destinations will be announced as development of the airline continues."
-    ],
-    "image": "assets/images/news/paris.jpg",
-    "author": "Network Planning",
-    "tags": [
-      "Network",
-      "Paris",
-      "CDG",
-      "Expansion"
-    ]
-  },
-  {
-    "id": 5,
-    "featured": false,
-    "published": "2026-07-26",
-    "category": "Network",
-    "title": "Frankfurt Added to the European Network",
-    "summary": "Germany's financial capital becomes the latest destination to join the British Midland Virtual route map.",
-    "content": [
-      "British Midland Virtual is pleased to announce the addition of Frankfurt (FRA) to our expanding European network.",
-      "As one of Europe's largest aviation hubs, Frankfurt offers excellent connectivity and a realistic destination for Airbus A320 operations from Birmingham.",
-      "The route reflects British Midland's long-standing links with Germany and provides pilots with another busy European sector to enjoy.",
-      "Frankfurt strengthens our presence across Central Europe and forms part of our commitment to recreating a modern interpretation of British Midland's historic network.",
-      "Further destinations across Europe are already in development as we continue expanding our operations."
-    ],
-    "image": "assets/images/news/frankfurt.jpg",
-    "author": "Network Planning",
-    "tags": [
-      "Network",
-      "Frankfurt",
-      "Germany",
-      "Expansion"
-    ]
-  },
-  {
-    "id": 6,
-    "featured": false,
-    "published": "2026-07-27",
-    "category": "Network",
-    "title": "Faro Brings the Algarve to Our Network",
-    "summary": "British Midland Virtual expands into Portugal with the addition of Faro.",
-    "content": [
-      "British Midland Virtual is delighted to announce Faro (FAO) as the newest addition to our growing route network.",
-      "A popular leisure destination, Faro offers pilots a scenic Airbus A320 operation between Birmingham and Portugal's Algarve coast.",
-      "The route introduces an important holiday destination to our network while complementing our growing collection of European services.",
-      "With realistic schedules and beautiful coastal approaches, Faro promises to become a favourite among our pilots.",
-      "The addition of Faro marks another step towards building a diverse and authentic network inspired by British Midland's heritage."
-    ],
-    "image": "assets/images/news/faro.jpg",
-    "author": "Network Planning",
-    "tags": [
-      "Network",
-      "Faro",
-      "Portugal",
-      "Expansion"
-    ]
-  },
-  {
-    "id": 7,
-    "featured": false,
-    "published": "2026-07-28",
-    "category": "Network",
-    "title": "Rome Ciampino Joins the British Midland Network",
-    "summary": "Italy's historic capital is now served through Rome Ciampino Airport.",
-    "content": [
-      "British Midland Virtual is pleased to welcome Rome Ciampino (CIA) to our expanding European route network.",
-      "Located just outside the Eternal City, Rome Ciampino offers a rewarding Airbus A320 operation with spectacular arrivals into one of Europe's most iconic destinations.",
-      "The route provides another Mediterranean destination while expanding our Italian network alongside Milan.",
-      "Pilots can look forward to realistic operations between Birmingham and Rome as part of our growing European schedule.",
-      "Rome represents another milestone as British Midland Virtual continues connecting Birmingham with destinations across the continent."
-    ],
-    "image": "assets/images/news/rome.jpg",
-    "author": "Network Planning",
-    "tags": [
-      "Network",
-      "Rome",
-      "Ciampino",
-      "Italy"
-    ]
-  },
-  {
-    "id": 8,
-    "featured": false,
-    "published": "2026-07-29",
-    "category": "Network",
-    "title": "Dublin Strengthens Our Irish Operations",
-    "summary": "British Midland Virtual welcomes Dublin as one of its key European destinations.",
-    "content": [
-      "British Midland Virtual is delighted to announce the addition of Dublin (DUB) to our growing European network.",
-      "As one of Birmingham's busiest international routes, Dublin offers a short yet rewarding Airbus A320 operation with frequent services and realistic schedules.",
-      "The route reflects British Midland's historic presence on the Irish market while providing excellent variety for our pilots.",
-      "Dublin strengthens our network across the British Isles and supports our vision of creating a comprehensive Airbus operation from Birmingham.",
-      "Further route announcements are planned as our European network continues to grow."
-    ],
-    "image": "assets/images/news/dublin.jpg",
-    "author": "Network Planning",
-    "tags": [
-      "Network",
-      "Dublin",
-      "Ireland",
-      "Expansion"
-    ]
-  },
-  {
-    "id": 9,
-    "featured": false,
-    "published": "2026-07-25",
     "category": "Partnership",
     "title": "British Midland Virtual Joins the SayIntentions.AI Virtual Airline Programme",
     "summary": "British Midland Virtual is now officially part of the SayIntentions.AI Virtual Airline Programme, bringing an even more immersive flying experience to our pilots.",
     "content": [
       "We're delighted to announce that British Midland Virtual has officially joined the SayIntentions.AI Virtual Airline Programme.",
-      "This exciting partnership allows our pilots to enhance every flight with realistic AI Air Traffic Control, intelligent cabin crew, AI dispatch services and seamless virtual airline integration through SayIntentions.AI.",
-      "Getting started couldn't be easier. Simply log into your SayIntentions Pilot Portal, navigate to Settings → Virtual Airline and select 'British Midland Virtual' from the drop-down menu before saving your changes. Once linked, your eligible flights will automatically be associated with the airline.",
-      "Thinking of subscribing to SayIntentions.AI? Before purchasing a subscription, speak to a member of the British Midland staff team. We have an exclusive 10% discount code available for all British Midland Virtual pilots.",
-      "This partnership represents another major milestone as we continue building a professional, immersive and realistic virtual airline experience inspired by one of Britain's most iconic airlines. We look forward to welcoming many more pilots aboard as we continue connecting the Heart of Britain with Europe and beyond."
+      "This partnership allows our pilots to enhance every flight with realistic AI Air Traffic Control, intelligent cabin crew, AI dispatch services and seamless virtual airline integration through SayIntentions.AI.",
+      "Pilots can link British Midland Virtual through their SayIntentions Pilot Portal by selecting British Midland Virtual within the Virtual Airline settings.",
+      "Thinking of subscribing to SayIntentions.AI? Speak to a member of the British Midland staff team before purchasing. We have an exclusive 10% discount code available for British Midland Virtual pilots.",
+      "This partnership represents another step towards building a professional, immersive and realistic virtual airline experience inspired by British Midland's heritage."
     ],
     "image": "assets/images/news/sayintentions-partnership.jpg",
     "author": "British Midland Crew Services",
@@ -213,17 +96,17 @@
     ]
   },
   {
-    "id": 10,
+    "id": 5,
     "featured": false,
     "published": "2026-08-08",
     "category": "Partnership",
     "title": "British Midland Virtual Announces Partnership with BATC",
-    "summary": "British Midland Virtual is pleased to announce a new partnership with BATC, strengthening our commitment to professional and immersive virtual airline operations.",
-       "content": [
-      "We're delighted to announce that British Midland Virtual has entered into a partnership with BeyondATC (BATC), bringing another powerful tool to our pilots as we continue developing a more immersive and realistic virtual airline experience.",
-      "BeyondATC provides AI-powered air traffic control and live traffic for Microsoft Flight Simulator, creating a more dynamic and realistic environment for pilots during their flights. Through its Pilot Portal, virtual airlines can also provide customised operational information such as airline callsigns, navigation data and procedures.",
-      "Our partnership will allow British Midland Virtual to build a closer connection between our airline operations and the BeyondATC platform, helping us provide pilots with a more authentic British Midland experience when flying our network.",
-      "As our route network and fleet continue to expand, integrating British Midland more closely with the tools our pilots use will become increasingly important. This partnership represents another step towards creating a connected and professional virtual airline operation from Birmingham.",
+    "summary": "British Midland Virtual is pleased to announce a new partnership with BeyondATC, strengthening our commitment to professional and immersive virtual airline operations.",
+    "content": [
+      "We're delighted to announce that British Midland Virtual has entered into a partnership with BeyondATC, bringing another powerful tool to our pilots as we continue developing a more immersive and realistic virtual airline experience.",
+      "BeyondATC provides AI-powered air traffic control and live traffic for Microsoft Flight Simulator, creating a more dynamic and realistic environment for pilots during their flights.",
+      "Our partnership will allow British Midland Virtual to build a closer connection between our airline operations and the tools our pilots use, helping provide a more authentic British Midland experience when flying our network.",
+      "As our route network and fleet continue to expand, integrating British Midland more closely with the tools our pilots use will become increasingly important.",
       "We're excited to work alongside the BeyondATC team and look forward to developing our integration further as British Midland Virtual continues to grow."
     ],
     "image": "assets/images/news/batc-partnership.jpg",
@@ -231,71 +114,23 @@
     "tags": [
       "Partnership",
       "BATC",
-      "British Midland",
+      "BeyondATC",
       "Operations",
       "Community"
     ]
   },
   {
-    "id": 11,
-    "featured": false,
-    "published": "2026-08-08",
-    "category": "Fleet",
-    "title": "Foundry Class Coming Soon to British Midland Virtual",
-    "summary": "A new chapter of regional flying is approaching as the Foundry Class prepares to join British Midland Virtual for short-haul regional operations.",
-    "content": [
-      "The next addition to the British Midland Virtual fleet is taking shape, with the Foundry Class set to arrive soon.",
-      "Designed around the demands of our regional network, the Foundry Class will introduce a new capability to British Midland operations, focusing on short-haul and regional services from our Birmingham hub.",
-      "The new class will allow British Midland to expand its network with aircraft suited to routes where capacity, frequency and regional connectivity are key. It will complement our existing Airbus fleet while opening the door to a wider range of destinations across the network.",
-      "The Foundry Class forms part of our wider fleet development strategy as British Midland continues to build a diverse and realistic operation around the Heart of Britain.",
-      "More information, including the aircraft type, routes and operational details, will be revealed ahead of its entry into service."
-    ],
-    "image": "assets/images/news/foundry-class.jpg",
-    "author": "British Midland Crew Services",
-    "tags": [
-      "Fleet",
-      "Foundry Class",
-      "Regional",
-      "Short Haul",
-      "Expansion"
-    ]
-  },
-  {
-    "id": 12,
-    "featured": false,
-    "published": "2026-08-08",
-    "category": "Fleet",
-    "title": "Pioneer Class Set for August Arrival",
-    "summary": "British Midland Virtual is preparing to welcome the Pioneer Class, with the new aircraft class scheduled to enter the fleet this August.",
-    "content": [
-      "A new era of British Midland Virtual flying is almost here, with the Pioneer Class preparing to make its arrival this August.",
-      "The Pioneer Class represents an important milestone in the continued development of our fleet and network. Its introduction will expand the capabilities of British Midland Virtual and support the next stage of our growth from Birmingham.",
-      "While the aircraft has yet to enter service, preparations are already underway to ensure the Pioneer Class is fully integrated into our operations and ready to serve British Midland pilots.",
-      "Its arrival forms part of an exciting period of fleet development, with further aircraft and new operational opportunities planned as we continue expanding the airline.",
-      "The Pioneer Class will be revealed in full ahead of its introduction, with more details on its role and destinations to follow. August marks the beginning of its journey with British Midland Virtual."
-    ],
-    "image": "assets/images/news/pioneer-class.jpg",
-    "author": "British Midland Crew Services",
-    "tags": [
-      "Fleet",
-      "Pioneer Class",
-      "August",
-      "Expansion",
-      "British Midland"
-    ]
-  },
-  {
-    "id": 13,
+    "id": 6,
     "featured": false,
     "published": "2026-08-08",
     "category": "Fleet",
     "title": "British Midland Agrees Lease for Airbus A330-900",
-    "summary": "British Midland Virtual has agreed a lease for an Airbus A330-900 through SMBC Capital, with the aircraft to be operated using the Headwind A330-900.",
+    "summary": "British Midland Virtual has agreed a lease for an Airbus A330-900 through SMBC Capital, marking another step in the development of our long-haul fleet.",
     "content": [
       "British Midland Virtual is pleased to announce that a lease agreement has been secured for an Airbus A330-900 through SMBC Capital.",
-      "The aircraft will be introduced to the British Midland Virtual fleet using the Headwind A330-900, marking another significant step in the airline's long-haul fleet development.",
+      "The aircraft will be introduced to the British Midland Virtual fleet using the Headwind A330-900, marking another significant step in our long-haul fleet development.",
       "The A330-900 will provide British Midland with a modern widebody platform capable of supporting longer-range operations as the airline continues to expand beyond its European network.",
-      "The lease agreement further strengthens British Midland's long-haul ambitions and follows continued investment in the development of our fleet and network from Birmingham.",
+      "The agreement further strengthens our long-haul ambitions and follows continued investment in the development of our fleet and network from Birmingham.",
       "The aircraft will form part of the next generation of British Midland long-haul operations, with its eventual routes and entry into service details to be announced separately."
     ],
     "image": "assets/images/news/a330-900-lease.jpg",
@@ -310,28 +145,130 @@
     ]
   },
   {
-    "id": 14,
+    "id": 7,
     "featured": false,
-    "published": "2026-08-08",
-    "category": "Company",
-    "title": "British Midland Group Takes Ownership of European Cargo Operations",
-    "summary": "British Midland Group has completed the acquisition of its European Cargo Operations, marking a significant expansion of the group's aviation portfolio.",
+    "published": "2026-08-29",
+    "category": "Group",
+    "title": "Introducing British Midland Group",
+    "summary": "British Midland is becoming part of a wider aviation group, bringing our passenger, regional and cargo operations together under one organisation.",
     "content": [
-      "British Midland Group is pleased to announce that it has taken ownership of its European Cargo Operations.",
-      "The move represents a significant expansion of the British Midland Group and marks the beginning of a new chapter beyond our established passenger operations.",
-      "European Cargo Operations will provide the group with a dedicated cargo presence within Europe, creating new opportunities for network development and operational growth while complementing the group's existing aviation activities.",
-      "The acquisition reflects our long-term ambition to build British Midland into a broader aviation group with a diverse range of operations. From passenger services across Europe and beyond to dedicated cargo operations, the group continues to expand its presence across the aviation sector.",
-      "Further details regarding the fleet, network and future development of European Cargo Operations will be announced as the operation progresses."
+      "British Midland Virtual is entering a new chapter with the formation of British Midland Group.",
+      "The new structure brings together our aviation businesses under one organisation, creating a stronger foundation for continued growth while allowing each business to develop its own identity and operational role.",
+      "The Group brings together British Midland Ltd, British Midland Regional Ltd and European Cargo as distinct aviation businesses operating under a shared organisation.",
+      "This structure allows us to share technology, expertise, infrastructure and operational resources across the Group while continuing to develop each business independently.",
+      "The reorganisation also creates opportunities beyond our own airlines. British Midland Group is being developed with the capability to support other virtual airlines through the technology, skills and operational systems we have built.",
+      "For our pilots, the Group creates the opportunity to fly across participating airlines while retaining familiar processes, systems and standards.",
+      "British Midland Group represents our ambition to build something larger than a single virtual airline: a connected aviation organisation built around the Heart of Britain."
+    ],
+    "image": "assets/images/news/british-midland-group.jpg",
+    "author": "British Midland Group",
+    "tags": [
+      "Group",
+      "British Midland Group",
+      "Restructure",
+      "Development",
+      "Expansion"
+    ]
+  },
+  {
+    "id": 8,
+    "featured": false,
+    "published": "2026-08-29",
+    "category": "Group",
+    "title": "European Cargo Joins British Midland Group",
+    "summary": "European Cargo has joined British Midland Group, expanding the organisation into dedicated cargo operations.",
+    "content": [
+      "British Midland Group is pleased to announce that European Cargo has joined the Group.",
+      "The addition of European Cargo expands British Midland Group beyond passenger aviation and introduces a dedicated cargo operation to our growing aviation portfolio.",
+      "European Cargo will operate as a distinct business within the Group, allowing it to develop its own cargo identity and operations while benefiting from the wider technology, expertise and infrastructure available across British Midland Group.",
+      "The move forms part of our wider strategy to build a diverse aviation organisation capable of supporting different types of virtual airline operations.",
+      "European Cargo joins British Midland Ltd and British Midland Regional Ltd as one of three aviation businesses within British Midland Group.",
+      "Further details regarding European Cargo's fleet, network and future development will be announced as the operation continues to take shape."
     ],
     "image": "assets/images/news/european-cargo-operations.jpg",
     "author": "British Midland Group",
     "tags": [
-      "British Midland Group",
-      "Cargo",
+      "Group",
       "European Cargo",
-      "Acquisition",
+      "Cargo",
+      "Expansion",
+      "Operations"
+    ]
+  },
+  {
+    "id": 9,
+    "featured": false,
+    "published": "2026-08-29",
+    "category": "Operations",
+    "title": "British Midland ACARS Operational in Alpha",
+    "summary": "Our custom ACARS platform has entered its operational Alpha phase, providing the foundation for British Midland's next generation of flight operations.",
+    "content": [
+      "British Midland Virtual is pleased to announce that our custom ACARS platform is now operational in Alpha.",
+      "Developed specifically for British Midland, the system is designed to provide a dedicated operational platform connecting pilots, flights and the wider airline infrastructure.",
+      "The Alpha release introduces the foundations of our flight tracking and operational systems, with continued development taking place alongside live use by our pilots.",
+      "ACARS will form a central part of the British Midland experience, supporting flight operations while providing the foundations for future operational tools and services.",
+      "As development continues, the system will evolve through testing, feedback and additional features. The Alpha phase allows us to develop the platform around the real requirements of British Midland operations rather than relying on a generic virtual airline system.",
+      "This is an important milestone in the development of British Midland Virtual and represents another step towards creating a fully connected airline operation."
+    ],
+    "image": "assets/images/news/acars.jpg",
+    "author": "British Midland Development",
+    "tags": [
+      "ACARS",
       "Operations",
-      "Expansion"
+      "Development",
+      "Alpha",
+      "Technology"
+    ]
+  },
+  {
+    "id": 10,
+    "featured": false,
+    "published": "2026-08-29",
+    "category": "Fleet",
+    "title": "Pioneer Class Launches with the Airbus A350",
+    "summary": "British Midland Virtual launches Pioneer Class, introducing the Airbus A350 as a new generation of long-haul flying.",
+    "content": [
+      "British Midland Virtual is proud to announce the launch of Pioneer Class, introducing the Airbus A350 to our growing fleet.",
+      "Pioneer Class represents the next generation of British Midland long-haul flying, built around the Airbus A350-1000 and designed to expand our capabilities beyond the European network.",
+      "The A350 brings a modern widebody aircraft into the British Midland fleet and provides a new platform for long-haul operations from our Birmingham hub.",
+      "The introduction of Pioneer Class forms part of our wider fleet development strategy, complementing our existing Airbus narrowbody fleet while establishing a dedicated long-haul identity.",
+      "The aircraft will open new opportunities for international operations and allow British Midland to connect Birmingham with destinations further afield.",
+      "Pioneer Class marks an important milestone in the continued evolution of British Midland Virtual and begins a new chapter for our long-haul operation."
+    ],
+    "image": "assets/images/news/pioneer-class.jpg",
+    "author": "British Midland Fleet Management",
+    "tags": [
+      "Fleet",
+      "Pioneer Class",
+      "A350",
+      "A350-1000",
+      "Long Haul"
+    ]
+  },
+  {
+    "id": 11,
+    "featured": false,
+    "hidden": true,
+    "published": "2026-08-29",
+    "category": "Fleet",
+    "title": "Foundry Class — The Next Generation of Regional Flying",
+    "summary": "British Midland Virtual prepares to introduce Foundry Class, bringing the Fokker 100 and ATR 72 into the Group's regional operation.",
+    "content": [
+      "A new chapter of regional flying is taking shape within British Midland Group with the development of Foundry Class.",
+      "Foundry Class will introduce two aircraft types to the regional operation: the Fokker 100 and ATR 72.",
+      "The aircraft will provide additional flexibility for regional and short-haul flying, complementing the wider Group fleet and allowing operations to be tailored to routes where frequency, capacity and regional connectivity are key.",
+      "The Fokker 100 and ATR 72 will form an important part of the regional aviation strategy, providing new opportunities for British Midland Regional Ltd as the operation develops.",
+      "Further details regarding aircraft allocations, routes and entry into service will be announced ahead of the public launch.",
+      "Foundry Class represents another step in the development of a diverse aviation organisation capable of operating across mainline, regional and cargo markets."
+    ],
+    "image": "assets/images/news/foundry-class.jpg",
+    "author": "British Midland Fleet Management",
+    "tags": [
+      "Fleet",
+      "Foundry Class",
+      "Fokker 100",
+      "ATR 72",
+      "Regional"
     ]
   }
 ]
