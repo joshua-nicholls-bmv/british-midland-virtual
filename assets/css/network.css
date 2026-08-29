@@ -1272,7 +1272,29 @@
     }
 
 }
+/* ==========================================================
+   NETWORK HERO — HEADER CLEARANCE FIX
+========================================================== */
 
+.network-hero {
+    padding-top: 230px !important;
+    padding-bottom: 120px !important;
+}
+
+.network-hero .container {
+    position: relative;
+    z-index: 2;
+}
+
+.network-hero .hero-kicker {
+    display: block;
+    margin-top: 0 !important;
+    margin-bottom: 24px !important;
+}
+
+.network-hero h1 {
+    margin-top: 0 !important;
+}
 
 /* ==========================================================
    END OF NETWORK.CSS
