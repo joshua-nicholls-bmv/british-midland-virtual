@@ -339,15 +339,12 @@ async function loadFlightTracks() {
 
         if (!track) {
             track = L.polyline(points, trackOptions);
-            track.addTo(liveMap);
             liveTracks.set(flightId, track);
         } else {
             track.setLatLngs(points);
             track.setStyle(trackOptions);
         }
 
-        const marker = liveMarkers.get(flightId);
-        if (marker) marker.bringToFront();
     });
 
     liveTracks.forEach((track, flightId) => {
@@ -361,15 +358,26 @@ async function loadFlightTracks() {
 function highlightTrackForSelection() {
     liveTracks.forEach((track, flightId) => {
         const isSelected =
+            selectedFlightId &&
             flightId === selectedFlightId;
 
-        track.setStyle({
-            color: "#d02823",
-            weight: isSelected ? 4 : 2,
-            opacity: isSelected ? 0.95 : 0.55,
-            lineCap: "round",
-            lineJoin: "round"
-        });
+        if (isSelected) {
+            if (!liveMap.hasLayer(track)) {
+                track.addTo(liveMap);
+            }
+
+            track.setStyle({
+                color: "#d02823",
+                weight: 4,
+                opacity: 0.95,
+                lineCap: "round",
+                lineJoin: "round"
+            });
+        } else {
+            if (liveMap.hasLayer(track)) {
+                liveMap.removeLayer(track);
+            }
+        }
     });
 }
 
@@ -580,7 +588,16 @@ async function loadLiveFlights() {
 
     updateAircraftMarkers();
 
-    await loadFlightTracks();
+    // Track history is supplementary and must never interrupt ACARS.
+    try {
+        await loadFlightTracks();
+    }
+    catch (trackError) {
+        console.error(
+            "Track history failed (ACARS remains operational):",
+            trackError
+        );
+    }
 
     renderFlightSidebar();
     renderSelectedFlight();
