@@ -32,12 +32,20 @@ const acarsFlightCount = document.getElementById("acarsFlightCount");
 const acarsFlightTime = document.getElementById("acarsFlightTime");
 const acarsLastSubmission = document.getElementById("acarsLastSubmission");
 
-const liveStatusBar = document.querySelector(".live-status-bar");
+const liveStatusBar =
+    document.querySelector(".live-status-bar");
 
-const liveMapContainer = document.getElementById("liveMap");
-const liveFlightList = document.getElementById("liveFlights");
-const selectedFlightPanel = document.getElementById("selectedFlight");
-const liveAircraftCount = document.getElementById("liveAircraftCount");
+const liveMapContainer =
+    document.getElementById("liveMap");
+
+const liveFlightList =
+    document.getElementById("liveFlights");
+
+const selectedFlightPanel =
+    document.getElementById("selectedFlight");
+
+const liveAircraftCount =
+    document.getElementById("liveAircraftCount");
 
 let liveMap = null;
 let liveMarkers = new Map();
@@ -47,83 +55,157 @@ let selectedFlightId = null;
 let liveRefreshTimer = null;
 let firstMapLoad = true;
 
+
+// ============================================================
+// FORMATTING
+// ============================================================
+
 function formatNumber(value) {
+
     const number = Number(value);
-    if (!Number.isFinite(number)) return "—";
+
+    if (!Number.isFinite(number))
+        return "—";
+
     return number.toLocaleString("en-GB");
 }
 
+
 function formatFlightTime(hours, remainingMinutes) {
-    const safeHours = Number(hours) || 0;
-    const safeMinutes = Number(remainingMinutes) || 0;
+
+    const safeHours =
+        Number(hours) || 0;
+
+    const safeMinutes =
+        Number(remainingMinutes) || 0;
+
     return `${safeHours}h ${String(safeMinutes).padStart(2, "0")}m`;
 }
 
+
 function formatBlockTime(minutes) {
-    const totalMinutes = Number(minutes);
-    if (!Number.isFinite(totalMinutes)) return "—";
 
-    const hours = Math.floor(totalMinutes / 60);
-    const mins = totalMinutes % 60;
+    const totalMinutes =
+        Number(minutes);
 
-    if (hours === 0) return `${mins}m`;
+    if (!Number.isFinite(totalMinutes))
+        return "—";
+
+    const hours =
+        Math.floor(totalMinutes / 60);
+
+    const mins =
+        totalMinutes % 60;
+
+    if (hours === 0)
+        return `${mins}m`;
 
     return `${hours}h ${String(mins).padStart(2, "0")}m`;
 }
 
+
 function formatLandingRate(value) {
-    const landingRate = Number(value);
-    if (!Number.isFinite(landingRate)) return "—";
+
+    const landingRate =
+        Number(value);
+
+    if (!Number.isFinite(landingRate))
+        return "—";
+
     return `${landingRate.toLocaleString("en-GB")}`;
 }
 
+
 function getLandingClass(value) {
-    const rate = Math.abs(Number(value));
-    if (!Number.isFinite(rate)) return "";
-    if (rate <= 300) return "landing-good";
-    if (rate <= 600) return "landing-medium";
+
+    const rate =
+        Math.abs(Number(value));
+
+    if (!Number.isFinite(rate))
+        return "";
+
+    if (rate <= 300)
+        return "landing-good";
+
+    if (rate <= 600)
+        return "landing-medium";
+
     return "landing-hard";
 }
 
+
 function getScoreClass(score) {
-    const value = Number(score);
-    if (!Number.isFinite(value)) return "";
-    if (value >= 90) return "";
-    if (value >= 75) return "score-medium";
+
+    const value =
+        Number(score);
+
+    if (!Number.isFinite(value))
+        return "";
+
+    if (value >= 90)
+        return "";
+
+    if (value >= 75)
+        return "score-medium";
+
     return "score-low";
 }
 
+
 function formatDateTime(value) {
-    if (!value) return "—";
 
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "—";
+    if (!value)
+        return "—";
 
-    return new Intl.DateTimeFormat("en-GB", {
-        day: "2-digit",
-        month: "short",
-        year: "numeric",
-        hour: "2-digit",
-        minute: "2-digit"
-    }).format(date);
+    const date =
+        new Date(value);
+
+    if (Number.isNaN(date.getTime()))
+        return "—";
+
+    return new Intl.DateTimeFormat(
+        "en-GB",
+        {
+            day: "2-digit",
+            month: "short",
+            year: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    ).format(date);
 }
+
 
 function formatShortDate(value) {
-    if (!value) return "—";
 
-    const date = new Date(value);
-    if (Number.isNaN(date.getTime())) return "—";
+    if (!value)
+        return "—";
 
-    return new Intl.DateTimeFormat("en-GB", {
-        day: "2-digit",
-        month: "short",
-        hour: "2-digit",
-        minute: "2-digit"
-    }).format(date);
+    const date =
+        new Date(value);
+
+    if (Number.isNaN(date.getTime()))
+        return "—";
+
+    return new Intl.DateTimeFormat(
+        "en-GB",
+        {
+            day: "2-digit",
+            month: "short",
+            hour: "2-digit",
+            minute: "2-digit"
+        }
+    ).format(date);
 }
 
+
 function escapeHtml(value) {
-    if (value === null || value === undefined) return "";
+
+    if (
+        value === null ||
+        value === undefined
+    )
+        return "";
 
     return String(value)
         .replaceAll("&", "&amp;")
@@ -133,53 +215,144 @@ function escapeHtml(value) {
         .replaceAll("'", "&#039;");
 }
 
+
 function formatAircraftName(value) {
-    if (!value) return "—";
 
-    const aircraft = String(value);
+    if (!value)
+        return "—";
 
-    if (aircraft.toLowerCase().includes("a319"))
+    const aircraft =
+        String(value);
+
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("a319")
+    )
         return "Airbus A319";
 
-    if (aircraft.toLowerCase().includes("a320neo"))
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("a320neo")
+    )
         return "Airbus A320neo";
 
-    if (aircraft.toLowerCase().includes("a320"))
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("a320")
+    )
         return "Airbus A320";
 
-    if (aircraft.toLowerCase().includes("a321"))
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("a321")
+    )
         return "Airbus A321";
 
-    if (aircraft.toLowerCase().includes("a350"))
-        return "Airbus A350";
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("a330")
+    )
+        return "Airbus A330";
+
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("a340")
+    )
+        return "Airbus A340";
+
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("f100")
+    )
+        return "Fokker 100";
+
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("atr72")
+    )
+        return "ATR 72";
+
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("atr 72")
+    )
+        return "ATR 72";
+
+    if (
+        aircraft
+            .toLowerCase()
+            .includes("dh8")
+    )
+        return "Dash 8";
 
     return aircraft;
 }
 
-function setConnectionStatus(state, message) {
+
+// ============================================================
+// LIVE CONNECTION STATUS
+// ============================================================
+
+function setConnectionStatus(
+    state,
+    message
+) {
+
     if (operationsStatus)
-        operationsStatus.textContent = message;
+        operationsStatus.textContent =
+            message;
 
-    if (!liveStatusBar) return;
+    if (!liveStatusBar)
+        return;
 
-    liveStatusBar.classList.remove("connected", "error");
+    liveStatusBar.classList.remove(
+        "connected",
+        "error"
+    );
 
     if (state === "connected")
-        liveStatusBar.classList.add("connected");
+        liveStatusBar.classList.add(
+            "connected"
+        );
 
     if (state === "error")
-        liveStatusBar.classList.add("error");
+        liveStatusBar.classList.add(
+            "error"
+        );
 }
 
+
+// ============================================================
+// LIVE MAP
+// ============================================================
+
 async function initialiseLiveMap() {
-    if (!liveMapContainer) return;
 
-    liveMap = L.map("liveMap", {
-        zoomControl: true,
-        attributionControl: false
-    });
+    if (!liveMapContainer)
+        return;
 
-    liveMap.setView([52.4539, -1.7480], 6);
+    liveMap =
+        L.map(
+            "liveMap",
+            {
+                zoomControl: true,
+                attributionControl: false
+            }
+        );
+
+    liveMap.setView(
+        [52.4539, -1.7480],
+        6
+    );
 
     L.tileLayer(
         "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
@@ -189,350 +362,848 @@ async function initialiseLiveMap() {
     ).addTo(liveMap);
 }
 
-const aircraftSvg = `
-<svg
-    viewBox="0 0 64 64"
-    xmlns="http://www.w3.org/2000/svg"
-    aria-hidden="true"
-    width="28"
-    height="28"
->
-    <path
-        fill="#d02823"
-        stroke="#ffffff"
-        stroke-width="1.2"
-        stroke-linejoin="round"
-        d="
-        M32 3
-        C29.8 3 28.5 5.2 28.1 8
-        L25.9 25
-        L8.5 34.5
-        C7.2 35.2 6.5 36.5 6.8 37.8
-        L7.4 40.2
-        L27.1 35.7
-        L28.1 50
-        L20.8 55
-        L21.5 58
-        L32 55
-        L42.5 58
-        L43.2 55
-        L35.9 50
-        L36.9 35.7
-        L56.6 40.2
-        L57.2 37.8
-        C57.5 36.5 56.8 35.2 55.5 34.5
-        L38.1 25
-        L35.9 8
-        C35.5 5.2 34.2 3 32 3
-        Z
-        "
-    />
-</svg>
-`;
 
-function createAircraftIcon(heading = 0) {
-    const hdg = Number(heading) || 0;
+// ============================================================
+// AIRCRAFT ICONS
+// ============================================================
+
+const AIRCRAFT_ICON_BASE =
+    "assets/images/aircraft/";
+
+
+function isEuropeanCargoFlight(flight) {
+
+    const flightNumber =
+        String(
+            flight?.flight_number || ""
+        ).toUpperCase();
+
+    return flightNumber.startsWith("ECV");
+}
+
+
+function getAircraftIconPath(flight) {
+
+    const flightNumber =
+        String(
+            flight?.flight_number || ""
+        ).toUpperCase();
+
+    const aircraft =
+        String(
+            flight?.aircraft || ""
+        ).toLowerCase();
+
+
+    // --------------------------------------------------------
+    // EUROPEAN CARGO
+    // ECV always receives the A340 icon
+    // --------------------------------------------------------
+
+    if (
+        flightNumber.startsWith("ECV")
+    ) {
+        return AIRCRAFT_ICON_BASE +
+            "a340.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // FOKKER 100
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("f100") ||
+        aircraft.includes("fokker 100")
+    ) {
+        return AIRCRAFT_ICON_BASE +
+            "f100.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // A330
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("a330")
+    ) {
+        return AIRCRAFT_ICON_BASE +
+            "a330.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // TURBOPROP
+    // ATR72 / DH8 / DASH 8
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("atr72") ||
+        aircraft.includes("atr 72") ||
+        aircraft.includes("dh8") ||
+        aircraft.includes("dash 8") ||
+        aircraft.includes("turboprop")
+    ) {
+        return AIRCRAFT_ICON_BASE +
+            "dh8a.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // A319 / A320 / A321
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("a319") ||
+        aircraft.includes("a320") ||
+        aircraft.includes("a321")
+    ) {
+        return AIRCRAFT_ICON_BASE +
+            "a320.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // DEFAULT
+    // --------------------------------------------------------
+
+    return AIRCRAFT_ICON_BASE +
+        "a320.svg";
+}
+
+
+function createAircraftIcon(flight) {
+
+    const heading =
+        Number(
+            flight?.heading
+        ) || 0;
+
+    const iconPath =
+        getAircraftIconPath(
+            flight
+        );
 
     return L.divIcon({
-        className: "bm-aircraft",
+
+        className:
+            "bm-aircraft",
+
         html: `
             <div style="
-                width:32px;
-                height:32px;
+                width:36px;
+                height:36px;
                 display:flex;
                 align-items:center;
                 justify-content:center;
-                transform:rotate(${hdg}deg);
+                transform:rotate(${heading}deg);
                 transform-origin:center center;
             ">
-                ${aircraftSvg}
+                <img
+                    src="${iconPath}"
+                    width="36"
+                    height="36"
+                    draggable="false"
+                    alt=""
+                    style="
+                        display:block;
+                        width:36px;
+                        height:36px;
+                        pointer-events:none;
+                    "
+                >
             </div>
         `,
-        iconSize: [32, 32],
-        iconAnchor: [16, 16],
-        popupAnchor: [0, -16]
+
+        iconSize: [
+            36,
+            36
+        ],
+
+        iconAnchor: [
+            18,
+            18
+        ],
+
+        popupAnchor: [
+            0,
+            -18
+        ]
     });
 }
 
+
+// ============================================================
+// TRACK COLOUR
+// ============================================================
+
+function getTrackColour(flight) {
+
+    if (
+        isEuropeanCargoFlight(
+            flight
+        )
+    ) {
+        return "#8994A1";
+    }
+
+    return "#d02823";
+}
+
+
+// ============================================================
+// LOAD FLIGHT TRACKS
+// ============================================================
+
 async function loadFlightTracks() {
-    if (!liveMap) return;
 
-    const activeFlightIds = liveFlights
-        .map(flight => flight.flight_id)
-        .filter(Boolean);
+    if (!liveMap)
+        return;
 
-    const visibleTrackIds = new Set(activeFlightIds);
 
-    if (activeFlightIds.length === 0) {
-        liveTracks.forEach(track => liveMap.removeLayer(track));
+    const activeFlightIds =
+        liveFlights
+            .map(
+                flight =>
+                    flight.flight_id
+            )
+            .filter(Boolean);
+
+
+    const visibleTrackIds =
+        new Set(
+            activeFlightIds
+        );
+
+
+    if (
+        activeFlightIds.length === 0
+    ) {
+
+        liveTracks.forEach(
+            track => {
+
+                if (
+                    liveMap.hasLayer(
+                        track
+                    )
+                ) {
+                    liveMap.removeLayer(
+                        track
+                    );
+                }
+            }
+        );
+
         liveTracks.clear();
+
         return;
     }
+
 
     const {
         data,
         error
-    } = await supabaseClient
-        .from("flight_track_points")
-        .select(`
-            active_flight_id,
-            latitude,
-            longitude,
-            recorded_at
-        `)
-        .in("active_flight_id", activeFlightIds)
-        .order("recorded_at", { ascending: true });
-
-    if (error) throw error;
-
-    const groupedTracks = new Map();
-
-    (data || []).forEach(point => {
-        if (
-            point.latitude === null ||
-            point.longitude === null
-        ) {
-            return;
-        }
-
-        if (!groupedTracks.has(point.active_flight_id)) {
-            groupedTracks.set(
-                point.active_flight_id,
-                []
-            );
-        }
-
-        groupedTracks
-            .get(point.active_flight_id)
-            .push([
-                Number(point.latitude),
-                Number(point.longitude)
-            ]);
-    });
-
-    activeFlightIds.forEach(flightId => {
-        const points =
-            groupedTracks.get(flightId) || [];
-
-        let track =
-            liveTracks.get(flightId);
-
-        const isSelected =
-            flightId === selectedFlightId;
-
-        const trackOptions = {
-            color: "#d02823",
-            weight: isSelected ? 4 : 2,
-            opacity: isSelected ? 0.95 : 0.55,
-            lineCap: "round",
-            lineJoin: "round",
-            interactive: false
-        };
-
-        if (points.length < 2) {
-            if (track) {
-                liveMap.removeLayer(track);
-                liveTracks.delete(flightId);
-            }
-            return;
-        }
-
-        if (!track) {
-            track = L.polyline(points, trackOptions);
-            liveTracks.set(flightId, track);
-        } else {
-            track.setLatLngs(points);
-            track.setStyle(trackOptions);
-        }
-
-    });
-
-    liveTracks.forEach((track, flightId) => {
-        if (!visibleTrackIds.has(flightId)) {
-            liveMap.removeLayer(track);
-            liveTracks.delete(flightId);
-        }
-    });
-}
-
-function highlightTrackForSelection() {
-    liveTracks.forEach((track, flightId) => {
-        const isSelected =
-            selectedFlightId &&
-            flightId === selectedFlightId;
-
-        if (isSelected) {
-            if (!liveMap.hasLayer(track)) {
-                track.addTo(liveMap);
-            }
-
-            track.setStyle({
-                color: "#d02823",
-                weight: 4,
-                opacity: 0.95,
-                lineCap: "round",
-                lineJoin: "round"
-            });
-        } else {
-            if (liveMap.hasLayer(track)) {
-                liveMap.removeLayer(track);
-            }
-        }
-    });
-}
-
-function updateAircraftMarkers() {
-    if (!liveMap) return;
-
-    const visibleFlights = new Set();
-
-    liveFlights.forEach(flight => {
-        if (
-            flight.latitude === null ||
-            flight.longitude === null
-        ) {
-            return;
-        }
-
-        visibleFlights.add(flight.flight_id);
-
-        let marker =
-            liveMarkers.get(flight.flight_id);
-
-        if (!marker) {
-            marker = L.marker(
-                [
-                    flight.latitude,
-                    flight.longitude
-                ],
+    } =
+        await supabaseClient
+            .from(
+                "flight_track_points"
+            )
+            .select(`
+                active_flight_id,
+                latitude,
+                longitude,
+                recorded_at
+            `)
+            .in(
+                "active_flight_id",
+                activeFlightIds
+            )
+            .order(
+                "recorded_at",
                 {
-                    icon:
-                        createAircraftIcon(
-                            Number(flight.heading)
-                        )
+                    ascending: true
                 }
             );
 
-            marker.addTo(liveMap);
 
-            marker.on("click", () => {
-                selectedFlightId =
-                    flight.flight_id;
+    if (error)
+        throw error;
 
-                renderSelectedFlight();
-                highlightSelectedFlight();
-                highlightTrackForSelection();
-            });
 
-            liveMarkers.set(
-                flight.flight_id,
-                marker
-            );
-        }
+    const groupedTracks =
+        new Map();
 
-        marker.setLatLng([
-            flight.latitude,
-            flight.longitude
-        ]);
 
-        marker.setIcon(
-            createAircraftIcon(
-                Number(flight.heading)
-            )
-        );
+    (data || []).forEach(
+        point => {
 
-        marker.bindPopup(`
-            <div class="live-aircraft-popup">
-                <strong>
-                    ${escapeHtml(
-                        flight.flight_number
-                    )}
-                </strong>
+            if (
+                point.latitude === null ||
+                point.longitude === null
+            ) {
+                return;
+            }
 
-                <div>
-                    ${escapeHtml(
-                        flight.departure
-                    )}
-                    →
-                    ${escapeHtml(
-                        flight.arrival
-                    )}
-                </div>
 
-                <div>
-                    ${escapeHtml(
-                        formatAircraftName(
-                            flight.aircraft
+            if (
+                !groupedTracks.has(
+                    point.active_flight_id
+                )
+            ) {
+
+                groupedTracks.set(
+                    point.active_flight_id,
+                    []
+                );
+            }
+
+
+            groupedTracks
+                .get(
+                    point.active_flight_id
+                )
+                .push(
+                    [
+                        Number(
+                            point.latitude
+                        ),
+                        Number(
+                            point.longitude
                         )
-                    )}
-                </div>
-
-                <div>
-                    ${flight.ground_speed || 0} kt
-                </div>
-
-                <div>
-                    FL ${Math.round(
-                        (flight.altitude || 0) / 100
-                    )}
-                </div>
-            </div>
-        `);
-    });
-
-    liveMarkers.forEach((marker, id) => {
-        if (!visibleFlights.has(id)) {
-            liveMap.removeLayer(marker);
-            liveMarkers.delete(id);
+                    ]
+                );
         }
-    });
+    );
+
+
+    activeFlightIds.forEach(
+        flightId => {
+
+            const flight =
+                liveFlights.find(
+                    item =>
+                        item.flight_id ===
+                        flightId
+                );
+
+
+            const points =
+                groupedTracks.get(
+                    flightId
+                ) || [];
+
+
+            let track =
+                liveTracks.get(
+                    flightId
+                );
+
+
+            const isSelected =
+                flightId ===
+                selectedFlightId;
+
+
+            const trackColour =
+                getTrackColour(
+                    flight
+                );
+
+
+            const trackOptions = {
+
+                color:
+                    trackColour,
+
+                weight:
+                    isSelected
+                        ? 4
+                        : 2,
+
+                opacity:
+                    isSelected
+                        ? 0.95
+                        : 0.55,
+
+                lineCap:
+                    "round",
+
+                lineJoin:
+                    "round",
+
+                interactive:
+                    false
+            };
+
+
+            // ------------------------------------------------
+            // Not enough points for a line
+            // ------------------------------------------------
+
+            if (
+                points.length < 2
+            ) {
+
+                if (track) {
+
+                    if (
+                        liveMap.hasLayer(
+                            track
+                        )
+                    ) {
+                        liveMap.removeLayer(
+                            track
+                        );
+                    }
+
+                    liveTracks.delete(
+                        flightId
+                    );
+                }
+
+                return;
+            }
+
+
+            // ------------------------------------------------
+            // Create new track
+            // ------------------------------------------------
+
+            if (!track) {
+
+                track =
+                    L.polyline(
+                        points,
+                        trackOptions
+                    );
+
+                liveTracks.set(
+                    flightId,
+                    track
+                );
+
+            }
+
+            // ------------------------------------------------
+            // Update existing track
+            // ------------------------------------------------
+
+            else {
+
+                track.setLatLngs(
+                    points
+                );
+
+                track.setStyle(
+                    trackOptions
+                );
+            }
+
+
+            // ------------------------------------------------
+            // IMPORTANT:
+            // Tracks are ONLY visible when selected.
+            // ------------------------------------------------
+
+            if (
+                isSelected
+            ) {
+
+                if (
+                    !liveMap.hasLayer(
+                        track
+                    )
+                ) {
+                    track.addTo(
+                        liveMap
+                    );
+                }
+
+            }
+
+            else {
+
+                if (
+                    liveMap.hasLayer(
+                        track
+                    )
+                ) {
+                    liveMap.removeLayer(
+                        track
+                    );
+                }
+            }
+        }
+    );
+
+
+    // --------------------------------------------------------
+    // Remove tracks belonging to flights no longer active
+    // --------------------------------------------------------
+
+    liveTracks.forEach(
+        (track, flightId) => {
+
+            if (
+                !visibleTrackIds.has(
+                    flightId
+                )
+            ) {
+
+                if (
+                    liveMap.hasLayer(
+                        track
+                    )
+                ) {
+                    liveMap.removeLayer(
+                        track
+                    );
+                }
+
+                liveTracks.delete(
+                    flightId
+                );
+            }
+        }
+    );
+}
+
+
+// ============================================================
+// TRACK SELECTION
+// ============================================================
+
+function highlightTrackForSelection() {
+
+    liveTracks.forEach(
+        (track, flightId) => {
+
+            const isSelected =
+                selectedFlightId &&
+                flightId ===
+                    selectedFlightId;
+
+
+            const flight =
+                liveFlights.find(
+                    item =>
+                        item.flight_id ===
+                        flightId
+                );
+
+
+            if (isSelected) {
+
+                if (
+                    !liveMap.hasLayer(
+                        track
+                    )
+                ) {
+                    track.addTo(
+                        liveMap
+                    );
+                }
+
+
+                track.setStyle({
+
+                    color:
+                        getTrackColour(
+                            flight
+                        ),
+
+                    weight:
+                        4,
+
+                    opacity:
+                        0.95,
+
+                    lineCap:
+                        "round",
+
+                    lineJoin:
+                        "round"
+                });
+
+            }
+
+            else {
+
+                if (
+                    liveMap.hasLayer(
+                        track
+                    )
+                ) {
+                    liveMap.removeLayer(
+                        track
+                    );
+                }
+            }
+        }
+    );
+}
+
+
+// ============================================================
+// AIRCRAFT MARKERS
+// ============================================================
+
+function updateAircraftMarkers() {
+
+    if (!liveMap)
+        return;
+
+
+    const visibleFlights =
+        new Set();
+
+
+    liveFlights.forEach(
+        flight => {
+
+            if (
+                flight.latitude === null ||
+                flight.longitude === null
+            ) {
+                return;
+            }
+
+
+            visibleFlights.add(
+                flight.flight_id
+            );
+
+
+            let marker =
+                liveMarkers.get(
+                    flight.flight_id
+                );
+
+
+            // ------------------------------------------------
+            // CREATE MARKER
+            // ------------------------------------------------
+
+            if (!marker) {
+
+                marker =
+                    L.marker(
+                        [
+                            flight.latitude,
+                            flight.longitude
+                        ],
+                        {
+                            icon:
+                                createAircraftIcon(
+                                    flight
+                                )
+                        }
+                    );
+
+
+                marker.addTo(
+                    liveMap
+                );
+
+
+                marker.on(
+                    "click",
+                    () => {
+
+                        selectedFlightId =
+                            flight.flight_id;
+
+                        renderSelectedFlight();
+
+                        highlightSelectedFlight();
+
+                        highlightTrackForSelection();
+                    }
+                );
+
+
+                liveMarkers.set(
+                    flight.flight_id,
+                    marker
+                );
+            }
+
+
+            // ------------------------------------------------
+            // UPDATE POSITION
+            // ------------------------------------------------
+
+            marker.setLatLng(
+                [
+                    flight.latitude,
+                    flight.longitude
+                ]
+            );
+
+
+            // ------------------------------------------------
+            // UPDATE ICON / HEADING / TYPE
+            // ------------------------------------------------
+
+            marker.setIcon(
+                createAircraftIcon(
+                    flight
+                )
+            );
+
+
+            // ------------------------------------------------
+            // POPUP
+            // ------------------------------------------------
+
+            marker.bindPopup(`
+                <div class="live-aircraft-popup">
+
+                    <strong>
+                        ${escapeHtml(
+                            flight.flight_number
+                        )}
+                    </strong>
+
+                    <div>
+                        ${escapeHtml(
+                            flight.departure
+                        )}
+                        →
+                        ${escapeHtml(
+                            flight.arrival
+                        )}
+                    </div>
+
+                    <div>
+                        ${escapeHtml(
+                            formatAircraftName(
+                                flight.aircraft
+                            )
+                        )}
+                    </div>
+
+                    <div>
+                        ${flight.ground_speed || 0} kt
+                    </div>
+
+                    <div>
+                        FL ${Math.round(
+                            (flight.altitude || 0) / 100
+                        )}
+                    </div>
+
+                </div>
+            `);
+        }
+    );
+
+
+    // --------------------------------------------------------
+    // REMOVE OLD MARKERS
+    // --------------------------------------------------------
+
+    liveMarkers.forEach(
+        (marker, id) => {
+
+            if (
+                !visibleFlights.has(
+                    id
+                )
+            ) {
+
+                if (
+                    liveMap.hasLayer(
+                        marker
+                    )
+                ) {
+                    liveMap.removeLayer(
+                        marker
+                    );
+                }
+
+                liveMarkers.delete(
+                    id
+                );
+            }
+        }
+    );
+
+
+    // --------------------------------------------------------
+    // INITIAL MAP FIT
+    // --------------------------------------------------------
 
     if (
         firstMapLoad &&
         liveFlights.length > 0
     ) {
+
         const bounds =
             L.latLngBounds(
                 liveFlights
                     .filter(
-                        f =>
-                            f.latitude !== null &&
-                            f.longitude !== null
+                        flight =>
+                            flight.latitude !== null &&
+                            flight.longitude !== null
                     )
                     .map(
-                        f => [
-                            f.latitude,
-                            f.longitude
-                        ]
+                        flight =>
+                            [
+                                flight.latitude,
+                                flight.longitude
+                            ]
                     )
             );
 
-        if (bounds.isValid()) {
+
+        if (
+            bounds.isValid()
+        ) {
+
             liveMap.fitBounds(
                 bounds,
                 {
-                    padding: [60, 60]
+                    padding: [
+                        60,
+                        60
+                    ]
                 }
             );
         }
 
-        firstMapLoad = false;
+
+        firstMapLoad =
+            false;
     }
 }
 
+
+// ============================================================
+// LIVE OPERATIONS REFRESH
+// ============================================================
+
 async function refreshLiveOperations() {
+
     try {
+
         await loadLiveFlights();
 
         highlightSelectedFlight();
+
         highlightTrackForSelection();
 
         setConnectionStatus(
             "connected",
             "OPERATIONAL"
         );
+
     }
+
     catch (error) {
+
         console.error(
             "Live Operations refresh failed:",
             error
@@ -545,87 +1216,155 @@ async function refreshLiveOperations() {
     }
 }
 
+
 function startLiveOperations() {
-    if (liveRefreshTimer) {
-        clearInterval(liveRefreshTimer);
+
+    if (
+        liveRefreshTimer
+    ) {
+        clearInterval(
+            liveRefreshTimer
+        );
     }
 
-    liveRefreshTimer = setInterval(
-        refreshLiveOperations,
-        5000
-    );
+
+    liveRefreshTimer =
+        setInterval(
+            refreshLiveOperations,
+            5000
+        );
 }
+
 
 function stopLiveOperations() {
-    if (!liveRefreshTimer) return;
 
-    clearInterval(liveRefreshTimer);
-    liveRefreshTimer = null;
+    if (
+        !liveRefreshTimer
+    )
+        return;
+
+
+    clearInterval(
+        liveRefreshTimer
+    );
+
+    liveRefreshTimer =
+        null;
 }
+
 
 window.addEventListener(
     "beforeunload",
     stopLiveOperations
 );
 
+
+// ============================================================
+// LOAD LIVE FLIGHTS
+// ============================================================
+
 async function loadLiveFlights() {
+
     const {
         data,
         error
-    } = await supabaseClient
-        .from("public_live_operations")
-        .select("*")
-        .order("flight_number");
+    } =
+        await supabaseClient
+            .from(
+                "public_live_operations"
+            )
+            .select("*")
+            .order(
+                "flight_number"
+            );
 
-    if (error) throw error;
 
-    liveFlights = data || [];
+    if (error)
+        throw error;
 
-    if (liveAircraftCount) {
+
+    liveFlights =
+        data || [];
+
+
+    if (
+        liveAircraftCount
+    ) {
         liveAircraftCount.textContent =
             liveFlights.length;
     }
 
+
     updateAircraftMarkers();
 
-    // Track history is supplementary and must never interrupt ACARS.
+
+    // --------------------------------------------------------
+    // Track history is supplementary.
+    // Track failure must NEVER kill ACARS.
+    // --------------------------------------------------------
+
     try {
+
         await loadFlightTracks();
+
     }
+
     catch (trackError) {
+
         console.error(
             "Track history failed (ACARS remains operational):",
             trackError
         );
     }
 
+
     renderFlightSidebar();
+
     renderSelectedFlight();
 }
 
-function renderFlightSidebar() {
-    if (!liveFlightList) return;
 
-    if (liveFlights.length === 0) {
+// ============================================================
+// FLIGHT SIDEBAR
+// ============================================================
+
+function renderFlightSidebar() {
+
+    if (!liveFlightList)
+        return;
+
+
+    if (
+        liveFlights.length === 0
+    ) {
+
         liveFlightList.innerHTML = `
             <div class="loading-flights">
                 No British Midland aircraft are currently online.
             </div>
         `;
+
         return;
     }
 
+
     liveFlightList.innerHTML =
-        liveFlights.map(flight => `
+        liveFlights
+            .map(
+                flight => `
+
             <div
                 class="live-flight-card ${
-                    selectedFlightId === flight.flight_id
+                    selectedFlightId ===
+                    flight.flight_id
                         ? "active"
                         : ""
                 }"
                 data-flight="${flight.flight_id}"
             >
+
                 <div class="live-flight-header">
+
                     <div class="live-flight-number">
                         ${escapeHtml(
                             flight.flight_number
@@ -634,20 +1373,37 @@ function renderFlightSidebar() {
 
                     <div class="live-flight-phase">
                         ${escapeHtml(
-                            flight.flight_phase || "UNKNOWN"
+                            flight.flight_phase ||
+                            "UNKNOWN"
                         )}
                     </div>
+
                 </div>
+
 
                 <div class="live-route">
-                    ${escapeHtml(flight.departure)}
+
+                    ${escapeHtml(
+                        flight.departure
+                    )}
+
                     →
-                    ${escapeHtml(flight.arrival)}
+
+                    ${escapeHtml(
+                        flight.arrival
+                    )}
+
                 </div>
 
+
                 <div class="live-flight-details">
+
                     <div class="live-detail">
-                        <label>Aircraft</label>
+
+                        <label>
+                            Aircraft
+                        </label>
+
                         <span>
                             ${escapeHtml(
                                 formatAircraftName(
@@ -655,88 +1411,151 @@ function renderFlightSidebar() {
                                 )
                             )}
                         </span>
+
                     </div>
 
+
                     <div class="live-detail">
-                        <label>Altitude</label>
+
+                        <label>
+                            Altitude
+                        </label>
+
                         <span>
                             ${(flight.altitude || 0)
-                                .toLocaleString()} ft
+                                .toLocaleString()}
+                            ft
                         </span>
+
                     </div>
 
+
                     <div class="live-detail">
-                        <label>Speed</label>
+
+                        <label>
+                            Speed
+                        </label>
+
                         <span>
-                            ${flight.ground_speed || 0} kt
+                            ${flight.ground_speed || 0}
+                            kt
                         </span>
+
                     </div>
 
+
                     <div class="live-detail">
-                        <label>Heading</label>
+
+                        <label>
+                            Heading
+                        </label>
+
                         <span>
                             ${flight.heading || 0}°
                         </span>
+
                     </div>
+
                 </div>
+
             </div>
-        `).join("");
+        `
+            )
+            .join("");
+
 
     liveFlightList
-        .querySelectorAll(".live-flight-card")
-        .forEach(card => {
-            card.addEventListener(
-                "click",
-                () => {
-                    selectedFlightId =
-                        card.dataset.flight;
+        .querySelectorAll(
+            ".live-flight-card"
+        )
+        .forEach(
+            card => {
 
-                    renderSelectedFlight();
-                    highlightSelectedFlight();
-                    highlightTrackForSelection();
-                }
-            );
-        });
+                card.addEventListener(
+                    "click",
+                    () => {
+
+                        selectedFlightId =
+                            card.dataset.flight;
+
+                        renderSelectedFlight();
+
+                        highlightSelectedFlight();
+
+                        highlightTrackForSelection();
+                    }
+                );
+            }
+        );
 }
+
+
+// ============================================================
+// HIGHLIGHT SELECTED FLIGHT
+// ============================================================
 
 function highlightSelectedFlight() {
-    if (!liveFlightList) return;
+
+    if (!liveFlightList)
+        return;
+
 
     liveFlightList
-        .querySelectorAll(".live-flight-card")
-        .forEach(card => {
-            card.classList.toggle(
-                "active",
-                card.dataset.flight === selectedFlightId
-            );
-        });
+        .querySelectorAll(
+            ".live-flight-card"
+        )
+        .forEach(
+            card => {
+
+                card.classList.toggle(
+                    "active",
+                    card.dataset.flight ===
+                        selectedFlightId
+                );
+            }
+        );
 }
 
+
+// ============================================================
+// SELECTED FLIGHT PANEL
+// ============================================================
+
 function renderSelectedFlight() {
-    if (!selectedFlightPanel) return;
+
+    if (!selectedFlightPanel)
+        return;
+
 
     if (!selectedFlightId) {
+
         selectedFlightPanel.innerHTML = `
             Select an aircraft from the map or list
             to view live information.
         `;
+
         return;
     }
+
 
     const flight =
         liveFlights.find(
-            f =>
-                f.flight_id ===
+            item =>
+                item.flight_id ===
                 selectedFlightId
         );
 
-    if (!flight) {
+
+    if (!flight)
         return;
-    }
+
 
     selectedFlightPanel.innerHTML = `
+
         <div class="selected-flight-content">
+
             <div class="selected-flight-title">
+
                 <h3>
                     ${escapeHtml(
                         flight.flight_number
@@ -748,96 +1567,175 @@ function renderSelectedFlight() {
                         flight.flight_phase
                     )}
                 </span>
+
             </div>
 
+
             <div class="selected-grid">
+
                 <div class="selected-item">
-                    <label>Route</label>
+
+                    <label>
+                        Route
+                    </label>
+
                     <strong>
+
                         ${escapeHtml(
                             flight.departure
                         )}
+
                         →
+
                         ${escapeHtml(
                             flight.arrival
                         )}
+
                     </strong>
+
                 </div>
 
+
                 <div class="selected-item">
-                    <label>Aircraft</label>
+
+                    <label>
+                        Aircraft
+                    </label>
+
                     <strong>
+
                         ${escapeHtml(
                             formatAircraftName(
                                 flight.aircraft
                             )
                         )}
+
                     </strong>
+
                 </div>
 
+
                 <div class="selected-item">
-                    <label>Altitude</label>
+
+                    <label>
+                        Altitude
+                    </label>
+
                     <strong>
+
                         ${(flight.altitude || 0)
-                            .toLocaleString()} ft
+                            .toLocaleString()}
+                        ft
+
                     </strong>
+
                 </div>
 
-                <div class="selected-item">
-                    <label>Ground Speed</label>
-                    <strong>
-                        ${flight.ground_speed || 0} kt
-                    </strong>
-                </div>
 
                 <div class="selected-item">
-                    <label>Heading</label>
+
+                    <label>
+                        Ground Speed
+                    </label>
+
                     <strong>
+
+                        ${flight.ground_speed || 0}
+                        kt
+
+                    </strong>
+
+                </div>
+
+
+                <div class="selected-item">
+
+                    <label>
+                        Heading
+                    </label>
+
+                    <strong>
+
                         ${flight.heading || 0}°
+
                     </strong>
+
                 </div>
 
+
                 <div class="selected-item">
-                    <label>Vertical Speed</label>
+
+                    <label>
+                        Vertical Speed
+                    </label>
+
                     <strong>
-                        ${flight.vertical_speed || 0} fpm
+
+                        ${flight.vertical_speed || 0}
+                        fpm
+
                     </strong>
+
                 </div>
+
             </div>
+
         </div>
     `;
 }
 
+
+// ============================================================
+// OPERATIONS STATISTICS
+// ============================================================
+
 async function loadOperationsStatistics() {
+
     const {
         data,
         error
-    } = await supabaseClient
-        .from("public_operations_statistics")
-        .select("*")
-        .maybeSingle();
+    } =
+        await supabaseClient
+            .from(
+                "public_operations_statistics"
+            )
+            .select("*")
+            .maybeSingle();
+
 
     if (error) {
+
         throw new Error(
             `Statistics request failed: ${error.message}`
         );
     }
 
+
     if (!data) {
+
         throw new Error(
             "No public operations statistics were returned."
         );
     }
 
+
     if (activePilots) {
+
         activePilots.textContent =
-            formatNumber(data.active_pilots);
+            formatNumber(
+                data.active_pilots
+            );
     }
 
+
     if (totalFlights) {
+
         totalFlights.textContent =
-            formatNumber(data.total_flights);
+            formatNumber(
+                data.total_flights
+            );
     }
+
 
     const flightTime =
         formatFlightTime(
@@ -845,83 +1743,123 @@ async function loadOperationsStatistics() {
             data.remaining_minutes
         );
 
+
     if (totalFlightTime) {
+
         totalFlightTime.textContent =
             flightTime;
     }
 
+
     if (totalLandings) {
+
         totalLandings.textContent =
-            formatNumber(data.total_landings);
+            formatNumber(
+                data.total_landings
+            );
     }
 
+
     if (averageLanding) {
+
         averageLanding.textContent =
             formatLandingRate(
                 data.average_landing_rate_fpm
             );
     }
 
+
     if (bestLanding) {
+
         bestLanding.textContent =
             formatLandingRate(
                 data.best_landing_rate_fpm
             );
     }
 
+
     if (totalGoArounds) {
+
         totalGoArounds.textContent =
-            formatNumber(data.total_go_arounds);
+            formatNumber(
+                data.total_go_arounds
+            );
     }
 
+
     if (lastOperation) {
+
         lastOperation.textContent =
             formatDateTime(
                 data.last_operation_at
             );
     }
 
+
     if (acarsPilotCount) {
+
         acarsPilotCount.textContent =
-            formatNumber(data.active_pilots);
+            formatNumber(
+                data.active_pilots
+            );
     }
+
 
     if (acarsFlightCount) {
+
         acarsFlightCount.textContent =
-            formatNumber(data.total_flights);
+            formatNumber(
+                data.total_flights
+            );
     }
 
+
     if (acarsFlightTime) {
+
         acarsFlightTime.textContent =
             flightTime;
     }
 
+
     if (acarsLastSubmission) {
+
         acarsLastSubmission.textContent =
             formatShortDate(
                 data.last_operation_at
             );
     }
 
+
     return data;
 }
 
-function createOperationRow(operation) {
+
+// ============================================================
+// RECENT OPERATION ROW
+// ============================================================
+
+function createOperationRow(
+    operation
+) {
+
     const landingClass =
         getLandingClass(
             operation.landing_rate_fpm
         );
+
 
     const scoreClass =
         getScoreClass(
             operation.flight_score
         );
 
+
     const score =
         operation.flight_score !== null &&
         operation.flight_score !== undefined
             ? operation.flight_score
             : "—";
+
 
     const grade =
         operation.flight_grade
@@ -930,35 +1868,55 @@ function createOperationRow(operation) {
             )}`
             : "";
 
+
     return `
+
         <tr>
+
             <td class="flight-number">
+
                 ${escapeHtml(
-                    operation.flight_number || "—"
+                    operation.flight_number ||
+                    "—"
                 )}
+
             </td>
 
+
             <td>
+
                 <div class="pilot-cell">
+
                     <strong>
+
                         ${escapeHtml(
                             operation.pilot_name ||
                             operation.pilot_id ||
                             "—"
                         )}
+
                     </strong>
 
+
                     <small>
+
                         ${escapeHtml(
-                            operation.pilot_id || ""
+                            operation.pilot_id ||
+                            ""
                         )}
+
                     </small>
+
                 </div>
+
             </td>
 
+
             <td class="route-cell">
+
                 ${escapeHtml(
-                    operation.departure || "—"
+                    operation.departure ||
+                    "—"
                 )}
 
                 <span class="route-arrow">
@@ -966,9 +1924,12 @@ function createOperationRow(operation) {
                 </span>
 
                 ${escapeHtml(
-                    operation.arrival || "—"
+                    operation.arrival ||
+                    "—"
                 )}
+
             </td>
+
 
             <td
                 class="aircraft-cell"
@@ -976,170 +1937,264 @@ function createOperationRow(operation) {
                     operation.aircraft || ""
                 )}"
             >
+
                 ${escapeHtml(
                     formatAircraftName(
                         operation.aircraft
                     )
                 )}
+
             </td>
+
 
             <td class="registration-cell">
+
                 ${escapeHtml(
-                    operation.registration || "—"
+                    operation.registration ||
+                    "—"
                 )}
+
             </td>
 
+
             <td>
+
                 ${escapeHtml(
                     formatBlockTime(
                         operation.block_minutes
                     )
                 )}
+
             </td>
 
+
             <td class="${landingClass}">
+
                 ${
                     operation.landing_rate_fpm !== null &&
                     operation.landing_rate_fpm !== undefined
+
                         ? `${escapeHtml(
                             formatLandingRate(
                                 operation.landing_rate_fpm
                             )
                         )} fpm`
+
                         : "—"
                 }
+
             </td>
 
+
             <td>
-                <span class="score-pill ${scoreClass}">
-                    ${escapeHtml(score)}${grade}
+
+                <span
+                    class="score-pill ${scoreClass}"
+                >
+
+                    ${escapeHtml(
+                        score
+                    )}
+
+                    ${grade}
+
                 </span>
+
             </td>
+
         </tr>
     `;
 }
 
+
+// ============================================================
+// RECENT OPERATIONS
+// ============================================================
+
 async function loadRecentOperations() {
+
     const {
         data,
         error
-    } = await supabaseClient
-        .from("public_recent_operations")
-        .select(`
-            pirep_id,
-            pilot_id,
-            pilot_name,
-            flight_number,
-            departure,
-            arrival,
-            aircraft,
-            registration,
-            block_minutes,
-            airborne_minutes,
-            landing_rate_fpm,
-            flight_score,
-            flight_grade,
-            submitted_at
-        `)
-        .order(
-            "submitted_at",
-            {
-                ascending: false
-            }
-        )
-        .limit(10);
+    } =
+        await supabaseClient
+            .from(
+                "public_recent_operations"
+            )
+            .select(`
+                pirep_id,
+                pilot_id,
+                pilot_name,
+                flight_number,
+                departure,
+                arrival,
+                aircraft,
+                registration,
+                block_minutes,
+                airborne_minutes,
+                landing_rate_fpm,
+                flight_score,
+                flight_grade,
+                submitted_at
+            `)
+            .order(
+                "submitted_at",
+                {
+                    ascending: false
+                }
+            )
+            .limit(10);
+
 
     if (error) {
+
         throw new Error(
             `Recent operations request failed: ${error.message}`
         );
     }
 
-    if (!recentOperations) {
-        return data;
-    }
 
-    if (!data || data.length === 0) {
+    if (!recentOperations)
+        return data;
+
+
+    if (
+        !data ||
+        data.length === 0
+    ) {
+
         recentOperations.innerHTML = `
+
             <tr>
+
                 <td
                     colspan="8"
                     class="operations-empty"
                 >
+
                     NO COMPLETED ACARS OPERATIONS RECORDED
+
                 </td>
+
             </tr>
         `;
 
         return [];
     }
 
+
     recentOperations.innerHTML =
         data
-            .map(createOperationRow)
+            .map(
+                createOperationRow
+            )
             .join("");
+
 
     return data;
 }
 
-function displayOperationsError(error) {
+
+// ============================================================
+// ERROR DISPLAY
+// ============================================================
+
+function displayOperationsError(
+    error
+) {
+
     console.error(
         "British Midland public operations error:",
         error
     );
+
 
     setConnectionStatus(
         "error",
         "DATA UNAVAILABLE"
     );
 
+
     if (recentOperations) {
+
         recentOperations.innerHTML = `
+
             <tr>
+
                 <td
                     colspan="8"
                     class="operations-error"
                 >
+
                     ACARS DATA TEMPORARILY UNAVAILABLE
+
                 </td>
+
             </tr>
         `;
     }
 }
 
+
+// ============================================================
+// INITIALISE OPERATIONS
+// ============================================================
+
 async function initialiseOperations() {
+
     console.log(
         "British Midland Operations Centre loading..."
     );
+
 
     setConnectionStatus(
         "connecting",
         "CONNECTING"
     );
 
+
     try {
+
         await Promise.all([
+
             loadOperationsStatistics(),
+
             loadRecentOperations(),
+
             initialiseLiveMap(),
+
             loadLiveFlights()
+
         ]);
 
+
         startLiveOperations();
+
 
         setConnectionStatus(
             "connected",
             "OPERATIONAL"
         );
 
+
         console.log(
             "British Midland public ACARS data loaded successfully."
         );
+
     }
+
     catch (error) {
-        displayOperationsError(error);
+
+        displayOperationsError(
+            error
+        );
     }
 }
+
+
+// ============================================================
+// DOM READY
+// ============================================================
 
 document.addEventListener(
     "DOMContentLoaded",
