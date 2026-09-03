@@ -302,16 +302,20 @@ function createAircraftIcon(flight) {
     const heading =
         Number(flight.heading) || 0;
 
-    const iconPath =
+    const iconFile =
         getAircraftIconFile(flight);
 
     const iconColour =
         getFlightColour(flight);
 
+    const filter =
+        isEuropeanCargoFlight(flight)
+            ? "brightness(0) saturate(100%) invert(61%) sepia(7%) saturate(400%) hue-rotate(174deg) brightness(91%) contrast(87%)"
+            : "brightness(0) saturate(100%) invert(20%) sepia(91%) saturate(3177%) hue-rotate(351deg) brightness(87%) contrast(88%)";
+
     return L.divIcon({
 
-        className:
-            "bm-aircraft",
+        className: "bm-aircraft",
 
         html: `
             <div style="
@@ -324,23 +328,21 @@ function createAircraftIcon(flight) {
                 transform-origin:center center;
             ">
 
-                <div style="
-                    width:28px;
-                    height:28px;
-                    background-color:${iconColour};
-
-                    -webkit-mask-image:url('${iconPath}');
-                    mask-image:url('${iconPath}');
-
-                    -webkit-mask-repeat:no-repeat;
-                    mask-repeat:no-repeat;
-
-                    -webkit-mask-position:center;
-                    mask-position:center;
-
-                    -webkit-mask-size:contain;
-                    mask-size:contain;
-                "></div>
+                <img
+                    src="/assets/images/aircraft/${iconFile}"
+                    width="32"
+                    height="32"
+                    alt=""
+                    draggable="false"
+                    style="
+                        display:block;
+                        width:32px;
+                        height:32px;
+                        object-fit:contain;
+                        filter:${filter};
+                        -webkit-filter:${filter};
+                    "
+                />
 
             </div>
         `,
