@@ -298,14 +298,20 @@ async function initialiseLiveMap() {
 // ============================================================
 
 function createAircraftIcon(flight) {
+
     const heading =
         Number(flight.heading) || 0;
 
-    const iconFile =
+    const iconPath =
         getAircraftIconFile(flight);
 
+    const iconColour =
+        getFlightColour(flight);
+
     return L.divIcon({
-        className: "bm-aircraft",
+
+        className:
+            "bm-aircraft",
 
         html: `
             <div style="
@@ -317,26 +323,35 @@ function createAircraftIcon(flight) {
                 transform:rotate(${heading}deg);
                 transform-origin:center center;
             ">
-                <img
-                    src="/assets/images/aircraft/${iconFile}"
-                    width="32"
-                    height="32"
-                    style="
-                        display:block;
-                        width:32px;
-                        height:32px;
-                    "
-                    alt=""
-                >
+
+                <div style="
+                    width:28px;
+                    height:28px;
+                    background-color:${iconColour};
+
+                    -webkit-mask-image:url('${iconPath}');
+                    mask-image:url('${iconPath}');
+
+                    -webkit-mask-repeat:no-repeat;
+                    mask-repeat:no-repeat;
+
+                    -webkit-mask-position:center;
+                    mask-position:center;
+
+                    -webkit-mask-size:contain;
+                    mask-size:contain;
+                "></div>
+
             </div>
         `,
 
         iconSize: [32, 32],
+
         iconAnchor: [16, 16],
+
         popupAnchor: [0, -16]
     });
 }
-
 
 // ============================================================
 // FLIGHT TRACKS
