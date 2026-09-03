@@ -16,21 +16,47 @@ const supabaseClient =
         SUPABASE_PUBLISHABLE_KEY
     );
 
-const activePilots = document.getElementById("activePilots");
-const totalFlights = document.getElementById("totalFlights");
-const totalFlightTime = document.getElementById("totalFlightTime");
-const totalLandings = document.getElementById("totalLandings");
-const averageLanding = document.getElementById("averageLanding");
-const bestLanding = document.getElementById("bestLanding");
-const totalGoArounds = document.getElementById("totalGoArounds");
-const lastOperation = document.getElementById("lastOperation");
-const operationsStatus = document.getElementById("operationsStatus");
-const recentOperations = document.getElementById("recentOperations");
+const activePilots =
+    document.getElementById("activePilots");
 
-const acarsPilotCount = document.getElementById("acarsPilotCount");
-const acarsFlightCount = document.getElementById("acarsFlightCount");
-const acarsFlightTime = document.getElementById("acarsFlightTime");
-const acarsLastSubmission = document.getElementById("acarsLastSubmission");
+const totalFlights =
+    document.getElementById("totalFlights");
+
+const totalFlightTime =
+    document.getElementById("totalFlightTime");
+
+const totalLandings =
+    document.getElementById("totalLandings");
+
+const averageLanding =
+    document.getElementById("averageLanding");
+
+const bestLanding =
+    document.getElementById("bestLanding");
+
+const totalGoArounds =
+    document.getElementById("totalGoArounds");
+
+const lastOperation =
+    document.getElementById("lastOperation");
+
+const operationsStatus =
+    document.getElementById("operationsStatus");
+
+const recentOperations =
+    document.getElementById("recentOperations");
+
+const acarsPilotCount =
+    document.getElementById("acarsPilotCount");
+
+const acarsFlightCount =
+    document.getElementById("acarsFlightCount");
+
+const acarsFlightTime =
+    document.getElementById("acarsFlightTime");
+
+const acarsLastSubmission =
+    document.getElementById("acarsLastSubmission");
 
 const liveStatusBar =
     document.querySelector(".live-status-bar");
@@ -48,11 +74,17 @@ const liveAircraftCount =
     document.getElementById("liveAircraftCount");
 
 let liveMap = null;
+
 let liveMarkers = new Map();
+
 let liveTracks = new Map();
+
 let liveFlights = [];
+
 let selectedFlightId = null;
+
 let liveRefreshTimer = null;
+
 let firstMapLoad = true;
 
 
@@ -79,7 +111,9 @@ function formatFlightTime(hours, remainingMinutes) {
     const safeMinutes =
         Number(remainingMinutes) || 0;
 
-    return `${safeHours}h ${String(safeMinutes).padStart(2, "0")}m`;
+    return `${safeHours}h ${String(
+        safeMinutes
+    ).padStart(2, "0")}m`;
 }
 
 
@@ -100,7 +134,9 @@ function formatBlockTime(minutes) {
     if (hours === 0)
         return `${mins}m`;
 
-    return `${hours}h ${String(mins).padStart(2, "0")}m`;
+    return `${hours}h ${String(
+        mins
+    ).padStart(2, "0")}m`;
 }
 
 
@@ -112,7 +148,9 @@ function formatLandingRate(value) {
     if (!Number.isFinite(landingRate))
         return "—";
 
-    return `${landingRate.toLocaleString("en-GB")}`;
+    return `${landingRate.toLocaleString(
+        "en-GB"
+    )}`;
 }
 
 
@@ -204,8 +242,9 @@ function escapeHtml(value) {
     if (
         value === null ||
         value === undefined
-    )
+    ) {
         return "";
+    }
 
     return String(value)
         .replaceAll("&", "&amp;")
@@ -215,6 +254,10 @@ function escapeHtml(value) {
         .replaceAll("'", "&#039;");
 }
 
+
+// ============================================================
+// AIRCRAFT FORMATTING
+// ============================================================
 
 function formatAircraftName(value) {
 
@@ -228,78 +271,196 @@ function formatAircraftName(value) {
         aircraft
             .toLowerCase()
             .includes("a319")
-    )
+    ) {
         return "Airbus A319";
+    }
 
     if (
         aircraft
             .toLowerCase()
             .includes("a320neo")
-    )
+    ) {
         return "Airbus A320neo";
+    }
 
     if (
         aircraft
             .toLowerCase()
             .includes("a320")
-    )
+    ) {
         return "Airbus A320";
+    }
 
     if (
         aircraft
             .toLowerCase()
             .includes("a321")
-    )
+    ) {
         return "Airbus A321";
+    }
 
     if (
         aircraft
             .toLowerCase()
             .includes("a330")
-    )
+    ) {
         return "Airbus A330";
+    }
 
     if (
         aircraft
             .toLowerCase()
             .includes("a340")
-    )
+    ) {
         return "Airbus A340";
+    }
 
     if (
         aircraft
             .toLowerCase()
             .includes("f100")
-    )
+    ) {
         return "Fokker 100";
+    }
 
     if (
         aircraft
             .toLowerCase()
-            .includes("atr72")
-    )
+            .includes("atr")
+    ) {
         return "ATR 72";
-
-    if (
-        aircraft
-            .toLowerCase()
-            .includes("atr 72")
-    )
-        return "ATR 72";
+    }
 
     if (
         aircraft
             .toLowerCase()
             .includes("dh8")
-    )
+    ) {
         return "Dash 8";
+    }
 
     return aircraft;
 }
 
 
 // ============================================================
-// LIVE CONNECTION STATUS
+// AIRCRAFT OPERATOR / ICON LOGIC
+// ============================================================
+
+function isECVFlight(flight) {
+
+    const flightNumber =
+        String(
+            flight.flight_number || ""
+        ).toUpperCase();
+
+    return flightNumber.startsWith("ECV");
+}
+
+
+function getAircraftIconPath(flight) {
+
+    const aircraft =
+        String(
+            flight.aircraft || ""
+        ).toLowerCase();
+
+    // --------------------------------------------------------
+    // EUROPEAN CARGO
+    // All ECV flights use the A340 icon
+    // --------------------------------------------------------
+
+    if (isECVFlight(flight)) {
+
+        return "/assets/images/aircraft/a340.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // FOKKER 100
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("f100") ||
+        aircraft.includes("fokker 100")
+    ) {
+
+        return "/assets/images/aircraft/f100.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // AIRBUS A330
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("a330")
+    ) {
+
+        return "/assets/images/aircraft/a330.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // AIRBUS A340
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("a340")
+    ) {
+
+        return "/assets/images/aircraft/a340.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // TURBOPROP / ATR 72
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("atr") ||
+        aircraft.includes("dh8") ||
+        aircraft.includes("dash 8") ||
+        aircraft.includes("turboprop")
+    ) {
+
+        return "/assets/images/aircraft/dh8a.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // A319 / A320 / A321
+    // --------------------------------------------------------
+
+    if (
+        aircraft.includes("a319") ||
+        aircraft.includes("a320") ||
+        aircraft.includes("a321")
+    ) {
+
+        return "/assets/images/aircraft/a320.svg";
+    }
+
+
+    // --------------------------------------------------------
+    // DEFAULT
+    // --------------------------------------------------------
+
+    return "/assets/images/aircraft/a320.svg";
+}
+
+
+function getAircraftColour(flight) {
+
+    if (isECVFlight(flight))
+        return "#8994A1";
+
+    return "#d02823";
+}
+
+
+// ============================================================
+// CONNECTION STATUS
 // ============================================================
 
 function setConnectionStatus(
@@ -319,15 +480,19 @@ function setConnectionStatus(
         "error"
     );
 
-    if (state === "connected")
+    if (state === "connected") {
+
         liveStatusBar.classList.add(
             "connected"
         );
+    }
 
-    if (state === "error")
+    if (state === "error") {
+
         liveStatusBar.classList.add(
             "error"
         );
+    }
 }
 
 
@@ -364,126 +529,21 @@ async function initialiseLiveMap() {
 
 
 // ============================================================
-// AIRCRAFT ICONS
+// AIRCRAFT ICON
 // ============================================================
-
-const AIRCRAFT_ICON_BASE =
-    "assets/images/aircraft/";
-
-
-function isEuropeanCargoFlight(flight) {
-
-    const flightNumber =
-        String(
-            flight?.flight_number || ""
-        ).toUpperCase();
-
-    return flightNumber.startsWith("ECV");
-}
-
-
-function getAircraftIconPath(flight) {
-
-    const flightNumber =
-        String(
-            flight?.flight_number || ""
-        ).toUpperCase();
-
-    const aircraft =
-        String(
-            flight?.aircraft || ""
-        ).toLowerCase();
-
-
-    // --------------------------------------------------------
-    // EUROPEAN CARGO
-    // ECV always receives the A340 icon
-    // --------------------------------------------------------
-
-    if (
-        flightNumber.startsWith("ECV")
-    ) {
-        return AIRCRAFT_ICON_BASE +
-            "a340.svg";
-    }
-
-
-    // --------------------------------------------------------
-    // FOKKER 100
-    // --------------------------------------------------------
-
-    if (
-        aircraft.includes("f100") ||
-        aircraft.includes("fokker 100")
-    ) {
-        return AIRCRAFT_ICON_BASE +
-            "f100.svg";
-    }
-
-
-    // --------------------------------------------------------
-    // A330
-    // --------------------------------------------------------
-
-    if (
-        aircraft.includes("a330")
-    ) {
-        return AIRCRAFT_ICON_BASE +
-            "a330.svg";
-    }
-
-
-    // --------------------------------------------------------
-    // TURBOPROP
-    // ATR72 / DH8 / DASH 8
-    // --------------------------------------------------------
-
-    if (
-        aircraft.includes("atr72") ||
-        aircraft.includes("atr 72") ||
-        aircraft.includes("dh8") ||
-        aircraft.includes("dash 8") ||
-        aircraft.includes("turboprop")
-    ) {
-        return AIRCRAFT_ICON_BASE +
-            "dh8a.svg";
-    }
-
-
-    // --------------------------------------------------------
-    // A319 / A320 / A321
-    // --------------------------------------------------------
-
-    if (
-        aircraft.includes("a319") ||
-        aircraft.includes("a320") ||
-        aircraft.includes("a321")
-    ) {
-        return AIRCRAFT_ICON_BASE +
-            "a320.svg";
-    }
-
-
-    // --------------------------------------------------------
-    // DEFAULT
-    // --------------------------------------------------------
-
-    return AIRCRAFT_ICON_BASE +
-        "a320.svg";
-}
-
 
 function createAircraftIcon(flight) {
 
     const heading =
         Number(
-            flight?.heading
+            flight.heading
         ) || 0;
 
     const iconPath =
-        getAircraftIconPath(
-            flight
-        );
+        getAircraftIconPath(flight);
+
+    const iconColour =
+        getAircraftColour(flight);
 
     return L.divIcon({
 
@@ -492,75 +552,53 @@ function createAircraftIcon(flight) {
 
         html: `
             <div style="
-                width:36px;
-                height:36px;
+                width:32px;
+                height:32px;
                 display:flex;
                 align-items:center;
                 justify-content:center;
                 transform:rotate(${heading}deg);
                 transform-origin:center center;
             ">
-                <img
-                    src="${iconPath}"
-                    width="36"
-                    height="36"
-                    draggable="false"
-                    alt=""
-                    style="
-                        display:block;
-                        width:36px;
-                        height:36px;
-                        pointer-events:none;
-                    "
-                >
+
+                <div style="
+                    width:28px;
+                    height:28px;
+                    background-color:${iconColour};
+
+                    -webkit-mask-image:url('${iconPath}');
+                    mask-image:url('${iconPath}');
+
+                    -webkit-mask-repeat:no-repeat;
+                    mask-repeat:no-repeat;
+
+                    -webkit-mask-position:center;
+                    mask-position:center;
+
+                    -webkit-mask-size:contain;
+                    mask-size:contain;
+                "></div>
+
             </div>
         `,
 
-        iconSize: [
-            36,
-            36
-        ],
+        iconSize: [32, 32],
 
-        iconAnchor: [
-            18,
-            18
-        ],
+        iconAnchor: [16, 16],
 
-        popupAnchor: [
-            0,
-            -18
-        ]
+        popupAnchor: [0, -16]
     });
 }
 
 
 // ============================================================
-// TRACK COLOUR
-// ============================================================
-
-function getTrackColour(flight) {
-
-    if (
-        isEuropeanCargoFlight(
-            flight
-        )
-    ) {
-        return "#8994A1";
-    }
-
-    return "#d02823";
-}
-
-
-// ============================================================
-// LOAD FLIGHT TRACKS
+// FLIGHT TRACKS
 // ============================================================
 
 async function loadFlightTracks() {
 
     if (!liveMap)
         return;
-
 
     const activeFlightIds =
         liveFlights
@@ -570,12 +608,15 @@ async function loadFlightTracks() {
             )
             .filter(Boolean);
 
-
     const visibleTrackIds =
         new Set(
             activeFlightIds
         );
 
+
+    // --------------------------------------------------------
+    // No active flights
+    // --------------------------------------------------------
 
     if (
         activeFlightIds.length === 0
@@ -585,9 +626,7 @@ async function loadFlightTracks() {
             track => {
 
                 if (
-                    liveMap.hasLayer(
-                        track
-                    )
+                    liveMap.hasLayer(track)
                 ) {
                     liveMap.removeLayer(
                         track
@@ -601,6 +640,10 @@ async function loadFlightTracks() {
         return;
     }
 
+
+    // --------------------------------------------------------
+    // Retrieve track history
+    // --------------------------------------------------------
 
     const {
         data,
@@ -636,6 +679,10 @@ async function loadFlightTracks() {
         new Map();
 
 
+    // --------------------------------------------------------
+    // Group points by flight
+    // --------------------------------------------------------
+
     (data || []).forEach(
         point => {
 
@@ -645,7 +692,6 @@ async function loadFlightTracks() {
             ) {
                 return;
             }
-
 
             if (
                 !groupedTracks.has(
@@ -658,7 +704,6 @@ async function loadFlightTracks() {
                     []
                 );
             }
-
 
             groupedTracks
                 .get(
@@ -678,8 +723,23 @@ async function loadFlightTracks() {
     );
 
 
+    // --------------------------------------------------------
+    // Build/update tracks
+    // --------------------------------------------------------
+
     activeFlightIds.forEach(
         flightId => {
+
+            const points =
+                groupedTracks.get(
+                    flightId
+                ) || [];
+
+            let track =
+                liveTracks.get(
+                    flightId
+                );
+
 
             const flight =
                 liveFlights.find(
@@ -689,16 +749,8 @@ async function loadFlightTracks() {
                 );
 
 
-            const points =
-                groupedTracks.get(
-                    flightId
-                ) || [];
-
-
-            let track =
-                liveTracks.get(
-                    flightId
-                );
+            if (!flight)
+                return;
 
 
             const isSelected =
@@ -707,7 +759,7 @@ async function loadFlightTracks() {
 
 
             const trackColour =
-                getTrackColour(
+                getAircraftColour(
                     flight
                 );
 
@@ -768,7 +820,7 @@ async function loadFlightTracks() {
 
 
             // ------------------------------------------------
-            // Create new track
+            // Create track
             // ------------------------------------------------
 
             if (!track) {
@@ -785,11 +837,6 @@ async function loadFlightTracks() {
                 );
 
             }
-
-            // ------------------------------------------------
-            // Update existing track
-            // ------------------------------------------------
-
             else {
 
                 track.setLatLngs(
@@ -804,7 +851,8 @@ async function loadFlightTracks() {
 
             // ------------------------------------------------
             // IMPORTANT:
-            // Tracks are ONLY visible when selected.
+            // Tracks are NOT automatically displayed.
+            // Only the selected aircraft's track appears.
             // ------------------------------------------------
 
             if (
@@ -816,13 +864,13 @@ async function loadFlightTracks() {
                         track
                     )
                 ) {
+
                     track.addTo(
                         liveMap
                     );
                 }
 
             }
-
             else {
 
                 if (
@@ -830,6 +878,7 @@ async function loadFlightTracks() {
                         track
                     )
                 ) {
+
                     liveMap.removeLayer(
                         track
                     );
@@ -840,11 +889,14 @@ async function loadFlightTracks() {
 
 
     // --------------------------------------------------------
-    // Remove tracks belonging to flights no longer active
+    // Remove tracks for aircraft no longer active
     // --------------------------------------------------------
 
     liveTracks.forEach(
-        (track, flightId) => {
+        (
+            track,
+            flightId
+        ) => {
 
             if (
                 !visibleTrackIds.has(
@@ -857,6 +909,7 @@ async function loadFlightTracks() {
                         track
                     )
                 ) {
+
                     liveMap.removeLayer(
                         track
                     );
@@ -877,13 +930,20 @@ async function loadFlightTracks() {
 
 function highlightTrackForSelection() {
 
+    if (!liveMap)
+        return;
+
+
     liveTracks.forEach(
-        (track, flightId) => {
+        (
+            track,
+            flightId
+        ) => {
 
             const isSelected =
                 selectedFlightId &&
                 flightId ===
-                    selectedFlightId;
+                selectedFlightId;
 
 
             const flight =
@@ -894,6 +954,16 @@ function highlightTrackForSelection() {
                 );
 
 
+            if (!flight)
+                return;
+
+
+            const trackColour =
+                getAircraftColour(
+                    flight
+                );
+
+
             if (isSelected) {
 
                 if (
@@ -901,18 +971,16 @@ function highlightTrackForSelection() {
                         track
                     )
                 ) {
+
                     track.addTo(
                         liveMap
                     );
                 }
 
-
                 track.setStyle({
 
                     color:
-                        getTrackColour(
-                            flight
-                        ),
+                        trackColour,
 
                     weight:
                         4,
@@ -928,7 +996,6 @@ function highlightTrackForSelection() {
                 });
 
             }
-
             else {
 
                 if (
@@ -936,6 +1003,7 @@ function highlightTrackForSelection() {
                         track
                     )
                 ) {
+
                     liveMap.removeLayer(
                         track
                     );
@@ -955,7 +1023,6 @@ function updateAircraftMarkers() {
     if (!liveMap)
         return;
 
-
     const visibleFlights =
         new Set();
 
@@ -967,6 +1034,7 @@ function updateAircraftMarkers() {
                 flight.latitude === null ||
                 flight.longitude === null
             ) {
+
                 return;
             }
 
@@ -1044,7 +1112,7 @@ function updateAircraftMarkers() {
 
 
             // ------------------------------------------------
-            // UPDATE ICON / HEADING / TYPE
+            // UPDATE ICON
             // ------------------------------------------------
 
             marker.setIcon(
@@ -1086,12 +1154,14 @@ function updateAircraftMarkers() {
                     </div>
 
                     <div>
-                        ${flight.ground_speed || 0} kt
+                        ${flight.ground_speed || 0}
+                        kt
                     </div>
 
                     <div>
                         FL ${Math.round(
-                            (flight.altitude || 0) / 100
+                            (flight.altitude || 0) /
+                            100
                         )}
                     </div>
 
@@ -1106,7 +1176,10 @@ function updateAircraftMarkers() {
     // --------------------------------------------------------
 
     liveMarkers.forEach(
-        (marker, id) => {
+        (
+            marker,
+            id
+        ) => {
 
             if (
                 !visibleFlights.has(
@@ -1119,6 +1192,7 @@ function updateAircraftMarkers() {
                         marker
                     )
                 ) {
+
                     liveMap.removeLayer(
                         marker
                     );
@@ -1133,7 +1207,7 @@ function updateAircraftMarkers() {
 
 
     // --------------------------------------------------------
-    // INITIAL MAP FIT
+    // FIRST MAP LOAD
     // --------------------------------------------------------
 
     if (
@@ -1141,42 +1215,46 @@ function updateAircraftMarkers() {
         liveFlights.length > 0
     ) {
 
-        const bounds =
-            L.latLngBounds(
-                liveFlights
-                    .filter(
-                        flight =>
-                            flight.latitude !== null &&
-                            flight.longitude !== null
-                    )
-                    .map(
+        const validFlights =
+            liveFlights.filter(
+                flight =>
+                    flight.latitude !== null &&
+                    flight.longitude !== null
+            );
+
+
+        if (
+            validFlights.length > 0
+        ) {
+
+            const bounds =
+                L.latLngBounds(
+                    validFlights.map(
                         flight =>
                             [
                                 flight.latitude,
                                 flight.longitude
                             ]
                     )
-            );
+                );
 
 
-        if (
-            bounds.isValid()
-        ) {
+            if (
+                bounds.isValid()
+            ) {
 
-            liveMap.fitBounds(
-                bounds,
-                {
-                    padding: [
-                        60,
-                        60
-                    ]
-                }
-            );
+                liveMap.fitBounds(
+                    bounds,
+                    {
+                        padding:
+                            [60, 60]
+                    }
+                );
+            }
         }
 
 
-        firstMapLoad =
-            false;
+        firstMapLoad = false;
     }
 }
 
@@ -1201,13 +1279,13 @@ async function refreshLiveOperations() {
         );
 
     }
-
     catch (error) {
 
         console.error(
             "Live Operations refresh failed:",
             error
         );
+
 
         setConnectionStatus(
             "error",
@@ -1217,11 +1295,14 @@ async function refreshLiveOperations() {
 }
 
 
+// ============================================================
+// REFRESH TIMER
+// ============================================================
+
 function startLiveOperations() {
 
-    if (
-        liveRefreshTimer
-    ) {
+    if (liveRefreshTimer) {
+
         clearInterval(
             liveRefreshTimer
         );
@@ -1238,9 +1319,7 @@ function startLiveOperations() {
 
 function stopLiveOperations() {
 
-    if (
-        !liveRefreshTimer
-    )
+    if (!liveRefreshTimer)
         return;
 
 
@@ -1248,8 +1327,7 @@ function stopLiveOperations() {
         liveRefreshTimer
     );
 
-    liveRefreshTimer =
-        null;
+    liveRefreshTimer = null;
 }
 
 
@@ -1287,9 +1365,8 @@ async function loadLiveFlights() {
         data || [];
 
 
-    if (
-        liveAircraftCount
-    ) {
+    if (liveAircraftCount) {
+
         liveAircraftCount.textContent =
             liveFlights.length;
     }
@@ -1300,7 +1377,7 @@ async function loadLiveFlights() {
 
     // --------------------------------------------------------
     // Track history is supplementary.
-    // Track failure must NEVER kill ACARS.
+    // A track failure must NEVER interrupt ACARS.
     // --------------------------------------------------------
 
     try {
@@ -1308,7 +1385,6 @@ async function loadLiveFlights() {
         await loadFlightTracks();
 
     }
-
     catch (trackError) {
 
         console.error(
@@ -1360,7 +1436,9 @@ function renderFlightSidebar() {
                         ? "active"
                         : ""
                 }"
-                data-flight="${flight.flight_id}"
+                data-flight="${
+                    flight.flight_id
+                }"
             >
 
                 <div class="live-flight-header">
@@ -1422,8 +1500,9 @@ function renderFlightSidebar() {
                         </label>
 
                         <span>
-                            ${(flight.altitude || 0)
-                                .toLocaleString()}
+                            ${(
+                                flight.altitude || 0
+                            ).toLocaleString()}
                             ft
                         </span>
 
@@ -1437,7 +1516,10 @@ function renderFlightSidebar() {
                         </label>
 
                         <span>
-                            ${flight.ground_speed || 0}
+                            ${
+                                flight.ground_speed ||
+                                0
+                            }
                             kt
                         </span>
 
@@ -1451,7 +1533,10 @@ function renderFlightSidebar() {
                         </label>
 
                         <span>
-                            ${flight.heading || 0}°
+                            ${
+                                flight.heading ||
+                                0
+                            }°
                         </span>
 
                     </div>
@@ -1463,6 +1548,10 @@ function renderFlightSidebar() {
             )
             .join("");
 
+
+    // --------------------------------------------------------
+    // SIDEBAR SELECTION
+    // --------------------------------------------------------
 
     liveFlightList
         .querySelectorAll(
@@ -1510,7 +1599,7 @@ function highlightSelectedFlight() {
                 card.classList.toggle(
                     "active",
                     card.dataset.flight ===
-                        selectedFlightId
+                    selectedFlightId
                 );
             }
         );
@@ -1540,8 +1629,8 @@ function renderSelectedFlight() {
 
     const flight =
         liveFlights.find(
-            item =>
-                item.flight_id ===
+            f =>
+                f.flight_id ===
                 selectedFlightId
         );
 
@@ -1603,13 +1692,11 @@ function renderSelectedFlight() {
                     </label>
 
                     <strong>
-
                         ${escapeHtml(
                             formatAircraftName(
                                 flight.aircraft
                             )
                         )}
-
                     </strong>
 
                 </div>
@@ -1622,11 +1709,10 @@ function renderSelectedFlight() {
                     </label>
 
                     <strong>
-
-                        ${(flight.altitude || 0)
-                            .toLocaleString()}
+                        ${(
+                            flight.altitude || 0
+                        ).toLocaleString()}
                         ft
-
                     </strong>
 
                 </div>
@@ -1639,10 +1725,11 @@ function renderSelectedFlight() {
                     </label>
 
                     <strong>
-
-                        ${flight.ground_speed || 0}
+                        ${
+                            flight.ground_speed ||
+                            0
+                        }
                         kt
-
                     </strong>
 
                 </div>
@@ -1655,9 +1742,10 @@ function renderSelectedFlight() {
                     </label>
 
                     <strong>
-
-                        ${flight.heading || 0}°
-
+                        ${
+                            flight.heading ||
+                            0
+                        }°
                     </strong>
 
                 </div>
@@ -1670,10 +1758,11 @@ function renderSelectedFlight() {
                     </label>
 
                     <strong>
-
-                        ${flight.vertical_speed || 0}
+                        ${
+                            flight.vertical_speed ||
+                            0
+                        }
                         fpm
-
                     </strong>
 
                 </div>
@@ -1838,9 +1927,7 @@ async function loadOperationsStatistics() {
 // RECENT OPERATION ROW
 // ============================================================
 
-function createOperationRow(
-    operation
-) {
+function createOperationRow(operation) {
 
     const landingClass =
         getLandingClass(
@@ -1896,7 +1983,6 @@ function createOperationRow(
                         )}
 
                     </strong>
-
 
                     <small>
 
@@ -2077,6 +2163,7 @@ async function loadRecentOperations() {
                 </td>
 
             </tr>
+
         `;
 
         return [];
@@ -2099,9 +2186,7 @@ async function loadRecentOperations() {
 // ERROR DISPLAY
 // ============================================================
 
-function displayOperationsError(
-    error
-) {
+function displayOperationsError(error) {
 
     console.error(
         "British Midland public operations error:",
@@ -2131,6 +2216,7 @@ function displayOperationsError(
                 </td>
 
             </tr>
+
         `;
     }
 }
@@ -2182,7 +2268,6 @@ async function initialiseOperations() {
         );
 
     }
-
     catch (error) {
 
         displayOperationsError(
@@ -2193,7 +2278,7 @@ async function initialiseOperations() {
 
 
 // ============================================================
-// DOM READY
+// START
 // ============================================================
 
 document.addEventListener(
