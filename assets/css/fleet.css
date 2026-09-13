@@ -8,40 +8,39 @@
    FLEET HERO
 ========================================================== */
 
-.fleet-hero{
+.fleet-hero {
 
-    position:relative;
+    position: relative;
 
-    min-height:620px;
+    min-height: 620px;
 
-    display:flex;
+    display: flex;
+    align-items: center;
 
-    align-items:center;
+    overflow: hidden;
 
-    overflow:hidden;
-
-    background:var(--bm-blue);
-
-}
-
-.fleet-hero-image{
-
-    position:absolute;
-
-    inset:0;
-
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
+    background: var(--bm-blue);
 
 }
 
-.fleet-hero-overlay{
+.fleet-hero-image {
 
-    position:absolute;
+    position: absolute;
 
-    inset:0;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+}
+
+.fleet-hero-overlay {
+
+    position: absolute;
+
+    inset: 0;
 
     background:
         linear-gradient(
@@ -53,52 +52,52 @@
 
 }
 
-.fleet-hero-content{
+.fleet-hero-content {
 
-    position:relative;
+    position: relative;
 
-    z-index:2;
+    z-index: 2;
 
-    padding-top:100px;
-    padding-bottom:100px;
+    padding-top: 100px;
+    padding-bottom: 100px;
 
-    max-width:1200px;
-
-}
-
-.fleet-hero-content .section-kicker{
-
-    color:#ffffff;
+    max-width: 1200px;
 
 }
 
-.fleet-hero-content h1{
+.fleet-hero-content .section-kicker {
 
-    max-width:720px;
-
-    margin:18px 0 25px;
-
-    color:#ffffff;
-
-    font-size:clamp(3rem,6vw,5.8rem);
-
-    line-height:.98;
-
-    letter-spacing:-.055em;
+    color: #ffffff;
 
 }
 
-.fleet-hero-content p{
+.fleet-hero-content h1 {
 
-    max-width:650px;
+    max-width: 720px;
 
-    margin:0;
+    margin: 18px 0 25px;
 
-    color:rgba(255,255,255,.82);
+    color: #ffffff;
 
-    font-size:1.15rem;
+    font-size: clamp(3rem,6vw,5.8rem);
 
-    line-height:1.8;
+    line-height: .98;
+
+    letter-spacing: -.055em;
+
+}
+
+.fleet-hero-content p {
+
+    max-width: 650px;
+
+    margin: 0;
+
+    color: rgba(255,255,255,.82);
+
+    font-size: 1.15rem;
+
+    line-height: 1.8;
 
 }
 
@@ -107,62 +106,62 @@
    FLEET INTRODUCTION
 ========================================================== */
 
-.fleet-intro{
+.fleet-intro {
 
-    position:relative;
+    position: relative;
 
-    padding:110px 0 100px;
+    padding: 110px 0 100px;
 
-    text-align:center;
+    text-align: center;
 
-    background:#ffffff;
-
-}
-
-.fleet-intro::after{
-
-    content:"";
-
-    display:block;
-
-    width:90px;
-    height:4px;
-
-    margin:55px auto 0;
-
-    background:var(--bm-red);
+    background: #ffffff;
 
 }
 
-.fleet-intro .container{
+.fleet-intro::after {
 
-    max-width:850px;
+    content: "";
 
-}
+    display: block;
 
-.fleet-intro h2{
+    width: 90px;
+    height: 4px;
 
-    margin:16px 0 25px;
+    margin: 55px auto 0;
 
-    color:var(--bm-blue);
-
-    font-size:clamp(2.4rem,4vw,4rem);
-
-    line-height:1.05;
-
-    letter-spacing:-.045em;
+    background: var(--bm-red);
 
 }
 
-.fleet-intro p{
+.fleet-intro .container {
 
-    margin:0;
+    max-width: 850px;
 
-    color:#526985;
+}
 
-    font-size:1.05rem;
+.fleet-intro h2 {
 
-    line-height:1.85;
+    margin: 16px 0 25px;
+
+    color: var(--bm-blue);
+
+    font-size: clamp(2.4rem,4vw,4rem);
+
+    line-height: 1.05;
+
+    letter-spacing: -.045em;
+
+}
+
+.fleet-intro p {
+
+    margin: 0;
+
+    color: #526985;
+
+    font-size: 1.05rem;
+
+    line-height: 1.85;
 
 }
 
@@ -171,90 +170,85 @@
    CLASS SECTION BASE
 ========================================================== */
 
-.fleet-class{
+.fleet-class {
 
-    position:relative;
+    position: relative;
 
-    padding:110px 0 120px;
-
-}
-
-/*
-    Strong BM blue divider/banner between fleet classes.
-*/
-
-.fleet-class::before{
-
-    content:"";
-
-    display:block;
-
-    width:100%;
-
-    height:10px;
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    background:var(--bm-blue);
+    padding: 110px 0 120px;
 
 }
 
-.fleet-class-heading{
+.fleet-class::before {
 
-    max-width:760px;
+    content: "";
 
-    margin:0 auto 70px;
+    display: block;
 
-    text-align:center;
+    width: 100%;
+    height: 10px;
 
-}
+    position: absolute;
 
-.fleet-class-label{
+    top: 0;
+    left: 0;
 
-    display:inline-block;
-
-    margin-bottom:18px;
-
-    color:var(--bm-red);
-
-    font-size:.82rem;
-
-    font-weight:800;
-
-    letter-spacing:.20em;
-
-    text-transform:uppercase;
+    background: var(--bm-blue);
 
 }
 
-.fleet-class-heading h2{
+.fleet-class-heading {
 
-    margin:0 0 22px;
+    max-width: 760px;
 
-    color:var(--bm-blue);
+    margin: 0 auto 70px;
 
-    font-size:clamp(2.4rem,4vw,4.2rem);
-
-    line-height:1.02;
-
-    letter-spacing:-.045em;
+    text-align: center;
 
 }
 
-.fleet-class-heading p{
+.fleet-class-label {
 
-    max-width:700px;
+    display: inline-block;
 
-    margin:0 auto;
+    margin-bottom: 18px;
 
-    color:#526985;
+    color: var(--bm-red);
 
-    font-size:1.05rem;
+    font-size: .82rem;
 
-    line-height:1.8;
+    font-weight: 800;
+
+    letter-spacing: .20em;
+
+    text-transform: uppercase;
+
+}
+
+.fleet-class-heading h2 {
+
+    margin: 0 0 22px;
+
+    color: var(--bm-blue);
+
+    font-size: clamp(2.4rem,4vw,4.2rem);
+
+    line-height: 1.02;
+
+    letter-spacing: -.045em;
+
+}
+
+.fleet-class-heading p {
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    color: #526985;
+
+    font-size: 1.05rem;
+
+    line-height: 1.8;
 
 }
 
@@ -263,237 +257,235 @@
    BEATING HEART CLASS
 ========================================================== */
 
-.beating-heart-class{
+.beating-heart-class {
 
-    background:#f5f7fa;
-
-}
-
-/*
-    Visible blue class banner.
-*/
-
-.beating-heart-class .fleet-class-heading{
-
-    position:relative;
-
-    padding-top:15px;
+    background: #f5f7fa;
 
 }
 
-.beating-heart-class .fleet-class-heading::before{
+.beating-heart-class .fleet-class-heading {
 
-    content:"BEATING HEART CLASS";
+    position: relative;
 
-    display:block;
+    padding-top: 15px;
 
-    width:max-content;
+}
 
-    margin:0 auto 28px;
+.beating-heart-class .fleet-class-heading::before {
 
-    padding:12px 24px;
+    content: "BEATING HEART CLASS";
 
-    background:var(--bm-blue);
+    display: block;
 
-    color:#ffffff;
+    width: max-content;
 
-    font-size:.75rem;
+    margin: 0 auto 28px;
 
-    font-weight:800;
+    padding: 12px 24px;
 
-    letter-spacing:.18em;
+    background: var(--bm-blue);
 
-    text-transform:uppercase;
+    color: #ffffff;
+
+    font-size: .75rem;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
 
 }
 
 
 /* ==========================================================
-   AIRCRAFT CARDS
+   STANDARD AIRCRAFT CARDS
 ========================================================== */
 
-.aircraft-card{
+.aircraft-card {
 
-    display:grid;
+    display: grid;
 
-    grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);
+    grid-template-columns:
+        minmax(0,1.15fr)
+        minmax(0,.85fr);
 
-    min-height:520px;
+    min-height: 520px;
 
-    margin-bottom:45px;
+    margin-bottom: 45px;
 
-    overflow:hidden;
+    overflow: hidden;
 
-    background:#ffffff;
+    background: #ffffff;
 
-    border:1px solid rgba(0,26,58,.08);
+    border: 1px solid rgba(0,26,58,.08);
 
-    border-radius:24px;
+    border-radius: 24px;
 
     box-shadow:
         0 18px 50px rgba(0,26,58,.08);
 
 }
 
-.aircraft-card:last-child{
+.aircraft-card:last-child {
 
-    margin-bottom:0;
-
-}
-
-.aircraft-image{
-
-    min-height:520px;
-
-    overflow:hidden;
+    margin-bottom: 0;
 
 }
 
-.aircraft-image img{
+.aircraft-image {
 
-    display:block;
+    min-height: 520px;
 
-    width:100%;
-    height:100%;
-
-    object-fit:cover;
-
-    transition:transform .5s ease;
+    overflow: hidden;
 
 }
 
-.aircraft-card:hover .aircraft-image img{
+.aircraft-image img {
 
-    transform:scale(1.035);
+    display: block;
 
-}
+    width: 100%;
+    height: 100%;
 
-.aircraft-content{
+    object-fit: cover;
 
-    display:flex;
-
-    flex-direction:column;
-
-    justify-content:center;
-
-    padding:65px;
+    transition: transform .5s ease;
 
 }
 
-.aircraft-class{
+.aircraft-card:hover .aircraft-image img {
 
-    display:block;
-
-    margin-bottom:14px;
-
-    color:var(--bm-red);
-
-    font-size:.76rem;
-
-    font-weight:800;
-
-    letter-spacing:.16em;
-
-    text-transform:uppercase;
+    transform: scale(1.035);
 
 }
 
-.aircraft-content h3{
+.aircraft-content {
 
-    margin:0 0 22px;
+    display: flex;
 
-    color:var(--bm-blue);
+    flex-direction: column;
 
-    font-size:clamp(2.2rem,3vw,3.4rem);
+    justify-content: center;
 
-    line-height:1;
-
-    letter-spacing:-.04em;
+    padding: 65px;
 
 }
 
-.aircraft-content p{
+.aircraft-class {
 
-    margin:0 0 32px;
+    display: block;
 
-    color:#526985;
+    margin-bottom: 14px;
 
-    line-height:1.8;
+    color: var(--bm-red);
 
-}
+    font-size: .76rem;
 
-.aircraft-specs{
+    font-weight: 800;
 
-    display:grid;
+    letter-spacing: .16em;
 
-    grid-template-columns:repeat(3,1fr);
-
-    gap:18px;
-
-    padding:24px 0;
-
-    margin-bottom:25px;
-
-    border-top:1px solid rgba(0,26,58,.10);
-
-    border-bottom:1px solid rgba(0,26,58,.10);
+    text-transform: uppercase;
 
 }
 
-.aircraft-specs div{
+.aircraft-content h3 {
 
-    display:flex;
+    margin: 0 0 22px;
 
-    flex-direction:column;
+    color: var(--bm-blue);
 
-    gap:5px;
+    font-size: clamp(2.2rem,3vw,3.4rem);
 
-}
+    line-height: 1;
 
-.aircraft-specs strong{
-
-    color:var(--bm-blue);
-
-    font-size:1.05rem;
+    letter-spacing: -.04em;
 
 }
 
-.aircraft-specs span{
+.aircraft-content p {
 
-    color:#7b8797;
+    margin: 0 0 32px;
 
-    font-size:.72rem;
+    color: #526985;
 
-    font-weight:700;
-
-    letter-spacing:.10em;
-
-    text-transform:uppercase;
+    line-height: 1.8;
 
 }
 
-.fleet-button{
+.aircraft-specs {
 
-    display:inline-flex;
+    display: grid;
 
-    align-items:center;
-    justify-content:center;
+    grid-template-columns: repeat(3,1fr);
 
-    width:max-content;
+    gap: 18px;
 
-    padding:15px 25px;
+    padding: 24px 0;
 
-    border-radius:999px;
+    margin-bottom: 25px;
 
-    background:var(--bm-red);
+    border-top: 1px solid rgba(0,26,58,.10);
 
-    color:#ffffff;
+    border-bottom: 1px solid rgba(0,26,58,.10);
 
-    text-decoration:none;
+}
 
-    font-size:.9rem;
+.aircraft-specs div {
 
-    font-weight:700;
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+.aircraft-specs strong {
+
+    color: var(--bm-blue);
+
+    font-size: 1.05rem;
+
+}
+
+.aircraft-specs span {
+
+    color: #7b8797;
+
+    font-size: .72rem;
+
+    font-weight: 700;
+
+    letter-spacing: .10em;
+
+    text-transform: uppercase;
+
+}
+
+.fleet-button {
+
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    width: max-content;
+
+    padding: 15px 25px;
+
+    border-radius: 999px;
+
+    background: var(--bm-red);
+
+    color: #ffffff;
+
+    text-decoration: none;
+
+    font-size: .9rem;
+
+    font-weight: 700;
 
     transition:
         transform .25s ease,
@@ -501,11 +493,11 @@
 
 }
 
-.fleet-button:hover{
+.fleet-button:hover {
 
-    background:#b9201c;
+    background: #b9201c;
 
-    transform:translateY(-2px);
+    transform: translateY(-2px);
 
 }
 
@@ -514,68 +506,64 @@
    PIONEER CLASS
 ========================================================== */
 
-.pioneer-class{
+.pioneer-class {
 
-    background:#ffffff;
-
-}
-
-/*
-    Strong full-width BM blue class divider.
-*/
-
-.pioneer-class::before{
-
-    height:14px;
-
-    background:var(--bm-blue);
+    background: #ffffff;
 
 }
 
-.pioneer-class .fleet-class-heading{
+.pioneer-class::before {
 
-    padding-top:10px;
+    height: 14px;
 
-}
-
-.pioneer-class .fleet-class-heading::before{
-
-    content:"PIONEER CLASS";
-
-    display:block;
-
-    width:max-content;
-
-    margin:0 auto 28px;
-
-    padding:12px 24px;
-
-    background:var(--bm-blue);
-
-    color:#ffffff;
-
-    font-size:.75rem;
-
-    font-weight:800;
-
-    letter-spacing:.18em;
-
-    text-transform:uppercase;
+    background: var(--bm-blue);
 
 }
 
-.aircraft-card-flagship{
+.pioneer-class .fleet-class-heading {
 
-    border:2px solid rgba(0,26,58,.12);
+    padding-top: 10px;
+
+}
+
+.pioneer-class .fleet-class-heading::before {
+
+    content: "PIONEER CLASS";
+
+    display: block;
+
+    width: max-content;
+
+    margin: 0 auto 28px;
+
+    padding: 12px 24px;
+
+    background: var(--bm-blue);
+
+    color: #ffffff;
+
+    font-size: .75rem;
+
+    font-weight: 800;
+
+    letter-spacing: .18em;
+
+    text-transform: uppercase;
+
+}
+
+.aircraft-card-flagship {
+
+    border: 2px solid rgba(0,26,58,.12);
 
     box-shadow:
         0 25px 70px rgba(0,26,58,.12);
 
 }
 
-.aircraft-card-flagship .aircraft-content{
+.aircraft-card-flagship .aircraft-content {
 
-    padding:70px;
+    padding: 70px;
 
 }
 
@@ -584,58 +572,58 @@
    PIONEER CLASS NOTE
 ========================================================== */
 
-.fleet-class-note{
+.fleet-class-note {
 
-    margin-top:65px;
+    margin-top: 65px;
 
-    padding:70px;
+    padding: 70px;
 
-    text-align:center;
+    text-align: center;
 
-    background:var(--bm-blue);
+    background: var(--bm-blue);
 
-    border-radius:24px;
+    border-radius: 24px;
 
     box-shadow:
         0 20px 60px rgba(0,26,58,.15);
 
 }
 
-.fleet-class-note .section-kicker{
+.fleet-class-note .section-kicker {
 
-    color:#ffffff;
-
-}
-
-.fleet-class-note h3{
-
-    margin:15px 0 20px;
-
-    color:#ffffff;
-
-    font-size:clamp(2rem,3vw,3rem);
-
-    line-height:1.05;
-
-    letter-spacing:-.035em;
+    color: #ffffff;
 
 }
 
-.fleet-class-note p{
+.fleet-class-note h3 {
 
-    max-width:680px;
+    margin: 15px 0 20px;
 
-    margin:0 auto 30px;
+    color: #ffffff;
 
-    color:rgba(255,255,255,.72);
+    font-size: clamp(2rem,3vw,3rem);
 
-    line-height:1.8;
+    line-height: 1.05;
+
+    letter-spacing: -.035em;
 
 }
 
-.fleet-class-note .primary-button{
+.fleet-class-note p {
 
-    display:inline-flex;
+    max-width: 680px;
+
+    margin: 0 auto 30px;
+
+    color: rgba(255,255,255,.72);
+
+    line-height: 1.8;
+
+}
+
+.fleet-class-note .primary-button {
+
+    display: inline-flex;
 
 }
 
@@ -644,204 +632,329 @@
    FOUNDRY CLASS
 ========================================================== */
 
-.foundry-class{
+.foundry-class {
 
-    position:relative;
+    position: relative;
 
-    padding:120px 0;
+    padding: 120px 0;
 
-    background:#f5f7fa;
-
-}
-
-/*
-    Foundry gets its own strong blue dividing banner.
-*/
-
-.foundry-class::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-    left:0;
-
-    width:100%;
-    height:14px;
-
-    background:var(--bm-blue);
+    background: #f5f7fa;
 
 }
 
-.foundry-heading{
+.foundry-class::before {
 
-    max-width:780px;
+    content: "";
 
-    margin:0 auto 65px;
+    position: absolute;
 
-    text-align:center;
+    top: 0;
+    left: 0;
 
-}
+    width: 100%;
+    height: 14px;
 
-.foundry-heading .fleet-class-label{
-
-    padding:12px 24px;
-
-    background:var(--bm-blue);
-
-    color:#ffffff;
+    background: var(--bm-blue);
 
 }
 
-.foundry-heading h2{
+.foundry-heading {
 
-    margin:25px 0 20px;
+    max-width: 780px;
 
-    color:var(--bm-blue);
+    margin: 0 auto 65px;
 
-    font-size:clamp(2.5rem,4vw,4rem);
-
-    line-height:1.03;
-
-    letter-spacing:-.045em;
+    text-align: center;
 
 }
 
-.foundry-heading p{
+.foundry-heading .fleet-class-label {
 
-    margin:0 auto;
+    display: inline-block;
 
-    max-width:700px;
+    padding: 12px 24px;
 
-    color:#526985;
+    margin-bottom: 25px;
 
-    line-height:1.8;
+    background: var(--bm-blue);
+
+    color: #ffffff;
+
+}
+
+.foundry-heading h2 {
+
+    margin: 0 0 20px;
+
+    color: var(--bm-blue);
+
+    font-size: clamp(2.5rem,4vw,4rem);
+
+    line-height: 1.03;
+
+    letter-spacing: -.045em;
+
+}
+
+.foundry-heading p {
+
+    max-width: 700px;
+
+    margin: 0 auto;
+
+    color: #526985;
+
+    line-height: 1.8;
 
 }
 
 
 /* ==========================================================
-   FOUNDRY CARDS
+   FOUNDRY GRID
 ========================================================== */
 
-.foundry-grid{
+.foundry-grid {
 
-    display:grid;
+    display: grid;
 
-    grid-template-columns:repeat(2,minmax(0,1fr));
+    grid-template-columns:
+        repeat(2,minmax(0,1fr));
 
-    gap:35px;
+    gap: 45px;
 
 }
 
-.foundry-card{
 
-    min-height:470px;
+/* ==========================================================
+   FOUNDRY AIRCRAFT CARDS
+   Styled to match the main fleet cards
+========================================================== */
 
-    padding:12px;
+.foundry-card {
 
-    background:var(--bm-blue);
+    display: flex;
 
-    border-radius:24px;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    background: #ffffff;
+
+    border: 1px solid rgba(0,26,58,.08);
+
+    border-radius: 24px;
 
     box-shadow:
-        0 20px 55px rgba(0,26,58,.12);
+        0 18px 50px rgba(0,26,58,.08);
+
+    transition:
+        transform .3s ease,
+        box-shadow .3s ease;
 
 }
 
-.foundry-card-content{
+.foundry-card:hover {
 
-    height:100%;
+    transform: translateY(-4px);
 
-    min-height:446px;
-
-    display:flex;
-
-    flex-direction:column;
-
-    align-items:center;
-    justify-content:center;
-
-    padding:55px;
-
-    text-align:center;
-
-    border:1px solid rgba(255,255,255,.12);
-
-    border-radius:18px;
+    box-shadow:
+        0 24px 60px rgba(0,26,58,.12);
 
 }
 
-.foundry-status{
+.foundry-card-content {
 
-    display:inline-block;
+    display: flex;
 
-    margin-bottom:25px;
+    flex-direction: column;
 
-    padding:9px 18px;
+    height: 100%;
 
-    border:1px solid rgba(255,255,255,.35);
+    padding: 0 0 40px;
 
-    border-radius:999px;
-
-    color:#ffffff;
-
-    font-size:.72rem;
-
-    font-weight:800;
-
-    letter-spacing:.18em;
-
-    text-transform:uppercase;
+    text-align: center;
 
 }
 
-.foundry-placeholder{
 
-    width:130px;
-    height:130px;
+/* ==========================================================
+   FOUNDRY STATUS
+========================================================== */
 
-    display:flex;
+.foundry-status {
 
-    align-items:center;
-    justify-content:center;
+    position: absolute;
 
-    margin-bottom:28px;
+    top: 22px;
+    left: 22px;
 
-    border:1px solid rgba(255,255,255,.25);
+    z-index: 2;
 
-    border-radius:50%;
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 9px 18px;
+
+    background: rgba(0,26,58,.88);
+
+    border: 1px solid rgba(255,255,255,.45);
+
+    border-radius: 999px;
+
+    color: #ffffff;
+
+    font-size: .72rem;
+
+    font-weight: 800;
+
+    letter-spacing: .16em;
+
+    text-transform: uppercase;
 
 }
 
-.foundry-placeholder span{
+.foundry-card-content {
 
-    color:rgba(255,255,255,.75);
-
-    font-size:2rem;
-
-    font-weight:800;
-
-    letter-spacing:.05em;
+    position: relative;
 
 }
 
-.foundry-card h3{
 
-    margin:0 0 12px;
+/* ==========================================================
+   FOUNDRY AIRCRAFT IMAGE
+========================================================== */
 
-    color:#ffffff;
+.foundry-aircraft-image {
 
-    font-size:1.65rem;
+    width: 100%;
+
+    height: 270px;
+
+    overflow: hidden;
 
 }
 
-.foundry-card p{
+.foundry-aircraft-image img {
 
-    margin:0;
+    display: block;
 
-    color:rgba(255,255,255,.60);
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    transition: transform .5s ease;
+
+}
+
+.foundry-card:hover
+.foundry-aircraft-image img {
+
+    transform: scale(1.035);
+
+}
+
+
+/* ==========================================================
+   FOUNDRY CONTENT
+========================================================== */
+
+.foundry-card h3 {
+
+    margin: 30px 35px 16px;
+
+    color: var(--bm-blue);
+
+    font-size: clamp(2rem,3vw,2.8rem);
+
+    line-height: 1;
+
+    letter-spacing: -.04em;
+
+}
+
+.foundry-card p {
+
+    margin: 0 auto;
+
+    max-width: 560px;
+
+    padding: 0 35px;
+
+    color: #526985;
+
+    line-height: 1.8;
+
+}
+
+
+/* ==========================================================
+   FOUNDRY SPECIFICATIONS
+========================================================== */
+
+.foundry-specs {
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(3,1fr);
+
+    gap: 18px;
+
+    margin: 30px 35px 0;
+
+    padding: 24px 0;
+
+    border-top:
+        1px solid rgba(0,26,58,.10);
+
+    border-bottom:
+        1px solid rgba(0,26,58,.10);
+
+}
+
+.foundry-specs div {
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 5px;
+
+}
+
+.foundry-specs strong {
+
+    color: var(--bm-blue);
+
+    font-size: 1.05rem;
+
+}
+
+.foundry-specs span {
+
+    color: #7b8797;
+
+    font-size: .72rem;
+
+    font-weight: 700;
+
+    letter-spacing: .10em;
+
+    text-transform: uppercase;
+
+}
+
+
+/* ==========================================================
+   FOUNDRY BUTTON
+========================================================== */
+
+.foundry-card .fleet-button {
+
+    margin: 30px auto 0;
 
 }
 
@@ -850,64 +963,65 @@
    FLEET PHILOSOPHY
 ========================================================== */
 
-.fleet-philosophy{
+.fleet-philosophy {
 
-    position:relative;
+    position: relative;
 
-    padding:120px 0;
+    padding: 120px 0;
 
-    text-align:center;
+    text-align: center;
 
-    background:#ffffff;
+    background: #ffffff;
 
-    border-top:1px solid rgba(0,26,58,.08);
-
-}
-
-.fleet-philosophy .container{
-
-    max-width:850px;
+    border-top:
+        1px solid rgba(0,26,58,.08);
 
 }
 
-.fleet-philosophy::before{
+.fleet-philosophy .container {
 
-    content:"";
-
-    display:block;
-
-    width:80px;
-    height:4px;
-
-    margin:0 auto 45px;
-
-    background:var(--bm-red);
+    max-width: 850px;
 
 }
 
-.fleet-philosophy h2{
+.fleet-philosophy::before {
 
-    margin:15px 0 25px;
+    content: "";
 
-    color:var(--bm-blue);
+    display: block;
 
-    font-size:clamp(2.5rem,4vw,4rem);
+    width: 80px;
+    height: 4px;
 
-    line-height:1.03;
+    margin: 0 auto 45px;
 
-    letter-spacing:-.045em;
+    background: var(--bm-red);
 
 }
 
-.fleet-philosophy p{
+.fleet-philosophy h2 {
 
-    margin:0 auto;
+    margin: 15px 0 25px;
 
-    color:#526985;
+    color: var(--bm-blue);
 
-    font-size:1.05rem;
+    font-size: clamp(2.5rem,4vw,4rem);
 
-    line-height:1.85;
+    line-height: 1.03;
+
+    letter-spacing: -.045em;
+
+}
+
+.fleet-philosophy p {
+
+    margin: 0 auto;
+
+    color: #526985;
+
+    font-size: 1.05rem;
+
+    line-height: 1.85;
 
 }
 
@@ -916,236 +1030,48 @@
    JOIN SECTION
 ========================================================== */
 
-.join-home{
+.join-home {
 
-    padding:110px 0;
+    padding: 110px 0;
 
-    text-align:center;
+    text-align: center;
 
-    background:#f5f7fa;
+    background: #f5f7fa;
 
-    border-top:1px solid rgba(0,26,58,.08);
-
-}
-
-.join-home .container{
-
-    max-width:850px;
+    border-top:
+        1px solid rgba(0,26,58,.08);
 
 }
 
-.join-home h2{
+.join-home .container {
 
-    margin:15px 0 25px;
-
-    color:var(--bm-blue);
-
-    font-size:clamp(2.7rem,4vw,4.3rem);
-
-    line-height:1;
-
-    letter-spacing:-.05em;
+    max-width: 850px;
 
 }
 
-.join-home p{
+.join-home h2 {
 
-    max-width:700px;
+    margin: 15px 0 25px;
 
-    margin:0 auto 38px;
+    color: var(--bm-blue);
 
-    color:#526985;
+    font-size: clamp(2.7rem,4vw,4rem);
 
-    line-height:1.8;
+    line-height: 1.03;
 
-}
-
-.join-home .hero-buttons{
-
-    display:flex;
-
-    justify-content:center;
-
-    align-items:center;
-
-    gap:20px;
-
-    flex-wrap:wrap;
+    letter-spacing: -.045em;
 
 }
 
+.join-home p {
 
-/*
-    This is used by the current fleet HTML instead of
-    .secondary-button.
-*/
+    max-width: 700px;
 
-.feature-button{
+    margin: 0 auto 35px;
 
-    display:inline-flex;
+    color: #526985;
 
-    align-items:center;
-    justify-content:center;
-
-    min-height:52px;
-
-    padding:15px 28px;
-
-    color:var(--bm-blue);
-
-    background:transparent;
-
-    border:2px solid var(--bm-blue);
-
-    border-radius:999px;
-
-    text-decoration:none;
-
-    font-size:.9rem;
-
-    font-weight:700;
-
-    transition:
-        color .25s ease,
-        background .25s ease,
-        transform .25s ease;
-
-}
-
-.feature-button:hover{
-
-    color:#ffffff;
-
-    background:var(--bm-blue);
-
-    transform:translateY(-2px);
-
-}
-
-
-/* ==========================================================
-   FOOTER
-========================================================== */
-
-.site-footer{
-
-    background:var(--bm-blue);
-
-    color:#ffffff;
-
-}
-
-.footer-grid{
-
-    display:grid;
-
-    grid-template-columns:2fr 1fr 1fr 1fr;
-
-    gap:70px;
-
-    padding:90px 0;
-
-}
-
-.footer-brand img{
-
-    width:220px;
-
-    margin-bottom:30px;
-
-}
-
-.footer-brand p{
-
-    max-width:360px;
-
-    margin:0;
-
-    line-height:1.9;
-
-    color:rgba(255,255,255,.72);
-
-}
-
-.site-footer h4{
-
-    margin:0 0 22px;
-
-    color:#ffffff;
-
-    font-size:.9rem;
-
-    font-weight:700;
-
-    letter-spacing:.14em;
-
-    text-transform:uppercase;
-
-}
-
-.site-footer ul{
-
-    margin:0;
-
-    padding:0;
-
-    list-style:none;
-
-}
-
-.site-footer li{
-
-    margin-bottom:14px;
-
-}
-
-.site-footer a{
-
-    color:rgba(255,255,255,.72);
-
-    text-decoration:none;
-
-    transition:
-        color .25s ease,
-        padding-left .25s ease;
-
-}
-
-.site-footer a:hover{
-
-    color:#ffffff;
-
-    padding-left:8px;
-
-}
-
-.footer-bottom{
-
-    border-top:1px solid rgba(255,255,255,.10);
-
-}
-
-.footer-bottom-content{
-
-    display:flex;
-
-    justify-content:space-between;
-
-    align-items:center;
-
-    gap:20px;
-
-    padding:28px 0;
-
-}
-
-.footer-bottom p{
-
-    margin:0;
-
-    color:rgba(255,255,255,.55);
-
-    font-size:.9rem;
+    line-height: 1.8;
 
 }
 
@@ -1154,169 +1080,267 @@
    RESPONSIVE
 ========================================================== */
 
-@media (max-width:900px){
+@media (max-width: 1000px) {
 
-    .fleet-hero{
+    .aircraft-card {
 
-        min-height:540px;
-
-    }
-
-    .aircraft-card{
-
-        grid-template-columns:1fr;
+        grid-template-columns: 1fr;
 
     }
 
-    .aircraft-image{
+    .aircraft-image {
 
-        min-height:380px;
-
-    }
-
-    .aircraft-content{
-
-        padding:45px;
+        min-height: 380px;
 
     }
 
-    .aircraft-card-flagship .aircraft-content{
+    .aircraft-content {
 
-        padding:45px;
-
-    }
-
-    .foundry-grid{
-
-        grid-template-columns:1fr;
+        padding: 50px;
 
     }
 
-    .footer-grid{
+    .aircraft-card-flagship .aircraft-content {
 
-        grid-template-columns:1fr 1fr;
+        padding: 50px;
 
-        gap:45px;
+    }
+
+    .foundry-grid {
+
+        grid-template-columns: 1fr;
+
+        gap: 35px;
 
     }
 
 }
 
 
-@media (max-width:600px){
+@media (max-width: 800px) {
 
-    .fleet-hero{
+    .fleet-hero {
 
-        min-height:500px;
-
-    }
-
-    .fleet-hero-content{
-
-        padding-top:75px;
-        padding-bottom:75px;
+        min-height: 540px;
 
     }
 
-    .fleet-intro,
-    .fleet-class,
-    .foundry-class,
-    .fleet-philosophy,
-    .join-home{
+    .fleet-hero-content {
 
-        padding:80px 0;
+        padding-top: 80px;
+        padding-bottom: 80px;
 
     }
 
-    .fleet-class-heading{
+    .fleet-class {
 
-        margin-bottom:50px;
-
-    }
-
-    .aircraft-card{
-
-        border-radius:18px;
+        padding: 90px 0 100px;
 
     }
 
-    .aircraft-image{
+    .fleet-class-heading {
 
-        min-height:280px;
-
-    }
-
-    .aircraft-content{
-
-        padding:30px;
+        margin-bottom: 50px;
 
     }
 
-    .aircraft-card-flagship .aircraft-content{
+    .aircraft-image {
 
-        padding:30px;
-
-    }
-
-    .aircraft-specs{
-
-        grid-template-columns:1fr;
-
-        gap:15px;
+        min-height: 300px;
 
     }
 
-    .fleet-class-note{
+    .aircraft-content {
 
-        padding:45px 30px;
-
-        border-radius:18px;
+        padding: 40px;
 
     }
 
-    .foundry-card{
+    .aircraft-content h3 {
 
-        min-height:400px;
-
-    }
-
-    .foundry-card-content{
-
-        min-height:376px;
-
-        padding:35px 25px;
+        font-size: 2.5rem;
 
     }
 
-    .join-home .hero-buttons{
+    .foundry-class {
 
-        flex-direction:column;
-
-    }
-
-    .join-home .hero-buttons a{
-
-        width:100%;
-
-        max-width:280px;
+        padding: 90px 0 100px;
 
     }
 
-    .footer-grid{
+    .foundry-heading {
 
-        grid-template-columns:1fr;
-
-        gap:40px;
-
-        padding:65px 0;
+        margin-bottom: 50px;
 
     }
 
-    .footer-bottom-content{
+    .foundry-aircraft-image {
 
-        flex-direction:column;
+        height: 230px;
 
-        align-items:flex-start;
+    }
+
+    .fleet-class-note {
+
+        padding: 50px 35px;
+
+    }
+
+    .fleet-philosophy {
+
+        padding: 90px 0;
+
+    }
+
+    .join-home {
+
+        padding: 90px 0;
+
+    }
+
+}
+
+
+@media (max-width: 600px) {
+
+    .fleet-hero-content h1 {
+
+        font-size: 3rem;
+
+    }
+
+    .fleet-hero-content p {
+
+        font-size: 1rem;
+
+    }
+
+    .fleet-intro {
+
+        padding: 80px 0;
+
+    }
+
+    .fleet-class {
+
+        padding: 80px 0 90px;
+
+    }
+
+    .fleet-class-heading h2 {
+
+        font-size: 2.5rem;
+
+    }
+
+    .aircraft-image {
+
+        min-height: 230px;
+
+    }
+
+    .aircraft-content {
+
+        padding: 32px 25px;
+
+    }
+
+    .aircraft-content h3 {
+
+        font-size: 2.2rem;
+
+    }
+
+    .aircraft-specs {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+    }
+
+    .foundry-aircraft-image {
+
+        height: 200px;
+
+    }
+
+    .foundry-card h3 {
+
+        font-size: 2.2rem;
+
+        margin-left: 25px;
+        margin-right: 25px;
+
+    }
+
+    .foundry-card p {
+
+        padding: 0 25px;
+
+    }
+
+    .foundry-specs {
+
+        grid-template-columns: 1fr;
+
+        gap: 18px;
+
+        margin-left: 25px;
+        margin-right: 25px;
+
+    }
+
+    .fleet-class-note {
+
+        padding: 40px 25px;
+
+    }
+
+    .fleet-class-note h3 {
+
+        font-size: 2.2rem;
+
+    }
+
+}
+
+
+@media (max-width: 420px) {
+
+    .fleet-hero {
+
+        min-height: 500px;
+
+    }
+
+    .fleet-hero-content {
+
+        padding-top: 65px;
+        padding-bottom: 65px;
+
+    }
+
+    .fleet-hero-content h1 {
+
+        font-size: 2.6rem;
+
+    }
+
+    .foundry-status {
+
+        top: 15px;
+        left: 15px;
+
+        padding: 8px 14px;
+
+        font-size: .65rem;
+
+    }
+
+    .fleet-button {
+
+        padding: 13px 21px;
 
     }
 
