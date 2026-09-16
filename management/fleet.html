@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="noindex, nofollow">
+    <title>Fleet &amp; Technical Operations | British Midland Virtual</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="fleet.css?v=1">
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body>
+<div id="authGate" class="auth-gate"><div class="auth-gate-inner">
+    <div class="auth-mark">BM</div><span>OPERATIONS CONTROL</span>
+    <small id="authMessage">AUTHENTICATING MANAGEMENT SESSION</small>
+    <a href="./" class="gate-link">Return to sign in</a>
+</div></div>
+<div id="dashboardApp" class="app hidden">
+    <aside class="sidebar"><div>
+        <div class="sidebar-brand"><div class="brand-mark">BM</div><div><strong>BRITISH MIDLAND</strong><span>OPERATIONS CONTROL</span></div></div>
+        <nav class="navigation" aria-label="Management">
+            <a href="dashboard.html" class="nav-item"><span class="nav-symbol">▦</span>Dashboard</a>
+            <a href="live-operations.html" class="nav-item"><span class="nav-symbol">◉</span>Live Operations</a>
+            <a href="pireps.html" class="nav-item"><span class="nav-symbol">✈</span>PIREPs</a>
+            <a href="pilots.html" class="nav-item"><span class="nav-symbol">◎</span>Pilots</a>
+            <a href="reviews.html" class="nav-item"><span class="nav-symbol">!</span>Reviews</a>
+            <a href="fleet.html" class="nav-item active" aria-current="page"><span class="nav-symbol">⚙</span>Fleet / Tech Ops</a>
+        </nav>
+    </div><div class="sidebar-footer"><span>BMV OPERATIONS</span><span>MANAGEMENT SYSTEM</span></div></aside>
+    <main class="main">
+        <header class="topbar"><div><span class="section-label">MANAGEMENT PORTAL</span><h1>Fleet / Technical Operations</h1></div>
+            <div class="user-area"><div class="user-copy"><strong id="managementName">—</strong><span id="managementRole">—</span></div><button id="signOutButton">SIGN OUT</button></div>
+        </header>
+        <a class="mobile-back" href="dashboard.html">← Operations dashboard</a>
+        <section class="welcome"><div><span class="eyebrow">AIRCRAFT SERVICEABILITY</span><h2>Fleet Control</h2><p>Review the fleet, record technical holds and authorise return to service.</p></div><button id="refreshButton" class="fleet-button">REFRESH FLEET</button></section>
+        <div id="pageMessage" role="status" aria-live="polite"></div>
+        <section class="stats-grid" aria-label="Current fleet summary">
+            <article class="stat-card"><span class="stat-label">CURRENT AIRCRAFT</span><strong id="currentCount">—</strong><small>In-service fleet</small></article>
+            <article class="stat-card"><span class="stat-label">AVAILABLE</span><strong id="availableCount">—</strong><small>Current aircraft available for service</small></article>
+            <article class="stat-card attention"><span class="stat-label">TECH HOLD / AWAITING RELEASE</span><strong id="holdCount">—</strong><small>Current aircraft requiring technical release</small></article>
+            <article class="stat-card"><span class="stat-label">OTHER UNAVAILABLE</span><strong id="otherCount">—</strong><small>Current aircraft in other unavailable states</small></article>
+        </section>
+        <section class="panel">
+            <div class="panel-header"><div><span class="panel-kicker">TECHNICAL OPERATIONS</span><h3>Aircraft register</h3></div><span id="updatedAt" class="panel-note">NOT YET LOADED</span></div>
+            <div class="fleet-filters">
+                <label>Search aircraft<input id="searchInput" type="search" placeholder="Registration, type, name or location"></label>
+                <label>Lifecycle<select id="lifecycleFilter"><option value="CURRENT">Current fleet</option><option value="">All aircraft</option><option value="PLANNED">Planned</option><option value="RETIRED">Retired</option></select></label>
+                <label>Operational status<select id="statusFilter"><option value="">All statuses</option><option value="AVAILABLE">Available</option><option value="TECH_HOLD">Tech hold</option><option value="AWAITING_RELEASE">Awaiting release</option><option value="MAINTENANCE">Maintenance</option><option value="NOT_IN_SERVICE">Not in service</option></select></label>
+            </div>
+            <p id="resultCount" class="result-count" aria-live="polite"></p>
+            <div id="fleetList" class="fleet-list" aria-busy="true"><p class="empty-state">Loading fleet…</p></div>
+        </section>
+        <footer class="page-footer"><span>BRITISH MIDLAND VIRTUAL</span><span>OPERATIONS CONTROL • RESTRICTED ACCESS</span></footer>
+    </main>
+</div>
+<dialog id="actionDialog" aria-labelledby="actionTitle">
+    <form id="actionForm">
+        <span class="eyebrow">TECHNICAL OPERATIONS</span><h2 id="actionTitle"></h2><p id="actionAircraft"></p>
+        <fieldset id="holdFields"><legend>Technical hold details</legend>
+            <label>Location (IATA or ICAO)<input id="holdLocation" maxlength="4" pattern="[A-Za-z]{3,4}" autocomplete="off" required></label>
+            <label>Reason<textarea id="holdReason" rows="4" maxlength="2000" required></textarea></label>
+            <label>Associated PIREP ID (optional)<input id="holdPirep" inputmode="numeric" pattern="[0-9]+" maxlength="19" aria-describedby="pirepHint"></label>
+            <small id="pirepHint">Enter a PIREP for this aircraft, or leave blank.</small>
+        </fieldset>
+        <p id="releaseNote" hidden>Confirm that the required checks are complete and this aircraft may return to service. Its current location will be retained.</p>
+        <p id="actorNote" class="muted"></p><p id="actionError" role="alert"></p>
+        <div class="dialog-actions"><button type="button" id="cancelAction" class="fleet-button">CANCEL</button><button type="submit" id="confirmAction" class="fleet-button primary"></button></div>
+    </form>
+</dialog>
+<dialog id="historyDialog" aria-labelledby="historyTitle"><h2 id="historyTitle">Technical hold history</h2><div id="historyContent"></div><div class="dialog-actions"><button id="closeHistory" class="fleet-button">CLOSE</button></div></dialog>
+<script src="fleet.js?v=1"></script>
+</body>
+</html>
