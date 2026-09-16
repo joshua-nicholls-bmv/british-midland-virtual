@@ -124,10 +124,10 @@
             if (hold) {
                 const location = $('holdLocation').value.trim().toUpperCase();
                 const reason = $('holdReason').value.trim();
-                const pirep = $('holdPirep').value.trim();
+                const pirep = $('holdPirep').value.trim().toLowerCase();
                 if (!/^[A-Z]{3,4}$/.test(location)) throw new Error('Enter a three-letter IATA or four-letter ICAO location.');
                 if (!reason || reason.length > 2000) throw new Error('Enter a reason of up to 2,000 characters.');
-                if (pirep && (!/^[0-9]+$/.test(pirep) || BigInt(pirep) < 1n || BigInt(pirep) > 9223372036854775807n)) throw new Error('Enter a valid positive PIREP ID.');
+                if (pirep && !/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/.test(pirep)) throw new Error('Paste the full PIREP ID from its page URL, or leave it blank.');
                 if (pirep) {
                     const {data:report,error} = await client.from('pireps').select('id, registration').eq('id',pirep).maybeSingle();
                     if (error) throw error;
@@ -143,7 +143,7 @@
             message(confirmation);
             if (!await loadFleet()) message(`${confirmation} The change was saved, but the fleet could not be refreshed. Refresh before taking further action.`,true);
         } catch (error) {
-            $('actionError').textContent = `${error.message || 'Unable to save the change.'} If the connection was interrupted, close and refresh to check whether it was saved before retrying.`;
+            $('actionError').textContent = error.message || 'Unable to save the change. If the connection was interrupted, close and refresh to check whether it was saved before retrying.';
         } finally {
             busy = false;
             $('confirmAction').disabled = $('cancelAction').disabled = false;

@@ -62,8 +62,8 @@
         <fieldset id="holdFields"><legend>Technical hold details</legend>
             <label>Location (IATA or ICAO)<input id="holdLocation" maxlength="4" pattern="[A-Za-z]{3,4}" autocomplete="off" required></label>
             <label>Reason<textarea id="holdReason" rows="4" maxlength="2000" required></textarea></label>
-            <label>Associated PIREP ID (optional)<input id="holdPirep" inputmode="numeric" pattern="[0-9]+" maxlength="19" aria-describedby="pirepHint"></label>
-            <small id="pirepHint">Enter a PIREP for this aircraft, or leave blank.</small>
+            <label>Associated PIREP ID (optional)<input id="holdPirep" type="text" maxlength="36" autocomplete="off" spellcheck="false" aria-describedby="pirepHint"></label>
+            <small id="pirepHint">Paste the full PIREP ID from its page URL (the value after id=), or leave blank.</small>
         </fieldset>
         <p id="releaseNote" hidden>Confirm that the required checks are complete and this aircraft may return to service. Its current location will be retained.</p>
         <p id="actorNote" class="muted"></p><p id="actionError" role="alert"></p>
@@ -71,6 +71,6 @@
     </form>
 </dialog>
 <dialog id="historyDialog" aria-labelledby="historyTitle"><h2 id="historyTitle">Technical hold history</h2><div id="historyContent"></div><div class="dialog-actions"><button id="closeHistory" class="fleet-button">CLOSE</button></div></dialog>
-<script src="fleet.js?v=1"></script>
+<script src="fleet.js?v=2"></script>
 </body>
 </html>
