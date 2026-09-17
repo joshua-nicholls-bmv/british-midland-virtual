@@ -11,7 +11,7 @@
  async function authorise(){const {data,error}=await client.auth.getUser();if(error||!data.user)throw new Error('Please sign in to Management.');$('managerName').textContent=await rpc('bmv_fleet_manager_identity',{});}
  async function edge(action,id){
   const {data,error}=await client.auth.getSession();if(error||!data.session)throw new Error('Please sign in again.');
-  const response=await fetch(`${URL}/functions/v1/tech-ops-dispatch/manage`,{method:'POST',headers:{Authorization:`Bearer ${data.session.access_token}`,apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({action,job_id:id}),signal:AbortSignal.timeout(45000)});
+  const response=await fetch`${URL}/functions/v1/smooth-action/manage',{method:'POST',headers:{Authorization:`Bearer ${data.session.access_token}`,apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify({action,job_id:id}),signal:AbortSignal.timeout(45000)});
   const result=await response.json();if(!response.ok)throw new Error(result.error||'Discord request failed');return result;
  }
  function render(){
