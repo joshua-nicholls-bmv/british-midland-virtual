@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Tech Ops Dispatch | British Midland Virtual</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="dashboard.css"><link rel="stylesheet" href="dispatch.css?v=1"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
+<body><div id="authGate" class="auth-gate"><div class="auth-gate-inner"><div class="auth-mark">BM</div><span>TECHNICAL OPERATIONS</span><small id="authMessage">VERIFYING MANAGEMENT ACCESS</small><p><a href="./">Return to sign in</a></p></div></div>
+<main id="dispatchApp" class="dispatch hidden"><header class="topbar"><div><span class="section-label">BRITISH MIDLAND · MANAGEMENT</span><h1>Technical Operations Dispatch</h1></div><div class="user-area"><span id="managerName"></span><button id="signOutButton">SIGN OUT</button></div></header>
+<nav class="dispatch-nav"><a href="fleet.html">← Fleet / Tech Ops</a><a href="dashboard.html">Dashboard</a><button id="refresh">Refresh jobs</button></nav>
+<div id="message" role="status" aria-live="polite"></div>
+<section class="panel"><div class="panel-header"><div><span class="panel-kicker">TECHNICAL RESPONSE</span><h3>Create a dispatch job</h3></div></div><form id="createForm" class="dispatch-form">
+<label>Grounded aircraft<select id="grounded" required></select></label><label>Support aircraft<select id="support" required></select></label><label>Departure (IATA or ICAO)<input id="departure" required pattern="[A-Za-z]{3,4}" maxlength="4"></label>
+<label class="wide">Pilot briefing<textarea id="briefing" required maxlength="1500" rows="3" placeholder="Describe the response required. This briefing will be visible in Discord."></textarea></label>
+<p class="wide muted">Destination comes from the grounded aircraft’s recorded location. Support aircraft must be CURRENT, AVAILABLE and in the TECH_OPS fleet. Open jobs reserve the support aircraft within this job board.</p>
+<button type="submit">CREATE JOB</button></form></section>
+<section class="panel"><div class="panel-header"><div><span class="panel-kicker">BMA100T–BMA199T</span><h3>Dispatch jobs</h3></div></div><div id="jobs" class="job-list"></div></section>
+<section class="panel"><div class="panel-header"><div><span class="panel-kicker">PILOT IDENTITIES</span><h3>Link a Discord pilot</h3></div></div><form id="linkForm" class="dispatch-form">
+<label>Discord user ID<input id="discordId" required pattern="[0-9]{17,20}" inputmode="numeric"></label><label>BMV pilot ID<input id="pilotId" required placeholder="BMA0001"></label>
+<label class="wide checkbox"><input id="verified" type="checkbox" required>I have verified that this Discord user owns this BMV pilot account.</label><button type="submit">LINK PILOT</button>
+</form><div id="links" class="job-list"></div></section><p class="muted">Completing a dispatch job does not release the grounded aircraft. Return to service remains a separate management decision.</p></main>
+<script src="dispatch.js?v=1"></script></body></html>
