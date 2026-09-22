@@ -21,8 +21,9 @@ function drawRoutes(filter='all') {
   L.circleMarker([r.lat,r.lon],{radius:6,color:'#fff',weight:2,fillColor:network.classes[r.class].colour,fillOpacity:1}).addTo(layers).bindTooltip(`${r.city} (${r.iata})`).bindPopup(content);
  });
  [...new Set(routes.map(r=>r.origin))].forEach(code=>{const h=network.hubs[code];L.circleMarker([h.lat,h.lon],{radius:9,color:'#fff',weight:3,fillColor:'#001a3a',fillOpacity:1}).addTo(layers).bindTooltip(`${h.name} (${code})`,{permanent:filter==='foundry'||code==='BHX',direction:code==='EMA'?'top':'bottom',className:'hub-label'});});
+ if(filter==='all'||filter==='cargo') network.cargoHubs.forEach(h=>{const point=[h.lat,h.lon];bounds.push(point);L.circleMarker(point,{radius:8,color:"#fff",weight:2,fillColor:"#526175",fillOpacity:1}).addTo(layers).bindTooltip(`${h.city} (${h.icao}) · Cargo hub`).bindPopup(`<strong>${h.city} (${h.icao})</strong><br>European Cargo hub<br>${h.country}`);});
  map.fitBounds(bounds,{padding:[35,35],maxZoom:7,animate:false});
- document.getElementById('map-status').textContent=`${routes.length} routes shown · One line per hub–destination pair. Select an airport to explore its routes.`;
+ document.getElementById('map-status').textContent=filter==='cargo'?'8 cargo hubs shown · Hub locations only; no cargo route lines.':`${routes.length} passenger routes${filter==='all'?' and 8 cargo hubs':''} shown · One line per passenger route pair.`;
 }
 function buildCards(){
  network.routes.forEach(r=>{
@@ -35,7 +36,7 @@ function buildCards(){
 }
 async function buildNetwork(){
  const status=document.getElementById('map-status');
- try{const response=await fetch('assets/data/network.json?v=11');if(!response.ok)throw Error('Route data unavailable');network=await response.json();buildCards();}
+ try{const response=await fetch('assets/data/network.json?v=12');if(!response.ok)throw Error('Route data unavailable');network=await response.json();buildCards();}
  catch(error){status.textContent='The route schedule could not be loaded. Please refresh to try again.';console.error(error);return;}
  if(typeof L==='undefined'){status.textContent='The interactive map is unavailable. All route details are listed below.';document.querySelectorAll('.map-route-button,[data-filter]').forEach(b=>b.disabled=true);return;}
  map=L.map('network-map',{scrollWheelZoom:false,minZoom:2,maxZoom:18});
@@ -48,6 +49,7 @@ async function buildNetwork(){
   map.attributionControl.addAttribution('Made with <a href="https://www.naturalearthdata.com/">Natural Earth</a>');
  } catch(error) {console.warn(error.message);}
  layers=L.layerGroup().addTo(map);drawRoutes();
+ document.querySelectorAll('[data-cargo-hub]').forEach(button=>button.addEventListener('click',()=>{const hub=network.cargoHubs.find(h=>h.icao===button.dataset.cargoHub);drawRoutes('cargo');map.setView([hub.lat,hub.lon],6,{animate:false});L.popup().setLatLng([hub.lat,hub.lon]).setContent(`<strong>${hub.city} (${hub.icao})</strong><br>European Cargo hub`).openOn(map);document.getElementById('network-map').scrollIntoView({behavior:smooth(),block:'center'});}));
  document.querySelectorAll('[data-filter]').forEach(b=>b.addEventListener('click',()=>drawRoutes(b.dataset.filter)));
 }
 document.addEventListener('DOMContentLoaded',buildNetwork);
