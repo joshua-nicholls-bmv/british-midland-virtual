@@ -1261,3 +1261,16 @@ a:focus-visible{outline:3px solid #2877bd;outline-offset:5px}
  #our-businesses,.group-business{scroll-margin-top:190px}
 }
 @media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+/* European Cargo fleet and hubs */
+.cargo-details{margin-top:60px;scroll-margin-top:120px}
+.cargo-details>h3{font-size:clamp(1.6rem,3vw,2.2rem);margin:10px 0 25px}
+.cargo-detail-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.cargo-detail-card{padding:26px;background:var(--bm-cream);border:1px solid #dce1e6;border-top:4px solid #526175;border-radius:16px}
+.cargo-detail-card h4{font-size:1.1rem;letter-spacing:0;line-height:1.4;margin:0 0 12px;color:#001a3a}
+.cargo-count{font-size:.85rem;color:#526175;margin-bottom:12px}
+.cargo-detail-card ul{list-style:none;padding:0;margin:0}
+.cargo-detail-card li{padding:10px 0;border-bottom:1px solid #dce1e6;display:flex;gap:14px;flex-wrap:wrap;font-size:.95rem}
+.cargo-detail-card li:last-child{border-bottom:0}
+.cargo-detail-card li strong{color:#001a3a}
+@media(max-width:768px){.cargo-detail-grid{grid-template-columns:1fr}.cargo-details{margin-top:40px;scroll-margin-top:190px}}
