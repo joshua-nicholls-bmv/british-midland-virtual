@@ -131,22 +131,7 @@
     </div>
 
 </section>
-<section id="fleet-status" class="fleet-status" aria-labelledby="fsTitle">
- <div class="container">
-  <div class="fs-heading"><div><span class="section-kicker">OPERATIONS · FLEET STATUS</span><h2 id="fsTitle">Check your aircraft before departure.</h2><p class="fs-intro">Current aircraft availability and last recorded location, maintained by Operations. Check your registration before you fly.</p></div><button id="fsRefresh" type="button">REFRESH STATUS</button></div>
-  <noscript><p class="fs-notice">Enable JavaScript to view current fleet status, or contact Operations to confirm availability.</p></noscript>
-  <div id="fsNotice" class="fs-notice" role="status" aria-live="polite"></div>
-  <div class="fs-summary" aria-label="Current fleet summary"><div><span>CURRENT AIRCRAFT</span><strong id="fsTotal">—</strong></div><div><span>AVAILABLE</span><strong id="fsAvailable">—</strong></div><div class="fs-attention"><span>UNAVAILABLE / UNKNOWN</span><strong id="fsUnavailable">—</strong></div></div>
-  <div class="fs-toolbar">
-   <label>Find an aircraft<input id="fsSearch" type="search" placeholder="Registration, type, name or location"></label>
-   <label>Availability<select id="fsStatus"><option value="">All statuses</option><option value="AVAILABLE">Available</option><option value="UNAVAILABLE">Unavailable / unknown</option><option value="TECH_HOLD">Tech hold</option><option value="AWAITING_RELEASE">Awaiting release</option><option value="MAINTENANCE">Maintenance</option></select></label>
-   <label>Fleet class<select id="fsClass"><option value="">All classes</option><option value="BEATING_HEART">Beating Heart</option><option value="PIONEER">Pioneer</option><option value="FOUNDRY">Foundry</option><option value="TECH_OPS">Technical Operations</option></select></label>
-  </div>
-  <div class="fs-meta"><span id="fsCount" aria-live="polite"></span><span id="fsUpdated">Checking latest status…</span></div>
-  <div id="fsGrid" class="fs-grid" aria-busy="true"><p class="fs-empty">Loading current fleet status…</p></div>
-  <p class="fs-footnote">Refreshes every 60 seconds while this page is visible. Locations are the last recorded airport, not live tracking. If your aircraft is unavailable, select another available registration or contact Operations.</p>
- </div>
-</section>
+
 
 
 
@@ -880,6 +865,23 @@
 
 </section>
 
+
+<section id="fleet-status" class="fleet-status" aria-labelledby="fsTitle">
+ <div class="container">
+  <div class="fs-heading"><div><span class="section-kicker">OPERATIONS · FLEET STATUS</span><h2 id="fsTitle">Check your aircraft before departure.</h2><p class="fs-intro">Current aircraft availability and last recorded location, maintained by Operations. Check your registration before you fly.</p></div><button id="fsRefresh" type="button">REFRESH STATUS</button></div>
+  <noscript><p class="fs-notice">Enable JavaScript to view current fleet status, or contact Operations to confirm availability.</p></noscript>
+  <div id="fsNotice" class="fs-notice" role="status" aria-live="polite"></div>
+  <div class="fs-summary" aria-label="Current fleet summary"><div><span>CURRENT AIRCRAFT</span><strong id="fsTotal">—</strong></div><div><span>AVAILABLE</span><strong id="fsAvailable">—</strong></div><div class="fs-attention"><span>UNAVAILABLE / UNKNOWN</span><strong id="fsUnavailable">—</strong></div></div>
+  <div class="fs-toolbar">
+   <label>Find an aircraft<input id="fsSearch" type="search" placeholder="Registration, type, name or location"></label>
+   <label>Availability<select id="fsStatus"><option value="">All statuses</option><option value="AVAILABLE">Available</option><option value="UNAVAILABLE">Unavailable / unknown</option><option value="TECH_HOLD">Tech hold</option><option value="AWAITING_RELEASE">Awaiting release</option><option value="MAINTENANCE">Maintenance</option></select></label>
+   <label>Fleet class<select id="fsClass"><option value="">All classes</option><option value="BEATING_HEART">Beating Heart</option><option value="PIONEER">Pioneer</option><option value="FOUNDRY">Foundry</option><option value="TECH_OPS">Technical Operations</option></select></label>
+  </div>
+  <div class="fs-meta"><span id="fsCount" aria-live="polite"></span><span id="fsUpdated">Checking latest status…</span></div>
+  <div id="fsGrid" class="fs-grid" aria-busy="true"><p class="fs-empty">Loading current fleet status…</p></div>
+  <p class="fs-footnote">Refreshes every 60 seconds while this page is visible. Locations are the last recorded airport, not live tracking. If your aircraft is unavailable, select another available registration or contact Operations.</p>
+ </div>
+</section>
 
 <!-- ==========================================================
      FOOTER
