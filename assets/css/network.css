@@ -682,70 +682,6 @@
 
 
 /* ==========================================================
-   AIRCRAFT BADGES
-========================================================== */
-
-.badge-a319,
-.badge-a320,
-.badge-a321,
-.badge-a350 {
-
-    display: inline-flex;
-
-    align-items: center;
-
-    justify-content: center;
-
-    padding: 6px 11px;
-
-    border-radius: 999px;
-
-    font-size: .75rem;
-
-    font-weight: 800;
-
-    line-height: 1;
-
-}
-
-
-.destination-info strong .badge-a319 {
-
-    background: #2e6fa3;
-
-    color: #ffffff;
-
-}
-
-
-.destination-info strong .badge-a320 {
-
-    background: var(--bm-red);
-
-    color: #ffffff;
-
-}
-
-
-.destination-info strong .badge-a321 {
-
-    background: #c9a227;
-
-    color: var(--bm-blue);
-
-}
-
-
-.destination-info strong .badge-a350 {
-
-    background: #8a8f98;
-
-    color: #ffffff;
-
-}
-
-
-/* ==========================================================
    ROUTE NOTE
 ========================================================== */
 
@@ -1299,3 +1235,36 @@
 /* ==========================================================
    END OF NETWORK.CSS
 ========================================================== */
+
+/* Class identity applies to every aircraft within that class. */
+.beating-heart-section, .beating-heart-card { --class-colour: #c62828; }
+.foundry-section, .foundry-card { --class-colour: #a65328; }
+.pioneer-section, .pioneer-card { --class-colour: #947019; }
+.network-class-section .section-kicker,.route-card-flight {color:var(--class-colour)}
+.pioneer-section .section-kicker {color:#e6c76c}
+.destination-card::before {background:var(--class-colour);transform:scaleX(1)}
+.destination-card.selected {border-color:var(--class-colour)}
+.destination-status.class-badge {background:var(--class-colour);color:white}
+.route-card-flight {letter-spacing:.04em}
+.airport {color:#546275}
+.destination-info span {color:#596779}
+.schedule-date {font-size:.82rem;margin-top:14px!important}
+.base-heading {max-width:1100px;margin:40px auto 22px}
+.base-heading span {font-size:.85rem;font-weight:500;margin-left:10px}
+.network-filters {display:flex;flex-wrap:wrap;gap:12px;justify-content:center;margin-bottom:24px}
+.network-filters button {display:inline-flex;align-items:center;gap:9px;min-height:44px;padding:10px 18px;border:2px solid #d1d8e1;border-radius:30px;background:white;color:var(--bm-blue);font:inherit;font-weight:700;cursor:pointer}
+.network-filters button[aria-pressed="true"] {border-color:var(--bm-blue);box-shadow:0 0 0 1px var(--bm-blue)}
+.legend-dot {width:12px;height:12px;border-radius:50%;background:var(--class-colour)}
+.map-route-button {margin-top:22px;padding:12px;border:1px solid var(--class-colour);border-radius:10px;background:white;color:var(--class-colour);font:inherit;font-weight:700;cursor:pointer}
+button:focus-visible {outline:3px solid #226dba;outline-offset:4px}
+.network-disclaimer,#map-status {text-align:center;padding:20px;color:#526175}
+.destination-card {scroll-margin-top:130px}
+.network-class-stat span {color:#596779}
+.pioneer-section .network-class-stat span {color:#c2cad7}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.destination-card::before{transition:none}}
+@media(max-width:768px){
+ .site-header .navbar{flex-direction:column;gap:14px;padding:16px 0}
+ .site-header nav{width:100%}
+ .site-header .nav-links{flex-wrap:wrap;justify-content:center;gap:10px 16px}
+ .site-header .nav-links a{display:inline-flex;align-items:center;min-height:36px}
+}
