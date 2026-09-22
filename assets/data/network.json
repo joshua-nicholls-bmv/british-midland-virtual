@@ -846,5 +846,63 @@
       "returnTime": "0:50",
       "class": "foundry"
     }
+  ],
+  "cargoHubs": [
+    {
+      "icao": "EGFF",
+      "city": "Cardiff",
+      "country": "United Kingdom",
+      "lat": 51.3967,
+      "lon": -3.3433
+    },
+    {
+      "icao": "EGHH",
+      "city": "Bournemouth",
+      "country": "United Kingdom",
+      "lat": 50.78,
+      "lon": -1.8425
+    },
+    {
+      "icao": "EGNV",
+      "city": "Teesside",
+      "country": "United Kingdom",
+      "lat": 54.5092,
+      "lon": -1.4294
+    },
+    {
+      "icao": "ZUUU",
+      "city": "Chengdu",
+      "country": "China",
+      "lat": 30.5785,
+      "lon": 103.9471
+    },
+    {
+      "icao": "ZUCK",
+      "city": "Chongqing",
+      "country": "China",
+      "lat": 29.7192,
+      "lon": 106.6417
+    },
+    {
+      "icao": "ZJHK",
+      "city": "Haikou",
+      "country": "China",
+      "lat": 19.9349,
+      "lon": 110.4589
+    },
+    {
+      "icao": "ZWWW",
+      "city": "Ürümqi",
+      "country": "China",
+      "lat": 43.9071,
+      "lon": 87.4742
+    },
+    {
+      "icao": "LOWW",
+      "city": "Vienna",
+      "country": "Austria",
+      "lat": 48.1103,
+      "lon": 16.5697
+    }
   ]
 }
