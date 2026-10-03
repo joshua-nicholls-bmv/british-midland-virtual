@@ -46,6 +46,9 @@ let liveFlights = [];
 let selectedFlightId = null;
 let liveRefreshTimer = null;
 let firstMapLoad = true;
+const flightTrackCache = new Map();
+const TRACK_PAGE_SIZE = 500;
+let liveRefreshInProgress = false;
 
 
 // ============================================================
@@ -366,6 +369,65 @@ function createAircraftIcon(flight) {
 // European Cargo (URO) = grey
 // ============================================================
 
+// Keep the original timestamp string: Date would discard Postgres microseconds.
+async function fetchCachedFlightTrack(flightId, state) {
+    if (state.pending) return state.pending;
+
+    state.pending = (async () => {
+        const received = [];
+        let offset = 0;
+        // Freeze the lower bound for this entire pagination pass. Include the
+        // boundary timestamp so equal-time points cannot be lost; dedupe below.
+        const since = state.latestRecordedAt;
+        while (flightTrackCache.get(flightId) === state) {
+            let query = supabaseClient
+                .from("flight_track_points")
+                .select("active_flight_id, latitude, longitude, recorded_at")
+                .eq("active_flight_id", flightId)
+                .order("recorded_at", { ascending: true })
+                .order("latitude", { ascending: true })
+                .order("longitude", { ascending: true });
+
+            if (since) query = query.gte("recorded_at", since);
+
+            const { data, error } = await query.range(
+                offset, offset + TRACK_PAGE_SIZE - 1
+            );
+            if (error) throw error;
+            if (flightTrackCache.get(flightId) !== state) return;
+            const batch = data || [];
+            if (batch.length === 0) break;
+            received.push(...batch);
+            // A server cap may be smaller than our page size. Continue until
+            // an empty page, advancing by the actual number of returned rows.
+            offset += batch.length;
+        }
+
+        if (flightTrackCache.get(flightId) !== state) return;
+        // Commit only after every page succeeds; a failed pass can be retried
+        // without advancing the cursor past missing history.
+        for (const point of received) {
+            if (!point.recorded_at) continue;
+            state.latestRecordedAt = point.recorded_at;
+            if (point.latitude == null || point.longitude == null) continue;
+            const latitude = Number(point.latitude);
+            const longitude = Number(point.longitude);
+            if (!Number.isFinite(latitude) || !Number.isFinite(longitude)) continue;
+            const key = JSON.stringify([point.recorded_at, latitude, longitude]);
+            if (state.keys.has(key)) continue;
+            state.keys.add(key);
+            state.points.push([latitude, longitude]);
+        }
+    })();
+
+    try {
+        await state.pending;
+    }
+    finally {
+        state.pending = null;
+    }
+}
+
 async function loadFlightTracks() {
     if (!liveMap) return;
 
@@ -376,6 +438,16 @@ async function loadFlightTracks() {
 
     const visibleTrackIds =
         new Set(activeFlightIds);
+
+    flightTrackCache.forEach((state, flightId) => {
+        if (!visibleTrackIds.has(flightId)) flightTrackCache.delete(flightId);
+    });
+    liveTracks.forEach((track, flightId) => {
+        if (!visibleTrackIds.has(flightId)) {
+            if (liveMap.hasLayer(track)) liveMap.removeLayer(track);
+            liveTracks.delete(flightId);
+        }
+    });
 
     if (activeFlightIds.length === 0) {
         liveTracks.forEach(track => {
@@ -388,63 +460,24 @@ async function loadFlightTracks() {
         return;
     }
 
-    const {
-        data,
-        error
-    } = await supabaseClient
-        .from("flight_track_points")
-        .select(`
-            active_flight_id,
-            latitude,
-            longitude,
-            recorded_at
-        `)
-        .in(
-            "active_flight_id",
-            activeFlightIds
-        )
-        .order(
-            "recorded_at",
-            {
-                ascending: true
-            }
-        );
-
-    if (error) throw error;
-
-    const groupedTracks =
-        new Map();
-
-    (data || []).forEach(point => {
-        if (
-            point.latitude === null ||
-            point.longitude === null
-        ) {
-            return;
+    for (const flightId of visibleTrackIds) {
+        if (!liveFlights.some(flight => flight.flight_id === flightId)) continue;
+        let state = flightTrackCache.get(flightId);
+        if (!state) {
+            state = { points: [], keys: new Set(), latestRecordedAt: null, pending: null };
+            flightTrackCache.set(flightId, state);
         }
-
-        if (
-            !groupedTracks.has(
-                point.active_flight_id
-            )
-        ) {
-            groupedTracks.set(
-                point.active_flight_id,
-                []
-            );
+        try {
+            await fetchCachedFlightTrack(flightId, state);
         }
-
-        groupedTracks
-            .get(point.active_flight_id)
-            .push([
-                Number(point.latitude),
-                Number(point.longitude)
-            ]);
-    });
-
+        catch (error) {
+            console.error("Track history failed for flight:", flightId, error);
+        }
+    }
     activeFlightIds.forEach(flightId => {
+        if (!liveFlights.some(flight => flight.flight_id === flightId)) return;
         const points =
-            groupedTracks.get(flightId) || [];
+            flightTrackCache.get(flightId)?.points || [];
 
         const flight =
             liveFlights.find(
@@ -525,9 +558,7 @@ async function loadFlightTracks() {
     liveTracks.forEach(
         (track, flightId) => {
             if (
-                !visibleTrackIds.has(
-                    flightId
-                )
+                !liveFlights.some(flight => flight.flight_id === flightId)
             ) {
                 if (
                     liveMap.hasLayer(track)
@@ -761,6 +792,8 @@ function updateAircraftMarkers() {
 // ============================================================
 
 async function refreshLiveOperations() {
+    if (liveRefreshInProgress) return;
+    liveRefreshInProgress = true;
     try {
         await loadLiveFlights();
 
@@ -782,6 +815,9 @@ async function refreshLiveOperations() {
             "error",
             "LIVE DATA UNAVAILABLE"
         );
+    }
+    finally {
+        liveRefreshInProgress = false;
     }
 }
 
