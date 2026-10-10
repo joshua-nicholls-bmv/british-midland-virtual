@@ -223,6 +223,11 @@ function getAircraftIconFile(flight) {
         return "a320.svg";
     }
 
+    // A350 variants, including A350-900 and A350-1000.
+    if (aircraft.includes("a350") || /\ba35[0-9k]\b/.test(aircraft)) {
+        return "a350.svg";
+    }
+
     // A330
     if (aircraft.includes("a330")) {
         return "a330.svg";
