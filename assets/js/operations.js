@@ -347,7 +347,7 @@ function createAircraftIcon(flight) {
             ">
 
                 <img
-                    src="/assets/images/aircraft/${iconFile}"
+                    src="/assets/images/aircraft/${iconFile}${iconFile === 'a350.svg' ? '?v=20-a350-cache-fix' : ''}"
                     width="32"
                     height="32"
                     alt=""
