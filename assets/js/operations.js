@@ -141,6 +141,16 @@ function escapeHtml(value) {
         .replaceAll("'", "&#039;");
 }
 
+// Public display fields supplied by public_live_operations; never query pilots here.
+function getPilotDisplay(flight) {
+    const displayText = value =>
+        typeof value === "string" && value.trim() ? value.trim() : "—";
+    return {
+        id: displayText(flight.pilot_id),
+        name: displayText(flight.pilot_name)
+    };
+}
+
 function formatAircraftName(value) {
     if (!value) return "—";
 
@@ -698,8 +708,13 @@ function updateAircraftMarkers() {
             )
         );
 
+        const pilot = getPilotDisplay(flight);
+
         marker.bindPopup(`
             <div class="live-aircraft-popup">
+
+                <div>Pilot ID: ${escapeHtml(pilot.id)}</div>
+                <div>Nickname: ${escapeHtml(pilot.name)}</div>
 
                 <strong>
                     ${escapeHtml(
@@ -1066,6 +1081,8 @@ function renderSelectedFlight() {
         return;
     }
 
+    const pilot = getPilotDisplay(flight);
+
     selectedFlightPanel.innerHTML = `
         <div class="selected-flight-content">
 
@@ -1087,6 +1104,16 @@ function renderSelectedFlight() {
             </div>
 
             <div class="selected-grid">
+
+                <div class="selected-item">
+                    <label>Pilot ID</label>
+                    <strong>${escapeHtml(pilot.id)}</strong>
+                </div>
+
+                <div class="selected-item">
+                    <label>Nickname</label>
+                    <strong>${escapeHtml(pilot.name)}</strong>
+                </div>
 
                 <div class="selected-item">
                     <label>Route</label>
