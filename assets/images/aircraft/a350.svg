@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" preserveAspectRatio="xMidYMid meet">
+  <title>Airbus A350</title>
+  <g fill="#000000" stroke="none" transform="translate(256 256) rotate(-90) scale(.88) translate(-375 -375)">
+    <!-- Solid, north-facing map silhouette; colour is supplied by the marker filter. -->
+    <!-- Swept wings and curved wing tips. -->
+    <path d="M348 355 L348 310 Q346 283 329 240 L298 151 Q290 138 280 126 L288 126 L306 135 L444 340 Q451 351 467 355 Z"/>
+    <path d="M348 395 L348 440 Q346 467 329 510 L298 599 Q290 612 280 624 L288 624 L306 615 L444 410 Q451 399 467 395 Z"/>
+    <!-- Two wide nacelles, with small pylons connecting them to the wings. -->
+    <path d="M415 294 L427 294 L436 325 L423 331 Z M423 287 Q445 282 461 287 Q465 289 464 302 L463 315 Q445 320 423 315 Z"/>
+    <path d="M415 456 L427 456 L436 425 L423 419 Z M423 463 Q445 468 461 463 Q465 461 464 448 L463 435 Q445 430 423 435 Z"/>
+    <!-- Tailplanes. -->
+    <path d="M177 363 L111 293 L92 293 L123 373 Z M177 387 L111 457 L92 457 L123 377 Z"/>
+    <!-- Fuselage and tapered tailcone. -->
+    <path d="M658 375 C658 367 616 351 583 351 H242 C212 351 189 355 165 360 L99 374 Q95 375 99 376 L165 390 C189 395 212 399 242 399 H583 C616 399 658 383 658 375 Z"/>
+  </g>
+</svg>
