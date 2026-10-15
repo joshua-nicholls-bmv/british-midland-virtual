@@ -427,6 +427,8 @@ async function getPirep(id) {
                 arrival,
                 aircraft,
                 registration,
+                atc_provider,
+                vatsim_id,
                 off_blocks,
                 takeoff,
                 landing,
@@ -666,6 +668,9 @@ function renderPirep(
     // --------------------------------------------------------
     // AIRCRAFT
     // --------------------------------------------------------
+
+    document.getElementById("atcProvider").textContent = pirep.atc_provider || "Not recorded";
+    document.getElementById("vatsimId").textContent = pirep.vatsim_id || "Not recorded";
 
     aircraft.textContent =
         pirep.aircraft ||

@@ -413,6 +413,8 @@ async function loadPireps() {
                     arrival,
                     aircraft,
                     registration,
+                    atc_provider,
+                    vatsim_id,
                     block_minutes,
                     airborne_minutes,
                     landing_rate_fpm,
@@ -665,6 +667,7 @@ function applyFilters() {
                         pirep.arrival,
                         pirep.aircraft,
                         pirep.registration,
+                        pirep.atc_provider,
                         pirep.status,
                         pirep.flight_grade,
                         pilot.pilotId,
@@ -779,6 +782,7 @@ function renderPireps(rows) {
                                         "—"
                                     )}
                                 </strong>
+                                <small class="pirep-atc">ATC · ${escapeHtml(pirep.atc_provider || "Not recorded")}</small>
 
                             </span>
 

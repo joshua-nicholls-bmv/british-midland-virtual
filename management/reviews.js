@@ -318,6 +318,8 @@ async function loadPireps() {
                 arrival,
                 aircraft,
                 registration,
+                atc_provider,
+                vatsim_id,
                 block_minutes,
                 landing_rate_fpm,
                 status,
@@ -642,7 +644,7 @@ function renderReviewQueue(flights) {
 
 
                             <div class="review-aircraft">
-                                ${escapeHtml(aircraft)}
+                                ${escapeHtml(aircraft)}<br><small>ATC · ${escapeHtml(flight.atc_provider || "Not recorded")}</small>
                             </div>
 
 
