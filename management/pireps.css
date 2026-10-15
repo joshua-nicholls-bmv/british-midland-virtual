@@ -402,3 +402,7 @@
     }
 
 }
+
+/* Flight ATC provider: retains the existing responsive roster columns. */
+.pirep-flight { display:flex; flex-direction:column; gap:5px; }
+.pirep-atc { color:#64748b; font-size:10px; line-height:1.4; }
