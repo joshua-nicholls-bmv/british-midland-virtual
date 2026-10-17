@@ -1,3 +1,4 @@
+function bmgPurposeLabel(code) { return ({SCHEDULED:"Scheduled revenue",POSITIONING:"Positioning / ferry",TRAINING:"Training",CHARTER:"Charter",CUSTOM:"Special / custom"})[code] || "Not recorded"; }
 // ============================================================
 // BRITISH MIDLAND VIRTUAL
 // OPERATIONS CONTROL - PIREP CENTRE
@@ -413,6 +414,8 @@ async function loadPireps() {
                     arrival,
                     aircraft,
                     registration,
+                    atc_callsign,
+                    flight_purpose,
                     atc_provider,
                     vatsim_id,
                     block_minutes,
@@ -668,6 +671,7 @@ function applyFilters() {
                         pirep.aircraft,
                         pirep.registration,
                         pirep.atc_provider,
+                        pirep.atc_callsign, pirep.flight_purpose,
                         pirep.status,
                         pirep.flight_grade,
                         pilot.pilotId,
@@ -782,7 +786,7 @@ function renderPireps(rows) {
                                         "—"
                                     )}
                                 </strong>
-                                <small class="pirep-atc">ATC · ${escapeHtml(pirep.atc_provider || "Not recorded")}</small>
+                                <small class="pirep-atc">${escapeHtml(pirep.atc_callsign || "Not recorded")} · ${escapeHtml(bmgPurposeLabel(pirep.flight_purpose))}</small><small class="pirep-atc">ATC · ${escapeHtml(pirep.atc_provider || "Not recorded")}</small>
 
                             </span>
 

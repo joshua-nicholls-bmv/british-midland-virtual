@@ -1,3 +1,4 @@
+function bmgPurposeLabel(code) { return ({SCHEDULED:"Scheduled revenue",POSITIONING:"Positioning / ferry",TRAINING:"Training",CHARTER:"Charter",CUSTOM:"Special / custom"})[code] || "Not recorded"; }
 const SUPABASE_URL =
     "https://eqbaezhcwnjlcnvtfxho.supabase.co";
 
@@ -994,10 +995,7 @@ function renderFlightDetail(
 
             <span class="detail-flight-number">
 
-                ${escapeHtml(
-                    flight.flight_number ||
-                    "—"
-                )}
+                ${escapeHtml(flight.atc_callsign || flight.flight_number || "—")}<br><small>${escapeHtml(flight.flight_number || "—")} · ${escapeHtml(bmgPurposeLabel(flight.flight_purpose))}</small>
 
             </span>
 
@@ -1355,10 +1353,7 @@ function renderTable() {
                             <span>
 
                                 <strong>
-                                    ${escapeHtml(
-                                        flight.flight_number ||
-                                        "—"
-                                    )}
+                                    ${escapeHtml(flight.atc_callsign || flight.flight_number || "—")}<br><small>${escapeHtml(flight.flight_number || "—")} · ${escapeHtml(bmgPurposeLabel(flight.flight_purpose))}</small>
                                 </strong>
 
                             </span>
@@ -1572,6 +1567,8 @@ async function loadLiveOperations(
                     arrival,
                     aircraft,
                     registration,
+                    atc_callsign,
+                    flight_purpose,
                     latitude,
                     longitude,
                     altitude,
