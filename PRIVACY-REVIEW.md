@@ -74,3 +74,7 @@ Password remediation is deferred at the user's request. Controller identity/ECV 
 ## Explicit interim publication approval
 
 User explicitly authorised publishing as a draft on 18 October 2026, retaining unresolved details and planning a further review this evening. Richie identified as responsible person; full identity and scope remain unconfirmed. User specifies two months inactive after departure, then anonymisation if no return; explicit email deletion requests completed within 28 days. Implementation unverified. Tracking points reportedly non-identifying, but active_flight_id linkage requires verification. No password changes authorised in this release.
+
+## Privacy contact supplied
+
+User supplied britishmidlandvirtual@gmail.com and renewed the instruction to continue publication. The public page now links that email for questions and deletion requests. Earlier TBD-email notes are superseded. Remaining review items and draft status remain; mailbox delivery was not tested and no message was sent.
