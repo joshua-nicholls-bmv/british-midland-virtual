@@ -78,3 +78,7 @@ User explicitly authorised publishing as a draft on 18 October 2026, retaining u
 ## Privacy contact supplied
 
 User supplied britishmidlandvirtual@gmail.com and renewed the instruction to continue publication. The public page now links that email for questions and deletion requests. Earlier TBD-email notes are superseded. Remaining review items and draft status remain; mailbox delivery was not tested and no message was sent.
+
+## Live routing correction
+
+GitHub Pages serves privacy.html for the extensionless /privacy address before the directory index. The original meta refresh to /privacy therefore looped. Redirect and all site links now explicitly target /privacy/. This was not reproduced by the local Python server. Verify all three public routes after deployment: /privacy, /privacy.html and /privacy/.
