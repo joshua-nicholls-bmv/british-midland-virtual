@@ -1,0 +1,31 @@
+.privacy-page .site-header{position:relative;background:var(--bm-blue)}
+.privacy-hero{background:var(--bm-blue);border-bottom:5px solid var(--bm-red);padding:64px 0 70px!important}
+.privacy-hero h1{color:white;margin:12px 0 22px;font-size:clamp(2.6rem,6vw,4.8rem)}
+.privacy-hero p{color:#dce5ef;max-width:720px;font-size:1.08rem}
+.privacy-hero .privacy-kicker{color:#fff;font-size:.78rem;letter-spacing:.2em;font-weight:700}
+.privacy-meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:28px;color:white;font-size:.85rem}
+.privacy-meta span{border:1px solid #8190a5;border-radius:30px;padding:6px 14px}
+.privacy-layout{display:grid;grid-template-columns:240px minmax(0,1fr);gap:56px;padding-block:48px 80px;align-items:start}
+.privacy-toc{position:sticky;top:24px;border-top:3px solid var(--bm-red);padding-top:20px}
+.privacy-toc h2{font-size:1rem;margin-bottom:14px}
+.privacy-toc a{display:block;padding:7px 0;color:var(--text);font-size:.9rem}
+.privacy-toc a:hover{color:var(--bm-red);text-decoration:underline}
+.privacy-content{min-width:0;background:#fff;border:1px solid var(--border);border-radius:18px;padding:clamp(22px,4vw,48px)}
+.privacy-content section{padding:30px 0!important;border-bottom:1px solid var(--border);scroll-margin-top:20px}
+.privacy-content section:last-child{border-bottom:0;padding-bottom:0!important}
+.privacy-content h2{font-size:clamp(1.45rem,3vw,1.9rem);margin-bottom:18px;line-height:1.25}
+.privacy-content h3{font-size:1.1rem;margin:22px 0 10px}
+.privacy-content p,.privacy-content ul,.privacy-content dl{margin:12px 0;line-height:1.8}
+.privacy-content ul{list-style:disc;padding-left:24px;color:var(--text)}
+.privacy-content li+li{margin-top:8px}
+.privacy-content dt{font-weight:700;margin-top:18px}
+.privacy-content dd{color:var(--text);margin-top:5px}
+.privacy-content a{text-decoration:underline;text-underline-offset:3px;color:var(--bm-blue)}
+.privacy-notice{padding:22px;background:#fff4f2;border-left:4px solid var(--bm-red);border-radius:0 8px 8px 0}
+.privacy-notice p{margin:8px 0 0}
+.privacy-contact{background:#f1f5fa;border-radius:10px;padding:22px;margin-top:18px}
+.privacy-page .skip-link{position:absolute;left:12px;top:-100px;background:white;color:var(--bm-blue);padding:12px;z-index:2000}
+.privacy-page .skip-link:focus{top:12px}
+@media(max-width:1000px){.privacy-page .navbar{flex-wrap:wrap;gap:12px;padding-block:18px}.privacy-page .nav-links{flex-wrap:wrap;gap:8px 20px}.privacy-layout{grid-template-columns:190px minmax(0,1fr);gap:28px}}
+@media(max-width:700px){.privacy-layout{grid-template-columns:1fr;gap:28px;padding-top:28px}.privacy-toc{position:static}.privacy-toc ol{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}.privacy-hero{padding:40px 0!important}.privacy-page .logo img{height:46px}}
+@media print{.privacy-toc{display:none}.privacy-layout{display:block;padding:0}.privacy-content{border:0;padding:0}.privacy-hero{background:white;padding:20px 0!important}.privacy-hero h1,.privacy-hero p,.privacy-meta{color:#000}.privacy-content section{break-inside:avoid}}
