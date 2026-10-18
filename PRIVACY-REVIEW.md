@@ -60,3 +60,13 @@ The reference guidance informs the draft; it does not establish this community's
 - Production backend enforcement, Discord registration, signed-in session storage and deployment have not been tested. This is a static site with no package build command.
 
 Windows checkout note: the repository contains `assets/images/aircraft/gitkeep.`, which Windows cannot normally check out. The working copy excludes only that placeholder via sparse checkout; it is preserved in Git and is not part of this change.
+
+## User-confirmed update — 18 October 2026
+
+The user authorised uploading the pages while deferring password changes. The published page remains explicitly a draft with TBD privacy email and no effective date; this is not legal sign-off.
+
+Confirmed: hobby community governed by management committee; BMG provides ECV tracking/PIREPs; BMG reviews British Midland reports, although ECV managers can currently view them; registration uses Discord identity, nickname and BMA ID, not real name/personal email; credentials delivered by private Discord DM after approval; no self-service password change. SimBrief is required for planning, VATSIM optional for PIREP identity/review; IDs saved locally, backend transfers still unverified. COO alone directly administers Supabase, with MFA; primary region Paris, backup details unknown.
+
+Agreed intentions, not verified implemented features: Private Pilot preference through Discord hiding both name and ID; account deletion closes all shared airline access and removes membership from both Discord servers; preserve only genuinely anonymised flight records; privacy mailbox restricted to COO/CEO.
+
+Password remediation is deferred at the user's request. Controller identity/ECV allocation, lawful-basis assessments, retention reviews, transfer safeguards, backups, permissions and bot/deletion implementation remain outstanding. Earlier publication checklist remains applicable to finalising the notice; user has expressly authorised the interim draft upload.
