@@ -70,3 +70,7 @@ Confirmed: hobby community governed by management committee; BMG provides ECV tr
 Agreed intentions, not verified implemented features: Private Pilot preference through Discord hiding both name and ID; account deletion closes all shared airline access and removes membership from both Discord servers; preserve only genuinely anonymised flight records; privacy mailbox restricted to COO/CEO.
 
 Password remediation is deferred at the user's request. Controller identity/ECV allocation, lawful-basis assessments, retention reviews, transfer safeguards, backups, permissions and bot/deletion implementation remain outstanding. Earlier publication checklist remains applicable to finalising the notice; user has expressly authorised the interim draft upload.
+
+## Explicit interim publication approval
+
+User explicitly authorised publishing as a draft on 18 October 2026, retaining unresolved details and planning a further review this evening. Richie identified as responsible person; full identity and scope remain unconfirmed. User specifies two months inactive after departure, then anonymisation if no return; explicit email deletion requests completed within 28 days. Implementation unverified. Tracking points reportedly non-identifying, but active_flight_id linkage requires verification. No password changes authorised in this release.
