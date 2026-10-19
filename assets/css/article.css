@@ -332,3 +332,7 @@ body{
     }
 
 }
+
+.news-inline-image{width:100%;height:auto;border-radius:12px;margin:24px 0}.article-body a{overflow-wrap:anywhere}
+@media(max-width:600px){.article-hero{height:auto;min-height:450px}.article-hero .hero-content{padding-top:100px;padding-bottom:85px}.article-hero h1{font-size:clamp(2rem,8vw,2.8rem)}}
+@media(max-width:600px){.article-hero .hero-content{padding-inline:24px}.article-hero h1{overflow-wrap:break-word}}
