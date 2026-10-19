@@ -20,7 +20,7 @@ raw_pireps(id,pilot_id,flight_number,stand,landing,block_minutes,requires_review
  (8,1,'BMA108',now()+interval '1 day',null,10,false),
  (9,1,'BMA109',null,now()-interval '2 days',20,false),
  (10,1,'BMA110',now()-interval '3 days',null,-10,false)),
-fixture_pireps as (select raw_pireps.*, 'Submitted'::text as status from raw_pireps),
+fixture_pireps as (select raw_pireps.*, 'Submitted'::text as status, case when id in (1,2,3,5,8) then ' vatsim ' else 'Offline' end as atc_provider from raw_pireps),
 fixture_pirep_reviews(id,pirep_id,decision,created_at) as (values
  (1,1,'cleared',now()),(2,2,'advisory',now()),(3,3,'cleared',now()),
  (4,4,'cleared',now()-interval '1 day'),(5,4,'rejected',now()),
@@ -30,6 +30,6 @@ fixture_vatsim_verifications(pirep_id,verified_at,revoked_at) as (values
  (1,now(),null::timestamptz),(2,now(),null),(3,now(),null),(8,now(),null),(9,now(),now())),
 result as (${query})
 select count(*)=2 as privacy_and_membership,
- bool_and(case when pilot_number='BMA001' then completed_flights=7 and flight_hours=5.50 and vatsim_flights=2 else completed_flights=0 and flight_hours=0 and last_flight is null and display_name='Chosen name' and status='On leave' and rank is null end) as totals_reviews_boundaries_and_empty
+ bool_and(case when pilot_number='BMA001' then completed_flights=8 and flight_hours=22.15 and vatsim_flights=3 else completed_flights=0 and flight_hours=0 and last_flight is null and display_name='Chosen name' and status='On leave' and rank is null end) as totals_reviews_boundaries_and_empty
 from result;`;
 fs.writeFileSync(path.join(__dirname,'roster-fixtures.sql'),fixtures);

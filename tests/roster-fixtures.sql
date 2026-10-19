@@ -14,7 +14,7 @@ raw_pireps(id,pilot_id,flight_number,stand,landing,block_minutes,requires_review
  (8,1,'BMA108',now()+interval '1 day',null,10,false),
  (9,1,'BMA109',null,now()-interval '2 days',20,false),
  (10,1,'BMA110',now()-interval '3 days',null,-10,false)),
-fixture_pireps as (select raw_pireps.*, 'Submitted'::text as status from raw_pireps),
+fixture_pireps as (select raw_pireps.*, 'Submitted'::text as status, case when id in (1,2,3,5,8) then ' vatsim ' else 'Offline' end as atc_provider from raw_pireps),
 fixture_pirep_reviews(id,pirep_id,decision,created_at) as (values
  (1,1,'cleared',now()),(2,2,'advisory',now()),(3,3,'cleared',now()),
  (4,4,'cleared',now()-interval '1 day'),(5,4,'rejected',now()),
@@ -31,17 +31,15 @@ result as (select p.pilot_id as pilot_number,
        totals.completed_flights,
        round(totals.total_minutes / 60.0, 2) as flight_hours,
        (totals.last_flight at time zone 'UTC')::date as last_flight,
-       case when settings.verification_enabled then totals.vatsim_flights else null end as vatsim_flights
+       totals.vatsim_flights
 from fixture_pilots p
 left join fixture_preferences pref on pref.pilot_id = p.id
 left join fixture_acars_pilot_ranks r on r.pilot_id = p.id
-cross join fixture_settings settings
 cross join lateral (
   select count(*) as completed_flights,
          coalesce(sum(greatest(f.block_minutes, 0)), 0) as total_minutes,
          max(coalesce(f.stand, f.landing)) as last_flight,
-         count(*) filter (where v.pirep_id is not null and v.revoked_at is null
-           and v.verified_at <= now()
+         count(*) filter (where lower(trim(f.atc_provider)) = 'vatsim'
            and coalesce(f.stand, f.landing) >= now() - interval '60 days'
            and coalesce(f.stand, f.landing) <= now()) as vatsim_flights
   from fixture_pireps f
@@ -50,14 +48,11 @@ cross join lateral (
     where review.pirep_id = f.id
     order by review.created_at desc nulls last, review.id desc limit 1
   ) latest on true
-  left join fixture_vatsim_verifications v on v.pirep_id = f.id
-  where f.pilot_id = p.id and f.requires_review = false
-    and (latest.decision in ('cleared', 'advisory')
-      or (latest.decision is null and lower(trim(f.status)) in ('submitted', 'completed')))
+  where f.pilot_id = p.id and latest.decision is distinct from 'rejected'
     and upper(trim(f.flight_number)) ~ '^(BMA|BMR|BMI)[0-9]'
 ) totals
 where upper(trim(p.pilot_id)) ~ '^BMA[0-9]'
   and not coalesce(pref.hidden, false))
 select count(*)=2 as privacy_and_membership,
- bool_and(case when pilot_number='BMA001' then completed_flights=7 and flight_hours=5.50 and vatsim_flights=2 else completed_flights=0 and flight_hours=0 and last_flight is null and display_name='Chosen name' and status='On leave' and rank is null end) as totals_reviews_boundaries_and_empty
+ bool_and(case when pilot_number='BMA001' then completed_flights=8 and flight_hours=22.15 and vatsim_flights=3 else completed_flights=0 and flight_hours=0 and last_flight is null and display_name='Chosen name' and status='On leave' and rank is null end) as totals_reviews_boundaries_and_empty
 from result;

@@ -34,7 +34,7 @@ create policy roster_reader on bmv_roster.preferences for select to bmv_roster_r
 create policy roster_reader on bmv_roster.vatsim_verifications for select to bmv_roster_reader using (true);
 create policy roster_reader on bmv_roster.settings for select to bmv_roster_reader using (true);
 grant select (id, pilot_id, nickname, status) on public.pilots to bmv_roster_reader;
-grant select (id, pilot_id, flight_number, stand, landing, block_minutes, requires_review, status) on public.pireps to bmv_roster_reader;
+grant select (id, pilot_id, flight_number, stand, landing, block_minutes, requires_review, status, atc_provider) on public.pireps to bmv_roster_reader;
 grant select (id, pirep_id, decision, created_at) on public.pirep_reviews to bmv_roster_reader;
 grant select (pilot_id, rank) on public.acars_pilot_ranks to bmv_roster_reader;
 create policy roster_reader on public.pilots for select to bmv_roster_reader using (true);
@@ -55,17 +55,15 @@ select p.pilot_id as pilot_number,
        totals.completed_flights,
        round(totals.total_minutes / 60.0, 2) as flight_hours,
        (totals.last_flight at time zone 'UTC')::date as last_flight,
-       case when settings.verification_enabled then totals.vatsim_flights else null end as vatsim_flights
+       totals.vatsim_flights
 from public.pilots p
 left join bmv_roster.preferences pref on pref.pilot_id = p.id
 left join public.acars_pilot_ranks r on r.pilot_id = p.id
-cross join bmv_roster.settings settings
 cross join lateral (
   select count(*) as completed_flights,
          coalesce(sum(greatest(f.block_minutes, 0)), 0) as total_minutes,
          max(coalesce(f.stand, f.landing)) as last_flight,
-         count(*) filter (where v.pirep_id is not null and v.revoked_at is null
-           and v.verified_at <= now()
+         count(*) filter (where lower(trim(f.atc_provider)) = 'vatsim'
            and coalesce(f.stand, f.landing) >= now() - interval '60 days'
            and coalesce(f.stand, f.landing) <= now()) as vatsim_flights
   from public.pireps f
@@ -74,10 +72,7 @@ cross join lateral (
     where review.pirep_id = f.id
     order by review.created_at desc nulls last, review.id desc limit 1
   ) latest on true
-  left join bmv_roster.vatsim_verifications v on v.pirep_id = f.id
-  where f.pilot_id = p.id and f.requires_review = false
-    and (latest.decision in ('cleared', 'advisory')
-      or (latest.decision is null and lower(trim(f.status)) in ('submitted', 'completed')))
+  where f.pilot_id = p.id and latest.decision is distinct from 'rejected'
     and upper(trim(f.flight_number)) ~ '^(BMA|BMR|BMI)[0-9]'
 ) totals
 where upper(trim(p.pilot_id)) ~ '^BMA[0-9]'
@@ -96,5 +91,5 @@ select pilot_number, display_name, rank, status, completed_flights,
 from bmv_roster.safe_projection;
 revoke all on public.public_pilot_roster from public, anon, authenticated;
 grant select on public.public_pilot_roster to anon, authenticated;
-comment on view public.public_pilot_roster is 'Public British Midland roster; cleared/advisory airline flights only. Null VATSIM count means verification unavailable. Read only.';
+comment on view public.public_pilot_roster is 'Read-only British Midland roster: recorded airline flights except management rejections; VATSIM provider counts over rolling 60 days.';
 notify pgrst, 'reload schema';

@@ -16,7 +16,7 @@
     const date = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
     function format(value, field) {
         if (field === 'vatsim_flights' && value === null) return 'Not available';
-        if (field === 'last_flight') return value ? date.format(new Date(value + 'T00:00:00Z')) : 'No approved flight';
+        if (field === 'last_flight') return value ? date.format(new Date(value + 'T00:00:00Z')) : 'No recorded flight';
         if (field === 'rank') return value || '—';
         if (['completed_flights', 'flight_hours', 'vatsim_flights'].includes(field)) return number.format(value);
         return String(value ?? '—');
