@@ -1,0 +1,31 @@
+.bmv-nav{display:flex;align-items:center;justify-content:space-between;gap:24px;min-height:96px}
+.bmv-brand{display:block;flex-shrink:0}.bmv-brand img{height:60px;width:auto}
+.bmv-primary{display:flex;align-items:center;gap:28px;list-style:none;margin:0;padding:0}
+.bmv-primary>li{position:relative}
+.bmv-primary>li>a,.bmv-dropdown>summary{display:flex;align-items:center;gap:8px;color:#fff;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;cursor:pointer;padding:12px 0;white-space:nowrap;border-bottom:2px solid transparent}
+.bmv-dropdown>summary{list-style:none}.bmv-dropdown>summary::-webkit-details-marker{display:none}
+.bmv-dropdown>summary::after{content:"";width:6px;height:6px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg);margin:0 3px 4px}
+.bmv-dropdown[open]>summary::after{transform:rotate(225deg);margin-bottom:-2px}
+.bmv-primary>li>a:hover,.bmv-primary>li>a.active,.bmv-dropdown>summary:hover,.bmv-dropdown>summary.active,.bmv-dropdown[open]>summary{border-bottom-color:var(--bm-red)}
+.bmv-submenu{position:absolute;top:calc(100% + 8px);left:0;z-index:1100;min-width:230px;padding:8px;background:#fff;border:1px solid var(--border);border-radius:12px;box-shadow:0 16px 40px #00112a40;list-style:none}
+.bmv-submenu a{display:block;padding:12px 14px;border-radius:7px;color:var(--bm-blue);font-size:.9rem;font-weight:600;white-space:nowrap}
+.bmv-submenu a:hover,.bmv-submenu a[aria-current]{background:#edf1f7;color:var(--bm-blue)}
+.bmv-submenu a[aria-current]{box-shadow:inset 3px 0 var(--bm-red)}
+.bmv-primary>li>.bmv-join{background:var(--bm-red);border:2px solid var(--bm-red);border-radius:30px;padding:12px 20px;letter-spacing:.03em}
+.bmv-primary>li>.bmv-join:hover{background:var(--bm-red-dark);border-color:var(--bm-red-dark)}
+.bmv-menu-toggle{display:none;color:white;border:1px solid #ffffff80;border-radius:24px;padding:10px 16px;min-height:44px;font-weight:700;align-items:center;gap:9px}
+.bmv-menu-toggle svg{width:18px;height:18px;stroke:currentColor;stroke-width:1.8;fill:none}
+@media(max-width:1000px){
+ .site-header.bmv-header,.site-header.bmv-header.scrolled{position:relative;background:var(--bm-blue)}
+ .bmv-nav{flex-wrap:wrap;gap:0;min-height:84px;padding-block:12px}
+ .bmv-brand img{height:48px}
+ .bmv-nav.nav-ready .bmv-menu-toggle{display:inline-flex}
+ .bmv-primary{flex:0 0 100%;width:100%;display:flex;flex-direction:column;align-items:stretch;gap:0;margin-top:14px;border-top:1px solid #ffffff30;padding:8px 0}
+ .bmv-nav.nav-ready .bmv-primary:not([data-open]){display:none}
+ .bmv-primary>li>a,.bmv-dropdown>summary{font-size:.85rem;padding:16px 4px;justify-content:space-between}
+ .bmv-submenu{position:static;min-width:0;margin:0 0 8px;padding:4px 8px;background:#ffffff0d;border:0;box-shadow:none;border-radius:8px}
+ .bmv-submenu a{white-space:normal;color:#e8edf5;padding:13px 16px}
+ .bmv-submenu a:hover,.bmv-submenu a[aria-current]{background:#ffffff15;color:white}
+ .bmv-primary>li>.bmv-join{justify-content:center;margin-top:14px;padding:14px 20px}
+}
+@media print{.bmv-header{display:none}}
