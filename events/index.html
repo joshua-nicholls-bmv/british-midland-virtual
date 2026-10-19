@@ -3,8 +3,8 @@
 <title>Events | British Midland Virtual</title>
 <meta name="description" content="Discover community events and group flights across British Midland and British Midland Regional.">
 <meta name="theme-color" content="#001A3A"><link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/assets/css/base.css?v=6"><link rel="stylesheet" href="/assets/css/events.css?v=1">
-</head><body class="events-page"><a class="skip-link" href="#main-content">Skip to events</a>
+<link rel="stylesheet" href="/assets/css/base.css?v=6"><link rel="stylesheet" href="/assets/css/events.css?v=2">
+<script src="/assets/js/events.js?v=1" defer></script></head><body class="events-page"><a class="skip-link" href="#main-content">Skip to events</a>
 <header class="site-header">
 
     <nav class="navbar container">
@@ -73,17 +73,15 @@
 </div></section>
 <div class="container events-main">
 <div class="events-heading"><div><p class="events-kicker">The next departure</p><h2 id="upcoming-title">Upcoming events</h2></div><p class="events-time">All event times are shown in UTC.</p></div>
+<div class="events-switcher" role="group" aria-label="Choose event list"><button type="button" data-events-view="upcoming" aria-pressed="true">Upcoming events</button><button type="button" data-events-view="past" aria-pressed="false">Past events archive</button></div>
+<p id="events-status" role="status" aria-live="polite">Loading events…</p><button id="events-retry" type="button" hidden>Try again</button>
+<noscript><p>Enable JavaScript to load published events. You can also find events and register your attendance in ACARS.</p></noscript>
 <div class="events-layout">
-<div id="events-list" aria-labelledby="upcoming-title">
-<div class="events-empty" id="events-empty">
-<div class="events-calendar" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="7" width="24" height="21" rx="3"/><path d="M10 4v6M22 4v6M4 14h24M11 21h10M16 18v6"/></svg></div>
-<h3>Our next event is on the horizon.</h3><p>No upcoming events have been published here yet. Check back for the next opportunity to take to the skies together.</p>
-<a class="secondary-button" href="/network.html">Explore our network</a>
-</div></div>
-<aside class="events-aside" aria-labelledby="take-part-title"><h3 id="take-part-title">Make the most of your flight</h3>
-<ol><li><strong>Find your event</strong><p>Look out for a destination, route or community flight that interests you.</p></li>
-<li><strong>Plan your departure</strong><p>Check the event time, route and briefing before preparing your flight.</p></li>
-<li><strong>Fly with the community</strong><p>Join fellow pilots and enjoy the journey together.</p></li></ol></aside>
+<div><div id="events-list" aria-labelledby="upcoming-title"></div><button id="events-more" type="button" hidden>Show more events</button></div>
+<aside class="events-aside" id="joining-in-acars" aria-labelledby="take-part-title"><h3 id="take-part-title">Join through ACARS</h3>
+<ol><li><strong>Open ACARS</strong><p>Sign in to your pilot account and open the Events tab.</p></li>
+<li><strong>Choose your event</strong><p>Find the event by its title and check the route, time and briefing.</p></li>
+<li><strong>Register attendance</strong><p>Select Register Attendance in ACARS. You can manage your attendance there too.</p></li></ol></aside>
 </div>
 <div class="events-community"><div><h2>A shared love of flying.</h2><p>New to British Midland? Become part of our virtual airline and share your next journey with the community.</p></div><a href="/join.html">Join British Midland →</a></div>
 </div></main><footer class="site-footer">
