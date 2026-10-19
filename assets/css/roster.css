@@ -1,0 +1,39 @@
+.roster-page .site-header{position:relative;background:var(--bm-blue)}
+.roster-hero{background:var(--bm-blue);border-bottom:5px solid var(--bm-red);padding:55px 0 60px!important}
+.roster-hero h1{color:white;margin:14px 0 20px;font-size:clamp(2.8rem,6vw,4.6rem)}
+.roster-hero p{color:#dce5ef;max-width:720px}
+.roster-kicker{text-transform:uppercase;letter-spacing:.2em;font-size:.8rem;font-weight:700}
+.roster-content{padding-block:38px 80px}
+.roster-controls{display:flex;flex-wrap:wrap;gap:22px;align-items:end;margin-bottom:24px}
+.roster-controls label{display:grid;gap:7px;font-size:.88rem;font-weight:700}
+.roster-controls input,.roster-controls select{background:white;border:1px solid #8190a5;border-radius:8px;padding:12px;min-height:48px;max-width:100%;color:var(--bm-blue)}
+.roster-controls input{width:320px}
+#roster-message{margin:18px 0}
+.roster-table-wrap{overflow-x:auto;border-radius:14px;background:white;box-shadow:var(--shadow-sm)}
+.roster-table{width:100%;border-collapse:collapse;text-align:left;font-size:.86rem}
+.roster-table caption{text-align:left;padding:18px;color:var(--text)}
+.roster-table th,.roster-table td{padding:16px 13px;border-bottom:1px solid var(--border);vertical-align:middle}
+.roster-table thead{background:var(--bm-blue);color:white}
+.roster-table tbody th{white-space:nowrap}
+.roster-table tbody tr:hover{background:#f5f7fa}
+.roster-table td:nth-child(2){overflow-wrap:anywhere;max-width:240px}
+.roster-badge{background:#e9eef5;border-radius:30px;display:inline-block;padding:4px 10px;white-space:nowrap;font-weight:600}
+.roster-notes{margin-top:30px;max-width:900px;display:grid;gap:13px;font-size:.9rem}
+.roster-notes a{text-decoration:underline;text-underline-offset:3px}
+.roster-page .skip-link{position:absolute;left:12px;top:-100px;background:white;padding:12px;z-index:2000}
+.roster-page .skip-link:focus{top:12px}
+[hidden]{display:none!important}
+@media(max-width:1100px){.roster-page .navbar{flex-wrap:wrap;gap:12px;padding-block:18px}.roster-page .nav-links{flex-wrap:wrap;gap:8px 20px}}
+@media(max-width:700px){
+ .roster-hero{padding:36px 0!important}.roster-page .logo img{height:46px}
+ .roster-controls,.roster-controls label,.roster-controls input{width:100%}
+ .roster-table-wrap{background:transparent;box-shadow:none;overflow:visible}
+ .roster-table,.roster-table tbody{display:block}
+ .roster-table thead{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+ .roster-table caption{display:block;padding:0 0 14px}
+ .roster-table tr{display:block;background:white;border:1px solid var(--border);border-radius:12px;margin-bottom:16px;padding:8px 16px}
+ .roster-table tbody th,.roster-table td{display:flex;justify-content:space-between;gap:16px;padding:11px 0;max-width:none!important;white-space:normal}
+ .roster-table tbody th::before,.roster-table td::before{content:attr(data-label);font-weight:600;text-align:left;flex:0 0 46%}
+ .roster-table tbody span{text-align:right;overflow-wrap:anywhere;min-width:0}
+ .roster-table td:last-child{border-bottom:0}
+}
