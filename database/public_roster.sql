@@ -34,7 +34,7 @@ create policy roster_reader on bmv_roster.preferences for select to bmv_roster_r
 create policy roster_reader on bmv_roster.vatsim_verifications for select to bmv_roster_reader using (true);
 create policy roster_reader on bmv_roster.settings for select to bmv_roster_reader using (true);
 grant select (id, pilot_id, nickname, status) on public.pilots to bmv_roster_reader;
-grant select (id, pilot_id, flight_number, stand, landing, block_minutes, requires_review) on public.pireps to bmv_roster_reader;
+grant select (id, pilot_id, flight_number, stand, landing, block_minutes, requires_review, status) on public.pireps to bmv_roster_reader;
 grant select (id, pirep_id, decision, created_at) on public.pirep_reviews to bmv_roster_reader;
 grant select (pilot_id, rank) on public.acars_pilot_ranks to bmv_roster_reader;
 create policy roster_reader on public.pilots for select to bmv_roster_reader using (true);
@@ -69,13 +69,15 @@ cross join lateral (
            and coalesce(f.stand, f.landing) >= now() - interval '60 days'
            and coalesce(f.stand, f.landing) <= now()) as vatsim_flights
   from public.pireps f
-  join lateral (
+  left join lateral (
     select review.decision from public.pirep_reviews review
     where review.pirep_id = f.id
     order by review.created_at desc nulls last, review.id desc limit 1
-  ) latest on latest.decision in ('cleared', 'advisory')
+  ) latest on true
   left join bmv_roster.vatsim_verifications v on v.pirep_id = f.id
-  where f.pilot_id = p.id and f.requires_review is not true
+  where f.pilot_id = p.id and f.requires_review = false
+    and (latest.decision in ('cleared', 'advisory')
+      or (latest.decision is null and lower(trim(f.status)) in ('submitted', 'completed')))
     and upper(trim(f.flight_number)) ~ '^(BMA|BMR|BMI)[0-9]'
 ) totals
 where upper(trim(p.pilot_id)) ~ '^BMA[0-9]'

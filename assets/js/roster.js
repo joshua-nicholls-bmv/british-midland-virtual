@@ -11,6 +11,7 @@
     const status = document.getElementById('roster-status');
     const table = document.getElementById('roster-table');
     let pilots = [];
+    let loading = false;
     const number = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 2 });
     const date = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short', year: 'numeric', timeZone: 'UTC' });
     function format(value, field) {
@@ -44,6 +45,8 @@
             pilots.length ? 'No pilots match your search.' : 'No pilots are currently listed.';
     }
     async function load() {
+        if (loading) return;
+        loading = true;
         retry.hidden = true;
         table.hidden = true;
         pilots = [];
@@ -76,10 +79,13 @@
             retry.hidden = false;
         } finally {
             clearTimeout(timeout);
+            loading = false;
         }
     }
     search.addEventListener('input', render);
     status.addEventListener('change', render);
     retry.addEventListener('click', load);
+    setInterval(() => { if (!document.hidden) load(); }, 60000);
+    document.addEventListener('visibilitychange', () => { if (!document.hidden) load(); });
     load();
 })();

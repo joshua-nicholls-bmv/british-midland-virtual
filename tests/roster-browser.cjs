@@ -10,6 +10,7 @@ const server=http.createServer((req,res)=>{let file=path.join(root,new URL(req.u
  let mode='normal'; const rows=[{pilot_number:'BMA001',display_name:'Test <img src=x onerror=alert(1)>',rank:'Captain',status:'Active',completed_flights:2,flight_hours:2.5,last_flight:'2026-10-18',vatsim_flights:null},{pilot_number:'BMA002',display_name:'Second pilot',rank:null,status:'On leave',completed_flights:0,flight_hours:0,last_flight:null,vatsim_flights:0}];
  await page.route('**/rest/v1/public_pilot_roster?*',route=>{const u=new URL(route.request().url());assert.equal(route.request().method(),'GET');assert.equal(u.searchParams.get('select').split(',').length,8);return mode==='error'?route.fulfill({status:503,body:'Unavailable'}):route.fulfill({json:mode==='empty'?[]:rows.slice(Number(u.searchParams.get('offset')),Number(u.searchParams.get('offset'))+1)});});
  const url=`http://127.0.0.1:${server.address().port}/roster`;
+ await page.clock.install();
  await page.goto(url);await page.getByText('2 pilots shown',{exact:true}).waitFor();
  assert.equal(await page.locator('#roster-body tr').count(),2);assert.equal(await page.locator('#roster-body img').count(),0);
  await page.locator('#roster-search').fill('bma002');assert.equal(await page.locator('#roster-body tr').count(),1);
@@ -17,10 +18,16 @@ const server=http.createServer((req,res)=>{let file=path.join(root,new URL(req.u
  await page.locator('#roster-search').fill('');await page.locator('#roster-status').selectOption('Active');assert.equal(await page.locator('#roster-body tr').count(),1);
  await page.locator('#roster-status').selectOption('');
  for(const width of [1440,768,390,320]){await page.setViewportSize({width,height:1000});assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth),`Overflow at ${width}`);const links=await page.locator('.nav-links a').first().boundingBox();assert(links);if(width===390||width===1440)await page.screenshot({path:path.resolve(__dirname,`../../roster-${width}.png`),fullPage:true});}
+ rows[0].completed_flights=3;
+ await page.clock.fastForward(60000);
+ await page.waitForFunction(()=>document.querySelector('#roster-body tr td[data-label="Completed flights"]')?.textContent==='3');
+ rows[0].completed_flights=4;
+ await page.evaluate(()=>document.dispatchEvent(new Event('visibilitychange')));
+ await page.waitForFunction(()=>document.querySelector('#roster-body tr td[data-label="Completed flights"]')?.textContent==='4');
  mode='error';await page.reload();await page.getByText('The pilot roster is temporarily unavailable. Please try again.').waitFor();
  mode='empty';await page.getByRole('button',{name:'Try again'}).click();await page.getByText('No pilots are currently listed.').waitFor();
  assert.deepEqual(errors,[]);
- console.log('PASS: pagination, eight-field read-only requests, XSS escaping, search, statuses, empty/error/retry, 1440/768/390/320px layouts.');
+ console.log('PASS: pagination, eight-field read-only requests, XSS escaping, search, statuses, empty/error/retry, 60-second refresh, tab-return refresh, 1440/768/390/320px layouts.');
  }finally{await browser.close();server.close();}
 })().catch(e=>{console.error(e);server.close();process.exitCode=1;});
 
