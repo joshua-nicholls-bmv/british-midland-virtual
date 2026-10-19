@@ -766,3 +766,5 @@ footer{
 /* ==========================================================
    END OF JOIN.CSS
 ========================================================== */
+
+.join-cta .cta-buttons{flex-wrap:wrap}.join-cta .cta-buttons a{max-width:100%;white-space:normal}
