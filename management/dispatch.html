@@ -3,7 +3,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="dashboard.css"><link rel="stylesheet" href="dispatch.css?v=1"><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script></head>
 <body><div id="authGate" class="auth-gate"><div class="auth-gate-inner"><div class="auth-mark">BM</div><span>TECHNICAL OPERATIONS</span><small id="authMessage">VERIFYING MANAGEMENT ACCESS</small><p><a href="./">Return to sign in</a></p></div></div>
 <main id="dispatchApp" class="dispatch hidden"><header class="topbar"><div><span class="section-label">BRITISH MIDLAND · MANAGEMENT</span><h1>Technical Operations Dispatch</h1></div><div class="user-area"><span id="managerName"></span><button id="signOutButton">SIGN OUT</button></div></header>
-<nav class="dispatch-nav"><a href="fleet.html">← Fleet / Tech Ops</a><a href="dashboard.html">Dashboard</a><button id="refresh">Refresh jobs</button></nav>
+<nav class="dispatch-nav"><a href="/management/vaa.html">VAA Activity</a><a href="fleet.html">← Fleet / Tech Ops</a><a href="dashboard.html">Dashboard</a><button id="refresh">Refresh jobs</button></nav>
 <div id="message" role="status" aria-live="polite"></div>
 <section class="panel"><div class="panel-header"><div><span class="panel-kicker">TECHNICAL RESPONSE</span><h3>Create a dispatch job</h3></div></div><form id="createForm" class="dispatch-form">
 <label>Grounded aircraft<select id="grounded" required></select></label><label>Support aircraft<select id="support" required></select></label><label>Departure (IATA or ICAO)<input id="departure" required pattern="[A-Za-z]{3,4}" maxlength="4"></label>
