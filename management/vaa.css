@@ -1,0 +1,20 @@
+.vaa-intro{background:var(--navy);color:white;padding:32px;border-radius:16px;margin:24px 0}
+.vaa-intro h2{font-size:28px;margin:8px 0 14px}.vaa-intro p{max-width:850px;line-height:1.7;color:#e0e8f3}.vaa-intro a{color:white}
+.vaa-controls{display:flex;gap:14px;align-items:end;flex-wrap:wrap;margin:24px 0}
+.vaa-controls label{display:grid;gap:8px;font-size:13px;font-weight:600}
+.vaa-controls select,.vaa-controls input,.vaa-controls button{font:inherit;border:1px solid var(--border);border-radius:8px;padding:12px;background:white;color:var(--navy)}
+.vaa-controls button{cursor:pointer;font-weight:700}.vaa-controls button:disabled{opacity:.45;cursor:not-allowed}
+.vaa-controls #export{background:var(--red);color:white}
+.vaa-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;margin:24px 0}
+.vaa-card{padding:24px;background:white;border:1px solid var(--border);border-radius:12px}
+.vaa-card strong{display:block;font-size:42px;margin:14px 0}.vaa-card small{display:block;color:var(--muted);line-height:1.5}
+.vaa-panel{padding:24px;background:white;border:1px solid var(--border);border-radius:12px;margin:24px 0}
+.vaa-panel h2{font-size:21px;margin:0 0 14px}.vaa-panel p,.vaa-panel li{line-height:1.7;font-size:14px}
+.vaa-table{overflow:auto;max-height:560px}.vaa-table table{width:100%;border-collapse:collapse;font-size:13px}
+.vaa-table th{background:#edf1f6;text-align:left;position:sticky;top:0}.vaa-table td,.vaa-table th{padding:13px;border-bottom:1px solid var(--border);line-height:1.6;vertical-align:top}
+.vaa-table a{color:var(--navy);text-decoration:underline}.vaa-good{color:#087345;font-weight:700}.vaa-review{color:#913d18}
+.vaa-page progress{width:100%;height:12px;accent-color:var(--red)}.vaa-table progress{min-width:100px}
+#loadStatus,#coverage,#windowLabel,#evidenceCount{font-size:13px;line-height:1.6;color:var(--muted)}
+.vaa-page :focus-visible{outline:3px solid var(--red);outline-offset:3px}
+@media(max-width:1100px){.vaa-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:650px){.vaa-cards{grid-template-columns:1fr}.vaa-intro,.vaa-panel{padding:18px}.vaa-controls>*{width:100%}.vaa-controls input,.vaa-controls select{width:100%}}
