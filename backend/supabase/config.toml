@@ -1,0 +1,6 @@
+[functions.bmv-website-register]
+verify_jwt = false
+[functions.bmv-website-management]
+verify_jwt = false
+[functions.bmv-worker]
+verify_jwt = false
