@@ -43,16 +43,87 @@ function render() {
         Array.from({length:6},(_,i)=>VAA.period(assessed,snapshot,i)).map(p=>[`${date(p.from).slice(0,10)} → ${date(p.until).slice(0,10)}`,p.flights,p.pilots,p.bma,p.bmr,`<progress max="50" value="${Math.min(p.flights,50)}" aria-label="${p.flights} of 50 flights"></progress>`]));
     renderEvidence();
 }
+
 function renderEvidence() {
-    const w=VAA.period(assessed,snapshot,selected),filter=el("evidenceFilter").value;
-    const search=el("search").value.trim().toLowerCase();
-    const missing=assessed.filter(r=>!Number.isFinite(r.completed));
-    let rows=(filter==="missing"?missing:w.included).filter(r=>filter!=="qualifying"||r.qualifies).filter(r=>filter!=="excluded"||!r.qualifies);
-    rows=rows.filter(r=>[r.pilot_code,r.nickname,r.vatsim_id,r.flight_number,r.actual_callsign].join(" ").toLowerCase().includes(search)).sort((a,b)=>(b.completed||0)-(a.completed||0));
-    el("evidenceCount").textContent=`${rows.length} records · CSV exports qualifying flights for the selected window only`;
-    table("evidence",["PIREP","Pilot / CID","Network callsign","Route","Completed UTC","Evidence / decision"],
-        rows.map(r=>[`<a href="report.html?id=${encodeURIComponent(r.id)}">${esc(r.flight_number||r.id)}</a>`,`${esc(r.pilot_code)} · ${esc(r.nickname)}<br>${esc(r.cid||"No valid CID")}`,esc(r.actual_callsign||"Not recorded"),`${esc(r.departure)} → ${esc(r.arrival)}`,Number.isFinite(r.completed)?date(r.completed):"Missing",`<span class="${r.qualifies?"vaa-good":"vaa-review"}">${r.qualifies?"Qualifying under dashboard rules":esc(r.reasons.join("; "))}</span><br>${Number(r.vatsim_participation_seconds)||0}s observed · Last check: ${esc(r.vatsim_verification_status||"Not recorded")}`]));
+    const w = VAA.period(assessed, snapshot, selected);
+    const filter = el("evidenceFilter").value;
+    const search = el("search").value.trim().toLowerCase();
+
+    // Only include flights where VATSIM was selected in BMAcars.
+    const vatsimOnly = rows => rows.filter(
+        r => String(r.atc_provider ?? "")
+            .trim()
+            .toUpperCase() === "VATSIM"
+    );
+
+    const missing = vatsimOnly(
+        assessed.filter(r => !Number.isFinite(r.completed))
+    );
+
+    let rows = filter === "missing"
+        ? missing
+        : vatsimOnly(w.included);
+
+    rows = rows
+        .filter(r =>
+            filter !== "qualifying" || r.qualifies
+        )
+        .filter(r =>
+            filter !== "excluded" || !r.qualifies
+        );
+
+    rows = rows
+        .filter(r =>
+            [
+                r.pilot_code,
+                r.nickname,
+                r.vatsim_id,
+                r.flight_number,
+                r.actual_callsign
+            ]
+            .join(" ")
+            .toLowerCase()
+            .includes(search)
+        )
+        .sort((a, b) =>
+            (b.completed || 0) - (a.completed || 0)
+        );
+
+    el("evidenceCount").textContent =
+        `${rows.length} VATSIM records · ` +
+        `CSV exports qualifying flights for the selected window only`;
+
+    table(
+        "evidence",
+        [
+            "PIREP",
+            "Pilot / CID",
+            "Network callsign",
+            "Route",
+            "Completed UTC",
+            "Evidence / decision"
+        ],
+        rows.map(r => [
+            `<a href="report.html?id=${encodeURIComponent(r.id)}">${esc(r.flight_number || r.id)}</a>`,
+            `${esc(r.pilot_code)} · ${esc(r.nickname)}<br>${esc(r.cid || "No valid CID")}`,
+            esc(r.actual_callsign || "Not recorded"),
+            `${esc(r.departure)} → ${esc(r.arrival)}`,
+            Number.isFinite(r.completed)
+                ? date(r.completed)
+                : "Missing",
+            `<span class="${r.qualifies ? "vaa-good" : "vaa-review"}">${
+                r.qualifies
+                    ? "Qualifying under dashboard rules"
+                    : esc(r.reasons.join("; "))
+            }</span><br>${
+                Number(r.vatsim_participation_seconds) || 0
+            }s observed · Last check: ${
+                esc(r.vatsim_verification_status || "Not recorded")
+            }`
+        ])
+    );
 }
+
 async function refresh() {
     if(busy)return;busy=true;ready=false;el("export").disabled=true;el("refresh").disabled=true;
     el("loadStatus").textContent="Refreshing flight evidence…";
