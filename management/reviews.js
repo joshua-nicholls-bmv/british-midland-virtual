@@ -1,3 +1,9 @@
+function bmgVatsimParticipation(report) {
+ if(report.vatsim_verified == null) return "Not recorded";
+ if(report.vatsim_verified !== true) return "Not verified";
+ const seconds=Math.max(0,Number(report.vatsim_participation_seconds)||0);
+ return `Verified · ${Math.floor(seconds/3600)}h ${Math.floor(seconds%3600/60)}m observed`;
+}
 // ============================================================
 // BRITISH MIDLAND VIRTUAL
 // OPERATIONS CONTROL - REVIEW CENTRE
@@ -319,7 +325,7 @@ async function loadPireps() {
                 aircraft,
                 registration,
                 atc_provider,
-                vatsim_id,
+                vatsim_id, vatsim_verified, vatsim_network_callsign, vatsim_participation_seconds, vatsim_verification_status,
                 block_minutes,
                 landing_rate_fpm,
                 status,
@@ -644,7 +650,7 @@ function renderReviewQueue(flights) {
 
 
                             <div class="review-aircraft">
-                                ${escapeHtml(aircraft)}<br><small>ATC · ${escapeHtml(flight.atc_provider || "Not recorded")}</small>
+                                ${escapeHtml(aircraft)}<br><small>ATC · ${escapeHtml(flight.atc_provider || "Not recorded")}<br>VATSIM · ${escapeHtml(bmgVatsimParticipation(flight))}<br>${escapeHtml(flight.vatsim_network_callsign || "No network callsign")}</small>
                             </div>
 
 
