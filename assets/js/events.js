@@ -37,8 +37,15 @@
         }
         if (!event.cancelled && view === 'upcoming') {
             const join = element('a', 'event-join', 'Join in ACARS');
-            join.href = '#joining-in-acars';
+            join.href = `bmgacars://events/${encodeURIComponent(event.id)}`;
+            join.addEventListener('click', () => { message.textContent = 'Allow your browser to open ACARS. If nothing opens, install the latest ACARS and launch it once, then try again.'; });
             article.append(join);
+            const fallback = element('p', 'event-description');
+            fallback.append(document.createTextNode('If ACARS does not open, '));
+            const download = element('a', '', 'download the latest ACARS');
+            download.href = 'https://github.com/joshua-nicholls-bmv/British-Midland-ACARS-Releases/releases/latest/download/BritishMidlandVirtual.ACARS-win-Setup.exe';
+            fallback.append(download, document.createTextNode(', launch it once and try again. You can also open the Events tab manually.'));
+            article.append(fallback);
         }
         return article;
     }
