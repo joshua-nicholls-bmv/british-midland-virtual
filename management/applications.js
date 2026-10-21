@@ -11,7 +11,7 @@
  function card(a){
   const article=node('article','');article.className='application-review';
   article.append(node('h2',a.nickname),node('p',`${a.state.toUpperCase()}${a.pilot_id?' · '+a.pilot_id:''} · ${new Date(a.created_at).toLocaleString('en-GB')}`));
-  const fields=node('dl','');for(const [label,value] of Object.entries({'Email':a.email,'Discord user ID':a.discord_id,'VATSIM CID (self-reported)':a.vatsim_cid||'Not supplied','SimBrief pilot ID':a.simbrief_id||'Not supplied','Privacy notice':a.privacy_notice_version,'Welcome DM':a.welcome_status||'Not sent'})){fields.append(node('dt',label),node('dd',value));}article.append(fields);
+  const fields=node('dl','');for(const [label,value] of Object.entries({'Discord user ID':a.discord_id,'VATSIM CID (self-reported)':a.vatsim_cid||'Not supplied','SimBrief pilot ID':a.simbrief_id||'Not supplied','Privacy notice':a.privacy_notice_version,'Welcome DM':a.welcome_status||'Not sent'})){fields.append(node('dt',label),node('dd',value));}article.append(fields);
   if(a.reason)article.append(node('p','Decision: '+a.reason));
   if(a.welcome_status==='welcome_dm_unconfirmed'||a.welcome_status==='welcome_dm_attempted')article.append(node('p','Delivery needs checking. Confirm whether the applicant received the message before taking any further action. Do not create another account.'));
   if(a.state==='pending'){

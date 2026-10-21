@@ -1,3 +1,4 @@
+.hero-buttons{flex-wrap:wrap}
 .application-section{padding:88px 0;background:#f6f3ee;color:#001a3a;scroll-margin-top:100px}
 .application-layout{display:grid;grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr);gap:64px;align-items:start}
 .application-intro h2{font-size:clamp(32px,4vw,48px);line-height:1.12;margin:18px 0 24px}

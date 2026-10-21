@@ -12,7 +12,6 @@ Deno.serve(async req=>{
   const a=validateApplication(await readBody(req));
   // A global ceiling cannot be bypassed with forged proxy headers; per-identity ceilings add protection.
   await rateLimit('global',secret!,100);
-  await rateLimit('email:'+a.email,secret!,5);
   await rateLimit('discord:'+a.discord_id,secret!,5);
   await verifyTurnstile(a.turnstile_token,secret!);
   await submitApplication(a);

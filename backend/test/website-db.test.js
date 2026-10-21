@@ -10,11 +10,11 @@ test('database role, duplicate controls, rate limits and review transitions',asy
  grant usage on schema bmv_registration to bmv_registration_service;grant select,insert,update on all tables in schema bmv_registration to bmv_registration_service;grant select on public.pilots to bmv_registration_service;`);
  await db.exec(await readFile(new URL('../sql/website-registration.sql',import.meta.url),'utf8'));
  pool.connect=async()=>({query:async(s,a)=>{const r=await db.query(s,a);return {...r,rowCount:r.affectedRows??r.rows.length};},release(){}});
- const a={nickname:'Pilot',email:'test@example.com',discord_id:'123456789012345678',vatsim_cid:null,simbrief_id:null};
- await submitApplication(a);await submitApplication(a);await submitApplication({...a,discord_id:'223456789012345678'});
- assert.equal((await db.query('select * from bmv_registration.applications')).rows.length,1);
- for(let i=0;i<2;i++)await rateLimit('email:test','secret',2);await assert.rejects(()=>rateLimit('email:test','secret',2),e=>e.status===429);
- const [r]=await listApplications(null);assert.equal(r.state,'pending');assert.equal(r.privacy_notice_version,'2026-10-20');
+ const a={nickname:'Pilot',discord_id:'123456789012345678',vatsim_cid:null,simbrief_id:null};
+ await submitApplication(a);await submitApplication(a);await submitApplication({...a,email:'ignored@example.com'});
+ assert.equal((await db.query('select * from bmv_registration.applications')).rows.length,1);assert.equal((await db.query('select email from bmv_registration.applications')).rows[0].email,null);
+ for(let i=0;i<2;i++)await rateLimit('discord:test','secret',2);await assert.rejects(()=>rateLimit('discord:test','secret',2),e=>e.status===429);
+ const [r]=await listApplications(null);assert.equal(r.state,'pending');assert.equal(r.privacy_notice_version,'2026-10-21');
  const user='00000000-0000-0000-0000-000000000001';
  await assert.rejects(()=>reviewApplication(r.id,user,true,'Welcome',false),e=>e.status===400);
  await db.query('insert into public.pilots values($1,$2)',[user,a.discord_id]);await assert.rejects(()=>reviewApplication(r.id,user,true,'Welcome',true),e=>e.status===403);

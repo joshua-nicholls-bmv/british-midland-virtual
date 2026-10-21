@@ -1,5 +1,5 @@
 export const ORIGINS = ['https://britishmidlandvirtual.co.uk','https://www.britishmidlandvirtual.co.uk'];
-export const PRIVACY_VERSION = '2026-10-20';
+export const PRIVACY_VERSION = '2026-10-21';
 export class HttpError extends Error { constructor(status,message){super(message);this.status=status;} }
 export function cors(req){
  const origin=req.headers.get('origin');
@@ -17,15 +17,14 @@ export async function readBody(req){
 export function validateApplication(b){
  if(!b || Array.isArray(b) || typeof b!=='object')throw new HttpError(400,'Invalid application.');
  const text=(key,max,required=true)=>{const v=b[key];if(v==null&&!required)return null;if(typeof v!=='string'||v.length>max||/[\u0000-\u001f\u007f]/.test(v))throw new HttpError(400,`Check ${key}.`);const s=v.trim();if(required&&!s)throw new HttpError(400,`Enter ${key}.`);return s||null;};
- const nickname=text('nickname',80),email=text('email',254).toLowerCase(),discord_id=text('discord_id',20);
- if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))throw new HttpError(400,'Enter a valid email address.');
+ const nickname=text('nickname',80),discord_id=text('discord_id',20);
  if(!/^[1-9]\d{16,19}$/.test(discord_id))throw new HttpError(400,'Enter your numeric Discord user ID.');
  const vatsim_cid=text('vatsim_cid',10,false),simbrief_id=text('simbrief_id',12,false);
  if(vatsim_cid&&!/^[1-9]\d{5,9}$/.test(vatsim_cid))throw new HttpError(400,'Check your VATSIM CID.');
  if(simbrief_id&&!/^[1-9]\d{0,11}$/.test(simbrief_id))throw new HttpError(400,'Use your numeric SimBrief pilot ID.');
  if(b.privacy_acknowledged!==true||b.age_confirmed!==true)throw new HttpError(400,'Confirm the privacy notice and age requirement.');
  const turnstile_token=text('turnstile_token',2048);
- return {nickname,email,discord_id,vatsim_cid,simbrief_id,turnstile_token};
+ return {nickname,discord_id,vatsim_cid,simbrief_id,turnstile_token};
 }
 export async function verifyTurnstile(token,secret,fetcher=fetch){
  const r=await fetcher('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret,response:token}),signal:AbortSignal.timeout(10000)});

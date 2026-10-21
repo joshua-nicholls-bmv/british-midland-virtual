@@ -18,7 +18,7 @@
   busy=true;submit.disabled=true;submit.textContent='Sending application…';message('Sending your application…');
   const data=new FormData(form);
   try{
-   const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(20000),body:JSON.stringify({nickname:data.get('nickname'),email:data.get('email'),discord_id:data.get('discord_id'),vatsim_cid:data.get('vatsim_cid'),simbrief_id:data.get('simbrief_id'),privacy_acknowledged:data.get('privacy')==='on',age_confirmed:data.get('age')==='on',turnstile_token:token})});
+   const r=await fetch(endpoint,{method:'POST',headers:{'Content-Type':'application/json'},signal:AbortSignal.timeout(20000),body:JSON.stringify({nickname:data.get('nickname'),discord_id:data.get('discord_id'),vatsim_cid:data.get('vatsim_cid'),simbrief_id:data.get('simbrief_id'),privacy_acknowledged:data.get('privacy')==='on',age_confirmed:data.get('age')==='on',turnstile_token:token})});
    const body=await r.json();if(!r.ok)throw Error(body.error||'Unable to submit. Please try again.');
    form.hidden=true;message(body.message);status.tabIndex=-1;status.focus();
   }catch(e){message(e.name==='TimeoutError'?'The response took too long. You can safely submit again after a fresh security check.':e.message||'Connection lost. Please try again.');}
