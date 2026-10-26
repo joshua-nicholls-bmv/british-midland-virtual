@@ -1,196 +1,530 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Midland Aero Club | British Midland Virtual</title>
-<meta name="description" content="Recreational general aviation from Wolverhampton Halfpenny Green. Explore Shropshire and the Midlands with Midland Aero Club.">
-<meta name="theme-color" content="#001A3A"><link rel="icon" href="/favicon.ico">
-<link rel="stylesheet" href="/assets/css/base.css?v=6"><link rel="stylesheet" href="/assets/css/navigation.css?v=1">
-<link rel="stylesheet" href="/assets/css/midland-aero-club.css?v=1"><script src="/assets/js/navigation.js?v=1" defer></script>
-</head><body><a class="skip-link" href="#main-content">Skip to content</a><header class="site-header bmv-header">
-    <nav class="bmv-nav container" aria-label="Main navigation">
-        <a class="bmv-brand" href="/" aria-label="British Midland Virtual home"><img src="/assets/images/logo.png" alt="British Midland Virtual"></a>
-        <button class="bmv-menu-toggle" type="button" aria-expanded="false" aria-controls="bmv-primary-menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg><span>Menu</span></button>
-        <ul class="bmv-primary" id="bmv-primary-menu">
-            <li><details class="bmv-dropdown"><summary class="active">Our Airline</summary><ul class="bmv-submenu"><li><a href="/vision.html">Our Vision</a></li><li><a href="/midland-aero-club.html" class="active" aria-current="page">Midland Aero Club</a></li><li><a href="/group.html">British Midland Group</a></li></ul></details></li>
-            <li><details class="bmv-dropdown"><summary>Flight Operations</summary><ul class="bmv-submenu"><li><a href="/fleet.html">Fleet</a></li><li><a href="/network.html">Route Network</a></li><li><a href="/operations.html">Live Operations</a></li></ul></details></li>
-            <li><details class="bmv-dropdown"><summary>Community</summary><ul class="bmv-submenu"><li><a href="/roster">Pilot Roster</a></li><li><a href="/events">Events</a></li></ul></details></li>
-            <li><a href="/news.html">News</a></li>
-            <li><a href="/join.html" class="bmv-join">Join British Midland</a></li>
-        </ul>
-    </nav>
-</header>
-<main id="main-content" class="mac-page">
-<section class="mac-hero"><div class="container mac-hero-layout"><div><p class="mac-eyebrow">Our Airline · Established October 2026</p>
-<h1>Midland Aero Club</h1><p class="mac-tagline">No schedules. No pressure.<br>Just flying.</p>
-<p class="mac-intro">Founded by British Midland Group in October 2026, Midland Aero Club brings relaxed recreational flying to British Midland Virtual. Take a light aircraft out over Shropshire and the Midlands, and enjoy the freedom to choose your own destination.</p>
+<html lang="en">
 
-<a class="mac-link" href="#club-fleet">Explore the club fleet <span aria-hidden="true">↓</span></a></div><img class="mac-emblem" src="/assets/images/midland-aero-club.png" alt="Midland Aero Club circular PA-28 emblem, part of British Midland Group" width="1254" height="1254"></div></section>
-<section class="container mac-section mac-columns" aria-labelledby="home-heading"><div><p class="mac-eyebrow">Our home</p><h2 id="home-heading">Wolverhampton<br>Halfpenny Green</h2><p class="mac-icao">EGBO</p></div>
-<div><p>Our home base is the starting point for exploring Shropshire and the Midlands. Plan a short local flight, visit a nearby airfield or head further afield.</p><p>All six club aircraft are always available at EGBO. Fly to your chosen destination; the aircraft remains available from the club’s home base for your next flight.</p></div></section>
-<section id="club-fleet" class="mac-fleet"><div class="container mac-section"><p class="mac-eyebrow">Six aircraft · One home base</p><h2>The club fleet</h2>
-<div class="mac-table-wrap"><table><caption class="mac-sr-only">Midland Aero Club aircraft, registration and ownership status</caption><thead><tr><th scope="col">Registration</th><th scope="col">Aircraft</th><th scope="col">Status</th></tr></thead><tbody><tr><th scope="row">G-WARB</th><td>PA-28</td><td>Loan — The Flying School</td></tr><tr><th scope="row">G-JIMH</th><td>Reims-Cessna F152</td><td>Loan — The Flying School</td></tr><tr><th scope="row">G-SHED</th><td>PA-28</td><td>Club aircraft</td></tr><tr><th scope="row">G-BLZH</th><td>C152</td><td>Club aircraft</td></tr><tr><th scope="row">G-NWFG</th><td>C172</td><td>Club aircraft</td></tr><tr><th scope="row">G-RGAH</th><td>DA40 NG</td><td>Club aircraft</td></tr></tbody></table></div></div></section>
-<section class="container mac-section mac-columns"><div><p class="mac-eyebrow">Already a BMV member?</p><h2>You’re part of the club.</h2><p>Every existing British Midland Virtual member is automatically eligible. There is no separate registration, booking system, training programme, club rank or management structure.</p></div>
-<div><h3>BMAcars · coming soon</h3><p>Club flight recording is being prepared for a future BMAcars update.</p><p>Once available, select your club aircraft by registration and choose your destination. No scheduled route or flight number is required.</p><p class="mac-record">MAC | G-WARB | EGBO → EGCV</p><p>Your flights will use the existing scoring system. Club flying hours will count towards your BMV total hours and rank progression, while club flights remain identifiable as MAC operations.</p><h3>Fly together</h3><p>Optional club fly-outs and group flights use our <a href="/events/">existing events calendar</a>.</p></div></section>
-</main><footer class="site-footer">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
 
-    <div class="container footer-grid">
+    <title>Midland Aero Club | British Midland Virtual</title>
 
+    <meta name="description"
+        content="Recreational general aviation from Wolverhampton Halfpenny Green. Explore Shropshire and the Midlands with Midland Aero Club.">
 
-        <!-- Brand -->
+    <meta name="theme-color" content="#001A3A">
 
-        <div class="footer-brand">
+    <link rel="icon" href="/favicon.ico">
 
-            <img
-                src="assets/images/logo.png"
-                alt="British Midland Virtual"
-            >
+    <link rel="stylesheet" href="/assets/css/base.css?v=6">
+    <link rel="stylesheet" href="/assets/css/navigation.css?v=1">
+    <link rel="stylesheet" href="/assets/css/midland-aero-club.css?v=1">
 
-            <p>
+    <script src="/assets/js/navigation.js?v=1" defer></script>
+</head>
 
-                The Heart of Britain.<br>
-                Connected to the World.
+<body>
 
-            </p>
+    <a class="skip-link" href="#main-content">Skip to content</a>
 
-        </div>
+    <!-- HEADER -->
 
+    <header class="site-header bmv-header">
 
-        <!-- Explore -->
+        <nav class="bmv-nav container" aria-label="Main navigation">
 
-        <div>
+            <a class="bmv-brand" href="/" aria-label="British Midland Virtual home">
+                <img src="/assets/images/logo.png" alt="British Midland Virtual">
+            </a>
 
-            <h4>
-                Explore
-            </h4>
+            <button class="bmv-menu-toggle"
+                type="button"
+                aria-expanded="false"
+                aria-controls="bmv-primary-menu">
 
-            <ul>
-                <li><a href="/vision.html">Our Vision</a></li>
-<li><a href="/events/">Events</a></li>
-<li><a href="/roster/">Pilot roster</a></li>
+                <svg viewBox="0 0 20 20" aria-hidden="true">
+                    <path d="M3 5h14M3 10h14M3 15h14"/>
+                </svg>
+
+                <span>Menu</span>
+            </button>
+
+            <ul class="bmv-primary" id="bmv-primary-menu">
 
                 <li>
-                    <a href="fleet.html">
-                        Fleet
-                    </a>
+                    <details class="bmv-dropdown">
+                        <summary class="active">Our Airline</summary>
+
+                        <ul class="bmv-submenu">
+                            <li><a href="/vision.html">Our Vision</a></li>
+                            <li>
+                                <a href="/midland-aero-club.html"
+                                   class="active"
+                                   aria-current="page">
+                                    Midland Aero Club
+                                </a>
+                            </li>
+                            <li><a href="/group.html">British Midland Group</a></li>
+                        </ul>
+                    </details>
                 </li>
 
                 <li>
-                    <a href="network.html">
-                        Network
-                    </a>
+                    <details class="bmv-dropdown">
+                        <summary>Flight Operations</summary>
+
+                        <ul class="bmv-submenu">
+                            <li><a href="/fleet.html">Fleet</a></li>
+                            <li><a href="/network.html">Route Network</a></li>
+                            <li><a href="/operations.html">Live Operations</a></li>
+                        </ul>
+                    </details>
                 </li>
 
                 <li>
-                    <a href="operations.html">
-                        Operations
-                    </a>
+                    <details class="bmv-dropdown">
+                        <summary>Community</summary>
+
+                        <ul class="bmv-submenu">
+                            <li><a href="/roster">Pilot Roster</a></li>
+                            <li><a href="/events">Events</a></li>
+                        </ul>
+                    </details>
                 </li>
 
-                <li>
-                    <a href="news.html">
-                        News
-                    </a>
-                </li>
-
-            </ul>
-
-        </div>
-
-
-        <!-- Community -->
-
-        <div>
-
-            <h4>
-                Community
-            </h4>
-
-            <ul>
+                <li><a href="/news.html">News</a></li>
 
                 <li>
-                    <a href="join.html">
+                    <a href="/join.html" class="bmv-join">
                         Join British Midland
                     </a>
                 </li>
 
-                <li>
-                    <a href="https://discord.gg/SU2WzHXWSz">
-                        Discord
-                    </a>
-                </li>
-
-                <li>
-                    <a href="news.html?id=9">
-                        SayIntentions
-                    </a>
-                </li>
-
             </ul>
 
+        </nav>
+
+    </header>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main id="main-content" class="mac-page">
+
+
+        <!-- HERO -->
+
+        <section class="mac-hero">
+
+            <div class="container mac-hero-layout">
+
+                <div>
+
+                    <p class="mac-eyebrow">
+                        Our Airline · Established October 2026
+                    </p>
+
+                    <h1>Midland Aero Club</h1>
+
+                    <p class="mac-tagline">
+                        No schedules. No pressure.<br>
+                        Just flying.
+                    </p>
+
+                    <p class="mac-intro">
+                        Founded by British Midland Group in October 2026,
+                        Midland Aero Club brings relaxed recreational flying
+                        to British Midland Virtual. Take a light aircraft
+                        out over Shropshire and the Midlands, and enjoy
+                        the freedom to choose your own destination.
+                    </p>
+
+                    <a class="mac-link" href="#club-fleet">
+                        Explore the club fleet
+                        <span aria-hidden="true">↓</span>
+                    </a>
+
+                </div>
+
+                <img
+                    class="mac-emblem"
+                    src="/assets/images/midland-aero-club.png"
+                    alt="Midland Aero Club circular PA-28 emblem, part of British Midland Group"
+                    width="1254"
+                    height="1254"
+                >
+
+            </div>
+
+        </section>
+
+
+        <!-- OUR HOME -->
+
+        <section class="container mac-section mac-columns"
+                 aria-labelledby="home-heading">
+
+            <div>
+
+                <p class="mac-eyebrow">Our home</p>
+
+                <h2 id="home-heading">
+                    Wolverhampton<br>
+                    Halfpenny Green
+                </h2>
+
+                <p class="mac-icao">EGBO</p>
+
+            </div>
+
+            <div>
+
+                <p>
+                    Nestled in the heart of the West Midlands,
+                    <strong>Wolverhampton Halfpenny Green Airport (EGBO)</strong>
+                    is the proud home of Midland Aero Club.
+                </p>
+
+                <p>
+                    Surrounded by the beautiful countryside of Staffordshire
+                    and Shropshire, EGBO provides the perfect starting point
+                    for General Aviation adventures. From scenic flights
+                    over the Shropshire Hills to exploring the Welsh borders
+                    and beyond, the airfield offers endless opportunities
+                    for recreational flying.
+                </p>
+
+                <p>
+                    Originally established as an RAF airfield during the
+                    Second World War, Halfpenny Green boasts a rich aviation
+                    heritage and a welcoming General Aviation atmosphere.
+                </p>
+
+                <h3>Airfield Information</h3>
+
+                <ul>
+                    <li>
+                        <strong>Main Runway:</strong>
+                        16/34 — 1,170 m (Asphalt)
+                    </li>
+
+                    <li>
+                        <strong>Secondary Runway:</strong>
+                        10/28 — 1,055 m (Asphalt)
+                    </li>
+
+                    <li>
+                        <strong>Crosswind Runway:</strong>
+                        04/22 — 646 m (Asphalt)
+                    </li>
+
+                    <li>
+                        <strong>Elevation:</strong>
+                        283 ft AMSL
+                    </li>
+
+                    <li>
+                        <strong>Radio:</strong>
+                        Halfpenny Green Information — 123.005 MHz
+                    </li>
+
+                    <li>
+                        <strong>Facilities:</strong>
+                        AFIS, fuel, aircraft parking, hangarage and café.
+                    </li>
+                </ul>
+
+                <p>
+                    With its excellent facilities and picturesque surroundings,
+                    Halfpenny Green is the ideal home for our growing fleet
+                    of light aircraft.
+                </p>
+
+                <p>
+                    All six club aircraft are permanently available at EGBO,
+                    giving members the freedom to explore at their own pace.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <!-- CLUB FLEET -->
+
+        <section id="club-fleet" class="mac-fleet">
+
+            <div class="container mac-section">
+
+                <p class="mac-eyebrow">
+                    Six aircraft · One home base
+                </p>
+
+                <h2>The club fleet</h2>
+
+                <div class="mac-table-wrap">
+
+                    <table>
+
+                        <caption class="mac-sr-only">
+                            Midland Aero Club aircraft, registration and ownership status
+                        </caption>
+
+                        <thead>
+                            <tr>
+                                <th scope="col">Registration</th>
+                                <th scope="col">Aircraft</th>
+                                <th scope="col">Status</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                            <tr>
+                                <th scope="row">G-WARB</th>
+                                <td>PA-28</td>
+                                <td>Loan — The Flying School</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">G-JIMH</th>
+                                <td>Reims-Cessna F152</td>
+                                <td>Loan — The Flying School</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">G-SHED</th>
+                                <td>PA-28</td>
+                                <td>Club aircraft</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">G-BLZH</th>
+                                <td>C152</td>
+                                <td>Club aircraft</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">G-NWFG</th>
+                                <td>C172</td>
+                                <td>Club aircraft</td>
+                            </tr>
+
+                            <tr>
+                                <th scope="row">G-RGAH</th>
+                                <td>DA40 NG</td>
+                                <td>Club aircraft</td>
+                            </tr>
+
+                        </tbody>
+
+                    </table>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- MEMBERSHIP & BMACARS -->
+
+        <section class="container mac-section mac-columns">
+
+            <div>
+
+                <p class="mac-eyebrow">
+                    Already a BMV member?
+                </p>
+
+                <h2>You're part of the club.</h2>
+
+                <p>
+                    Every existing British Midland Virtual member is
+                    automatically eligible. There is no separate registration,
+                    booking system, training programme, club rank or
+                    management structure.
+                </p>
+
+            </div>
+
+            <div>
+
+                <h3>BMAcars · coming soon</h3>
+
+                <p>
+                    Club flight recording is being prepared for a future
+                    BMAcars update.
+                </p>
+
+                <p>
+                    Once available, select your club aircraft by registration
+                    and choose your destination. No scheduled route or
+                    flight number is required.
+                </p>
+
+                <p class="mac-record">
+                    MAC | G-WARB | EGBO → EGCV
+                </p>
+
+                <p>
+                    Your flights will use the existing scoring system.
+                    Club flying hours will count towards your BMV total
+                    hours and rank progression, while club flights remain
+                    identifiable as MAC operations.
+                </p>
+
+                <h3>Fly together</h3>
+
+                <p>
+                    Optional club fly-outs and group flights use our
+                    <a href="/events/">existing events calendar</a>.
+                </p>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- FOOTER -->
+
+    <footer class="site-footer">
+
+        <div class="container footer-grid">
+
+
+            <!-- Brand -->
+
+            <div class="footer-brand">
+
+                <img
+                    src="assets/images/logo.png"
+                    alt="British Midland Virtual"
+                >
+
+                <p>
+                    The Heart of Britain.<br>
+                    Connected to the World.
+                </p>
+
+            </div>
+
+
+            <!-- Explore -->
+
+            <div>
+
+                <h4>Explore</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="/vision.html">Our Vision</a>
+                    </li>
+
+                    <li>
+                        <a href="/events/">Events</a>
+                    </li>
+
+                    <li>
+                        <a href="/roster/">Pilot roster</a>
+                    </li>
+
+                    <li>
+                        <a href="fleet.html">Fleet</a>
+                    </li>
+
+                    <li>
+                        <a href="network.html">Network</a>
+                    </li>
+
+                    <li>
+                        <a href="operations.html">Operations</a>
+                    </li>
+
+                    <li>
+                        <a href="news.html">News</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Community -->
+
+            <div>
+
+                <h4>Community</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="join.html">Join British Midland</a>
+                    </li>
+
+                    <li>
+                        <a href="https://discord.gg/SU2WzHXWSz">Discord</a>
+                    </li>
+
+                    <li>
+                        <a href="news.html?id=9">SayIntentions</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
+
+            <!-- Company -->
+
+            <div>
+
+                <h4>Company</h4>
+
+                <ul>
+
+                    <li>
+                        <a href="/privacy/">Privacy Policy</a>
+                    </li>
+
+                    <li>
+                        <a href="terms.html">Terms &amp; Conditions</a>
+                    </li>
+
+                    <li>
+                        <a href="contact.html">Contact</a>
+                    </li>
+
+                    <li>
+                        <a href="/management/">Management Portal</a>
+                    </li>
+
+                </ul>
+
+            </div>
+
         </div>
 
 
-        <!-- Company -->
+        <div class="footer-bottom">
 
-        <div>
+            <div class="container footer-bottom-content">
 
-            <h4>
-                Company
-            </h4>
+                <p>
+                    © 2026 British Midland Virtual.
+                    All rights reserved.
+                </p>
 
-            <ul>
+                <p>
+                    Inspired by the heritage of British Midland.
+                </p>
 
-                <li>
-                    <a href="/privacy/">
-                        Privacy Policy
-                    </a>
-                </li>
-
-                <li>
-                    <a href="terms.html">
-                        Terms & Conditions
-                    </a>
-                </li>
-
-                <li>
-                    <a href="contact.html">
-                        Contact
-                    </a>
-                </li>
-
-                <li>
-                    <a href="/management/">
-                        Management Portal
-                    </a>
-                </li>
-
-            </ul>
+            </div>
 
         </div>
 
+    </footer>
 
-    </div>
-
-
-    <div class="footer-bottom">
-
-        <div class="container footer-bottom-content">
-
-            <p>
-
-                © 2026 British Midland Virtual.
-                All rights reserved.
-
-            </p>
-
-            <p>
-
-                Inspired by the heritage of British Midland.
-
-            </p>
-
-        </div>
-
-    </div>
-
-
-</footer></body></html>
+</body>
+</html>
