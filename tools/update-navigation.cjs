@@ -1,7 +1,7 @@
 // Generate the same static, no-JavaScript-compatible navigation on each public page.
 const fs=require('node:fs'),path=require('node:path');
 const root=path.resolve(__dirname,'..');
-const pages=['index.html','vision.html','group.html','fleet.html','network.html','operations.html','news.html','article.html','join.html','roster/index.html','events/index.html','privacy/index.html'];
+const pages=['index.html','vision.html','midland-aero-club.html','group.html','fleet.html','network.html','operations.html','news.html','article.html','join.html','roster/index.html','events/index.html','privacy/index.html'];
 for(const page of pages){
  const current='/'+page;
  const link=(href,title,extra='')=>{const active=href===current || href+'/index.html'===current || href==='/news.html'&&page==='article.html';return `<a href="${href}"${active?` class="active${extra?' '+extra:''}" aria-current="${page==='article.html'?'location':'page'}"`:extra?` class="${extra}"`:''}>${title}</a>`;};
@@ -11,7 +11,7 @@ for(const page of pages){
         <a class="bmv-brand" href="/" aria-label="British Midland Virtual home"${page==='index.html'?' aria-current="page"':''}><img src="/assets/images/logo.png" alt="British Midland Virtual"></a>
         <button class="bmv-menu-toggle" type="button" aria-expanded="false" aria-controls="bmv-primary-menu"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 5h14M3 10h14M3 15h14"/></svg><span>Menu</span></button>
         <ul class="bmv-primary" id="bmv-primary-menu">
-            ${group('Our Airline',[['/vision.html','Our Vision'],['/group.html','British Midland Group']])}
+            ${group('Our Airline',[['/vision.html','Our Vision'],['/midland-aero-club.html','Midland Aero Club'],['/group.html','British Midland Group']])}
             ${group('Flight Operations',[['/fleet.html','Fleet'],['/network.html','Route Network'],['/operations.html','Live Operations']])}
             ${group('Community',[['/roster','Pilot Roster'],['/events','Events']])}
             <li>${link('/news.html','News')}</li>
