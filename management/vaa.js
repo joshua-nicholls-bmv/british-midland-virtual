@@ -4,7 +4,7 @@ const el=id=>document.getElementById(id);
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const date=value=>new Date(value).toISOString().replace("T"," ").slice(0,19)+" UTC";
 let assessed=[],snapshot=0,selected=0,busy=false,ready=false,timer;
-const fields="id,pilot_id,flight_number,atc_callsign,departure,arrival,off_blocks,takeoff,landing,stand,status,requires_review,created_at,atc_provider,vatsim_id,vatsim_session_id,vatsim_verified,vatsim_network_callsign,vatsim_participation_seconds,vatsim_verification_status";
+const fields="id,pilot_id,flight_number,flight_purpose,registration,atc_callsign,departure,arrival,off_blocks,takeoff,landing,stand,status,requires_review,created_at,atc_provider,vatsim_id,vatsim_session_id,vatsim_verified,vatsim_network_callsign,vatsim_participation_seconds,vatsim_verification_status";
 async function pages(table,columns) {
     const output=[];
     for(let offset=0;;offset+=500) {

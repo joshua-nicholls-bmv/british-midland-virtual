@@ -9,6 +9,14 @@ const sample={id:"one",pilot_id:"pilot",flight_number:"BMA123",atc_callsign:"BMA
     vatsim_id:"1234567",vatsim_session_id:"session",vatsim_verified:true,vatsim_network_callsign:"BMA123",
     vatsim_participation_seconds:1200,vatsim_verification_status:"OFFLINE"};
 const assess=rows=>VAA.assess(rows,pilots,now);
+
+for (const change of [{flight_purpose:"MAC"}, {flight_number:"MAC"}, ...["G-WARB","G-JIMH","G-SHED","G-BLZH","G-NWFG","G-RGAH"].map(registration=>({registration}))]) {
+    test("MAC excluded despite valid airline callsign: "+JSON.stringify(change),()=>{
+        const row=assess([{...sample,...change}])[0];
+        assert.equal(row.qualifies,false);
+        assert.ok(row.reasons.some(reason=>reason.includes("Midland Aero Club")));
+    });
+}
 test("completed server-observed report qualifies even after disconnect",()=>assert.equal(assess([sample])[0].qualifies,true));
 for(const [label,change] of [
     ["typed CID only",{vatsim_verified:null}],["no duration",{vatsim_participation_seconds:0}],

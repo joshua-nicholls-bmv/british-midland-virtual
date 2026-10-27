@@ -7,7 +7,7 @@
     "use strict";
 
     const DAY = 86400000;
-    const RULES_VERSION = "2";
+    const RULES_VERSION = "3";
 
     const clean = value => String(value ?? "").trim();
     const upper = value => clean(value).toUpperCase();
@@ -57,6 +57,13 @@
             )
             .map(row => {
                 const reasons = [];
+                // Club operations never qualify as scheduled airline activity,
+                // even when a pilot used a BMA/BMR network callsign.
+                if (upper(row.flight_purpose) === "MAC" ||
+                    /^MAC(?:$|[ |])/.test(upper(row.flight_number)) ||
+                    ["G-WARB", "G-JIMH", "G-SHED", "G-BLZH", "G-NWFG", "G-RGAH"].includes(upper(row.registration))) {
+                    reasons.push("Midland Aero Club operation excluded from airline VAA activity");
+                }
                 const pilot = pilots.get(row.pilot_id);
 
                 const completed = time(row.stand);
