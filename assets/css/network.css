@@ -1270,3 +1270,20 @@ button:focus-visible {outline:3px solid #226dba;outline-offset:4px}
 }
 
 .cargo-hubs-section{background:var(--bm-cream);--class-colour:#526175;scroll-margin-top:130px}.cargo-hub-card{--class-colour:#526175}.cargo-hub-badge{background:#526175;color:white}
+
+/* Autumn 2026 departure-base schedules. Keep horizontal scrolling inside the table on mobile. */
+.schedule-base[hidden]{display:none}
+.schedule-base{padding:0}
+.schedule-note::after{content:' On small screens, scroll the table sideways to see all columns.'}
+.schedule-scroll{max-width:1100px;margin:0 auto;overflow-x:auto;border:1px solid #d1d8e1;border-radius:14px;background:white}
+.schedule-table{width:100%;border-collapse:collapse;min-width:680px;text-align:left;color:var(--bm-blue)}
+.schedule-table caption{text-align:left;padding:18px;font-weight:700;background:var(--bm-cream)}
+.schedule-table th,.schedule-table td{padding:14px 18px;border-bottom:1px solid #e0e5eb}
+.schedule-table thead{background:var(--bm-blue);color:white}
+.schedule-table tbody tr:nth-child(even){background:#f6f7fa}
+.schedule-table tr.selected{outline:3px solid var(--bm-red);outline-offset:-3px}
+.schedule-table tr{scroll-margin-top:140px}
+.schedule-table .map-route-button{margin:0;white-space:nowrap;min-height:44px}
+#schedule-status,.schedule-note{max-width:1100px;margin:14px auto;color:#526175}
+.schedule-scroll:focus-visible{outline:3px solid #226dba;outline-offset:4px}
+@media(max-width:768px){.schedule-table th,.schedule-table td{padding:12px}.schedule-base .base-heading span{display:block;margin:8px 0}.schedule-note{line-height:1.7}}

@@ -11,13 +11,13 @@ function drawRoutes(filter='all') {
   const strength=r.class==='pioneer'?.16:.07,control=[(start[0]+end[0])/2+(end[1]-start[1])*strength,(start[1]+end[1])/2-(end[0]-start[0])*strength];
   const points=Array.from({length:41},(_,i)=>{const t=i/40;return [0,1].map(a=>(1-t)**2*start[a]+2*(1-t)*t*control[a]+t*t*end[a]);});
   const line=L.polyline(points,{color:colour,weight:3,opacity:.8,dashArray:r.class==='pioneer'?'10 8':null}).addTo(layers);
-  line.bindPopup(`<strong>${h.name} ↔ ${r.city}</strong><br>${network.classes[r.class].name} Class<br>${r.flight} / ${r.returnFlight}<br>${r.aircraft}<br>${r.time} outbound · ${r.returnTime} return`);
+  line.bindPopup(`<strong>${h.name} ↔ ${r.city}</strong><br>${network.classes[r.class].name} Class<br>${r.flight} / ${r.returnFlight}<br>${r.aircraft}<br>${r.time} outbound${r.returnTime ? ` · ${r.returnTime} return` : ""}`);
   lines.set(r.flight,line);bounds.push(start,end);
   if(!airports.has(r.iata))airports.set(r.iata,[]);airports.get(r.iata).push(r);
  });
  airports.forEach(group=>{
   const r=group[0],content=document.createElement('div'),heading=document.createElement('strong');heading.textContent=r.city;content.appendChild(heading);
-  group.forEach(route=>{const b=document.createElement('button');b.type='button';b.className='map-route-button';b.style.display='block';b.textContent=`${network.hubs[route.origin].name} · ${route.flight} / ${route.returnFlight}`;b.addEventListener('click',()=>{document.querySelectorAll('.selected').forEach(c=>c.classList.remove('selected'));const card=document.getElementById('card-'+route.flight);card.classList.add('selected');card.scrollIntoView({behavior:smooth(),block:'center'});});content.appendChild(b);});
+  group.forEach(route=>{const b=document.createElement('button');b.type='button';b.className='map-route-button';b.style.display='block';b.textContent=`${network.hubs[route.origin].name} · ${route.flight} / ${route.returnFlight}`;b.addEventListener('click',()=>{document.querySelectorAll('.selected').forEach(c=>c.classList.remove('selected'));const card=document.getElementById('card-'+route.flight);if(route.class==='beating-heart')filterSchedule(route.origin);card.classList.add('selected');card.scrollIntoView({behavior:smooth(),block:'center'});});content.appendChild(b);});
   L.circleMarker([r.lat,r.lon],{radius:6,color:'#fff',weight:2,fillColor:network.classes[r.class].colour,fillOpacity:1}).addTo(layers).bindTooltip(`${r.city} (${r.iata})`).bindPopup(content);
  });
  [...new Set(routes.map(r=>r.origin))].forEach(code=>{const h=network.hubs[code];L.circleMarker([h.lat,h.lon],{radius:9,color:'#fff',weight:3,fillColor:'#001a3a',fillOpacity:1}).addTo(layers).bindTooltip(`${h.name} (${code})`,{permanent:filter==='foundry'||code==='BHX',direction:code==='EMA'?'top':'bottom',className:'hub-label'});});
@@ -26,7 +26,7 @@ function drawRoutes(filter='all') {
  document.getElementById('map-status').textContent=filter==='cargo'?'8 cargo hubs shown · Hub locations only; no cargo route lines.':`${routes.length} passenger routes${filter==='all'?' and 8 cargo hubs':''} shown · One line per passenger route pair.`;
 }
 function buildCards(){
- network.routes.forEach(r=>{
+ network.routes.filter(r=>r.class!=='beating-heart').forEach(r=>{
   const h=network.hubs[r.origin],c=network.classes[r.class],card=document.createElement('article');
   card.id='card-'+r.flight;card.className=`destination-card ${r.class}-card`;
   card.innerHTML=`<span class="destination-status class-badge">${c.name} Class</span><div class="route-card-flight">${r.flight} / ${r.returnFlight}</div><h3>${r.city}</h3><p class="airport">${r.origin} ↔ ${r.iata}</p><p class="destination-description">${h.name} to ${r.city}.${r.class==='foundry'?' Your choice of Fokker 100 or ATR 72.':''}</p><div class="destination-info"><div><span>Aircraft</span><strong>${r.aircraft}</strong></div><div><span>Estimated block time</span><strong>${r.time}${r.time===r.returnTime?' each way':' out / '+r.returnTime+' return'}</strong></div><div><span>Outbound · ${r.origin} → ${r.iata}</span><strong>${r.flight}</strong></div><div><span>Return · ${r.iata} → ${r.origin}</span><strong>${r.returnFlight}</strong></div></div><button type="button" class="map-route-button" aria-label="Show ${h.name} to ${r.city} on map">View on map</button>`;
@@ -34,9 +34,25 @@ function buildCards(){
   document.getElementById(r.class==='foundry'?`foundry-${r.origin}-grid`:`${r.class}-grid`).appendChild(card);
  });
 }
+function filterSchedule(base) {
+ document.querySelectorAll('[data-base]').forEach(button=>button.setAttribute('aria-pressed',String(button.dataset.base===base)));
+ document.querySelectorAll('[data-schedule-base]').forEach(section=>section.hidden=base!=='all'&&section.dataset.scheduleBase!==base);
+ const count=network.routes.filter(r=>r.class==='beating-heart'&&(base==='all'||r.origin===base)).length;
+ document.getElementById('schedule-status').textContent=base==='all'?'32 routes across 3 departure bases':count+' routes from '+network.hubs[base].name;
+}
+function buildSchedule() {
+ network.routes.filter(r=>r.class==='beating-heart').forEach(r=>{
+  const row=document.createElement('tr');row.id='card-'+r.flight;
+  [r.flight,r.city,r.aircraft,r.time,r.returnFlight].forEach((value,i)=>{const cell=document.createElement(i===0?'th':'td');if(i===0)cell.scope='row';cell.textContent=value;row.appendChild(cell);});
+  const cell=document.createElement('td'),button=document.createElement('button');button.type='button';button.className='map-route-button';button.textContent='View map';button.setAttribute('aria-label','Show '+network.hubs[r.origin].name+' to '+r.city+' on map');
+  button.addEventListener('click',()=>{if(!map)return;drawRoutes(r.class);map.fitBounds(lines.get(r.flight).getBounds(),{padding:[40,40],maxZoom:8,animate:false});lines.get(r.flight).openPopup();document.getElementById('network-map').scrollIntoView({behavior:smooth(),block:'center'});});
+  cell.appendChild(button);row.appendChild(cell);document.getElementById('schedule-'+r.origin+'-body').appendChild(row);
+ });
+ document.querySelectorAll('[data-base]').forEach(button=>button.addEventListener('click',()=>filterSchedule(button.dataset.base)));
+}
 async function buildNetwork(){
  const status=document.getElementById('map-status');
- try{const response=await fetch('assets/data/network.json?v=12');if(!response.ok)throw Error('Route data unavailable');network=await response.json();buildCards();}
+ try{const response=await fetch('assets/data/network.json?v=13');if(!response.ok)throw Error('Route data unavailable');network=await response.json();buildSchedule();buildCards();}
  catch(error){status.textContent='The route schedule could not be loaded. Please refresh to try again.';console.error(error);return;}
  if(typeof L==='undefined'){status.textContent='The interactive map is unavailable. All route details are listed below.';document.querySelectorAll('.map-route-button,[data-filter]').forEach(b=>b.disabled=true);return;}
  map=L.map('network-map',{scrollWheelZoom:false,minZoom:2,maxZoom:18});
