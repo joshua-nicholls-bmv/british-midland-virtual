@@ -1,3 +1,9 @@
+function bmgVatsimParticipation(report) {
+ if(report.vatsim_verified == null) return "Not recorded";
+ if(report.vatsim_verified !== true) return "Not verified";
+ const seconds=Math.max(0,Number(report.vatsim_participation_seconds)||0);
+ return `Verified · ${Math.floor(seconds/3600)}h ${Math.floor(seconds%3600/60)}m observed`;
+}
 // ============================================================
 // BRITISH MIDLAND VIRTUAL
 // OPERATIONS CONTROL - PIREP CENTRE
@@ -414,7 +420,7 @@ async function loadPireps() {
                     aircraft,
                     registration,
                     atc_provider,
-                    vatsim_id,
+                    vatsim_id, vatsim_verified, vatsim_network_callsign, vatsim_participation_seconds, vatsim_verification_status,
                     block_minutes,
                     airborne_minutes,
                     landing_rate_fpm,
@@ -782,7 +788,7 @@ function renderPireps(rows) {
                                         "—"
                                     )}
                                 </strong>
-                                <small class="pirep-atc">ATC · ${escapeHtml(pirep.atc_provider || "Not recorded")}</small>
+                                <small class="pirep-atc">ATC · ${escapeHtml(pirep.atc_provider || "Not recorded")}</small><small class="pirep-atc">VATSIM · ${escapeHtml(bmgVatsimParticipation(pirep))} · ${escapeHtml(pirep.vatsim_network_callsign || "No network callsign")}</small>
 
                             </span>
 
