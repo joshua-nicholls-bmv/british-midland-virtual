@@ -1,3 +1,4 @@
+function bmgPurposeLabel(code) { return ({SCHEDULED:"Scheduled revenue",POSITIONING:"Positioning / ferry",TRAINING:"Training",CHARTER:"Charter",CUSTOM:"Special / custom"})[code] || "Not recorded"; }
 // ============================================================
 // BRITISH MIDLAND VIRTUAL
 // OPERATIONS CONTROL - REVIEW CENTRE
@@ -318,6 +319,8 @@ async function loadPireps() {
                 arrival,
                 aircraft,
                 registration,
+                atc_callsign,
+                flight_purpose,
                 atc_provider,
                 vatsim_id,
                 block_minutes,
@@ -644,7 +647,7 @@ function renderReviewQueue(flights) {
 
 
                             <div class="review-aircraft">
-                                ${escapeHtml(aircraft)}<br><small>ATC · ${escapeHtml(flight.atc_provider || "Not recorded")}</small>
+                                ${escapeHtml(aircraft)}<br><small>${escapeHtml(flight.atc_callsign || "Not recorded")} · ${escapeHtml(bmgPurposeLabel(flight.flight_purpose))}<br>ATC · ${escapeHtml(flight.atc_provider || "Not recorded")}</small>
                             </div>
 
 

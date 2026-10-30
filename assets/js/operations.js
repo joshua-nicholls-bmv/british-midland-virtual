@@ -1,3 +1,4 @@
+function bmgPurposeLabel(code) { return ({SCHEDULED:"Scheduled revenue",POSITIONING:"Positioning / ferry",TRAINING:"Training",CHARTER:"Charter",CUSTOM:"Special / custom"})[code] || "Not recorded"; }
 // ============================================================
 // BRITISH MIDLAND VIRTUAL
 // PUBLIC OPERATIONS CENTRE
@@ -722,9 +723,7 @@ function updateAircraftMarkers() {
                 <div>Nickname: ${escapeHtml(pilot.name)}</div>
 
                 <strong>
-                    ${escapeHtml(
-                        flight.flight_number
-                    )}
+                    ${escapeHtml(flight.atc_callsign || flight.flight_number || "—")}<br><small>${escapeHtml(flight.flight_number || "—")} · ${escapeHtml(bmgPurposeLabel(flight.flight_purpose))}</small>
                 </strong>
 
                 <div>
@@ -950,9 +949,7 @@ function renderFlightSidebar() {
                     <div class="live-flight-header">
 
                         <div class="live-flight-number">
-                            ${escapeHtml(
-                                flight.flight_number
-                            )}
+                            ${escapeHtml(flight.atc_callsign || flight.flight_number || "—")}<br><small>${escapeHtml(flight.flight_number || "—")} · ${escapeHtml(bmgPurposeLabel(flight.flight_purpose))}</small>
                         </div>
 
                         <div class="live-flight-phase">
@@ -1094,9 +1091,7 @@ function renderSelectedFlight() {
             <div class="selected-flight-title">
 
                 <h3>
-                    ${escapeHtml(
-                        flight.flight_number
-                    )}
+                    ${escapeHtml(flight.atc_callsign || flight.flight_number || "—")}<br><small>${escapeHtml(flight.flight_number || "—")} · ${escapeHtml(bmgPurposeLabel(flight.flight_purpose))}</small>
                 </h3>
 
                 <span>
@@ -1450,6 +1445,8 @@ async function loadRecentOperations() {
             arrival,
             aircraft,
             registration,
+            atc_callsign,
+            flight_purpose,
             block_minutes,
             airborne_minutes,
             landing_rate_fpm,

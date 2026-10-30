@@ -1,3 +1,4 @@
+function bmgPurposeLabel(code) { return ({SCHEDULED:"Scheduled revenue",POSITIONING:"Positioning / ferry",TRAINING:"Training",CHARTER:"Charter",CUSTOM:"Special / custom"})[code] || "Not recorded"; }
 // ============================================================
 // BRITISH MIDLAND VIRTUAL
 // OPERATIONS CONTROL - FLIGHT REVIEW
@@ -567,6 +568,8 @@ async function loadPirep(pirepId) {
                 arrival,
                 aircraft,
                 registration,
+                atc_callsign,
+                flight_purpose,
                 atc_provider,
                 vatsim_id,
                 off_blocks,
@@ -953,6 +956,8 @@ function renderReport(
             : "No grade";
 
 
+    document.getElementById("atcCallsign").textContent = pirep.atc_callsign || "Not recorded";
+    document.getElementById("flightPurpose").textContent = bmgPurposeLabel(pirep.flight_purpose);
     document.getElementById("atcProvider").textContent = pirep.atc_provider || "Not recorded";
     document.getElementById("vatsimId").textContent = pirep.vatsim_id || "Not recorded";
 
