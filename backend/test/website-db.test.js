@@ -14,7 +14,7 @@ test('database role, duplicate controls, rate limits and review transitions',asy
  await submitApplication(a);await submitApplication(a);await submitApplication({...a,email:'ignored@example.com'});
  assert.equal((await db.query('select * from bmv_registration.applications')).rows.length,1);assert.equal((await db.query('select email from bmv_registration.applications')).rows[0].email,null);
  for(let i=0;i<2;i++)await rateLimit('discord:test','secret',2);await assert.rejects(()=>rateLimit('discord:test','secret',2),e=>e.status===429);
- const [r]=await listApplications(null);assert.equal(r.state,'pending');assert.equal(r.privacy_notice_version,'2026-10-21');
+ const [r]=await listApplications(null);assert.equal(r.state,'pending');assert.equal(r.privacy_notice_version,'2026-10-30');
  const user='00000000-0000-0000-0000-000000000001';
  await assert.rejects(()=>reviewApplication(r.id,user,true,'Welcome',false),e=>e.status===400);
  await db.query('insert into public.pilots values($1,$2)',[user,a.discord_id]);await assert.rejects(()=>reviewApplication(r.id,user,true,'Welcome',true),e=>e.status===403);
