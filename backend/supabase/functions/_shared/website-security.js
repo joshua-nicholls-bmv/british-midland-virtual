@@ -1,5 +1,5 @@
 export const ORIGINS = ['https://britishmidlandvirtual.co.uk','https://www.britishmidlandvirtual.co.uk'];
-export const PRIVACY_VERSION = '2026-10-21';
+export const PRIVACY_VERSION = '2026-10-30';
 export class HttpError extends Error { constructor(status,message){super(message);this.status=status;} }
 export function cors(req){
  const origin=req.headers.get('origin');
