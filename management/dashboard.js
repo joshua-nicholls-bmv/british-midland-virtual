@@ -119,7 +119,7 @@ async function initialiseDashboard() {
         managementName.textContent = manager.display_name;
         managementRole.textContent = manager.role;
         setGreeting(manager.display_name);
-        await loadOperationsData();
+        await Promise.all([loadOperationsData(), loadDailyActivity()]);
         authGate.classList.add("hidden");
         dashboardApp.classList.remove("hidden");
     } catch (error) { console.error("Dashboard initialisation failed:", error); redirectToLogin(); }
@@ -132,3 +132,33 @@ async function signOut() {
 if (signOutButton) signOutButton.addEventListener("click", signOut);
 supabaseClient.auth.onAuthStateChange(event => { if (event === "SIGNED_OUT") redirectToLogin(); });
 initialiseDashboard();
+
+// Determine London calendar boundaries independently of the manager's device timezone.
+function londonDayBounds(now = new Date()) {
+    const dateKey = date => new Intl.DateTimeFormat('en-CA', {timeZone:'Europe/London',year:'numeric',month:'2-digit',day:'2-digit'}).format(date);
+    const today = dateKey(now);
+    let start = new Date(now); start.setUTCHours(0,0,0,0);
+    while (dateKey(start) === today) start = new Date(start.getTime()-3600000);
+    while (dateKey(start) !== today) start = new Date(start.getTime()+3600000);
+    let end = new Date(start.getTime()+23*3600000);
+    while (dateKey(end) === today) end = new Date(end.getTime()+3600000);
+    return {start:start.toISOString(),end:end.toISOString()};
+}
+async function dailyRows(table, columns, field, bounds) {
+    const rows=[];
+    for(let offset=0;;offset+=500){
+        const {data,error}=await supabaseClient.from(table).select(columns).gte(field,bounds.start).lt(field,bounds.end).order('id').range(offset,offset+499);
+        if(error)throw error;
+        rows.push(...data);
+        if(data.length<500)return rows;
+    }
+}
+async function loadDailyActivity(){
+    const bounds=londonDayBounds();
+    document.getElementById('dailyPeriod').textContent='Today · '+new Intl.DateTimeFormat('en-GB',{timeZone:'Europe/London',dateStyle:'full'}).format(new Date())+' · UK time';
+    await Promise.allSettled([
+        (async()=>{try{const rows=await dailyRows('pireps','id,pilot_id','submitted_at',bounds);document.getElementById('dailyFlights').textContent=rows.length;document.getElementById('dailyPilots').textContent=new Set(rows.map(r=>r.pilot_id).filter(Boolean)).size;}catch{for(const id of ['dailyFlights','dailyPilots'])document.getElementById(id).textContent='Unavailable';}})(),
+        (async()=>{try{const {data,error}=await supabaseClient.functions.invoke('bmv-website-management?summary=daily',{method:'GET'});if(error||!data.daily)throw Error();document.getElementById('dailyRecruitment').textContent=data.daily.applications;}catch{document.getElementById('dailyRecruitment').textContent='Unavailable';}})(),
+        (async()=>{try{const [holds,releases]=await Promise.all([dailyRows('tech_hold_history','id','placed_on_hold_at',bounds),dailyRows('tech_hold_history','id','released_at',bounds)]);document.getElementById('dailyTech').textContent=holds.length+releases.length;document.getElementById('dailyTechDetail').textContent=holds.length+' holds placed · '+releases.length+' returned to service';}catch{document.getElementById('dailyTech').textContent='Unavailable';}})()
+    ]);
+}

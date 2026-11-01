@@ -1,3 +1,4 @@
+import {pool} from '../_shared/db.js';
 import {cors,readBody,response,failure,HttpError} from '../_shared/website-security.js';
 import {listApplications,reviewApplication} from '../_shared/website-db.js';
 async function manager(req:Request){
@@ -18,6 +19,10 @@ Deno.serve(async req=>{
   if(!['GET','POST'].includes(req.method))throw new HttpError(405,'Method not allowed.');
   const user=await manager(req);
   if(req.method==='GET'){
+   if(new URL(req.url).searchParams.get('summary')==='daily'){
+    const {rows:[daily]}=await pool.query("select count(*)::integer as applications from bmv_registration.applications where kind='new' and created_at >= (date_trunc('day',now() at time zone 'Europe/London') at time zone 'Europe/London') and created_at < ((date_trunc('day',now() at time zone 'Europe/London') + interval '1 day') at time zone 'Europe/London')");
+    return response({daily},200,headers);
+   }
    const raw=new URL(req.url).searchParams.get('before');let before=null;
    if(raw){try{before=JSON.parse(raw);}catch{throw new HttpError(400,'Invalid page.');}
     if(!before||typeof before.at!=='string'||!Number.isFinite(Date.parse(before.at))||!/^[-a-f0-9]{36}$/i.test(before.id))throw new HttpError(400,'Invalid page.');}
