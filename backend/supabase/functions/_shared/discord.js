@@ -108,8 +108,9 @@ export async function work(){
   }catch(e){console.error('Application retry',a.id,e.name);}
  }
 }
-// Website applications never create approval messages or change Discord roles.
+// Website alerts link to management; decisions remain on the website.
 export async function workWebsite(){
+ await applicationAlerts();
  const {rows}=await pool.query(`with due as (select id from bmv_registration.applications a where application_source='website' and retry_at<=now() and
  (state='approved' or (state='complete' and not exists(select 1 from bmv_registration.audit e where e.application_id=a.id and e.event='welcome_dm_attempted')))
  order by retry_at limit 3 for update skip locked)
@@ -118,4 +119,24 @@ export async function workWebsite(){
   if(a.state==='approved' && await provision(a.id))a.state='complete';
   if(a.state==='complete')await deliverWelcome(a,{tx,audit,discord});
  }catch(e){console.error('Website registration retry',a.id,e.name);}}
+}
+
+async function applicationAlerts(){
+ const {rows}=await pool.query("select a.id,a.created_at from bmv_registration.applications a where a.application_source='website' and exists(select 1 from bmv_registration.audit e where e.application_id=a.id and e.event='application_alert_queued') and not exists(select 1 from bmv_registration.audit e where e.application_id=a.id and e.event='application_alert_attempted') order by a.created_at limit 3");
+ for(const a of rows){
+  const claimed=await tx(async c=>{
+   await c.query('select pg_advisory_xact_lock(hashtextextended($1,4))',[a.id]);
+   if((await c.query("select 1 from bmv_registration.audit where application_id=$1 and event='application_alert_attempted'",[a.id])).rowCount)return false;
+   await audit(c,a.id,'bot','application_alert_attempted');return true;
+  });
+  if(!claimed)continue;
+  try{
+   const m=await discord('channels/1526327360843026523/messages','POST',{
+    content:'🛫 **New pilot application**\n<@1302378693901160579> <@563049560159813643> — a new website application is ready for review.\n\n[Review applications](https://britishmidlandvirtual.co.uk/management/applications.html)',
+    allowed_mentions:{parse:[],users:['1302378693901160579','563049560159813643']},
+    nonce:('a'+a.id.replaceAll('-','')).slice(0,25),enforce_nonce:true
+   });
+   await tx(c=>audit(c,a.id,'bot','application_alert_sent',{message_id:m.id}));
+  }catch(e){await tx(c=>audit(c,a.id,'bot','application_alert_unconfirmed',{status:Number.isInteger(e.status)?e.status:null}));}
+ }
 }

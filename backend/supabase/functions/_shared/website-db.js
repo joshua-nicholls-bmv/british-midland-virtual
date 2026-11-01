@@ -20,6 +20,7 @@ export async function submitApplication(a){
   const {rows:[r]}=await c.query(`insert into bmv_registration.applications(discord_id,nickname,kind,vatsim_cid,simbrief_id,application_source,privacy_notice_version,privacy_acknowledged_at)
    values($1,$2,'new',$3,$4,'website',$5,now()) returning id`,[a.discord_id,a.nickname,a.vatsim_cid,a.simbrief_id,PRIVACY_VERSION]);
   await audit(c,r.id,'website','website_submitted',{privacy_notice_version:PRIVACY_VERSION,age_confirmed:true});
+  await audit(c,r.id,'website','application_alert_queued');
  });}catch(e){if(e.code!=='23505')throw e;}
 }
 export async function listApplications(before){
