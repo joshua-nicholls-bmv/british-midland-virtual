@@ -19,7 +19,7 @@
     <link rel="stylesheet" href="dashboard.css">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
+<link rel="stylesheet" href="/management/navigation.css?v=1"><script src="/management/navigation.js?v=1" defer></script></head>
 
 <body>
 
@@ -59,101 +59,7 @@
              SIDEBAR
              ================================================= -->
 
-        <aside class="sidebar">
-
-            <div>
-
-                <div class="sidebar-brand">
-
-                    <div class="brand-mark">
-                        BM
-                    </div>
-
-                    <div>
-
-                        <strong>
-                            BRITISH MIDLAND
-                        </strong>
-
-                        <span>
-                            OPERATIONS CONTROL
-                        </span>
-
-                    </div>
-
-                </div>
-
-
-                <!-- =========================================
-                     MANAGEMENT NAVIGATION
-                     ========================================= -->
-
-                <nav class="navigation"><a href="/management/applications.html" class="nav-item"><span class="nav-symbol">＋</span>Pilot applications</a><a href="/management/vaa.html" class="nav-item"><span class="nav-symbol">&#9678;</span>VAA Activity</a>
-                    <a href="/management/fleet.html" class="nav-item"><span class="nav-symbol">⚙</span>Fleet / Tech Ops</a>
-                    <a href="dispatch.html" class="nav-item"><span class="nav-symbol">✈</span>Dispatch</a>
-
-                    <a
-                        href="dashboard.html"
-                        class="nav-item active"
-                    >
-                        <span class="nav-symbol">▦</span>
-                        Dashboard
-                    </a>
-
-
-                    <a
-                        href="live-operations.html"
-                        class="nav-item"
-                    >
-                        <span class="nav-symbol">◉</span>
-                        Live Operations
-                    </a>
-
-
-                    <a
-                        href="pireps.html"
-                        class="nav-item"
-                    >
-                        <span class="nav-symbol">✈</span>
-                        PIREPs
-                    </a>
-
-
-                    <a
-                        href="pilots.html"
-                        class="nav-item"
-                    >
-                        <span class="nav-symbol">◎</span>
-                        Pilots
-                    </a>
-
-
-                    <a
-                        href="reviews.html"
-                        class="nav-item"
-                    >
-                        <span class="nav-symbol">!</span>
-                        Reviews
-                    </a>
-
-                </nav>
-
-            </div>
-
-
-            <div class="sidebar-footer">
-
-                <span>
-                    BMV OPERATIONS
-                </span>
-
-                <span>
-                    MANAGEMENT SYSTEM
-                </span>
-
-            </div>
-
-        </aside>
+        <aside class="sidebar management-sidebar"><div><div class="sidebar-brand"><div class="brand-mark">BM</div><div><strong>BRITISH MIDLAND</strong><span>MANAGEMENT</span></div></div><details class="management-menu" open><summary>Management menu <span aria-hidden="true">⌄</span></summary><nav class="navigation management-navigation" aria-label="Management"><a href="/management/dashboard.html" class="nav-item active" aria-current="page">Dashboard</a><details class="management-nav-group"><summary><span class="nav-symbol" aria-hidden="true">⚙</span><span>Fleet Management</span><span class="management-chevron" aria-hidden="true">⌄</span></summary><div class="management-nav-links"><a href="/management/fleet.html" class="nav-item">Fleet / Tech Ops</a><a href="/management/dispatch.html" class="nav-item">Dispatch</a></div></details><details class="management-nav-group"><summary><span class="nav-symbol" aria-hidden="true">✈</span><span>Flight Operations</span><span class="management-chevron" aria-hidden="true">⌄</span></summary><div class="management-nav-links"><a href="/management/live-operations.html" class="nav-item">Live Operations</a><a href="/management/pireps.html" class="nav-item">PIREPs</a><a href="/management/reviews.html" class="nav-item">Reviews</a></div></details><details class="management-nav-group"><summary><span class="nav-symbol" aria-hidden="true">◎</span><span>Pilots</span><span class="management-chevron" aria-hidden="true">⌄</span></summary><div class="management-nav-links"><a href="/management/pilots.html" class="nav-item">Pilot Directory</a><a href="/management/applications.html" class="nav-item">Pilot Applications</a><a href="/management/badges.html" class="nav-item">Special Badges</a></div></details><details class="management-nav-group"><summary><span class="nav-symbol" aria-hidden="true">◉</span><span>VATSIM</span><span class="management-chevron" aria-hidden="true">⌄</span></summary><div class="management-nav-links"><a href="/management/vaa.html" class="nav-item">VAA Activity</a></div></details></nav></details></div><div class="sidebar-footer"><span>BMV OPERATIONS</span><span>MANAGEMENT SYSTEM</span></div></aside>
 
 
         <!-- =================================================

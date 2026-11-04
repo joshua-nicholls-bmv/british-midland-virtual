@@ -1,0 +1,26 @@
+/* Shared management navigation. Loaded after each page's existing styles. */
+.management-sidebar{inset:0 auto 0 0;overflow-y:auto;overscroll-behavior:contain;z-index:30;padding:28px 18px;gap:32px}
+.management-sidebar .sidebar-brand{margin-bottom:30px;padding-inline:6px}
+.management-menu>summary{display:none}
+.management-navigation{gap:8px}
+.management-navigation>.nav-item{border-radius:8px;margin-bottom:8px;font-size:13px}
+.management-nav-group{border-top:1px solid rgba(255,255,255,.09);padding-top:8px}
+.management-nav-group>summary{list-style:none;display:flex;align-items:center;gap:10px;min-height:46px;padding:10px 12px;color:#c0cbd9;font-size:12px;font-weight:600;cursor:pointer;border-radius:8px}
+.management-nav-group>summary::-webkit-details-marker,.management-menu>summary::-webkit-details-marker{display:none}
+.management-nav-group>summary:hover,.management-nav-group>summary.section-active{color:#fff;background:rgba(255,255,255,.05)}
+.management-chevron{margin-left:auto;transition:transform .15s}
+.management-nav-group[open]>summary .management-chevron{transform:rotate(180deg)}
+.management-nav-links{padding:4px 0 6px 18px}
+.management-nav-links .nav-item{min-height:40px;padding:9px 12px;font-size:12px;border-radius:0 7px 7px 0;line-height:1.4}
+.management-sidebar :focus-visible{outline:2px solid #9bc7ff;outline-offset:3px}
+.management-standalone>main{margin-left:260px;width:calc(100% - 260px);max-width:none}
+.management-standalone .applications-header{flex-wrap:wrap}
+@media(max-width:760px){
+ .management-sidebar{display:block;position:relative;inset:auto;width:100%;height:auto;padding:18px 20px;overflow:visible}
+ .management-sidebar .sidebar-brand{margin-bottom:16px}
+ .management-sidebar .sidebar-footer{display:none}
+ .management-menu>summary{display:flex;align-items:center;justify-content:space-between;list-style:none;padding:12px;border:1px solid rgba(255,255,255,.25);border-radius:8px;font-size:13px;font-weight:600;cursor:pointer}
+ .management-navigation{padding-top:14px}
+ .management-standalone>main{margin-left:0;width:100%}
+}
+@media(prefers-reduced-motion:reduce){.management-chevron{transition:none}}
