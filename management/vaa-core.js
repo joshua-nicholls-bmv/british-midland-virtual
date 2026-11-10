@@ -98,7 +98,9 @@
                 // Historical manual verification is an
                 // alternative to server-observed duration.
                 // It does not fabricate a VATSIM session.
-                if (method === "unverified") {
+                if (row.vatsim_verification_status === "management_rejected") {
+                    reasons.push("VAA credit rejected by management");
+                } else if (method === "unverified") {
                     reasons.push(
                         "No server-verified online duration"
                     );

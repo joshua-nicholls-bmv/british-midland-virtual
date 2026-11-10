@@ -13,6 +13,7 @@ function reviewPilotLabel(row) {
 }
 
 function reviewIssues(row) {
+    if (row.vatsim_verification_status === "management_rejected") return [];
     const session = reviewSessions.get(row.vatsim_session_id);
     const pilotCid = reviewPilots.get(row.pilot_id);
     const history = reviewHistory.get(row.id) || [];
@@ -44,18 +45,19 @@ function renderReviews(windowData) {
     for (const row of rows.reverse()) {
         const issues = reviewIssues(row);
         const history = reviewHistory.get(row.id) || [];
-        if (!issues.length && !history.length) continue;
-        reviewCases.set(row.id, {row, issues, history});
+        if (!issues.length && !history.length && row.vatsim_verification_status !== "management_rejected") continue;
+        const outcome = row.vatsim_verification_status === "management_rejected" ? "Rejected for VAA credit" : "Reviewed";
+        reviewCases.set(row.id, {row, issues, history, outcome});
         const label = [date(row.completed || Date.parse(row.created_at)).slice(0,10), reviewPilotLabel(row), row.atc_callsign || row.flight_number, row.departure + " → " + row.arrival].join(" · ");
-        picker.add(new Option(label + (issues.length ? " — " + issues.join("; ") : " — Reviewed"), row.id));
+        picker.add(new Option(label + (issues.length ? " — " + issues.join("; ") : " — " + outcome), row.id));
     }
     if (reviewCases.has(previous)) picker.value = previous;
     else openReview();
-    table("reviewSummary", ["Flight / pilot", "Route", "UTC date", "Discrepancy or evidence needed", "Review"], [...reviewCases.values()].map(({row, issues}) => [
+    table("reviewSummary", ["Flight / pilot", "Route", "UTC date", "Discrepancy or evidence needed", "Review"], [...reviewCases.values()].map(({row, issues, outcome}) => [
         esc(row.atc_callsign || row.flight_number) + "<br>" + esc(reviewPilotLabel(row)),
         esc(row.departure) + " → " + esc(row.arrival),
         date(row.completed || Date.parse(row.created_at)).slice(0,10),
-        issues.length ? esc(issues.join(" · ")) : "Reviewed",
+        issues.length ? esc(issues.join(" · ")) : outcome,
         '<button type="button" data-flight="' + esc(row.id) + '">Open review</button>'
     ]));
     el("reviewCount").textContent = [...reviewCases.values()].filter(item => item.issues.length).length + " flights with discrepancies in this window.";
@@ -70,12 +72,14 @@ function openReview() {
     const {row, issues, history} = item;
     el("reviewPilot").textContent = "Pilot · " + reviewPilotLabel(row);
     openedReview = {id:row.id, version:history.at(-1)?.id ?? null};
-    el("reviewIssues").textContent = issues.join(" · ") || "Management review recorded.";
+    el("reviewIssues").textContent = issues.join(" · ") || item.outcome;
     el("reviewCid").value = row.cid || reviewPilots.get(row.pilot_id) || "";
     el("reviewCall").value = row.actual_callsign || row.atc_callsign || row.flight_number || "";
     el("reviewSource").value = row.external_evidence?.source || row.legacy_review?.source || "";
     el("reviewHistory").textContent = history.map(h => date(h.recorded_at) + " · " + h.reviewer_name + " · " + h.decision + "\n" + h.notes + (h.evidence ? "\n" + h.evidence : "")).join("\n\n");
-    el("reviewVerify").disabled = !issues.length || row.reasons.some(reason => /duplicate|timestamps|club|outstanding|status not eligible|missing ICAO|pilot record/i.test(reason));
+    const rejected = row.vatsim_verification_status === "management_rejected";
+    el("reviewReject").disabled = rejected;
+    el("reviewVerify").disabled = (!issues.length && !rejected) || row.reasons.some(reason => /duplicate|timestamps|club|outstanding|status not eligible|missing ICAO|pilot record/i.test(reason));
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -107,7 +111,7 @@ el("reviewForm").addEventListener("submit", async event => {
         if (error) throw error;
         await refresh();
         openReview();
-        el("reviewStatus").textContent = action === "verified" ? "Management verification saved." : "Management note saved.";
+        el("reviewStatus").textContent = {verified:"VAA credit approved.", rejected:"VAA credit rejected.", note:"Management note saved."}[action];
     } catch (error) {
         el("reviewStatus").textContent = error.message || "Save failed. Refresh and retry.";
     } finally {
