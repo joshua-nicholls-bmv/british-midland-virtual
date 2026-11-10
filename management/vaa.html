@@ -9,7 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="dashboard.css">
-    <link rel="stylesheet" href="/management/vaa.css?v=1">
+    <link rel="stylesheet" href="/management/vaa.css?v=2">
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="stylesheet" href="/management/navigation.css?v=1"><script src="/management/navigation.js?v=1" defer></script><link rel="stylesheet" href="/management/redesign.css?v=1"><script src="/management/redesign.js?v=1" defer></script></head>
 <body class="vaa-page">
@@ -42,11 +42,25 @@
 <section class="vaa-panel"><h2>Successive 60-day periods</h2><p>Six adjacent windows anchored to the last refresh. Empty older windows may reflect missing retained evidence, not inactivity. These are reconstructed totals, not immutable audit snapshots.</p><div class="vaa-table" id="trends"></div></section>
 <section class="vaa-panel"><h2>Flight evidence</h2><div class="vaa-controls"><label>Show<select id="evidenceFilter"><option value="all">All reports in window</option><option value="qualifying">Qualifying only</option><option value="excluded">Excluded / needs evidence</option><option value="missing">Missing completion date (all retained)</option></select></label><label>Find pilot or flight<input id="search" type="search" placeholder="Pilot ID, nickname, CID or callsign"></label></div><p id="evidenceCount"></p><div class="vaa-table" id="evidence"></div></section>
 <section class="vaa-panel"><h2>How qualification is calculated</h2><ul><li>A retained member pilot record, a numeric CID, VATSIM provider, a server-verified session and positive observed online duration are required. A typed CID or VATSIM label alone is not evidence.</li><li>The observed network callsign must match the planned callsign and begin BMA or BMR. Both prefixes must be included in your registered VATSIM callsign list.</li><li>Departure and arrival must be four-letter ICAO codes. Off-blocks, takeoff, landing and stand timestamps must be valid and chronological. Completion means the stand timestamp, not the PIREP submission date.</li><li>Submitted, Completed, Approved or Accepted reports are eligible only with completed flight timestamps and no outstanding management review. Other statuses are excluded.</li><li>Repeated PIREP IDs, verification sessions and matching pilot/start/callsign combinations cannot increase the count. CID syntax checks do not independently validate ownership; identity evidence comes from the server verifier.</li><li>Observed seconds demonstrate sampled network participation, not full-flight coverage. Last verification status is exported even when the pilot disconnected after earlier valid observations. Historical reports without evidence are not retroactively verified.</li></ul><p>CSV files contain pilot identifiers and flight evidence. Keep them within authorised management or share deliberately with VATSIM for the application/audit. Exporting does not submit anything automatically.</p></section>
+<section class="vaa-panel" aria-labelledby="reviewHeading">
+<h2 id="reviewHeading">Discrepancies and management verification</h2>
+<p id="reviewCount">Loading review records…</p>
+<div class="vaa-table" id="reviewSummary"></div>
+<label>Flight to review <select id="reviewFlight"><option value="">Choose a flight</option></select></label>
+<form id="reviewForm" hidden>
+<p id="reviewIssues"></p><p id="reviewHistory"></p>
+<fieldset id="reviewInputs"><legend>Management review</legend>
+<div class="vaa-controls"><label>Confirmed VATSIM CID<input id="reviewCid" inputmode="numeric" maxlength="9"></label><label>Observed callsign<input id="reviewCall" maxlength="10"></label></div>
+<label>Evidence link or record reference<input id="reviewSource" maxlength="1000"></label>
+<label>Management notes<textarea id="reviewNote" required maxlength="2000" rows="3"></textarea></label>
+<div class="vaa-controls"><button type="submit" value="note">Save note</button><button type="submit" id="reviewVerify" value="verified">Management verify</button></div>
+<small>Verification saves the confirmed CID, callsign and VATSIM provider on this report. Your name, evidence and notes are recorded. ACARS observations are preserved.</small>
+</fieldset></form><p id="reviewStatus" role="status"></p></section>
         <footer class="page-footer"><span>BRITISH MIDLAND VIRTUAL</span><span>VAA ACTIVITY • RESTRICTED ACCESS</span><a href="/privacy/">Privacy Policy</a>
 </footer>
     </main>
 </div>
-<script src="/management/vaa-core.js?v=3"></script><script src="/management/vaa.js?v=3"></script>
+<script src="/management/vaa-core.js?v=3"></script><script src="/management/vaa-review.js?v=1"></script><script src="/management/vaa.js?v=4"></script>
 </body>
 </html>
 

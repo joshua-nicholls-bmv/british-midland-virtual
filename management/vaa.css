@@ -18,3 +18,4 @@
 .vaa-page :focus-visible{outline:3px solid var(--red);outline-offset:3px}
 @media(max-width:1100px){.vaa-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:650px){.vaa-cards{grid-template-columns:1fr}.vaa-intro,.vaa-panel{padding:18px}.vaa-controls>*{width:100%}.vaa-controls input,.vaa-controls select{width:100%}}
+#reviewFlight,#reviewSource,#reviewNote{display:block;width:100%;max-width:100%;padding:.65rem;font:inherit} #reviewHistory{white-space:pre-wrap;overflow-wrap:anywhere} #reviewInputs{border:1px solid var(--border);padding:1rem} #reviewInputs>label{display:block;margin:1rem 0} #reviewIssues{font-weight:600}

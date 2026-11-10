@@ -4,7 +4,7 @@ const el=id=>document.getElementById(id);
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const date=value=>new Date(value).toISOString().replace("T"," ").slice(0,19)+" UTC";
 let assessed=[],snapshot=0,selected=0,busy=false,ready=false,timer;
-const fields="id,pilot_id,flight_number,flight_purpose,registration,atc_callsign,departure,arrival,off_blocks,takeoff,landing,stand,status,requires_review,created_at,atc_provider,vatsim_id,vatsim_session_id,vatsim_verified,vatsim_network_callsign,vatsim_participation_seconds,vatsim_verification_status";
+const fields="id,pilot_id,flight_number,flight_purpose,registration,atc_callsign,departure,arrival,off_blocks,takeoff,landing,stand,status,requires_review,created_at,atc_provider,vatsim_id,vatsim_session_id,vatsim_verified,vatsim_network_callsign,vatsim_participation_seconds,vatsim_verification_status,external_evidence:debrief_data->vatsim_external_verification,legacy_review:debrief_data->vaa_management_review";
 async function pages(table,columns) {
     const output=[];
     for(let offset=0;;offset+=500) {
@@ -42,6 +42,7 @@ function render() {
     table("trends",["60-day window (UTC)","Flights / 50","Pilots / 10","BMA","BMR","Flight progress"],
         Array.from({length:6},(_,i)=>VAA.period(assessed,snapshot,i)).map(p=>[`${date(p.from).slice(0,10)} → ${date(p.until).slice(0,10)}`,p.flights,p.pilots,p.bma,p.bmr,`<progress max="50" value="${Math.min(p.flights,50)}" aria-label="${p.flights} of 50 flights"></progress>`]));
     renderEvidence();
+    renderReviews(w);
 }
 
 function renderEvidence() {
@@ -130,7 +131,18 @@ async function refresh() {
     try {
         const user=await manager();if(!user)return;
         el("managementName").textContent=user.display_name;el("managementRole").textContent=user.role;
-        const [reports,pilots]=await Promise.all([pages("pireps",fields),pages("pilots","id,pilot_id,nickname")]);
+        const [reports,pilots,sessions,reviews]=await Promise.all([
+            pages("pireps",fields), pages("pilots","id,pilot_id,nickname,vatsim_cid"),
+            pages("acars_vatsim_sessions","id,owner_id,verified_cid,network_callsign,verified_seconds"),
+            pages("vaa_management_reviews","id,pirep_id,decision,notes,evidence,reviewer_name,recorded_at")
+        ]);
+        reviewSessions=new Map(sessions.map(s=>[s.id,s]));
+        reviewPilots=new Map(pilots.map(p=>[p.id,p.vatsim_cid]));
+        reviewHistory=new Map();
+        for(const entry of reviews){
+            if(!reviewHistory.has(entry.pirep_id)) reviewHistory.set(entry.pirep_id,[]);
+            reviewHistory.get(entry.pirep_id).push(entry);
+        }
         snapshot=Date.now();assessed=VAA.assess(reports,new Map(pilots.map(p=>[p.id,p])),snapshot);
         ready=true;busy=false;render();el("loadStatus").textContent=`Updated ${date(snapshot)} · Auto-refresh every 60 seconds while visible`;
     } catch(error) {
