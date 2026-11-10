@@ -7,6 +7,11 @@ let reviewCases = new Map();
 let openedReview = null;
 let reviewSaving = false;
 
+function reviewPilotLabel(row) {
+    const name = row.nickname?.trim();
+    return name && name !== "—" ? name + " (" + row.pilot_code + ")" : row.pilot_code;
+}
+
 function reviewIssues(row) {
     const session = reviewSessions.get(row.vatsim_session_id);
     const pilotCid = reviewPilots.get(row.pilot_id);
@@ -41,13 +46,13 @@ function renderReviews(windowData) {
         const history = reviewHistory.get(row.id) || [];
         if (!issues.length && !history.length) continue;
         reviewCases.set(row.id, {row, issues, history});
-        const label = [date(row.completed || Date.parse(row.created_at)).slice(0,10), row.pilot_code, row.atc_callsign || row.flight_number, row.departure + " → " + row.arrival].join(" · ");
+        const label = [date(row.completed || Date.parse(row.created_at)).slice(0,10), reviewPilotLabel(row), row.atc_callsign || row.flight_number, row.departure + " → " + row.arrival].join(" · ");
         picker.add(new Option(label + (issues.length ? " — " + issues.join("; ") : " — Reviewed"), row.id));
     }
     if (reviewCases.has(previous)) picker.value = previous;
     else openReview();
     table("reviewSummary", ["Flight / pilot", "Route", "UTC date", "Discrepancy or evidence needed", "Review"], [...reviewCases.values()].map(({row, issues}) => [
-        esc(row.atc_callsign || row.flight_number) + "<br>" + esc(row.pilot_code),
+        esc(row.atc_callsign || row.flight_number) + "<br>" + esc(reviewPilotLabel(row)),
         esc(row.departure) + " → " + esc(row.arrival),
         date(row.completed || Date.parse(row.created_at)).slice(0,10),
         issues.length ? esc(issues.join(" · ")) : "Reviewed",
@@ -63,6 +68,7 @@ function openReview() {
     openedReview = null;
     if (!item) return;
     const {row, issues, history} = item;
+    el("reviewPilot").textContent = "Pilot · " + reviewPilotLabel(row);
     openedReview = {id:row.id, version:history.at(-1)?.id ?? null};
     el("reviewIssues").textContent = issues.join(" · ") || "Management review recorded.";
     el("reviewCid").value = row.cid || reviewPilots.get(row.pilot_id) || "";
