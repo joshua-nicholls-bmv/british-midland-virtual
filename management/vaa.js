@@ -134,7 +134,7 @@ async function refresh() {
         const [reports,pilots,sessions,reviews]=await Promise.all([
             pages("pireps",fields), pages("pilots","id,pilot_id,nickname,vatsim_cid"),
             pages("acars_vatsim_sessions","id,owner_id,verified_cid,network_callsign,verified_seconds"),
-            pages("vaa_management_reviews","id,pirep_id,decision,notes,evidence,reviewer_name,recorded_at")
+            pages("vaa_management_reviews","id,pirep_id,decision,notes,evidence,reviewer_name,recorded_at,resolution_snapshot")
         ]);
         reviewSessions=new Map(sessions.map(s=>[s.id,s]));
         reviewPilots=new Map(pilots.map(p=>[p.id,p.vatsim_cid]));

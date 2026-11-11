@@ -35,32 +35,55 @@ function reviewIssues(row) {
     return issues;
 }
 
+function discrepancySnapshot(row, issues, session, profileCid) {
+    return {issues, facts: [
+        row.pilot_id, profileCid, row.cid, row.atc_provider, row.atc_callsign, row.actual_callsign,
+        row.flight_number, row.departure, row.arrival, row.registration, row.flight_purpose,
+        row.status, row.requires_review, row.vatsim_verified, row.vatsim_verification_status,
+        row.vatsim_participation_seconds, row.vatsim_session_id, session?.owner_id,
+        session?.verified_cid, session?.network_callsign, session?.verified_seconds,
+        ...[row.off_blocks, row.takeoff, row.landing, row.stand].map(value => Date.parse(value))
+    ]};
+}
+
 function renderReviews(windowData) {
     const picker = el("reviewFlight");
     const previous = picker.value;
     reviewCases = new Map();
     picker.replaceChildren(new Option("Choose a flight", ""));
+    let activeCount = 0;
+    let inactiveCount = 0;
     const rows = assessed.filter(r => (r.completed >= windowData.from && r.completed < windowData.until) ||
         (!Number.isFinite(r.completed) && Date.parse(r.created_at) >= windowData.from && Date.parse(r.created_at) < windowData.until));
     for (const row of rows.reverse()) {
         const issues = reviewIssues(row);
         const history = reviewHistory.get(row.id) || [];
         if (!issues.length && !history.length && row.vatsim_verification_status !== "management_rejected") continue;
-        const outcome = row.vatsim_verification_status === "management_rejected" ? "Rejected for VAA credit" : "Reviewed";
-        reviewCases.set(row.id, {row, issues, history, outcome});
+        const details = discrepancySnapshot(row, issues, reviewSessions.get(row.vatsim_session_id), reviewPilots.get(row.pilot_id));
+        const lastDecision = history.findLast(h => h.decision !== "note");
+        const closed = lastDecision?.decision === "inactive"
+            && JSON.stringify(lastDecision.resolution_snapshot?.issues) === JSON.stringify(details.issues)
+            && JSON.stringify(lastDecision.resolution_snapshot?.facts) === JSON.stringify(details.facts);
+        const active = issues.length > 0 && !closed;
+        if (active) activeCount++;
+        else inactiveCount++;
+        if (!active && !el("includeInactive").checked) continue;
+        let outcome = row.vatsim_verification_status === "management_rejected" ? "Rejected for VAA credit" : "Reviewed";
+        if (!active) outcome = closed ? "Inactive · " + lastDecision.notes : "Inactive · " + outcome;
+        reviewCases.set(row.id, {row, issues, history, outcome, active, details});
         const label = [date(row.completed || Date.parse(row.created_at)).slice(0,10), reviewPilotLabel(row), row.atc_callsign || row.flight_number, row.departure + " → " + row.arrival].join(" · ");
-        picker.add(new Option(label + (issues.length ? " — " + issues.join("; ") : " — " + outcome), row.id));
+        picker.add(new Option(label + " — " + (active ? issues.join("; ") : outcome), row.id));
     }
     if (reviewCases.has(previous)) picker.value = previous;
     else openReview();
-    table("reviewSummary", ["Flight / pilot", "Route", "UTC date", "Discrepancy or evidence needed", "Review"], [...reviewCases.values()].map(({row, issues, outcome}) => [
+    table("reviewSummary", ["Flight / pilot", "Route", "UTC date", "Discrepancy or evidence needed", "Review"], [...reviewCases.values()].map(({row, issues, outcome, active}) => [
         esc(row.atc_callsign || row.flight_number) + "<br>" + esc(reviewPilotLabel(row)),
         esc(row.departure) + " → " + esc(row.arrival),
         date(row.completed || Date.parse(row.created_at)).slice(0,10),
-        issues.length ? esc(issues.join(" · ")) : outcome,
+        esc(active ? issues.join(" · ") : outcome),
         '<button type="button" data-flight="' + esc(row.id) + '">Open review</button>'
     ]));
-    el("reviewCount").textContent = [...reviewCases.values()].filter(item => item.issues.length).length + " flights with discrepancies in this window.";
+    el("reviewCount").textContent = activeCount + " active · " + inactiveCount + " inactive in this window.";
 }
 
 function openReview() {
@@ -71,8 +94,9 @@ function openReview() {
     if (!item) return;
     const {row, issues, history} = item;
     el("reviewPilot").textContent = "Pilot · " + reviewPilotLabel(row);
-    openedReview = {id:row.id, version:history.at(-1)?.id ?? null};
-    el("reviewIssues").textContent = issues.join(" · ") || item.outcome;
+    openedReview = {id:row.id, version:history.at(-1)?.id ?? null, details:item.details};
+    el("reviewIssues").textContent = item.active ? issues.join(" · ") : item.outcome;
+    el("reviewInactive").disabled = !item.active;
     el("reviewCid").value = row.cid || reviewPilots.get(row.pilot_id) || "";
     el("reviewCall").value = row.actual_callsign || row.atc_callsign || row.flight_number || "";
     el("reviewSource").value = row.external_evidence?.source || row.legacy_review?.source || "";
@@ -83,6 +107,9 @@ function openReview() {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
+el("includeInactive").addEventListener("change", () => {
+    if (snapshot) renderReviews(VAA.period(assessed, snapshot, selected));
+});
 el("reviewSummary").addEventListener("click", event => {
     const button = event.target.closest("button[data-flight]");
     if (!button || reviewSaving) return;
@@ -107,11 +134,13 @@ el("reviewForm").addEventListener("submit", async event => {
     el("reviewInputs").disabled = true;
     el("reviewFlight").disabled = true;
     try {
-        const {error} = await client.rpc("record_vaa_review", {flight:openedReview.id, action, note, source, confirmed_cid:cid, confirmed_callsign:call, last_review:openedReview.version});
+        const {error} = action === "inactive"
+            ? await client.rpc("close_vaa_discrepancy", {flight:openedReview.id, note, snapshot:openedReview.details, last_review:openedReview.version})
+            : await client.rpc("record_vaa_review", {flight:openedReview.id, action, note, source, confirmed_cid:cid, confirmed_callsign:call, last_review:openedReview.version});
         if (error) throw error;
         await refresh();
         openReview();
-        el("reviewStatus").textContent = {verified:"VAA credit approved.", rejected:"VAA credit rejected.", note:"Management note saved."}[action];
+        el("reviewStatus").textContent = {inactive:"Discrepancy marked inactive.", verified:"VAA credit approved.", rejected:"VAA credit rejected.", note:"Management note saved."}[action];
     } catch (error) {
         el("reviewStatus").textContent = error.message || "Save failed. Refresh and retry.";
     } finally {
