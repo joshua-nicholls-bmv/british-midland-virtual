@@ -52,7 +52,7 @@
 <fieldset id="reviewInputs"><legend>Management review</legend>
 <div class="vaa-controls"><label>Confirmed VATSIM CID<input id="reviewCid" inputmode="numeric" maxlength="9"></label><label>Observed callsign<input id="reviewCall" maxlength="10"></label></div>
 <label>Evidence link or record reference<input id="reviewSource" maxlength="1000"></label>
-<label>Management notes (give a reason when rejecting)<textarea id="reviewNote" required maxlength="2000" rows="3"></textarea></label>
+<label>StatSim block minutes (optional, if evidenced)<input id="reviewBlockMinutes" type="number" min="1" step="1"></label><label>Management notes (give a reason when rejecting)<textarea id="reviewNote" required maxlength="2000" rows="3"></textarea></label>
 <div class="vaa-controls"><button type="submit" value="note">Save note</button><button type="submit" id="reviewVerify" value="verified">Approve VAA credit</button><button type="submit" id="reviewReject" value="rejected">Reject VAA credit</button><button type="submit" id="reviewInactive" value="inactive">Mark inactive</button></div>
 <small>Verification saves the confirmed CID, callsign and VATSIM provider on this report. Your name, evidence and notes are recorded. ACARS observations are preserved.</small>
 </fieldset></form><p id="reviewStatus" role="status"></p></section>
@@ -60,7 +60,7 @@
 </footer>
     </main>
 </div>
-<script src="/management/vaa-core.js?v=4"></script><script src="/management/vaa-review.js?v=4"></script><script src="/management/vaa.js?v=5"></script>
+<script src="/management/vaa-core.js?v=5"></script><script src="/management/vaa-review.js?v=5"></script><script src="/management/vaa.js?v=6"></script>
 </body>
 </html>
 

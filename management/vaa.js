@@ -4,7 +4,7 @@ const el=id=>document.getElementById(id);
 const esc=value=>String(value??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const date=value=>new Date(value).toISOString().replace("T"," ").slice(0,19)+" UTC";
 let assessed=[],snapshot=0,selected=0,busy=false,ready=false,timer;
-const fields="id,pilot_id,flight_number,flight_purpose,registration,atc_callsign,departure,arrival,off_blocks,takeoff,landing,stand,status,requires_review,created_at,atc_provider,vatsim_id,vatsim_session_id,vatsim_verified,vatsim_network_callsign,vatsim_participation_seconds,vatsim_verification_status,external_evidence:debrief_data->vatsim_external_verification,legacy_review:debrief_data->vaa_management_review";
+const fields="id,pilot_id,flight_number,flight_purpose,registration,atc_callsign,departure,arrival,off_blocks,takeoff,landing,stand,status,requires_review,created_at,atc_provider,vatsim_id,vatsim_session_id,vatsim_verified,vatsim_network_callsign,vatsim_participation_seconds,vatsim_verification_status,statsim_track:debrief_data->statsim_track,external_evidence:debrief_data->vatsim_external_verification,legacy_review:debrief_data->vaa_management_review";
 async function pages(table,columns) {
     const output=[];
     for(let offset=0;;offset+=500) {
@@ -43,6 +43,28 @@ function render() {
         Array.from({length:6},(_,i)=>VAA.period(assessed,snapshot,i)).map(p=>[`${date(p.from).slice(0,10)} → ${date(p.until).slice(0,10)}`,p.flights,p.pilots,p.bma,p.bmr,`<progress max="50" value="${Math.min(p.flights,50)}" aria-label="${p.flights} of 50 flights"></progress>`]));
     renderEvidence();
     renderReviews(w);
+}
+
+function flightEvidence(row) {
+    const latest = (reviewHistory.get(row.id) || []).findLast(entry => entry.decision === "verified");
+    const source = latest?.evidence || row.external_evidence?.source || row.legacy_review?.source || "";
+    const url = /^https:\/\/(?:www\.)?statsim\.net\/flights\/detail\/\d+\/?$/.test(source) ? source : "";
+    const track = row.statsim_track;
+    const blockSeconds = url && track?.source === url ? Number(track.estimated_block_seconds) || 0 : 0;
+    const observed = Number(reviewSessions.get(row.vatsim_session_id)?.verified_seconds) || 0;
+    return {url, blockSeconds, observed};
+}
+
+function evidenceDescription(row) {
+    const {url, blockSeconds, observed} = row.displayEvidence;
+    const manual = row.is_historical_manual;
+    const parts = [manual ? "Verified via evidence" : esc(row.vatsim_verification_status || "Not recorded")];
+    if (manual && url) parts.push('<a target="_blank" rel="noopener noreferrer" href="' + esc(url) + '">StatSim flight ↗</a>');
+    if (observed > 0) parts.push(observed + "s observed by ACARS");
+    else if (manual && blockSeconds > 0) parts.push("Estimated StatSim block time · " + Math.round(blockSeconds / 60) + " min");
+    else if (manual && url) parts.push("StatSim block time unavailable");
+    else if (!manual) parts.push("0s observed by ACARS");
+    return parts.join("<br>");
 }
 
 function renderEvidence() {
@@ -116,11 +138,7 @@ function renderEvidence() {
                 r.qualifies
                     ? "Qualifying under dashboard rules"
                     : esc(r.reasons.join("; "))
-            }</span><br>${
-                Number(r.vatsim_participation_seconds) || 0
-            }s observed · Last check: ${
-                esc(r.vatsim_verification_status || "Not recorded")
-            }`
+            }</span><br>${evidenceDescription(r)}`
         ])
     );
 }
@@ -144,6 +162,7 @@ async function refresh() {
             reviewHistory.get(entry.pirep_id).push(entry);
         }
         snapshot=Date.now();assessed=VAA.assess(reports,new Map(pilots.map(p=>[p.id,p])),snapshot);
+        for (const row of assessed) row.displayEvidence = flightEvidence(row);
         ready=true;busy=false;render();el("loadStatus").textContent=`Updated ${date(snapshot)} · Auto-refresh every 60 seconds while visible`;
     } catch(error) {
         console.error("VAA load failed",error);

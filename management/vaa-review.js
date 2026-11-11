@@ -29,7 +29,7 @@ function reviewIssues(row) {
         if (session?.network_callsign && session.network_callsign !== row.actual_callsign) issues.push("Session callsign differs from the PIREP");
     }
     if (row.is_historical_manual && !history.some(h => h.decision === "verified") && !row.external_evidence?.source && !row.legacy_review?.source)
-        issues.push("Historical manual verification needs an evidence reference");
+        issues.push("Evidence verification needs a flight reference");
     if (row.vatsim_verified && Date.parse(row.landing)-Date.parse(row.takeoff) < 60000)
         issues.push("Less than one minute airborne. Check for an incomplete sector");
     return issues;
@@ -99,7 +99,7 @@ function openReview() {
     el("reviewInactive").disabled = !item.active;
     el("reviewCid").value = row.cid || reviewPilots.get(row.pilot_id) || "";
     el("reviewCall").value = row.actual_callsign || row.atc_callsign || row.flight_number || "";
-    el("reviewSource").value = row.external_evidence?.source || row.legacy_review?.source || "";
+    el("reviewSource").value = history.findLast(h => h.decision === "verified")?.evidence || row.external_evidence?.source || row.legacy_review?.source || "";
     el("reviewHistory").textContent = history.map(h => date(h.recorded_at) + " · " + h.reviewer_name + " · " + h.decision + "\n" + h.notes + (h.evidence ? "\n" + h.evidence : "")).join("\n\n");
     const rejected = row.vatsim_verification_status === "management_rejected";
     el("reviewReject").disabled = rejected;
@@ -134,9 +134,16 @@ el("reviewForm").addEventListener("submit", async event => {
     el("reviewInputs").disabled = true;
     el("reviewFlight").disabled = true;
     try {
-        const {error} = action === "inactive"
-            ? await client.rpc("close_vaa_discrepancy", {flight:openedReview.id, note, snapshot:openedReview.details, last_review:openedReview.version})
-            : await client.rpc("record_vaa_review", {flight:openedReview.id, action, note, source, confirmed_cid:cid, confirmed_callsign:call, last_review:openedReview.version});
+        const args = {flight:openedReview.id, note, source, confirmed_cid:cid, confirmed_callsign:call, last_review:openedReview.version};
+        let result;
+        if (action === "inactive") {
+            result = await client.rpc("close_vaa_discrepancy", {flight:openedReview.id, note, snapshot:openedReview.details, last_review:openedReview.version});
+        } else if (action === "verified" && el("reviewBlockMinutes").value) {
+            result = await client.rpc("verify_vaa_with_statsim_time", {...args, block_minutes:Number(el("reviewBlockMinutes").value)});
+        } else {
+            result = await client.rpc("record_vaa_review", {...args, action});
+        }
+        const {error} = result;
         if (error) throw error;
         await refresh();
         openReview();

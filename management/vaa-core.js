@@ -292,7 +292,7 @@
             ]++;
 
             entry.seconds +=
-                Number(row.vatsim_participation_seconds) || 0;
+                row.displayEvidence?.observed ?? (Number(row.vatsim_participation_seconds) || 0);
 
             if (row.is_historical_manual) {
                 entry.manual++;
@@ -351,7 +351,9 @@
             "window_start_inclusive_utc",
             "window_end_exclusive_utc",
             "exported_utc",
-            "rules_version"
+            "rules_version",
+            "statsim_flight_url",
+            "estimated_statsim_block_seconds"
         ];
 
         const rows = window.qualifying.map(r => [
@@ -370,17 +372,19 @@
             r.stand,
             r.status,
             r.vatsim_verification_status,
-            r.vatsim_participation_seconds,
+            r.displayEvidence?.observed ?? r.vatsim_participation_seconds,
             r.verification_method,
 
             r.is_historical_manual
-                ? "Retrospective management verification; no server-observed duration"
+                ? "Verified via evidence"
                 : "BMAcars server observations; not full-flight coverage",
 
             new Date(window.from).toISOString(),
             new Date(window.until).toISOString(),
             new Date(exportedAt).toISOString(),
-            RULES_VERSION
+            RULES_VERSION,
+            r.displayEvidence?.url || "",
+            r.displayEvidence?.blockSeconds || ""
         ]);
 
         return "\ufeff" +
