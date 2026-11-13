@@ -45,7 +45,7 @@ async function discord(path,method='GET',body=null) {
 }
 export function jobMessage(job,announce=false) {
  const open=job.status==='OPEN';
- const flight=job.flight_number?`BMA${job.flight_number}T`:'Assigned when claimed';
+ const flight=job.flight_number?`BMA${job.flight_number}${job.flight_suffix || 'T'}`:'Assigned when claimed';
  return {
   content:announce?`<@&${ROLE}> Technical Operations dispatch available.`:'Technical Operations dispatch',
   allowed_mentions:announce?{parse:[],roles:[ROLE]}:{parse:[]},
@@ -55,8 +55,8 @@ export function jobMessage(job,announce=false) {
    fields:[{name:'STATUS',value:job.status,inline:true},{name:'SUPPORT AIRCRAFT',value:job.support_registration,inline:true},{name:'GROUNDED AIRCRAFT',value:job.grounded_registration,inline:true},
     {name:'PILOT',value:job.claimed_pilot_id || 'Unassigned',inline:true},{name:'FLIGHT NUMBER',value:flight,inline:true},
     {name:'JOB REFERENCE',value:job.id,inline:false}],
-   footer:{text:'British Midland Virtual · Tech Ops role and linked active pilot required',icon_url:LOGO},timestamp:job.created_at}],
-  components:[{type:1,components:[{type:2,style:open?1:2,label:open?'Claim Job':job.status==='CLAIMED'?'Claimed':job.status==='COMPLETED'?'Completed':'Cancelled',custom_id:`techops:claim:${job.id}`,disabled:!open}]}]
+   footer:{text:'Select Tech Ops in ACARS to claim a job.',icon_url:LOGO},timestamp:job.created_at}],
+  components:[]
  };
 }
 async function syncJob(id) {
@@ -74,20 +74,31 @@ export async function verifySignature(request,raw,keyHex=PUBLIC_KEY) {
   return await crypto.subtle.verify('Ed25519',key,bytes(signature),new TextEncoder().encode(timestamp+raw));
  } catch { return false; }
 }
-async function processClaim(interaction,id) {
- let notice;
- try {
-  // Fresh role membership supplements Discord's signed interaction snapshot.
-  const member=await discord(`/guilds/${GUILD}/members/${interaction.member.user.id}`);
-  if(!member.roles?.includes(ROLE)) throw new Error('The Technical Operations role is required.');
-  const job=await rpc('tech_ops_claim_job',{p_job_id:id,p_discord_user_id:interaction.member.user.id,p_message_id:interaction.message.id});
-  notice=`You have claimed ${job.departure} → ${job.destination} in ${job.support_registration}. Your flight number is **BMA${job.flight_number}T**. The grounded aircraft remains on hold until management releases it.`;
-  try { await syncJob(id); }
-  catch { notice+=' Your claim is saved, but the channel message could not be updated. Ask management to use Sync Discord.'; }
- } catch(error) { notice=error.message || 'Unable to claim this job. Contact management.'; }
- try {
-  await request(`${API}/webhooks/${APP}/${interaction.token}/messages/@original`,{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({content:notice,allowed_mentions:{parse:[]}})});
- } catch { console.error('Unable to deliver private Tech Ops claim result. Check job state in management.'); }
+async function importTechRoster(token) {
+ // The management-only RPC authenticates the caller before any Discord lookup.
+ await rpc('acars_tech_roster',{},token);
+ const key=secret('SUPABASE_SERVICE_ROLE_KEY'),base=secret('SUPABASE_URL')+'/rest/v1/';
+ const headers={apikey:key,Authorization:'Bearer '+key};
+ const prior=await request(base+'tech_ops_roster_import?select=singleton&limit=1',{headers});
+ if(prior.length)return 0;
+ const pilots=await request(base+'pilots?select=id,pilot_id,discord_user_id&status=eq.Active&login_enabled=eq.true',{headers});
+ const links=await request(base+'tech_ops_pilot_links?select=pilot_id,discord_user_id',{headers});
+ const confirmed=[];
+ const groups=new Map();
+ for(const p of pilots){
+ const linked=links.find(l=>l.pilot_id===p.pilot_id)?.discord_user_id;
+ if(linked && p.discord_user_id && linked!==p.discord_user_id)continue;
+ const id=p.discord_user_id||linked;
+ if(/^\d{17,20}$/.test(id))groups.set(id,[...(groups.get(id)||[]),p]);
+ }
+ for(const [id,accounts] of groups){
+ if(accounts.length!==1)continue;
+ const response=await fetch(API+'/guilds/'+GUILD+'/members/'+id,{headers:{Authorization:'Bot '+secret('DISCORD_BOT_TOKEN')},signal:AbortSignal.timeout(10000)});
+ if(response.status===404)continue;
+ if(!response.ok)throw new Error('Discord membership check unavailable. Retry the import.');
+ if((await response.json()).roles?.includes(ROLE))confirmed.push(accounts[0].id);
+ }
+ return await rpc('acars_finish_tech_import',{confirmed});
 }
 async function manage(request) {
  const origin=request.headers.get('Origin');
@@ -99,8 +110,9 @@ async function manage(request) {
   const token=(request.headers.get('Authorization') || '').replace(/^Bearer /,'');
   if(!token) return json({error:'Sign in to management'},401,cors);
   await requestUser(token);
-  await rpc('bmv_fleet_manager_identity',{},token);
   const body=await request.json();
+  if(body.action==='import_tech_roster') return json({added:await importTechRoster(token)},200,cors);
+  await rpc('bmv_fleet_manager_identity',{},token);
   if(!UUID.test(body.job_id || '')) return json({error:'Invalid job ID'},400,cors);
   if(body.action==='publish') {
    const job=await rpc('tech_ops_begin_publish',{p_job_id:body.job_id});
@@ -132,11 +144,6 @@ export async function handler(request,verify=verifySignature) {
  }
  if(interaction.guild_id!==GUILD || interaction.channel_id!==CHANNEL) return ephemeral('Use the official Tech Ops dispatch channel.');
  if(interaction.type!==3 || interaction.data?.component_type!==2) return ephemeral('Unsupported interaction.');
- if(!interaction.member?.roles?.includes(ROLE) || !interaction.member?.user?.id) return ephemeral('Only pilots with the Technical Operations role can claim jobs.');
- const id=interaction.data?.custom_id?.replace(/^techops:claim:/,'');
- if(!interaction.data?.custom_id?.startsWith('techops:claim:') || !UUID.test(id || '') || !interaction.message?.id) return ephemeral('Invalid job button.');
- // Acknowledge within Discord's 3-second deadline, then perform network/DB work.
- EdgeRuntime.waitUntil(processClaim(interaction,id));
- return json({type:5,data:{flags:64}});
+ return ephemeral('Open ACARS and select Tech Ops under Flight purpose to claim a job.');
 }
 Deno.serve(request=>handler(request));
