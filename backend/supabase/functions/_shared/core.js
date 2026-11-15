@@ -4,7 +4,7 @@ export const hashToken = token => createHash('sha256').update(token).digest('hex
 export const newToken = () => randomBytes(32).toString('base64url');
 export function pilotId(value) {
   const id = String(value || '').trim().toUpperCase();
-  if (!/^BMA\d{4}$/.test(id)) throw new Error('Enter a BMA number such as BMA0001.');
+  if (!/^(BMA|ECV)\d{4}$/.test(id)) throw new Error('Enter a pilot number such as BMA0001 or ECV0001.');
   return id;
 }
 export const standardPassword = id => `${pilotId(id)}!`;

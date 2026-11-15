@@ -1,5 +1,6 @@
 import {cors,readBody,validateApplication,verifyTurnstile,response,failure,HttpError} from '../_shared/website-security.js';
 import {rateLimit,submitApplication} from '../_shared/website-db.js';
+import {applicationAirline} from '../_shared/application-routing.js';
 Deno.serve(async req=>{
  let headers={};
  try{
@@ -9,11 +10,11 @@ Deno.serve(async req=>{
   if(req.method==='GET')return response({enabled,sitekey:enabled?sitekey:null},200,headers);
   if(req.method!=='POST')throw new HttpError(405,'Method not allowed.');
   if(!enabled)throw new HttpError(503,'Website applications are not open yet. Please check back shortly.');
-  const a=validateApplication(await readBody(req));
+  const a={...validateApplication(await readBody(req)),airline:applicationAirline(req.headers.get('origin'))};
   // A global ceiling cannot be bypassed with forged proxy headers; per-identity ceilings add protection.
   await rateLimit('global',secret!,100);
   await rateLimit('discord:'+a.discord_id,secret!,5);
-  await verifyTurnstile(a.turnstile_token,secret!);
+  await verifyTurnstile(a.turnstile_token,secret!,fetch,req.headers.get('origin'));
   await submitApplication(a);
   // Identical response for duplicates: never disclose accounts, status, or credentials to the public.
   return response({message:'Thank you. Your application has been received for review. If you have already applied, your existing application remains in place. Approved pilots receive a welcome DM in Discord.'},202,headers);

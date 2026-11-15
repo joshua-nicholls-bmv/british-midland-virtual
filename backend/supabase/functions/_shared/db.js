@@ -35,7 +35,7 @@ export async function decide(id,actor,approve,reason,client=null) {
     if(a.state!=='pending') return a;
     let pilot=a.pilot_id;
     if(approve && a.kind==='new') {
-      const {rows:[allocated]}=await c.query('select bmv_registration.allocate_pilot_id() as pilot_id');
+      const {rows:[allocated]}=await c.query(a.airline==='ECV'?'select bmv_registration.allocate_ecv_pilot_id() as pilot_id':'select bmv_registration.allocate_pilot_id() as pilot_id');
       pilot=allocated.pilot_id;
     }
     const {rows:[result]}=await c.query('update bmv_registration.applications set state=$2,pilot_id=$3,reviewed_by=$4,reason=$5,reviewed_at=now() where id=$1 returning *',[id,approve?'approved':'rejected',pilot,actor,reason]);

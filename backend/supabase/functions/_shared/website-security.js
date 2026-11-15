@@ -1,4 +1,5 @@
-export const ORIGINS = ['https://britishmidlandvirtual.co.uk','https://www.britishmidlandvirtual.co.uk'];
+import {APPLICATION_ORIGINS} from './application-routing.js';
+export const ORIGINS = APPLICATION_ORIGINS;
 export const PRIVACY_VERSION = '2026-11-01';
 export class HttpError extends Error { constructor(status,message){super(message);this.status=status;} }
 export function cors(req){
@@ -26,11 +27,11 @@ export function validateApplication(b){
  const turnstile_token=text('turnstile_token',2048);
  return {nickname,discord_id,vatsim_cid,simbrief_id,turnstile_token};
 }
-export async function verifyTurnstile(token,secret,fetcher=fetch){
+export async function verifyTurnstile(token,secret,fetcher=fetch,expectedOrigin=null){
  const r=await fetcher('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({secret,response:token}),signal:AbortSignal.timeout(10000)});
  if(!r.ok)throw new HttpError(503,'Verification unavailable. Please try again.');
  const v=await r.json();
- if(v.success!==true||v.action!=='pilot_join'||!ORIGINS.some(o=>new URL(o).hostname===v.hostname))throw new HttpError(400,'Please complete a fresh security check.');
+ if(v.success!==true||v.action!=='pilot_join'||!ORIGINS.some(o=>new URL(o).hostname===v.hostname)||(expectedOrigin&&new URL(expectedOrigin).hostname!==v.hostname))throw new HttpError(400,'Please complete a fresh security check.');
 }
 export function response(body,status=200,headers={}){return new Response(JSON.stringify(body),{status,headers:{'Content-Type':'application/json','Cache-Control':'no-store',...headers}});}
 export function failure(e,headers){return response({error:e instanceof HttpError?e.message:'Service unavailable. Please try again.'},e instanceof HttpError?e.status:503,headers);}

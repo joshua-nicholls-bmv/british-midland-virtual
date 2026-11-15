@@ -17,14 +17,14 @@ export async function submitApplication(a){
   const {rows}=await c.query(`select id from bmv_registration.applications where discord_id=$1 and (state<>'rejected' or created_at>now()-interval '24 hours') limit 1`,[a.discord_id]);
   if(rows.length)return;
   if((await c.query('select id from public.pilots where discord_user_id=$1 limit 1',[a.discord_id])).rows.length)return;
-  const {rows:[r]}=await c.query(`insert into bmv_registration.applications(discord_id,nickname,kind,vatsim_cid,simbrief_id,application_source,privacy_notice_version,privacy_acknowledged_at)
-   values($1,$2,'new',$3,$4,'website',$5,now()) returning id`,[a.discord_id,a.nickname,a.vatsim_cid,a.simbrief_id,PRIVACY_VERSION]);
-  await audit(c,r.id,'website','website_submitted',{privacy_notice_version:PRIVACY_VERSION,age_confirmed:true});
+  const {rows:[r]}=await c.query(`insert into bmv_registration.applications(discord_id,nickname,kind,vatsim_cid,simbrief_id,application_source,privacy_notice_version,privacy_acknowledged_at,airline)
+   values($1,$2,'new',$3,$4,'website',$5,now(),$6) returning id`,[a.discord_id,a.nickname,a.vatsim_cid,a.simbrief_id,PRIVACY_VERSION,a.airline]);
+  await audit(c,r.id,'website','website_submitted',{privacy_notice_version:PRIVACY_VERSION,age_confirmed:true,airline:a.airline});
   await audit(c,r.id,'website','application_alert_queued');
  });}catch(e){if(e.code!=='23505')throw e;}
 }
 export async function listApplications(before){
- return tx(async c=>(await c.query(`select a.id,a.nickname,a.discord_id,a.vatsim_cid,a.simbrief_id,a.state,a.pilot_id,a.reason,a.created_at,a.reviewed_at,a.privacy_notice_version,
+ return tx(async c=>(await c.query(`select a.id,a.airline,a.nickname,a.discord_id,a.vatsim_cid,a.simbrief_id,a.state,a.pilot_id,a.reason,a.created_at,a.reviewed_at,a.privacy_notice_version,
  (select e.event from bmv_registration.audit e where e.application_id=a.id and e.event in ('welcome_dm_sent','welcome_dm_unconfirmed','welcome_dm_attempted') order by e.created_at desc limit 1) as welcome_status
  from bmv_registration.applications a where a.application_source='website' and ($1::timestamptz is null or (a.created_at,a.id)<($1::timestamptz,$2::uuid)) order by a.created_at desc,a.id desc limit 51`,[before?.at||null,before?.id||null])).rows);
 }

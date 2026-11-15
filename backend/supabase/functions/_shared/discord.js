@@ -1,3 +1,4 @@
+import {applicationAlert} from './application-routing.js';
 import {pool,tx,audit,apply,decide,status,provision} from './db.js';
 import {pilotId,standardPassword,hasManagementRole} from './core.js';
 import {setting as env} from './settings.js';
@@ -122,7 +123,7 @@ export async function workWebsite(){
 }
 
 async function applicationAlerts(){
- const {rows}=await pool.query("select a.id,a.created_at from bmv_registration.applications a where a.application_source='website' and exists(select 1 from bmv_registration.audit e where e.application_id=a.id and e.event='application_alert_queued') and not exists(select 1 from bmv_registration.audit e where e.application_id=a.id and e.event='application_alert_attempted') order by a.created_at limit 3");
+ const {rows}=await pool.query("select a.id,a.airline,a.created_at from bmv_registration.applications a where a.application_source='website' and exists(select 1 from bmv_registration.audit e where e.application_id=a.id and e.event='application_alert_queued') and not exists(select 1 from bmv_registration.audit e where e.application_id=a.id and e.event='application_alert_attempted') order by a.created_at limit 3");
  for(const a of rows){
   const claimed=await tx(async c=>{
    await c.query('select pg_advisory_xact_lock(hashtextextended($1,4))',[a.id]);
@@ -131,11 +132,8 @@ async function applicationAlerts(){
   });
   if(!claimed)continue;
   try{
-   const m=await discord('channels/1526327360843026523/messages','POST',{
-    content:'🛫 **New pilot application**\n<@1302378693901160579> <@563049560159813643> — a new website application is ready for review.\n\n[Review applications](https://britishmidlandvirtual.co.uk/management/applications.html)',
-    allowed_mentions:{parse:[],users:['1302378693901160579','563049560159813643']},
-    nonce:('a'+a.id.replaceAll('-','')).slice(0,25),enforce_nonce:true
-   });
+   const alert=applicationAlert(a);
+   const m=await discord(`channels/${alert.channel}/messages`,'POST',alert.body);
    await tx(c=>audit(c,a.id,'bot','application_alert_sent',{message_id:m.id}));
   }catch(e){await tx(c=>audit(c,a.id,'bot','application_alert_unconfirmed',{status:Number.isInteger(e.status)?e.status:null}));}
  }
