@@ -838,3 +838,9 @@ body {
     }
 
 }
+.flying-insights .stat-card { min-width: 0; }
+.flying-insights .stat-card strong {
+    font-size: clamp(21px, 2vw, 29px);
+    letter-spacing: -0.6px;
+    overflow-wrap: anywhere;
+}

@@ -16,7 +16,7 @@
         rel="stylesheet"
     >
 
-    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="dashboard.css?v=2">
 
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <link rel="stylesheet" href="/management/navigation.css?v=1"><script src="/management/navigation.js?v=1" defer></script><link rel="stylesheet" href="/management/redesign.css?v=1"><script src="/management/redesign.js?v=1" defer></script></head>
@@ -243,6 +243,17 @@
 
             </section>
 
+
+            <section aria-labelledby="flyingInsightsHeading">
+                <h3 id="flyingInsightsHeading">Flying insights</h3>
+                <p>Last 30 days · submitted PIREPs · all Group pilots</p>
+                <div class="stats-grid flying-insights">
+                    <article class="stat-card"><span class="stat-label">FAVOURITE ROUTE</span><strong id="favouriteRoute" aria-live="polite">—</strong><small id="favouriteRouteDetail">Most flown direction</small></article>
+                    <article class="stat-card"><span class="stat-label">BUSIEST AIRCRAFT</span><strong id="busiestAircraft">—</strong><small id="busiestAircraftDetail">Most flown registration</small></article>
+                    <article class="stat-card"><span class="stat-label">MOST ACTIVE PILOT</span><strong id="mostActivePilot">—</strong><small id="mostActivePilotDetail">Most submitted flights</small></article>
+                    <article class="stat-card"><span class="stat-label">AVERAGE FLIGHT DURATION</span><strong id="averageFlightDuration">—</strong><small id="averageFlightDurationDetail">Recorded airborne time</small></article>
+                </div>
+            </section>
 
             <!-- =============================================
                  OPERATIONS CONTENT
@@ -475,7 +486,7 @@
          DASHBOARD APPLICATION
          ===================================================== -->
 
-    <script src="/management/dashboard.js?v=6"></script>
+    <script src="/management/dashboard.js?v=7"></script>
 
 </body>
 </html>
