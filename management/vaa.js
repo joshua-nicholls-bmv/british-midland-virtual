@@ -59,6 +59,7 @@ function evidenceDescription(row) {
     const {url, blockSeconds, observed} = row.displayEvidence;
     const manual = row.is_historical_manual;
     const parts = [manual ? "Verified via evidence" : esc(row.vatsim_verification_status || "Not recorded")];
+    if (row.management_approved) parts.push("Management approval · automatic discrepancies overridden");
     if (manual && url) parts.push('<a target="_blank" rel="noopener noreferrer" href="' + esc(url) + '">StatSim flight ↗</a>');
     if (observed > 0) parts.push(observed + "s observed by ACARS");
     else if (manual && blockSeconds > 0) parts.push("Estimated StatSim block time · " + Math.round(blockSeconds / 60) + " min");
@@ -161,7 +162,7 @@ async function refresh() {
             if(!reviewHistory.has(entry.pirep_id)) reviewHistory.set(entry.pirep_id,[]);
             reviewHistory.get(entry.pirep_id).push(entry);
         }
-        snapshot=Date.now();assessed=VAA.assess(reports,new Map(pilots.map(p=>[p.id,p])),snapshot);
+        snapshot=Date.now();assessed=VAA.assess(reports,new Map(pilots.map(p=>[p.id,p])),snapshot,reviews);
         for (const row of assessed) row.displayEvidence = flightEvidence(row);
         ready=true;busy=false;render();el("loadStatus").textContent=`Updated ${date(snapshot)} · Auto-refresh every 60 seconds while visible`;
     } catch(error) {

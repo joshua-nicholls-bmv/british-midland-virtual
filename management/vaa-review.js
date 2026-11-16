@@ -13,7 +13,7 @@ function reviewPilotLabel(row) {
 }
 
 function reviewIssues(row) {
-    if (row.vatsim_verification_status === "management_rejected") return [];
+    if (row.management_approved || row.vatsim_verification_status === "management_rejected") return [];
     const session = reviewSessions.get(row.vatsim_session_id);
     const pilotCid = reviewPilots.get(row.pilot_id);
     const history = reviewHistory.get(row.id) || [];
@@ -54,7 +54,7 @@ function renderReviews(windowData) {
     let activeCount = 0;
     let inactiveCount = 0;
     const rows = assessed.filter(r => (r.completed >= windowData.from && r.completed < windowData.until) ||
-        (!Number.isFinite(r.completed) && Date.parse(r.created_at) >= windowData.from && Date.parse(r.created_at) < windowData.until));
+        ((!Number.isFinite(r.completed) || r.reasons.length) && Date.parse(r.created_at) >= windowData.from && Date.parse(r.created_at) < windowData.until));
     for (const row of rows.reverse()) {
         const issues = reviewIssues(row);
         const history = reviewHistory.get(row.id) || [];
@@ -68,7 +68,7 @@ function renderReviews(windowData) {
         if (active) activeCount++;
         else inactiveCount++;
         if (!active && !el("includeInactive").checked) continue;
-        let outcome = row.vatsim_verification_status === "management_rejected" ? "Rejected for VAA credit" : "Reviewed";
+        let outcome = row.management_approved ? "Approved via evidence by management" : row.vatsim_verification_status === "management_rejected" ? "Rejected for VAA credit" : "Reviewed";
         if (!active) outcome = closed ? "Inactive · " + lastDecision.notes : "Inactive · " + outcome;
         reviewCases.set(row.id, {row, issues, history, outcome, active, details});
         const label = [date(row.completed || Date.parse(row.created_at)).slice(0,10), reviewPilotLabel(row), row.atc_callsign || row.flight_number, row.departure + " → " + row.arrival].join(" · ");
@@ -100,10 +100,10 @@ function openReview() {
     el("reviewCid").value = row.cid || reviewPilots.get(row.pilot_id) || "";
     el("reviewCall").value = row.actual_callsign || row.atc_callsign || row.flight_number || "";
     el("reviewSource").value = history.findLast(h => h.decision === "verified")?.evidence || row.external_evidence?.source || row.legacy_review?.source || "";
-    el("reviewHistory").textContent = history.map(h => date(h.recorded_at) + " · " + h.reviewer_name + " · " + h.decision + "\n" + h.notes + (h.evidence ? "\n" + h.evidence : "")).join("\n\n");
-    const rejected = row.vatsim_verification_status === "management_rejected";
-    el("reviewReject").disabled = rejected;
-    el("reviewVerify").disabled = (!issues.length && !rejected) || row.reasons.some(reason => /duplicate|timestamps|club|outstanding|status not eligible|missing ICAO|pilot record/i.test(reason));
+    el("reviewHistory").textContent = history.map(h => date(h.recorded_at) + " · " + h.reviewer_name + " · " + h.decision + "\n" + h.notes + (h.resolution_snapshot?.kind === "management_override_v1" ? "\nReviewed discrepancies: " + (h.resolution_snapshot.issues || []).join("; ") : "") + (h.evidence ? "\n" + h.evidence : "")).join("\n\n");
+    el("reviewReject").disabled = false;
+    el("reviewVerify").disabled = false;
+    el("reviewCompleted").value = Number.isFinite(row.completed) ? new Date(row.completed).toISOString().slice(0,19) : "";
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -126,8 +126,10 @@ el("reviewForm").addEventListener("submit", async event => {
     const source = el("reviewSource").value.trim();
     const cid = el("reviewCid").value.trim();
     const call = el("reviewCall").value.trim().toUpperCase();
-    if (action === "verified" && (!source || !/^[1-9]\d{5,8}$/.test(cid) || !/^(BMA|BMR)[A-Z0-9]{1,7}$/.test(call))) {
-        el("reviewStatus").textContent = "Enter the independent evidence reference, CID and observed BMA/BMR callsign.";
+    const completion = el("reviewCompleted").value;
+    const completionMs = completion ? Date.parse(completion + "Z") : NaN;
+    if (action === "verified" && (!source || !/^[1-9]\d{5,8}$/.test(cid) || !/^[A-Z0-9]{2,10}$/.test(call) || !Number.isFinite(completionMs) || completionMs > Date.now())) {
+        el("reviewStatus").textContent = "Enter independent evidence, the confirmed CID/callsign and the evidenced completion time in UTC.";
         return;
     }
     reviewSaving = true;
@@ -138,8 +140,11 @@ el("reviewForm").addEventListener("submit", async event => {
         let result;
         if (action === "inactive") {
             result = await client.rpc("close_vaa_discrepancy", {flight:openedReview.id, note, snapshot:openedReview.details, last_review:openedReview.version});
-        } else if (action === "verified" && el("reviewBlockMinutes").value) {
-            result = await client.rpc("verify_vaa_with_statsim_time", {...args, block_minutes:Number(el("reviewBlockMinutes").value)});
+        } else if (action === "verified" || action === "rejected") {
+            result = await client.rpc("review_vaa_discrepancy", {...args, action,
+                completed_at:action === "verified" ? new Date(completionMs).toISOString() : null,
+                block_minutes:action === "verified" && el("reviewBlockMinutes").value ? Number(el("reviewBlockMinutes").value) : null,
+                discrepancies:reviewCases.get(openedReview.id)?.issues || []});
         } else {
             result = await client.rpc("record_vaa_review", {...args, action});
         }

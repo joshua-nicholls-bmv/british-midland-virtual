@@ -7,7 +7,7 @@
     "use strict";
 
     const DAY = 86400000;
-    const RULES_VERSION = "3";
+    const RULES_VERSION = "4";
 
     const clean = value => String(value ?? "").trim();
     const upper = value => clean(value).toUpperCase();
@@ -44,7 +44,14 @@
         return "unverified";
     }
 
-    function assess(rows, pilots, now) {
+    function assess(rows, pilots, now, reviews = []) {
+        // Decisions come from the manager-only audit table, never pilot-editable report JSON.
+        const decisions = new Map();
+        for (const review of reviews) {
+            if (!["verified", "rejected"].includes(review.decision)) continue;
+            const previous = decisions.get(review.pirep_id);
+            if (!previous || BigInt(review.id) > BigInt(previous.id)) decisions.set(review.pirep_id, review);
+        }
         const seenIds = new Set();
         const sessions = new Set();
         const flights = new Set();
@@ -204,6 +211,13 @@
                     }
                 }
 
+                const decision = decisions.get(row.id);
+                const approved = decision?.decision === "verified" && decision.resolution_snapshot?.kind === "management_override_v1"
+                    && Boolean(clean(decision.evidence)) && Boolean(clean(decision.notes))
+                    && Number.isFinite(time(decision.resolution_snapshot.completed_at)) && time(decision.resolution_snapshot.completed_at) <= now;
+                const rejected = decision?.decision === "rejected";
+                const automaticReasons = [...new Set([...reasons, ...(approved ? decision.resolution_snapshot.issues || [] : [])])];
+                const effectiveReasons = rejected ? ["VAA credit rejected by management"] : approved ? [] : reasons;
                 return {
                     ...row,
                     pilot_code:
@@ -212,11 +226,15 @@
                         pilot?.nickname || "—",
                     cid: cid(row.vatsim_id),
                     actual_callsign: actual,
-                    completed,
+                    completed: approved ? time(decision.resolution_snapshot.completed_at) : completed,
+                    original_completed: completed,
+                    management_approved: approved,
+                    management_decision: decision || null,
+                    automatic_reasons: automaticReasons,
                     verification_method: method,
                     is_historical_manual: manual,
-                    reasons,
-                    qualifies: !reasons.length
+                    reasons: effectiveReasons,
+                    qualifies: !effectiveReasons.length
                 };
             });
     }
@@ -285,11 +303,8 @@
 
             entry.flights++;
 
-            entry[
-                row.actual_callsign.startsWith("BMA")
-                    ? "bma"
-                    : "bmr"
-            ]++;
+            if (row.actual_callsign.startsWith("BMA")) entry.bma++;
+            else if (row.actual_callsign.startsWith("BMR")) entry.bmr++;
 
             entry.seconds +=
                 row.displayEvidence?.observed ?? (Number(row.vatsim_participation_seconds) || 0);
@@ -353,7 +368,8 @@
             "exported_utc",
             "rules_version",
             "statsim_flight_url",
-            "estimated_statsim_block_seconds"
+            "estimated_statsim_block_seconds",
+            "management_review_id", "management_reviewer", "management_notes", "management_evidence", "management_completed_utc", "automated_discrepancies"
         ];
 
         const rows = window.qualifying.map(r => [
@@ -384,7 +400,13 @@
             new Date(exportedAt).toISOString(),
             RULES_VERSION,
             r.displayEvidence?.url || "",
-            r.displayEvidence?.blockSeconds || ""
+            r.displayEvidence?.blockSeconds || "",
+            r.management_approved ? r.management_decision.id : "",
+            r.management_approved ? r.management_decision.reviewer_name : "",
+            r.management_approved ? r.management_decision.notes : "",
+            r.management_approved ? r.management_decision.evidence : "",
+            r.management_approved ? new Date(r.completed).toISOString() : "",
+            r.management_approved ? r.automatic_reasons.join("; ") : ""
         ]);
 
         return "\ufeff" +

@@ -52,3 +52,29 @@ test("CSV contains evidence and prevents formula injection with RFC4180 quoting"
 test("empty dataset produces zero counts and header-only export",()=>{
     const w=VAA.period([],now);assert.equal(w.flights,0);assert.equal(w.pilots,0);assert.equal(VAA.csv(w,now).split("\r\n").length,2);
 });
+const override = (id=1, decision='verified', change={}) => ({id,pirep_id:sample.id,decision,notes:'Evidence reviewed; exception accepted',evidence:'https://statsim.net/flights/detail/31390957',reviewer_name:'Test manager',resolution_snapshot:{kind:'management_override_v1',completed_at:sample.stand},...change});
+for(const change of [{takeoff:'2026-10-19T08:00:00Z'},{stand:null},{stand:'2027-01-01T00:00:00Z'},{requires_review:true},{status:'Cancelled'},{departure:null},{pilot_id:'missing'},{flight_purpose:'MAC'},{vatsim_id:null},{atc_provider:'Offline'},{vatsim_network_callsign:'TEST12'}]) {
+ test('evidence-backed management approval overrides '+JSON.stringify(change),()=>{
+  const row=VAA.assess([{...sample,...change}],pilots,now,[override()])[0];
+  assert.equal(row.qualifies,true);assert.equal(row.management_approved,true);assert.ok(row.automatic_reasons.length);
+  assert.equal(row.completed,Date.parse(sample.stand));assert.equal(VAA.period([row],now).flights,1);
+ });
+}
+test('management can review duplicate reports individually',()=>{
+ const rows=VAA.assess([sample,{...sample,id:'two'}],pilots,now,[override(1,'verified',{pirep_id:'two'})]);
+ assert.equal(rows[1].qualifies,true);assert.ok(rows[1].automatic_reasons.includes('Duplicate flight/session'));
+});
+test('latest decision wins; notes and inactive markers do not erase it',()=>{
+ const reviews=[override(4,'note'),override(2,'rejected'),override(1),override(3,'inactive')];
+ assert.equal(VAA.assess([sample],pilots,now,reviews)[0].qualifies,false);
+ assert.equal(VAA.assess([sample],pilots,now,[...reviews,override(5)])[0].qualifies,true);
+});
+test('legacy verified flag or report JSON cannot grant a discrepancy override',()=>{
+ const bad={...sample,stand:null,vatsim_verified:true,vatsim_verification_status:'manually_verified',legacy_review:{kind:'management_override_v1'},debrief_data:{management_approved:true}};
+ assert.equal(VAA.assess([bad],pilots,now,[])[0].qualifies,false);
+ assert.equal(VAA.assess([bad],pilots,now,[override(1,'verified',{resolution_snapshot:null})])[0].qualifies,false);
+});
+test('approval exports reviewer evidence original discrepancy and effective completion separately',()=>{
+ const rows=VAA.assess([{...sample,stand:null}],pilots,now,[override()]);const csv=VAA.csv(VAA.period(rows,now),now);
+ assert.ok(csv.includes('Test manager'));assert.ok(csv.includes('Invalid or incomplete flight timestamps'));assert.ok(csv.includes('31390957'));assert.ok(csv.includes('management_completed_utc'));
+});
